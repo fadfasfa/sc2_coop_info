@@ -48,6 +48,8 @@ jobs:
           cache-dependency-path: tauri-overlay/package-lock.json
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
       - name: Linux build and headless dependencies
         if: runner.os == 'Linux'
         run: |
@@ -77,16 +79,71 @@ jobs:
           else
             cargo test --workspace --locked -- --nocapture 2>&1 | tee validation-evidence/rust-tests.txt
           fi
-      - name: Frontend type checks and browser regression after bindings export
+      - name: Frontend type check after bindings export
         if: ${{ !cancelled() }}
         working-directory: tauri-overlay
         shell: bash
         run: |
           set -o pipefail
           npm run typecheck 2>&1 | tee ../validation-evidence/typecheck.txt
+      - name: Frontend test type check
+        if: ${{ !cancelled() }}
+        working-directory: tauri-overlay
+        shell: bash
+        run: |
+          set -o pipefail
           npm run typecheck:tests 2>&1 | tee ../validation-evidence/typecheck-tests.txt
+      - name: Browser regression
+        if: ${{ !cancelled() }}
+        working-directory: tauri-overlay
+        shell: bash
+        run: |
+          set -o pipefail
           npx playwright install --with-deps chromium
           npm run test:config -- --workers=2 --reporter=line 2>&1 | tee ../validation-evidence/playwright.txt
+      - name: Get exact personal packaging sources
+        if: ${{ success() && runner.os == 'Windows' && needs.target.outputs.portable == 'true' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: .packaging-source
+          persist-credentials: false
+      - name: Apply fail-closed portable transformation
+        if: ${{ success() && runner.os == 'Windows' && needs.target.outputs.portable == 'true' }}
+        shell: bash
+        run: |
+          set -o pipefail
+          git diff --exit-code
+          node .packaging-source/packaging/apply-portable.mjs "$GITHUB_WORKSPACE" 2>&1 | tee validation-evidence/portable-apply.txt
+          git diff --check
+      - name: Portable isolation verification and EXE build (no bundler)
+        if: ${{ success() && runner.os == 'Windows' && needs.target.outputs.portable == 'true' }}
+        working-directory: tauri-overlay
+        shell: bash
+        run: |
+          set -o pipefail
+          cargo test --locked -p sco-tauri-overlay --lib portable_runtime::tests -- --nocapture 2>&1 | tee ../validation-evidence/portable-rust-tests.txt
+          npm run typecheck 2>&1 | tee ../validation-evidence/portable-typecheck.txt
+          npm run typecheck:tests 2>&1 | tee ../validation-evidence/portable-typecheck-tests.txt
+          npm run tauri -- build --no-bundle -- --locked 2>&1 | tee ../validation-evidence/portable-build.txt
+      - name: Package exact binary, data, licenses, source and hashes
+        if: ${{ success() && runner.os == 'Windows' && needs.target.outputs.portable == 'true' }}
+        shell: pwsh
+        run: |
+          node .packaging-source/packaging/make-portable.mjs $env:GITHUB_WORKSPACE "$env:GITHUB_WORKSPACE/.packaging-source" "$env:GITHUB_WORKSPACE/portable/SC2_Coop_Info_ZhCN_Portable"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Compress-Archive -LiteralPath portable/SC2_Coop_Info_ZhCN_Portable -DestinationPath portable/SC2_Coop_Info_ZhCN_Portable.zip
+          $packageHash = (Get-FileHash -LiteralPath portable/SC2_Coop_Info_ZhCN_Portable.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$packageHash  SC2_Coop_Info_ZhCN_Portable.zip" | Set-Content -LiteralPath portable/SC2_Coop_Info_ZhCN_Portable.zip.sha256 -Encoding utf8
+      - uses: actions/upload-artifact@v4
+        if: ${{ success() && runner.os == 'Windows' && needs.target.outputs.portable == 'true' }}
+        with:
+          name: SC2-Coop-Info-ZhCN-Portable-${{ needs.target.outputs.sha }}
+          path: |
+            portable/SC2_Coop_Info_ZhCN_Portable.zip
+            portable/SC2_Coop_Info_ZhCN_Portable.zip.sha256
+          if-no-files-found: error
+          retention-days: 30
       - name: Record real-replay skips separately
         if: ${{ !cancelled() }}
         shell: bash
