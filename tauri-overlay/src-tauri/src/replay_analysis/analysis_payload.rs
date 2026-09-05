@@ -590,6 +590,7 @@ impl ReplayAnalysis {
                         LocalizedLabels {
                             en: value.en.clone(),
                             ko: value.ko.clone(),
+                            zh_cn: Some(value.zh_cn.clone()),
                         },
                     )
                 })

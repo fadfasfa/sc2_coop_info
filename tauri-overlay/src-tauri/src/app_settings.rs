@@ -892,6 +892,7 @@ impl AppSettings {
     pub fn overlay_language(&self) -> &'static str {
         match self.language.as_str() {
             "ko" => "ko",
+            "zh-CN" => "zh-CN",
             _ => "en",
         }
     }

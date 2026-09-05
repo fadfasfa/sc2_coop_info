@@ -55,6 +55,9 @@ impl TauriOverlayOps {
         if overlay_runtime_changed {
             overlay_info::OverlayInfoOps::sync_overlay_runtime_settings(app);
         }
+        if previous_settings.overlay_language() != next_settings.overlay_language() {
+            TauriOverlayOps::refresh_tray_language(app);
+        }
 
         let previous_show_charts = previous_settings.show_charts();
         let show_charts = next_settings.show_charts();

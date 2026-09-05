@@ -430,6 +430,7 @@ impl OverlayInfoOps {
                             LocalizedLabels {
                                 en: value.en.clone(),
                                 ko: value.ko.clone(),
+                                zh_cn: Some(value.zh_cn.clone()),
                             },
                         )
                     })
@@ -626,10 +627,16 @@ impl OverlayInfoOps {
 
 impl OverlayInfoOps {
     pub fn build_tray_menu<R: Runtime>(app: &tauri::AppHandle<R>) -> Option<tauri::menu::Menu<R>> {
+        let language = app.state::<BackendState>().read_settings_memory().overlay_language();
+        let (show_config, show_overlay, quit) = match language {
+            "zh-CN" => ("显示设置", "显示悬浮窗", "退出"),
+            "ko" => ("설정 표시", "오버레이 표시", "종료"),
+            _ => ("Show Config", "Show Overlay", "Quit"),
+        };
         let show_item = MenuItem::with_id(
             app,
             MENU_ITEM_SHOW_CONFIG,
-            "Show Config",
+            show_config,
             true,
             None::<&str>,
         )
@@ -641,7 +648,7 @@ impl OverlayInfoOps {
         let show_overlay_item = MenuItem::with_id(
             app,
             MENU_ITEM_SHOW_OVERLAY,
-            "Show Overlay",
+            show_overlay,
             true,
             None::<&str>,
         )
@@ -652,7 +659,7 @@ impl OverlayInfoOps {
         })
         .ok()?;
 
-        let quit_item = MenuItem::with_id(app, MENU_ITEM_QUIT, "Quit", true, None::<&str>)
+        let quit_item = MenuItem::with_id(app, MENU_ITEM_QUIT, quit, true, None::<&str>)
             .inspect_err(|error| {
                 crate::sco_error!("Failed to create tray menu item '{MENU_ITEM_QUIT}': {error}");
             })

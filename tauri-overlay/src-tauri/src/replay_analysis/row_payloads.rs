@@ -39,6 +39,9 @@ pub struct WeeklyRowPayload {
     pub name_en: String,
     #[serde(rename = "nameKo")]
     pub name_ko: String,
+    #[serde(rename = "nameZhCn", default, skip_serializing_if = "Option::is_none")]
+    #[ts(optional)]
+    pub name_zh_cn: Option<String>,
     pub map: String,
     pub mutators: Vec<UiMutatorRow>,
     #[serde(rename = "mutationOrder")]
@@ -183,6 +186,7 @@ impl ReplayAnalysis {
         struct WeeklyMutatorUi<'a> {
             name_en: &'a str,
             name_ko: &'a str,
+            name_zh_cn: &'a str,
             map: &'a str,
             mutators: Vec<UiMutatorRow>,
         }
@@ -262,14 +266,16 @@ impl ReplayAnalysis {
                         let mutator_id = ReplayAnalysisOps::canonical_mutator_id_with_dictionary(
                             mutator, dictionary,
                         );
-                        let (name_en, name_ko, description_en, description_ko) = dictionary
+                        let (name_en, name_ko, name_zh_cn, description_en, description_ko, description_zh_cn) = dictionary
                             .mutator_data(&mutator_id)
                             .map(|value| {
                                 (
                                     ReplayAnalysisOps::decode_html_entities(&value.name.en),
                                     ReplayAnalysisOps::decode_html_entities(&value.name.ko),
+                                    ReplayAnalysisOps::decode_html_entities(&value.name.zh_cn),
                                     ReplayAnalysisOps::decode_html_entities(&value.description.en),
                                     ReplayAnalysisOps::decode_html_entities(&value.description.ko),
+                                    ReplayAnalysisOps::decode_html_entities(&value.description.zh_cn),
                                 )
                             })
                             .unwrap_or_default();
@@ -293,11 +299,13 @@ impl ReplayAnalysis {
                             name: LocalizedText {
                                 en: display_name_en,
                                 ko: name_ko,
+                                zh_cn: Some(name_zh_cn),
                             },
                             icon_name,
                             description: LocalizedText {
                                 en: description_en,
                                 ko: description_ko,
+                                zh_cn: Some(description_zh_cn),
                             },
                         }
                     })
@@ -311,6 +319,7 @@ impl ReplayAnalysis {
                             weekly_data.name_en.as_str()
                         },
                         name_ko: weekly_data.name_ko.as_str(),
+                        name_zh_cn: weekly_data.name_zh_cn.as_str(),
                         map: weekly_data.map.as_str(),
                         mutators,
                     },
@@ -385,6 +394,7 @@ impl ReplayAnalysis {
                 name_ko: weekly_details
                     .map(|value| value.name_ko.to_string())
                     .unwrap_or_default(),
+                name_zh_cn: weekly_details.map(|value| value.name_zh_cn.to_string()),
                 map: weekly_details
                     .map(|value| value.map.to_string())
                     .unwrap_or_default(),
@@ -420,6 +430,7 @@ impl ReplayAnalysis {
                 mutation: mutation.clone(),
                 name_en: mutation,
                 name_ko: String::new(),
+                name_zh_cn: None,
                 map: String::new(),
                 mutators: Vec::new(),
                 mutation_order: usize::MAX,
