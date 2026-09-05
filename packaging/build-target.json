@@ -1,7 +1,7 @@
 {
   "repository": "fadfasfa/sc2_coop_info",
   "upstreamBase": "fb16c6c7eacb4b5f3589e22795b0fc45334b01a1",
-  "contribution": "fb16c6c7eacb4b5f3589e22795b0fc45334b01a1",
-  "label": "upstream-baseline",
+  "contribution": "a8b9a660a900731cc05dfc593cf28149c154589f",
+  "label": "language-backend",
   "portable": false
 }

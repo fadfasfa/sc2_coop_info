@@ -60,17 +60,13 @@ jobs:
           { git rev-parse HEAD; node --version; npm --version; rustc --version; cargo --version; } > validation-evidence/identity.txt
           test ! -f .env
           test -z "$(find . -name '*.SC2Replay' -print -quit)"
-      - name: Frontend install and checks
+      - name: Frontend install and asset build
         working-directory: tauri-overlay
         shell: bash
         run: |
           set -o pipefail
           npm ci --no-audit --no-fund
-          npm run typecheck 2>&1 | tee ../validation-evidence/typecheck.txt
-          npm run typecheck:tests 2>&1 | tee ../validation-evidence/typecheck-tests.txt
           npm run build 2>&1 | tee ../validation-evidence/frontend-build.txt
-          npx playwright install --with-deps chromium
-          npm run test:config -- --workers=2 --reporter=line 2>&1 | tee ../validation-evidence/playwright.txt
       - name: Full Rust workspace tests (including bindings export)
         if: ${{ !cancelled() }}
         shell: bash
@@ -81,6 +77,16 @@ jobs:
           else
             cargo test --workspace --locked -- --nocapture 2>&1 | tee validation-evidence/rust-tests.txt
           fi
+      - name: Frontend type checks and browser regression after bindings export
+        if: ${{ !cancelled() }}
+        working-directory: tauri-overlay
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run typecheck 2>&1 | tee ../validation-evidence/typecheck.txt
+          npm run typecheck:tests 2>&1 | tee ../validation-evidence/typecheck-tests.txt
+          npx playwright install --with-deps chromium
+          npm run test:config -- --workers=2 --reporter=line 2>&1 | tee ../validation-evidence/playwright.txt
       - name: Record real-replay skips separately
         if: ${{ !cancelled() }}
         shell: bash
