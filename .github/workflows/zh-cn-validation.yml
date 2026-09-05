@@ -1,0 +1,99 @@
+name: Chinese validation (no release)
+
+on:
+  push:
+    branches: [codex/zh-cn-build]
+
+permissions:
+  contents: read
+
+jobs:
+  target:
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.target.outputs.sha }}
+      label: ${{ steps.target.outputs.label }}
+      portable: ${{ steps.target.outputs.portable }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - id: target
+        shell: bash
+        run: |
+          node -e 'const fs=require("fs"); const t=require("./packaging/build-target.json"); if(!/^[a-f0-9]{40}$/.test(t.contribution)) throw Error("Expected exact commit"); fs.appendFileSync(process.env.GITHUB_OUTPUT,`sha=${t.contribution}\nlabel=${t.label}\nportable=${t.portable}\n`);'
+  validate:
+    needs: target
+    name: ${{ matrix.os }} / ${{ needs.target.outputs.label }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 70
+    env:
+      CI: true
+      CARGO_BUILD_JOBS: 2
+      CARGO_PROFILE_DEV_DEBUG: 0
+      CARGO_PROFILE_TEST_DEBUG: 0
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.target.outputs.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: tauri-overlay/package-lock.json
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Linux build and headless dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf libxdo-dev libxcb-randr0-dev libdbus-1-dev libpipewire-0.3-dev libgbm-dev libegl1-mesa-dev libclang-dev xvfb
+      - name: Record identity and assert no private fixtures
+        shell: bash
+        run: |
+          mkdir -p validation-evidence
+          { git rev-parse HEAD; node --version; npm --version; rustc --version; cargo --version; } > validation-evidence/identity.txt
+          test ! -f .env
+          test -z "$(find . -name '*.SC2Replay' -print -quit)"
+      - name: Frontend install and checks
+        working-directory: tauri-overlay
+        shell: bash
+        run: |
+          set -o pipefail
+          npm ci --no-audit --no-fund
+          npm run typecheck 2>&1 | tee ../validation-evidence/typecheck.txt
+          npm run typecheck:tests 2>&1 | tee ../validation-evidence/typecheck-tests.txt
+          npm run build 2>&1 | tee ../validation-evidence/frontend-build.txt
+          npx playwright install --with-deps chromium
+          npm run test:config -- --workers=2 --reporter=line 2>&1 | tee ../validation-evidence/playwright.txt
+      - name: Full Rust workspace tests (including bindings export)
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          set -o pipefail
+          if [ "$RUNNER_OS" = Linux ]; then
+            xvfb-run -a cargo test --workspace --locked -- --nocapture 2>&1 | tee validation-evidence/rust-tests.txt
+          else
+            cargo test --workspace --locked -- --nocapture 2>&1 | tee validation-evidence/rust-tests.txt
+          fi
+      - name: Record real-replay skips separately
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          node -e 'const fs=require("fs"); const p="validation-evidence/rust-tests.txt"; const s=fs.existsSync(p)?fs.readFileSync(p,"utf8"):"Rust tests did not run"; fs.writeFileSync("validation-evidence/real-replay-skips.txt",s.split(/\r?\n/).filter(l=>/skipping|ignored|did not run/i.test(l)).join("\n"));'
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: validation-${{ matrix.os }}-${{ needs.target.outputs.label }}
+          path: |
+            validation-evidence/
+            tauri-overlay/test-results/
+            tauri-overlay/src/app/bindings/
+            tauri-overlay/src/bindings/
+            tauri-overlay/src-tauri/bindings/
+          retention-days: 30
