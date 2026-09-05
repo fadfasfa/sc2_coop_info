@@ -102,4 +102,5 @@ jobs:
             tauri-overlay/src/app/bindings/
             tauri-overlay/src/bindings/
             tauri-overlay/src-tauri/bindings/
+            tauri-overlay/src-tauri/src/bindings/
           retention-days: 30
