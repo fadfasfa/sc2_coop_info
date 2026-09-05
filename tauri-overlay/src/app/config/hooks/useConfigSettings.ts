@@ -11,6 +11,7 @@ import type {
 import { loadConfigRequest, updateConfigRequest } from "../configApi";
 import { cloneJson, getAtPath, setAtPath } from "../configValueUtils";
 import type { JsonValue } from "../types";
+import { statusMessage, type StatusMessage } from "../statusMessage";
 
 const SCO_OVERLAY_COLOR_PREVIEW_EVENT = "sco://overlay-color-preview";
 const SCO_OVERLAY_LANGUAGE_PREVIEW_EVENT = "sco://overlay-language-preview";
@@ -18,7 +19,7 @@ const SCO_OVERLAY_LANGUAGE_PREVIEW_EVENT = "sco://overlay-language-preview";
 type QueuedLiveApply = {
     settings: AppSettings;
     requestSeq: number;
-    successMessage: string;
+    successMessage: StatusMessage;
 };
 
 type UseConfigSettingsArgs = {
@@ -29,7 +30,7 @@ type UseConfigSettingsArgs = {
 type UseConfigSettingsResult = {
     applyRuntimeSettings: (
         nextSettings: AppSettings,
-        successMessage?: string,
+        successMessage?: StatusMessage,
     ) => Promise<ConfigPayload | null>;
     cancelPendingLiveApply: () => void;
     dirty: boolean;
@@ -40,7 +41,7 @@ type UseConfigSettingsResult = {
     randomizerCatalog: OverlayRandomizerCatalog | null;
     replaceDraft: (nextDraft: AppSettings | null) => void;
     resetSettings: () => void;
-    safeStatus: (message: string) => void;
+    safeStatus: (message: StatusMessage) => void;
     saveProvidedSettings: (nextSettings: AppSettings) => Promise<void>;
     saveSettings: () => Promise<void>;
     setDraft: React.Dispatch<React.SetStateAction<AppSettings | null>>;
@@ -53,8 +54,8 @@ type UseConfigSettingsResult = {
     setSettings: React.Dispatch<React.SetStateAction<AppSettings | null>>;
     settings: AppSettings | null;
     settingsMutationRef: React.MutableRefObject<Promise<void>>;
-    setStatus: React.Dispatch<React.SetStateAction<string>>;
-    status: string;
+    setStatus: React.Dispatch<React.SetStateAction<StatusMessage>>;
+    status: StatusMessage;
     updateField: (path: string[], value: JsonValue) => void;
 };
 
@@ -125,7 +126,9 @@ export function useConfigSettings({
 }: UseConfigSettingsArgs): UseConfigSettingsResult {
     const [settings, setSettings] = React.useState<AppSettings | null>(null);
     const [draft, setDraft] = React.useState<AppSettings | null>(null);
-    const [status, setStatus] = React.useState("Loading settings...");
+    const [status, setStatus] = React.useState<StatusMessage>(
+        statusMessage("ui_status_loading_settings"),
+    );
     const [randomizerCatalog, setRandomizerCatalog] =
         React.useState<OverlayRandomizerCatalog | null>(null);
     const [monitorCatalog, setMonitorCatalog] = React.useState<
@@ -135,6 +138,7 @@ export function useConfigSettings({
     const settingsMutationRef = React.useRef<Promise<void>>(Promise.resolve());
     const latestLiveApplySeqRef = React.useRef<number>(0);
     const liveApplyInFlightRef = React.useRef<boolean>(false);
+    const liveApplyFinishedRef = React.useRef<Promise<void>>(Promise.resolve());
     const queuedLiveApplyRef = React.useRef<QueuedLiveApply | null>(null);
     draftRef.current = draft;
 
@@ -145,7 +149,7 @@ export function useConfigSettings({
         return JSON.stringify(settings) !== JSON.stringify(draft);
     }, [settings, draft]);
 
-    function safeStatus(message: string): void {
+    function safeStatus(message: StatusMessage): void {
         console.log("[SCO/ui] status", message);
         setStatus(message);
     }
@@ -178,10 +182,10 @@ export function useConfigSettings({
     function performRuntimeSettingsApply(
         nextSettings: AppSettings,
         requestSeq: number,
-        successMessage = "Changes applied immediately. Click Save to persist.",
+        successMessage: StatusMessage = statusMessage("ui_status_applied"),
     ): Promise<ConfigPayload | null> {
         liveApplyInFlightRef.current = true;
-        return updateConfigRequest(nextSettings, false)
+        const pendingApply = updateConfigRequest(nextSettings, false)
             .then((payload) => {
                 setRandomizerCatalog(
                     (current) => payload.randomizer_catalog ?? current,
@@ -194,7 +198,13 @@ export function useConfigSettings({
             })
             .catch((error) => {
                 if (requestSeq === latestLiveApplySeqRef.current) {
-                    safeStatus(`Failed to apply changes: ${error.message}`);
+                    safeStatus(
+                        statusMessage(
+                            "ui_status_apply_failed",
+                            undefined,
+                            error.message,
+                        ),
+                    );
                 }
                 return null;
             })
@@ -213,11 +223,13 @@ export function useConfigSettings({
                     );
                 }
             });
+        liveApplyFinishedRef.current = pendingApply.then(() => undefined);
+        return pendingApply;
     }
 
     function applyRuntimeSettings(
         nextSettings: AppSettings,
-        successMessage = "Changes applied immediately. Click Save to persist.",
+        successMessage: StatusMessage = statusMessage("ui_status_applied"),
     ): Promise<ConfigPayload | null> {
         const requestSeq = latestLiveApplySeqRef.current + 1;
         latestLiveApplySeqRef.current = requestSeq;
@@ -249,9 +261,15 @@ export function useConfigSettings({
             replaceDraft(activeSettings);
             setRandomizerCatalog(payload.randomizer_catalog ?? null);
             setMonitorCatalog(payload.monitor_catalog || []);
-            setStatus("Settings loaded");
+            setStatus(statusMessage("ui_status_settings_loaded"));
         } catch (error) {
-            setStatus(`Failed to load settings: ${error.message}`);
+            setStatus(
+                statusMessage(
+                    "ui_status_load_settings_failed",
+                    undefined,
+                    error.message,
+                ),
+            );
         } finally {
             setIsBusy(false);
         }
@@ -264,6 +282,9 @@ export function useConfigSettings({
         await queueSettingsMutation(async () => {
             try {
                 setIsBusy(true);
+                // A slow, earlier runtime-only update must settle before the
+                // saved language is applied, or it could overwrite that save.
+                await liveApplyFinishedRef.current;
                 const payload = await updateConfigRequest(nextSettings, true);
                 const activeSettings =
                     payload.active_settings || payload.settings;
@@ -273,9 +294,15 @@ export function useConfigSettings({
                     (current) => payload.randomizer_catalog ?? current,
                 );
                 setMonitorCatalog(payload.monitor_catalog || []);
-                setStatus("Saved to settings.json");
+                setStatus(statusMessage("ui_status_saved"));
             } catch (error) {
-                setStatus(`Failed to save: ${error.message}`);
+                setStatus(
+                    statusMessage(
+                        "ui_status_save_failed",
+                        undefined,
+                        error.message,
+                    ),
+                );
             } finally {
                 setIsBusy(false);
             }
@@ -295,7 +322,11 @@ export function useConfigSettings({
             replaceDraft(nextDraft);
             cancelPendingLiveApply();
             emitOverlayColorPreview(nextDraft);
-            void applyRuntimeSettings(nextDraft, "Reverted to saved settings.");
+            emitOverlayLanguagePreview(nextDraft);
+            void applyRuntimeSettings(
+                nextDraft,
+                statusMessage("ui_status_reverted"),
+            );
         }
     }
 

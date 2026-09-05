@@ -1,3 +1,10 @@
+.overlayPageRoot:lang(zh-CN) {
+    --overlay-font-family:
+        "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Segoe UI",
+        sans-serif;
+    overflow-wrap: anywhere;
+}
+
 @font-face {
     font-family: "Eurostile";
     src: url("/overlay/Eurostile-Reg.otf") format("opentype");

@@ -60,7 +60,8 @@ function isAppLanguage(value: string): value is AppLanguage {
     return value === "en" || value === "ko" || value === "zh-CN";
 }
 
-// Keep legacy aliases stable; new Chinese labels must not introduce ambiguity.
+// Display labels are aliases only when they identify exactly one entity.
+// Repeated UI phrases and translated names must never pick an arbitrary ID.
 function createAliasIndex(
     data: Record<string, LanguageEntry | UnitTranslationEntry>,
 ): Map<string, string> {
@@ -68,20 +69,16 @@ function createAliasIndex(
     const candidates = new Map<string, Set<string>>();
     for (const [id, entry] of Object.entries(data)) {
         const aliases = "aliases" in entry ? entry.aliases || [] : [];
-        for (const label of [id, entry.en, entry.ko, ...aliases]) {
+        for (const label of [entry.en, entry.ko, entry["zh-CN"], ...aliases]) {
             if (!label?.trim()) continue;
-            index.set(normalizeAliasKey(label), id);
-        }
-        const chineseLabel = entry["zh-CN"];
-        if (chineseLabel?.trim()) {
-            const key = normalizeAliasKey(chineseLabel);
+            const key = normalizeAliasKey(label);
             const ids = candidates.get(key) || new Set<string>();
             ids.add(id);
             candidates.set(key, ids);
         }
     }
     for (const [alias, ids] of candidates) {
-        if (ids.size === 1 && !index.has(alias)) index.set(alias, [...ids][0]);
+        if (ids.size === 1) index.set(alias, [...ids][0]);
     }
     // Canonical keys are authoritative even when another label resembles one.
     for (const id of Object.keys(data)) index.set(normalizeAliasKey(id), id);

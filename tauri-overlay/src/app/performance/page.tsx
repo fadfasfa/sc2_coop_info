@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { listen } from "@tauri-apps/api/event";
+import { createLanguageManager } from "../i18n/languageManager";
 import type { JsonObject, JsonValue } from "../config/types";
 
 import styles from "./page.module.css";
@@ -12,6 +14,7 @@ type CpuUsageRow = {
 };
 
 type PerformanceOverlayPayload = {
+    language?: string;
     processTitle: string;
     sc2Ram: string;
     sc2Read: string;
@@ -103,6 +106,15 @@ export default function PerformancePage() {
     const [stats, setStats] =
         useState<PerformanceOverlayPayload>(DEFAULT_STATS);
     const [editMode, setEditMode] = useState(false);
+    const languageManager = useMemo(
+        () => createLanguageManager(stats.language),
+        [stats.language],
+    );
+    const t = (id: string) => languageManager.translate(id);
+
+    useEffect(() => {
+        document.documentElement.lang = languageManager.currentLanguage();
+    }, [languageManager]);
 
     useEffect(() => {
         const root = document.documentElement;
@@ -116,20 +128,45 @@ export default function PerformancePage() {
         runtime.updatePerformanceStats = (
             payload: PerformanceOverlayPayload,
         ) => {
-            setStats(payload);
+            setStats((current) => ({
+                ...payload,
+                // Older payloads have no language; keep the last preview.
+                language: payload.language ?? current.language,
+            }));
         };
         runtime.setPerformanceEditMode = (enabled: boolean) => {
             setEditMode(Boolean(enabled));
         };
+        const unlistenLanguage = listen<{ language?: string }>(
+            "sco://overlay-language-preview",
+            ({ payload }) => {
+                if (typeof payload.language === "string") {
+                    setStats((current) => ({
+                        ...current,
+                        language: payload.language,
+                    }));
+                }
+            },
+        ).catch((error) => {
+            console.warn(
+                "Failed to subscribe to performance language preview",
+                error,
+            );
+            return () => {};
+        });
 
         return () => {
             delete runtime.updatePerformanceStats;
             delete runtime.setPerformanceEditMode;
+            void unlistenLanguage.then((unlisten) => unlisten());
         };
     }, []);
 
     return (
-        <main className={styles.performanceOverlayRoot}>
+        <main
+            lang={languageManager.currentLanguage()}
+            className={styles.performanceOverlayRoot}
+        >
             <div
                 className={optionalClassName(
                     `${styles.performanceDragbar} performance-dragbar`,
@@ -140,19 +177,21 @@ export default function PerformancePage() {
                     void startPerformanceDrag();
                 }}
             >
-                Drag performance overlay
+                {t("ui_performance_overlay_drag")}
             </div>
             <section className={styles.performanceCard}>
                 <div className={styles.performanceColumns}>
                     <section className={styles.performanceColumn}>
                         <h1>{stats.processTitle}</h1>
                         <div className={styles.performanceStatGrid}>
-                            <span className={styles.performanceLabel}>RAM</span>
+                            <span className={styles.performanceLabel}>
+                                {t("ui_performance_overlay_ram")}
+                            </span>
                             <span className={styles.performanceValue}>
                                 {stats.sc2Ram}
                             </span>
                             <span className={styles.performanceLabel}>
-                                Read
+                                {t("ui_performance_overlay_read")}
                             </span>
                             <span className={styles.performanceValue}>
                                 {stats.sc2Read}
@@ -162,7 +201,7 @@ export default function PerformancePage() {
                                 {stats.sc2ReadTotal}
                             </span>
                             <span className={styles.performanceLabel}>
-                                Write
+                                {t("ui_performance_overlay_write")}
                             </span>
                             <span className={styles.performanceValue}>
                                 {stats.sc2Write}
@@ -188,9 +227,11 @@ export default function PerformancePage() {
                     </section>
 
                     <section className={styles.performanceColumn}>
-                        <h1>System</h1>
+                        <h1>{t("ui_performance_overlay_system")}</h1>
                         <div className={styles.performanceStatGrid}>
-                            <span className={styles.performanceLabel}>RAM</span>
+                            <span className={styles.performanceLabel}>
+                                {t("ui_performance_overlay_ram")}
+                            </span>
                             <span
                                 className={optionalClassName(
                                     styles.performanceValue,
@@ -200,7 +241,7 @@ export default function PerformancePage() {
                                 {stats.systemRam}
                             </span>
                             <span className={styles.performanceLabel}>
-                                Down
+                                {t("ui_performance_overlay_down")}
                             </span>
                             <span className={styles.performanceValue}>
                                 {stats.systemDown}
@@ -210,7 +251,7 @@ export default function PerformancePage() {
                                 {stats.systemDownTotal}
                             </span>
                             <span className={styles.performanceLabel}>
-                                Upload
+                                {t("ui_performance_overlay_upload")}
                             </span>
                             <span className={styles.performanceValue}>
                                 {stats.systemUp}
@@ -221,7 +262,9 @@ export default function PerformancePage() {
                             </span>
                         </div>
                         <div className={styles.performanceCpuList}>
-                            <h2>CPU utilization</h2>
+                            <h2>
+                                {t("ui_performance_overlay_cpu_utilization")}
+                            </h2>
                             {stats.cpuCores.map((entry) => (
                                 <div
                                     className={styles.performanceCpuRow}
@@ -246,7 +289,7 @@ export default function PerformancePage() {
                                 className={`${styles.performanceCpuRow} ${styles.performanceCpuTotal}`}
                             >
                                 <span className={styles.performanceCpuLabel}>
-                                    total
+                                    {t("ui_performance_overlay_total")}
                                 </span>
                                 <span
                                     className={optionalClassName(

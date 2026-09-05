@@ -14,6 +14,7 @@ import type {
 } from "../../bindings/overlay";
 
 import { createLanguageManager } from "../i18n/languageManager";
+import { renderStatusMessage, statusMessage } from "./statusMessage";
 import {
     DEFAULT_TAB_ID,
     SCO_OVERLAY_SCREENSHOT_RESULT_EVENT,
@@ -122,6 +123,10 @@ function SettingsEditor({
     );
 
     useEffect(() => {
+        document.documentElement.lang = languageManager.currentLanguage();
+    }, [languageManager]);
+
+    useEffect(() => {
         if (getTabIdFromPathname(location.pathname) !== null) {
             return;
         }
@@ -130,7 +135,7 @@ function SettingsEditor({
 
     useEffect(() => {
         let disposed = false;
-        const unlistenPromise = listen(
+        const unlistenPromise = listen<OverlayScreenshotResultPayload>(
             SCO_OVERLAY_SCREENSHOT_RESULT_EVENT,
             (event) => {
                 if (disposed) {
@@ -143,7 +148,15 @@ function SettingsEditor({
                     "message" in payload &&
                     typeof payload.message === "string"
                 ) {
-                    setStatus(payload.message);
+                    setStatus(
+                        statusMessage(
+                            payload.ok
+                                ? "ui_status_screenshot_saved"
+                                : "ui_status_screenshot_failed",
+                            undefined,
+                            payload.ok ? payload.path : payload.message,
+                        ),
+                    );
                 }
             },
         );
@@ -230,16 +243,29 @@ function SettingsEditor({
         }
     }, [activeTab, tabData.weeklies]);
 
-    async function postAction<T extends { message?: string }>(
-        request: () => Promise<T>,
-    ): Promise<T | null> {
+    async function postAction<
+        T extends { message?: string; result?: { ok: boolean } },
+    >(request: () => Promise<T>): Promise<T | null> {
         setIsBusy(true);
         try {
             const result = await request();
-            safeStatus(result.message || "Action completed");
+            safeStatus(
+                result.message ||
+                    statusMessage(
+                        result.result?.ok === false
+                            ? "ui_status_action_failed"
+                            : "ui_status_action_completed",
+                    ),
+            );
             return result;
         } catch (error) {
-            safeStatus(`Action failed: ${error.message}`);
+            safeStatus(
+                statusMessage(
+                    "ui_status_action_failed",
+                    undefined,
+                    error.message,
+                ),
+            );
             return null;
         } finally {
             setIsBusy(false);
@@ -319,9 +345,21 @@ function SettingsEditor({
                     patchedPlayerNotes(current, handle, noteValue),
                 );
             });
-            setStatus(payload.message || "Player note saved");
+            setStatus(
+                statusMessage(
+                    noteValue.trim()
+                        ? "ui_status_player_note_saved"
+                        : "ui_status_player_note_cleared",
+                ),
+            );
         } catch (error) {
-            setStatus(`Failed to save player note: ${error.message}`);
+            setStatus(
+                statusMessage(
+                    "ui_status_player_note_failed",
+                    undefined,
+                    error.message,
+                ),
+            );
         } finally {
             setIsBusy(false);
         }
@@ -369,9 +407,15 @@ function SettingsEditor({
                 draftRef.current = nextDraft;
                 return nextDraft;
             });
-            safeStatus(payload.message || "First win bonus time saved.");
+            safeStatus(statusMessage("ui_status_first_win_saved"));
         } catch (error) {
-            safeStatus(`Failed to save first win bonus time: ${error.message}`);
+            safeStatus(
+                statusMessage(
+                    "ui_status_first_win_failed",
+                    undefined,
+                    error.message,
+                ),
+            );
         } finally {
             setIsBusy(false);
         }
@@ -379,14 +423,14 @@ function SettingsEditor({
 
     async function showSelectedReplay() {
         if (!selectedReplayFile) {
-            setStatus("Select a replay first");
+            setStatus(statusMessage("ui_status_select_replay"));
             return;
         }
         const result = await postAction(() =>
             showReplayRequest(selectedReplayFile),
         );
         if (result) {
-            setStatus("Replay sent to overlay");
+            setStatus(statusMessage("ui_status_replay_sent"));
             await loadTabData("games");
         }
     }
@@ -398,7 +442,7 @@ function SettingsEditor({
         setSelectedReplayFile(file);
         const result = await postAction(() => showReplayRequest(file));
         if (result) {
-            setStatus("Replay sent to overlay");
+            setStatus(statusMessage("ui_status_replay_sent"));
         }
     }
 
@@ -465,10 +509,16 @@ function SettingsEditor({
             cancelPendingLiveApply();
             void applyRuntimeSettings(
                 nextDraft,
-                "Folder selected and applied. Click Save to persist.",
+                statusMessage("ui_status_folder_selected"),
             );
         } catch (error) {
-            safeStatus(`Failed to select folder: ${error.message}`);
+            safeStatus(
+                statusMessage(
+                    "ui_status_select_folder_failed",
+                    undefined,
+                    error.message,
+                ),
+            );
         } finally {
             setIsBusy(false);
         }
@@ -491,7 +541,7 @@ function SettingsEditor({
     async function parseReplayPrompt() {
         const suggested = selectedReplayFile || "";
         const value = window.prompt(
-            "Replay file path (*.SC2Replay)",
+            languageManager.translate("ui_replay_path_prompt"),
             suggested,
         );
         if (value === null || value.trim() === "") {
@@ -507,7 +557,7 @@ function SettingsEditor({
     async function openFolderPath(path: string): Promise<true | null> {
         const normalized = String(path || "").trim();
         if (normalized === "") {
-            safeStatus("Folder path is empty");
+            safeStatus(statusMessage("ui_status_folder_empty"));
             return null;
         }
 
@@ -516,10 +566,18 @@ function SettingsEditor({
             await invoke("open_folder_path", {
                 path: normalized,
             });
-            safeStatus(`Opened folder: ${normalized}`);
+            safeStatus(
+                statusMessage("ui_status_folder_opened", undefined, normalized),
+            );
             return true;
         } catch (error) {
-            safeStatus(`Failed to open folder: ${error.message}`);
+            safeStatus(
+                statusMessage(
+                    "ui_status_open_folder_failed",
+                    undefined,
+                    error.message,
+                ),
+            );
             return null;
         } finally {
             setIsBusy(false);
@@ -543,7 +601,7 @@ function SettingsEditor({
                         .filter(Boolean)
                         .join(" ")}
                 >
-                    <p>{status}</p>
+                    <p>{renderStatusMessage(status, languageManager)}</p>
                 </div>
             </section>
         ) : (
@@ -640,6 +698,7 @@ function SettingsEditor({
                                           (mutator) => ({
                                               id: String(mutator.id),
                                               name: {
+                                                  ...mutator.name,
                                                   en: String(
                                                       mutator.name?.en || "",
                                                   ),
@@ -651,6 +710,7 @@ function SettingsEditor({
                                                   mutator.iconName || "",
                                               ),
                                               description: {
+                                                  ...mutator.description,
                                                   en: String(
                                                       mutator.description?.en ||
                                                           "",
@@ -752,7 +812,7 @@ function SettingsEditor({
         );
 
     return (
-        <section id="app-content">
+        <section id="app-content" lang={languageManager.currentLanguage()}>
             <div className={styles.configHeader}>
                 <h1>
                     SC2 Coop Info v{appVersion}
@@ -763,7 +823,7 @@ function SettingsEditor({
                     className={styles.status}
                     data-busy={String(isBusy)}
                 >
-                    {status}
+                    {renderStatusMessage(status, languageManager)}
                 </p>
             </div>
             <Tabs

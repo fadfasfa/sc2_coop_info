@@ -2,6 +2,10 @@
     color: var(--config-page-text);
 }
 
+.configPage :lang(zh-CN) {
+    overflow-wrap: anywhere;
+}
+
 .configPage h1 {
     margin: 0 0 10px;
 }

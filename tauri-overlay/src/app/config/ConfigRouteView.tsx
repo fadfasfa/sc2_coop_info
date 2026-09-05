@@ -194,16 +194,13 @@ const TABS: ConfigTabDefinition[] = [
         titleId: "ui_tab_links",
         groups: [
             {
-                title: "Project",
+                title: "ui_links_project",
                 links: [
                     [
-                        "Project - https://github.com/skyser2003/sc2_coop_info",
+                        "ui_links_project",
                         "https://github.com/skyser2003/sc2_coop_info",
                     ],
-                    [
-                        "Email - sc2coopinfo@gmail.com",
-                        "mailto:sc2coopinfo@gmail.com",
-                    ],
+                    ["ui_links_email", "mailto:sc2coopinfo@gmail.com"],
                 ],
             },
         ],
@@ -797,6 +794,7 @@ function renderTabContent(
 
     return (
         <GenericTab
+            languageManager={extraState.languageManager}
             tab={{ title: tab.titleId, groups: tab.groups }}
             draft={draft}
             settings={settings}

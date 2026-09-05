@@ -57,6 +57,7 @@ impl TauriOverlayOps {
         }
         if previous_settings.overlay_language() != next_settings.overlay_language() {
             TauriOverlayOps::refresh_tray_language(app);
+            TauriOverlayOps::refresh_window_titles(app);
         }
 
         let previous_show_charts = previous_settings.show_charts();

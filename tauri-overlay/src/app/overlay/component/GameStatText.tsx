@@ -160,11 +160,22 @@ export default function GameStatText({
 
         const currentLabels =
             localized[overlayLanguageManager.currentLanguage()];
-        if (Array.isArray(currentLabels) && currentLabels.length > 0) {
-            return currentLabels;
-        }
-
-        return Array.isArray(localized.en) ? localized.en : [];
+        const count = Math.max(
+            currentLabels?.length || 0,
+            localized.en.length,
+            localized.ko.length,
+        );
+        return Array.from(
+            { length: count },
+            (_, index) =>
+                [
+                    currentLabels?.[index],
+                    localized.en[index],
+                    localized.ko[index],
+                ].find(
+                    (label) => typeof label === "string" && label.trim() !== "",
+                ) || "",
+        );
     };
 
     const localizePrestige = (
@@ -187,7 +198,7 @@ export default function GameStatText({
                 overlayPrestigeNameCatalog,
                 commanderKey,
                 0,
-                language === "ko" ? "ko" : "en",
+                overlayLanguageManager.currentLanguage(),
             );
             return formatPrestigeDisplay(
                 localizedPrestigeName,
@@ -198,7 +209,12 @@ export default function GameStatText({
 
         const prestigeIndex = localized.en.findIndex((label, index) => {
             const koreanLabel = localized.ko[index] ?? "";
-            return label === rawPrestige || koreanLabel === rawPrestige;
+            const chineseLabel = localized["zh-CN"]?.[index] ?? "";
+            return (
+                label === rawPrestige ||
+                koreanLabel === rawPrestige ||
+                chineseLabel === rawPrestige
+            );
         });
 
         if (prestigeIndex === -1) {
@@ -209,7 +225,7 @@ export default function GameStatText({
             overlayPrestigeNameCatalog,
             commanderKey,
             prestigeIndex,
-            language === "ko" ? "ko" : "en",
+            overlayLanguageManager.currentLanguage(),
         );
         return formatPrestigeDisplay(
             localizedPrestigeName,

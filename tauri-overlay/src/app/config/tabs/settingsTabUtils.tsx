@@ -115,6 +115,7 @@ export function parseManualFirstWinBonusTime(value: string): string | null {
 export function formatManualFirstWinBonusTimeDisplay(
     value: JsonValue | undefined,
     neverSetText: string,
+    language?: string,
 ): string {
     if (typeof value !== "string" || value.trim() === "") {
         return neverSetText;
@@ -132,6 +133,10 @@ export function formatManualFirstWinBonusTimeDisplay(
     const period = hours24 >= 12 ? "PM" : "AM";
     const hours12 = hours24 % 12 === 0 ? 12 : hours24 % 12;
     const minutes = padDatePart(parsed.getMinutes());
+
+    if (language === "zh-CN") {
+        return `${year}-${month}-${day} ${padDatePart(hours24)}:${minutes}`;
+    }
 
     return `${year}-${month}-${day} ${hours12}:${minutes} ${period}`;
 }

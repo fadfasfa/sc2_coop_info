@@ -9,6 +9,8 @@ import {
 
 import { ReplayChartVisible } from "./component/GameStatChart";
 import GameStatMode from "./component/GameStatMode";
+import type { OverlayPrestigeNameCatalog } from "./component/GameStatTextViewModel";
+import prestigeNamesData from "../../../../s2coop-analyzer/data/prestige_names.json";
 import { createLanguageManager } from "../i18n/languageManager";
 import { emit, listen } from "@tauri-apps/api/event";
 import { invoke } from "@tauri-apps/api/core";
@@ -49,10 +51,6 @@ type OverlayEventName =
     | typeof OVERLAY_SET_SHOW_CHARTS_FROM_CONFIG_EVENT
     | typeof OVERLAY_SCREENSHOT_REQUEST_EVENT;
 
-type OverlayPrestigeNameCatalog = Record<
-    string,
-    { en: string[]; ko: string[] }
->;
 type TimeoutHandle = number;
 type StatsPanelStyle = Pick<
     CSSProperties,
@@ -172,7 +170,7 @@ function normalizeInitPayload(
         session_victory: payload.session_victory ?? 0,
         session_defeat: payload.session_defeat ?? 0,
         language: payload.language ?? "en",
-        prestige_names: payload.prestige_names ?? {},
+        prestige_names: payload.prestige_names ?? prestigeNamesData,
     };
 }
 
@@ -231,6 +229,9 @@ export default function OverlayPage() {
     const [overlayLanguageManager] = useState(() =>
         createLanguageManager(language),
     );
+    useEffect(() => {
+        document.documentElement.lang = language;
+    }, [language]);
     const [p1Color, setP1Color] = useState<string>("#0080F8");
     const [p2Color, setP2Color] = useState<string>("#00D532");
     const [amonColor, setAmonColor] = useState<string>("red");
@@ -241,7 +242,7 @@ export default function OverlayPage() {
         defaultGameStatsVisibleMs,
     );
     const [overlayPrestigeNameCatalog, setOverlayPrestigeNameCatalog] =
-        useState<OverlayPrestigeNameCatalog>({});
+        useState<OverlayPrestigeNameCatalog>(prestigeNamesData);
     const [chartVisibility, setChartVisibility] = useState<ReplayChartVisible>({
         visible: true,
         immediate: false,
@@ -255,8 +256,8 @@ export default function OverlayPage() {
     const [sessionDefeatCount, setSessionDefeatCount] = useState<number>(0);
 
     function applyOverlayLanguage(nextLanguage: string): void {
-        setLanguage(nextLanguage);
         overlayLanguageManager.setLanguage(nextLanguage);
+        setLanguage(overlayLanguageManager.currentLanguage());
     }
 
     function setColors(
@@ -779,7 +780,11 @@ export default function OverlayPage() {
     }, [gameStatPayload, gameStatsVisibleMs]);
 
     return (
-        <div id="overlay-screenshot-root" className={styles.overlayPageRoot}>
+        <div
+            id="overlay-screenshot-root"
+            lang={overlayLanguageManager.currentLanguage()}
+            className={styles.overlayPageRoot}
+        >
             <div
                 id="bgdiv"
                 className="overlay-background"

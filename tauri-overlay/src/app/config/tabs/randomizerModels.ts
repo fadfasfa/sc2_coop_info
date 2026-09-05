@@ -4,7 +4,7 @@ import type {
     OverlayRandomizerCatalog,
     RandomizerResult,
 } from "../../../bindings/overlay";
-import type { LanguageManager } from "../../i18n/languageManager";
+import type { AppLanguage, LanguageManager } from "../../i18n/languageManager";
 import type { PrestigeNameMap } from "../types";
 
 export type RandomizerChoices = AppSettings["rng_choices"];
@@ -116,7 +116,7 @@ export function prestigeLabelForLanguage(
     prestigeNames: PrestigeNameMap,
     commander: string,
     prestige: number,
-    language: "en" | "ko",
+    language: AppLanguage,
 ): string {
     const localized = prestigeNames[commander];
     if (!localized) {
@@ -126,6 +126,7 @@ export function prestigeLabelForLanguage(
     return (
         localized[language]?.[prestige] ||
         localized.en?.[prestige] ||
+        localized.ko?.[prestige] ||
         `P${prestige}`
     );
 }
@@ -149,11 +150,19 @@ export function masteryRowsFromIndices(
 
         rows.push({
             points: leftPoints,
-            label: labels[leftIndex] || `Mastery ${leftIndex + 1}`,
+            label:
+                labels[leftIndex] ||
+                languageManager
+                    .translate("ui_stats_mastery_fallback")
+                    .replace("{{index}}", String(leftIndex + 1)),
         });
         rows.push({
             points: rightPoints,
-            label: labels[rightIndex] || `Mastery ${rightIndex + 1}`,
+            label:
+                labels[rightIndex] ||
+                languageManager
+                    .translate("ui_stats_mastery_fallback")
+                    .replace("{{index}}", String(rightIndex + 1)),
         });
     }
 
@@ -175,9 +184,7 @@ export function localizedMutatorText(
     value: LocalizedText,
     languageManager: LanguageManager,
 ): string {
-    return languageManager.currentLanguage() === "ko"
-        ? value.ko || value.en
-        : value.en || value.ko;
+    return languageManager.localizedValue(value);
 }
 
 export function brutalPlusLabel(brutalPlusText: string, level: number): string {

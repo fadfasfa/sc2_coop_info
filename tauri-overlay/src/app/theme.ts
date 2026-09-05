@@ -46,7 +46,8 @@ export function createConfigTheme(mode: ConfigThemeMode) {
             divider: isDark ? "#243145" : "#d7e1ee",
         },
         typography: {
-            fontFamily: 'Inter, "Segoe UI", Arial, sans-serif',
+            fontFamily:
+                'Inter, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif',
         },
         shape: {
             borderRadius: 8,
@@ -82,7 +83,8 @@ export function createConfigTheme(mode: ConfigThemeMode) {
                     root: {
                         textTransform: "none",
                         borderRadius: 8,
-                        fontFamily: 'Inter, "Segoe UI", Arial, sans-serif',
+                        fontFamily:
+                            'Inter, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif',
                     },
                 },
             },

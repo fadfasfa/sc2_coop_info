@@ -7,10 +7,8 @@ import GameStatChart, { ReplayChartVisible } from "./GameStatChart";
 import GameStatText from "./GameStatText";
 import type { OverlayReplayPayload } from "../../../bindings/overlay";
 
-type OverlayPrestigeNameCatalog = Record<
-    string,
-    { en: string[]; ko: string[] }
->;
+type OverlayPrestigeNameCatalog =
+    import("./GameStatTextViewModel").OverlayPrestigeNameCatalog;
 type StatsPanelStyle = Pick<
     CSSProperties,
     "display" | "opacity" | "right" | "transition"

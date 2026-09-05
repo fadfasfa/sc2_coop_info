@@ -14,6 +14,7 @@ import StatisticsFiltersPanel from "./StatisticsFiltersPanel";
 import StatisticsMapsPanel from "./StatisticsMapsPanel";
 import StatisticsUnitsPanel from "./StatisticsUnitsPanel";
 import styles from "../configStyles";
+import { localizeBackendStatus } from "../statusMessage";
 
 const STATS_SUBTABS = [
     { id: "maps", titleId: "ui_statistics_subtab_maps" },
@@ -84,7 +85,8 @@ export default function StatisticsTab({
 
     let subtabContent = (
         <div className={styles.statsDetailEmpty}>
-            {payload?.message || t("ui_stats_no_statistics")}
+            {localizeBackendStatus(payload?.message || "", languageManager) ||
+                t("ui_stats_no_statistics")}
         </div>
     );
 

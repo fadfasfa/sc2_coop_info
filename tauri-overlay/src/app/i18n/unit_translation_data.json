@@ -1,1562 +1,1952 @@
 {
     "A.R.E.S.": {
         "en": "A.R.E.S.",
-        "ko": "A.R.E.S."
+        "ko": "A.R.E.S.",
+        "zh-CN": "武装机器人"
     },
     "Aberration": {
         "en": "Aberration",
-        "ko": "변형체"
+        "ko": "변형체",
+        "zh-CN": "畸变体"
     },
     "Adept": {
         "en": "Adept",
-        "ko": "사도"
+        "ko": "사도",
+        "zh-CN": "使徒"
     },
     "Aegis Guard": {
         "en": "Aegis Guard",
-        "ko": "이지스 근위대"
+        "ko": "이지스 근위대",
+        "zh-CN": "壁垒卫队"
     },
     "Air Defense Cannon": {
         "en": "Air Defense Cannon",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "防空炮（Air Defense Cannon）"
     },
     "Alarak": {
         "en": "Alarak",
-        "ko": "알라라크"
+        "ko": "알라라크",
+        "zh-CN": "阿拉纳克"
     },
     "Aleksander": {
         "en": "Aleksander",
-        "ko": "알렉산더"
+        "ko": "알렉산더",
+        "zh-CN": "亚历山大号"
     },
     "Amon's Host": {
         "en": "Amon's Host",
-        "ko": "아몬의 숙주"
+        "ko": "아몬의 숙주",
+        "zh-CN": "埃蒙的宿主"
     },
     "Apocalisk": {
         "en": "Apocalisk",
-        "ko": "아포칼리스크"
+        "ko": "아포칼리스크",
+        "zh-CN": "末日巨兽"
     },
     "Arbiter": {
         "en": "Arbiter",
-        "ko": "중재자"
+        "ko": "중재자",
+        "zh-CN": "仲裁者"
     },
     "Archangel": {
         "en": "Archangel",
-        "ko": "대천사"
+        "ko": "대천사",
+        "zh-CN": "大天使"
     },
     "Archon": {
         "en": "Archon",
-        "ko": "집정관"
+        "ko": "집정관",
+        "zh-CN": "执政官"
     },
     "Armory": {
         "en": "Armory",
-        "ko": "무기고"
+        "ko": "무기고",
+        "zh-CN": "军械库"
     },
     "Artanis": {
         "en": "Artanis",
-        "ko": "아르타니스"
+        "ko": "아르타니스",
+        "zh-CN": "阿塔尼斯"
     },
     "Assault Galleon": {
         "en": "Assault Galleon",
-        "ko": "강습 갈레온"
+        "ko": "강습 갈레온",
+        "zh-CN": "突击炮舰"
     },
     "Assimilator": {
         "en": "Assimilator",
-        "ko": "융화소"
+        "ko": "융화소",
+        "zh-CN": "吸纳舱"
     },
     "Asteria Wraith": {
         "en": "Asteria Wraith",
-        "ko": "아스테리아 망령"
+        "ko": "아스테리아 망령",
+        "zh-CN": "阿斯忒瑞亚怨灵战机"
     },
     "Auto-Turret": {
         "en": "Auto-Turret",
-        "ko": "자동 포탑"
+        "ko": "자동 포탑",
+        "zh-CN": "自动机炮"
     },
     "Automated Refinery": {
         "en": "Automated Refinery",
-        "ko": "자동 정제소"
+        "ko": "자동 정제소",
+        "zh-CN": "自动化精炼厂"
     },
     "Baneling": {
         "en": "Baneling",
-        "ko": "맹독충"
+        "ko": "맹독충",
+        "zh-CN": "爆虫"
     },
     "Baneling Nest": {
         "en": "Baneling Nest",
-        "ko": "맹독충 둥지"
+        "ko": "맹독충 둥지",
+        "zh-CN": "爆虫巢穴"
     },
     "Barracks": {
         "en": "Barracks",
-        "ko": "병영"
+        "ko": "병영",
+        "zh-CN": "兵营"
     },
     "Battlecruiser": {
         "en": "Battlecruiser",
-        "ko": "전투순양함"
+        "ko": "전투순양함",
+        "zh-CN": "战列巡航舰"
     },
     "Bile Launcher": {
         "en": "Bile Launcher",
-        "ko": "부패 주둥이"
+        "ko": "부패 주둥이",
+        "zh-CN": "胆汁喷射体"
     },
     "Blackhammer": {
         "en": "Blackhammer",
-        "ko": "검은망치"
+        "ko": "검은망치",
+        "zh-CN": "黑锤"
     },
     "Blaster Billy": {
         "en": "Blaster Billy",
-        "ko": "발포 빌리"
+        "ko": "발포 빌리",
+        "zh-CN": "爆弹比利"
     },
     "Blightbringer": {
         "en": "Blightbringer",
-        "ko": "역병전파자"
+        "ko": "역병전파자",
+        "zh-CN": "疾疫传播体"
     },
     "Blizzard": {
         "en": "Blizzard",
-        "ko": "눈보라"
+        "ko": "눈보라",
+        "zh-CN": "暴风雪"
     },
     "Boom Bot": {
         "en": "Boom Bot",
-        "ko": "폭탄 로봇"
+        "ko": "폭탄 로봇",
+        "zh-CN": "砰砰机器人"
     },
     "Brood Lord": {
         "en": "Brood Lord",
-        "ko": "무리 군주"
+        "ko": "무리 군주",
+        "zh-CN": "巢虫领主"
     },
     "Brood Queen": {
         "en": "Brood Queen",
-        "ko": "무리 여왕"
+        "ko": "무리 여왕",
+        "zh-CN": "虫巢女王"
     },
     "Broodling": {
         "en": "Broodling",
-        "ko": "공생충"
+        "ko": "공생충",
+        "zh-CN": "巢虫"
     },
     "Brutalisk": {
         "en": "Brutalisk",
-        "ko": "브루탈리스크"
+        "ko": "브루탈리스크",
+        "zh-CN": "莽兽"
     },
     "Bunker": {
         "en": "Bunker",
-        "ko": "벙커"
+        "ko": "벙커",
+        "zh-CN": "地堡"
     },
     "Carrier": {
         "en": "Carrier",
-        "ko": "우주모함"
+        "ko": "우주모함",
+        "zh-CN": "航母"
     },
     "Centurion": {
         "en": "Centurion",
-        "ko": "백인대장"
+        "ko": "백인대장",
+        "zh-CN": "百夫长"
     },
     "Choker": {
         "en": "Choker",
-        "ko": "혀감염충"
+        "ko": "혀감염충",
+        "zh-CN": "扼喉怪"
     },
     "Clolarion": {
         "en": "Clolarion",
-        "ko": "클로라리온"
+        "ko": "클로라리온",
+        "zh-CN": "科罗拉里昂"
     },
     "Colossus": {
         "en": "Colossus",
-        "ko": "거신"
+        "ko": "거신",
+        "zh-CN": "巨像"
     },
     "Command Center": {
         "en": "Command Center",
-        "ko": "사령부"
+        "ko": "사령부",
+        "zh-CN": "指挥中心"
     },
     "Conservator": {
         "en": "Conservator",
-        "ko": "보전기"
+        "ko": "보전기",
+        "zh-CN": "保护者"
     },
     "Corruptor": {
         "en": "Corruptor",
-        "ko": "타락귀"
+        "ko": "타락귀",
+        "zh-CN": "腐化者"
     },
     "Corsair": {
         "en": "Corsair",
-        "ko": "해적선"
+        "ko": "해적선",
+        "zh-CN": "海盗船"
     },
     "Covert Banshee": {
         "en": "Covert Banshee",
-        "ko": "비밀 밴시"
+        "ko": "비밀 밴시",
+        "zh-CN": "隐秘女妖"
     },
     "Creep Tumor": {
         "en": "Creep Tumor",
-        "ko": "점막 종양"
+        "ko": "점막 종양",
+        "zh-CN": "菌毯肿瘤"
     },
     "Creeper Host": {
         "en": "Creeper Host",
-        "ko": "땅무지 숙주"
+        "ko": "땅무지 숙주",
+        "zh-CN": "掘地虫宿主"
     },
     "Cybernetics Core": {
         "en": "Cybernetics Core",
-        "ko": "인공제어소"
+        "ko": "인공제어소",
+        "zh-CN": "控制芯核"
     },
     "Cyclone": {
         "en": "Cyclone",
-        "ko": "사이클론"
+        "ko": "사이클론",
+        "zh-CN": "飓风"
     },
     "Dakrun": {
         "en": "Dakrun",
-        "ko": "다크룬"
+        "ko": "다크룬",
+        "zh-CN": "达克伦"
     },
     "Dark Archon": {
         "en": "Dark Archon",
-        "ko": "암흑 집정관"
+        "ko": "암흑 집정관",
+        "zh-CN": "黑暗执政官"
     },
     "Dark Pylon": {
         "en": "Dark Pylon",
-        "ko": "암흑 수정탑"
+        "ko": "암흑 수정탑",
+        "zh-CN": "黑暗水晶塔"
     },
     "Dark Shrine": {
         "en": "Dark Shrine",
-        "ko": "암흑 성소"
+        "ko": "암흑 성소",
+        "zh-CN": "黑暗圣坛"
     },
     "Dark Templar": {
         "en": "Dark Templar",
-        "ko": "암흑 기사"
+        "ko": "암흑 기사",
+        "zh-CN": "黑暗圣堂武士"
     },
     "Death Grip Crystal": {
         "en": "Death Grip Crystal",
-        "ko": "죽음의 손아귀 수정"
+        "ko": "죽음의 손아귀 수정",
+        "zh-CN": "死亡之握水晶"
     },
     "Death Head": {
         "en": "Death Head",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "死神之首"
     },
     "Defense Bot": {
         "en": "Defense Bot",
-        "ko": "방어 로봇"
+        "ko": "방어 로봇",
+        "zh-CN": "防御机器人"
     },
     "Defensive Drone": {
         "en": "Defensive Drone",
-        "ko": "방어 드론"
+        "ko": "방어 드론",
+        "zh-CN": "防御无人机"
     },
     "Dehaka": {
         "en": "Dehaka",
-        "ko": "데하카"
+        "ko": "데하카",
+        "zh-CN": "德哈卡"
     },
     "Dehaka Spawn": {
         "en": "Dehaka Spawn",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "德哈卡分身"
     },
     "Deimos Viking": {
         "en": "Deimos Viking",
-        "ko": "데이모스 바이킹"
+        "ko": "데이모스 바이킹",
+        "zh-CN": "德摩斯维京战机"
     },
     "Destroyer": {
         "en": "Destroyer",
-        "ko": "파멸자"
+        "ko": "파멸자",
+        "zh-CN": "毁灭者"
     },
     "Devil Dog": {
         "en": "Devil Dog",
-        "ko": "악마의 개"
+        "ko": "악마의 개",
+        "zh-CN": "魔鬼犬"
     },
     "Devourer": {
         "en": "Devourer",
-        "ko": "포식귀"
+        "ko": "포식귀",
+        "zh-CN": "吞噬者"
     },
     "Diamondback": {
         "en": "Diamondback",
-        "ko": "코브라"
+        "ko": "코브라",
+        "zh-CN": "响尾蛇战车"
     },
     "Disruptor": {
         "en": "Disruptor",
-        "ko": "분열기"
+        "ko": "분열기",
+        "zh-CN": "干扰者"
     },
     "Dogs of War (Maguro Brood)": {
         "en": "Dogs of War",
-        "ko": "전쟁의 개"
+        "ko": "전쟁의 개",
+        "zh-CN": "战争恶犬（Dogs of War）"
     },
     "Dominion Laborer": {
         "en": "Dominion Laborer",
-        "ko": "자치령 인부"
+        "ko": "자치령 인부",
+        "zh-CN": "帝国劳工"
     },
     "Dominion Trooper": {
         "en": "Dominion Trooper",
-        "ko": "자치령 부대원"
+        "ko": "자치령 부대원",
+        "zh-CN": "帝国冲锋队员"
     },
     "Dragoon": {
         "en": "Dragoon",
-        "ko": "용기병"
+        "ko": "용기병",
+        "zh-CN": "龙骑士"
     },
     "Drakken Laser Drill": {
         "en": "Drakken Laser Drill",
-        "ko": "드라켄 레이저 천공기"
+        "ko": "드라켄 레이저 천공기",
+        "zh-CN": "德拉肯激光钻机"
     },
     "Drone": {
         "en": "Drone",
-        "ko": "일벌레"
+        "ko": "일벌레",
+        "zh-CN": "工蜂"
     },
     "Dump Truck": {
         "en": "Dump Truck",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "自卸卡车（Dump Truck）"
     },
     "Dusk Wings": {
         "en": "Dusk Wings",
-        "ko": "그늘날개"
+        "ko": "그늘날개",
+        "zh-CN": "黄昏之翼"
     },
     "Earthsplitter Ordnance": {
         "en": "Earthsplitter Ordnance",
-        "ko": "대지파괴 포"
+        "ko": "대지파괴 포",
+        "zh-CN": "大地碎裂炮"
     },
     "Elite Marine": {
         "en": "Elite Marine",
-        "ko": "정예 해병"
+        "ko": "정예 해병",
+        "zh-CN": "精英陆战队员"
     },
     "Emperor's Shadow": {
         "en": "Emperor's Shadow",
-        "ko": "황제의 그림자"
+        "ko": "황제의 그림자",
+        "zh-CN": "帝影"
     },
     "Energizer": {
         "en": "Energizer",
-        "ko": "동력기"
+        "ko": "동력기",
+        "zh-CN": "激励者"
     },
     "Engineering Bay": {
         "en": "Engineering Bay",
-        "ko": "공학 연구소"
+        "ko": "공학 연구소",
+        "zh-CN": "工程站"
     },
     "Eradicator": {
         "en": "Eradicator",
-        "ko": "섬멸 전차"
+        "ko": "섬멸 전차",
+        "zh-CN": "根除者"
     },
     "Evolution Chamber": {
         "en": "Evolution Chamber",
-        "ko": "진화장"
+        "ko": "진화장",
+        "zh-CN": "进化腔"
     },
     "Excavator": {
         "en": "Excavator",
-        "ko": "지게로봇"
+        "ko": "지게로봇",
+        "zh-CN": "挖掘机（Excavator）"
     },
     "Extractor": {
         "en": "Extractor",
-        "ko": "추출장"
+        "ko": "추출장",
+        "zh-CN": "萃取房"
     },
     "Factory": {
         "en": "Factory",
-        "ko": "군수공장"
+        "ko": "군수공장",
+        "zh-CN": "重工厂"
     },
     "Firebat": {
         "en": "Firebat",
-        "ko": "화염방사병"
+        "ko": "화염방사병",
+        "zh-CN": "火蝠"
     },
     "Flaming Betty": {
         "en": "Flaming Betty",
-        "ko": "불꽃 베티"
+        "ko": "불꽃 베티",
+        "zh-CN": "热辣贝蒂"
     },
     "Fleet Beacon": {
         "en": "Fleet Beacon",
-        "ko": "함대 신호소"
+        "ko": "함대 신호소",
+        "zh-CN": "舰队航标"
     },
     "Forge": {
         "en": "Forge",
-        "ko": "제련소"
+        "ko": "제련소",
+        "zh-CN": "锻炉"
     },
     "Fusion Core": {
         "en": "Fusion Core",
-        "ko": "융합로"
+        "ko": "융합로",
+        "zh-CN": "聚变芯体"
     },
     "Gatekeeper Construct": {
         "en": "Gatekeeper Construct",
-        "ko": "문지기 구조물"
+        "ko": "문지기 구조물",
+        "zh-CN": "门卫构造体"
     },
     "Gateway": {
         "en": "Gateway",
-        "ko": "관문"
+        "ko": "관문",
+        "zh-CN": "传送门"
     },
     "Ghost": {
         "en": "Ghost",
-        "ko": "유령"
+        "ko": "유령",
+        "zh-CN": "幽灵"
     },
     "Ghost Academy": {
         "en": "Ghost Academy",
-        "ko": "유령 사관학교"
+        "ko": "유령 사관학교",
+        "zh-CN": "幽灵军校"
     },
     "Glevig": {
         "en": "Glevig",
-        "ko": "글레빅"
+        "ko": "글레빅",
+        "zh-CN": "格里维格"
     },
     "Goliath": {
         "en": "Goliath",
-        "ko": "골리앗"
+        "ko": "골리앗",
+        "zh-CN": "歌利亚武装机器人"
     },
     "Greater Primal Wurm": {
         "en": "Greater Primal Wurm",
-        "ko": "거대 원시 벌레"
+        "ko": "거대 원시 벌레",
+        "zh-CN": "大型原始蠕虫"
     },
     "Greater Roach Warren": {
         "en": "Greater Roach Warren",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "大型蟑螂温室"
     },
     "Greater Spire": {
         "en": "Greater Spire",
-        "ko": "거대 둥지탑"
+        "ko": "거대 둥지탑",
+        "zh-CN": "巨型尖塔"
     },
     "Guardian": {
         "en": "Guardian",
-        "ko": "수호군주"
+        "ko": "수호군주",
+        "zh-CN": "守护者"
     },
     "Hatchery": {
         "en": "Hatchery",
-        "ko": "부화장"
+        "ko": "부화장",
+        "zh-CN": "孵化场"
     },
     "Havoc": {
         "en": "Havoc",
-        "ko": "교란기"
+        "ko": "교란기",
+        "zh-CN": "浩劫"
     },
     "Hellbat": {
         "en": "Hellbat",
-        "ko": "화염기갑병"
+        "ko": "화염기갑병",
+        "zh-CN": "恶蝠"
     },
     "Hellbat Ranger": {
         "en": "Hellbat Ranger",
-        "ko": "화염기갑 특전병"
+        "ko": "화염기갑 특전병",
+        "zh-CN": "恶蝠游骑兵"
     },
     "Hellion": {
         "en": "Hellion",
-        "ko": "화염차"
+        "ko": "화염차",
+        "zh-CN": "恶火"
     },
     "Hellion Ranger": {
         "en": "Hellion Ranger",
-        "ko": "화염차 특전병"
+        "ko": "화염차 특전병",
+        "zh-CN": "恶火游骑兵"
     },
     "HERC": {
         "en": "HERC",
-        "ko": "HERC"
+        "ko": "HERC",
+        "zh-CN": "赫克"
     },
     "Hercules": {
         "en": "Hercules",
-        "ko": "헤라클레스"
+        "ko": "헤라클레스",
+        "zh-CN": "大力神"
     },
     "High Templar": {
         "en": "High Templar",
-        "ko": "고위 기사"
+        "ko": "고위 기사",
+        "zh-CN": "高阶圣堂武士"
     },
     "Hive": {
         "en": "Hive",
-        "ko": "군락"
+        "ko": "군락",
+        "zh-CN": "主巢"
     },
     "Hunter Killer": {
         "en": "Hunter Killer",
-        "ko": "추적 도살자"
+        "ko": "추적 도살자",
+        "zh-CN": "屠猎者"
     },
     "Hunterling": {
         "en": "Hunterling",
-        "ko": "왕저글링"
+        "ko": "왕저글링",
+        "zh-CN": "猎杀体"
     },
     "Hydralisk": {
         "en": "Hydralisk",
-        "ko": "히드라리스크"
+        "ko": "히드라리스크",
+        "zh-CN": "刺蛇"
     },
     "Hydralisk Den": {
         "en": "Hydralisk Den",
-        "ko": "히드라리스크 굴"
+        "ko": "히드라리스크 굴",
+        "zh-CN": "刺蛇巢"
     },
     "Hyperion": {
         "en": "Hyperion",
-        "ko": "히페리온"
+        "ko": "히페리온",
+        "zh-CN": "休伯利安号"
     },
     "Immortal": {
         "en": "Immortal",
-        "ko": "불멸자"
+        "ko": "불멸자",
+        "zh-CN": "不朽者"
     },
     "Impaler": {
         "en": "Impaler",
-        "ko": "관통촉수"
+        "ko": "관통촉수",
+        "zh-CN": "穿刺者"
     },
     "Imperial Intercessor": {
         "en": "Imperial Intercessor",
-        "ko": "황제의 중재선"
+        "ko": "황제의 중재선",
+        "zh-CN": "帝国仲裁机"
     },
     "Imperial Witness": {
         "en": "Imperial Witness",
-        "ko": "황제의 증인"
+        "ko": "황제의 증인",
+        "zh-CN": "帝国见证者"
     },
     "Infestation Pit": {
         "en": "Infestation Pit",
-        "ko": "감염 구덩이"
+        "ko": "감염 구덩이",
+        "zh-CN": "感染深渊"
     },
     "Infestation Spire": {
         "en": "Infestation Spire",
-        "ko": "감염 둥지탑"
+        "ko": "감염 둥지탑",
+        "zh-CN": "感染尖塔（Infestation Spire）"
     },
     "Infested Armory": {
         "en": "Infested Armory",
-        "ko": "감염된 무기고"
+        "ko": "감염된 무기고",
+        "zh-CN": "被感染的军械库"
     },
     "Infested Banshee": {
         "en": "Infested Banshee",
-        "ko": "감염된 밴시"
+        "ko": "감염된 밴시",
+        "zh-CN": "被感染的女妖"
     },
     "Infested Barracks": {
         "en": "Infested Barracks",
-        "ko": "감염된 병영"
+        "ko": "감염된 병영",
+        "zh-CN": "被感染的兵营"
     },
     "Infested Bunker": {
         "en": "Infested Bunker",
-        "ko": "감염된 벙커"
+        "ko": "감염된 벙커",
+        "zh-CN": "被感染的地堡"
     },
     "Infested Civilian": {
         "en": "Infested Civilian",
-        "ko": "감염된 민간인"
+        "ko": "감염된 민간인",
+        "zh-CN": "被感染的平民"
     },
     "Infested Command Center": {
         "en": "Infested Command Center",
-        "ko": "감염된 사령부"
+        "ko": "감염된 사령부",
+        "zh-CN": "被感染的指挥中心"
     },
     "Infested Diamondback": {
         "en": "Infested Diamondback",
-        "ko": "감염된 코브라"
+        "ko": "감염된 코브라",
+        "zh-CN": "被感染的响尾蛇战车"
     },
     "Infested Engineering Bay": {
         "en": "Infested Engineering Bay",
-        "ko": "감염된 공학 연구소"
+        "ko": "감염된 공학 연구소",
+        "zh-CN": "被感染的工程站"
     },
     "Infested Factory": {
         "en": "Infested Factory",
-        "ko": "감염된 군수공장"
+        "ko": "감염된 군수공장",
+        "zh-CN": "被感染的重工厂"
     },
     "Infested Industrial Ship": {
         "en": "Infested Industrial Ship",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "被感染的工业船"
     },
     "Infested Liberator": {
         "en": "Infested Liberator",
-        "ko": "감염된 해방선"
+        "ko": "감염된 해방선",
+        "zh-CN": "被感染的解放者"
     },
     "Infested Marine": {
         "en": "Infested Marine",
-        "ko": "감염된 해병"
+        "ko": "감염된 해병",
+        "zh-CN": "被感染的陆战队员"
     },
     "Infested Medic": {
         "en": "Infested Medic",
-        "ko": "감염된 의무관"
+        "ko": "감염된 의무관",
+        "zh-CN": "被感染的医疗兵"
     },
     "Infested Missile Turret": {
         "en": "Infested Missile Turret",
-        "ko": "감염된 미사일 포탑"
+        "ko": "감염된 미사일 포탑",
+        "zh-CN": "被感染的导弹塔"
     },
     "Infested SCV": {
         "en": "Infested SCV",
-        "ko": "감염된 건설로봇"
+        "ko": "감염된 건설로봇",
+        "zh-CN": "被感染的SCV"
     },
     "Infested Siege Tank": {
         "en": "Infested Siege Tank",
-        "ko": "감염된 공성 전차"
+        "ko": "감염된 공성 전차",
+        "zh-CN": "被感染的攻城坦克"
     },
     "Infested Starport": {
         "en": "Infested Starport",
-        "ko": "감염된 우주공항"
+        "ko": "감염된 우주공항",
+        "zh-CN": "被感染的星港"
     },
     "Infested Swarm Egg": {
         "en": "Infested Swarm Egg",
-        "ko": "감염된 군단 알"
+        "ko": "감염된 군단 알",
+        "zh-CN": "被感染的虫群卵（Infested Swarm Egg）"
     },
     "Infested Terran": {
         "en": "Infested Terran",
-        "ko": "감염된 테란"
+        "ko": "감염된 테란",
+        "zh-CN": "被感染的人类"
     },
     "Infested Trooper": {
         "en": "Infested Trooper",
-        "ko": "감염된 부대원"
+        "ko": "감염된 부대원",
+        "zh-CN": "被感染的士兵"
     },
     "Infestor": {
         "en": "Infestor",
-        "ko": "감염충"
+        "ko": "감염충",
+        "zh-CN": "感染者"
     },
     "Jorium Stockpile": {
         "en": "Jorium Stockpile",
-        "ko": "조륨 보관 시설"
+        "ko": "조륨 보관 시설",
+        "zh-CN": "聚燃储备（Jorium Stockpile）"
     },
     "Kaboomer": {
         "en": "Kaboomer",
-        "ko": "폭독충"
+        "ko": "폭독충",
+        "zh-CN": "炸弹怪"
     },
     "Kaldalis": {
         "en": "Kaldalis",
-        "ko": "칼달리스"
+        "ko": "칼달리스",
+        "zh-CN": "卡尔达利斯"
     },
     "Karax": {
         "en": "Karax",
-        "ko": "카락스"
+        "ko": "카락스",
+        "zh-CN": "凯拉克斯"
     },
     "Kerrigan": {
         "en": "Kerrigan",
-        "ko": "케리건"
+        "ko": "케리건",
+        "zh-CN": "凯瑞甘"
     },
     "Khaydarin Monolith": {
         "en": "Khaydarin Monolith",
-        "ko": "케이다린 초석"
+        "ko": "케이다린 초석",
+        "zh-CN": "凯达琳巨石"
     },
     "Kill Bot": {
         "en": "Kill Bot",
-        "ko": "처치 로봇"
+        "ko": "처치 로봇",
+        "zh-CN": "杀戮机器人"
     },
     "Lair": {
         "en": "Lair",
-        "ko": "번식지"
+        "ko": "번식지",
+        "zh-CN": "虫穴"
     },
     "Large Egg": {
         "en": "Large Egg",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "大型虫卵（Large Egg）"
     },
     "Larva": {
         "en": "Larva",
-        "ko": "애벌레"
+        "ko": "애벌레",
+        "zh-CN": "幼虫"
     },
     "Leviathan": {
         "en": "Leviathan",
-        "ko": "거대괴수"
+        "ko": "거대괴수",
+        "zh-CN": "利维坦"
     },
     "Liberator": {
         "en": "Liberator",
-        "ko": "해방선"
+        "ko": "해방선",
+        "zh-CN": "解放者"
     },
     "Locust": {
         "en": "Locust",
-        "ko": "식충"
+        "ko": "식충",
+        "zh-CN": "蝗虫"
     },
     "Logistics Headquarters": {
         "en": "Logistics Headquarters",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "后勤总部（Logistics Headquarters）"
     },
     "Loki": {
         "en": "Loki",
-        "ko": "로키"
+        "ko": "로키",
+        "zh-CN": "洛基"
     },
     "Lurker": {
         "en": "Lurker",
-        "ko": "가시지옥"
+        "ko": "가시지옥",
+        "zh-CN": "潜伏者"
     },
     "Lurker Den": {
         "en": "Lurker Den",
-        "ko": "가시지옥 굴"
+        "ko": "가시지옥 굴",
+        "zh-CN": "潜伏者巢"
     },
     "Ma'lash": {
         "en": "Ma'lash",
-        "ko": "말라쉬"
+        "ko": "말라쉬",
+        "zh-CN": "马拉什"
     },
     "Mag Mine": {
         "en": "Mag Mine",
-        "ko": "자기 지뢰"
+        "ko": "자기 지뢰",
+        "zh-CN": "麦格天雷"
     },
     "Magnetic Mine": {
         "en": "Magnetic Mine",
-        "ko": "자기 지뢰"
+        "ko": "자기 지뢰",
+        "zh-CN": "麦格天雷"
     },
     "Marauder": {
         "en": "Marauder",
-        "ko": "불곰"
+        "ko": "불곰",
+        "zh-CN": "劫掠者"
     },
     "Marauder Commando": {
         "en": "Marauder Commando",
-        "ko": "불곰 특공대"
+        "ko": "불곰 특공대",
+        "zh-CN": "劫掠者突击手"
     },
     "Marine": {
         "en": "Marine",
-        "ko": "해병"
+        "ko": "해병",
+        "zh-CN": "陆战队员"
     },
     "Mecha Baneling": {
         "en": "Mecha Baneling",
-        "ko": "메카 맹독충"
+        "ko": "메카 맹독충",
+        "zh-CN": "机械爆虫"
     },
     "Mecha Battlecarrier Lord": {
         "en": "Mecha Battlecarrier Lord",
-        "ko": "메카 전투모함 군주"
+        "ko": "메카 전투모함 군주",
+        "zh-CN": "机械巢式战列空母"
     },
     "Mecha Broodling": {
         "en": "Mecha Broodling",
-        "ko": "메카 공생충"
+        "ko": "메카 공생충",
+        "zh-CN": "机械巢虫"
     },
     "Mecha Corruptor": {
         "en": "Mecha Corruptor",
-        "ko": "메카 타락귀"
+        "ko": "메카 타락귀",
+        "zh-CN": "机械腐化者"
     },
     "Mecha Drone": {
         "en": "Mecha Drone",
-        "ko": "메카 일벌레"
+        "ko": "메카 일벌레",
+        "zh-CN": "机械工蜂"
     },
     "Mecha Extractor": {
         "en": "Mecha Extractor",
-        "ko": "메카 추출장"
+        "ko": "메카 추출장",
+        "zh-CN": "机械萃取房"
     },
     "Mecha Hydralisk": {
         "en": "Mecha Hydralisk",
-        "ko": "메카 히드라리스크"
+        "ko": "메카 히드라리스크",
+        "zh-CN": "机械刺蛇"
     },
     "Mecha Infestor": {
         "en": "Mecha Infestor",
-        "ko": "메카 감염충"
+        "ko": "메카 감염충",
+        "zh-CN": "机械感染者"
     },
     "Mecha Lurker": {
         "en": "Mecha Lurker",
-        "ko": "메카 가시지옥"
+        "ko": "메카 가시지옥",
+        "zh-CN": "机械潜伏者"
     },
     "Mecha Overlord": {
         "en": "Mecha Overlord",
-        "ko": "메카 대군주"
+        "ko": "메카 대군주",
+        "zh-CN": "机械王虫"
     },
     "Mecha Overseer": {
         "en": "Mecha Overseer",
-        "ko": "메카 감시군주"
+        "ko": "메카 감시군주",
+        "zh-CN": "机械眼虫"
     },
     "Mecha Ravager": {
         "en": "Mecha Ravager",
-        "ko": "메카 궤멸충"
+        "ko": "메카 궤멸충",
+        "zh-CN": "机械破坏者"
     },
     "Mecha Roach": {
         "en": "Mecha Roach",
-        "ko": "메카 바퀴"
+        "ko": "메카 바퀴",
+        "zh-CN": "机械蟑螂"
     },
     "Mecha Spine Crawler": {
         "en": "Mecha Spine Crawler",
-        "ko": "메카 가시 촉수"
+        "ko": "메카 가시 촉수",
+        "zh-CN": "机械脊针爬虫"
     },
     "Mecha Spore Crawler": {
         "en": "Mecha Spore Crawler",
-        "ko": "메카 포자 촉수"
+        "ko": "메카 포자 촉수",
+        "zh-CN": "机械孢子爬虫"
     },
     "Mecha Ultralisk": {
         "en": "Mecha Ultralisk",
-        "ko": "메카 울트라리스크"
+        "ko": "메카 울트라리스크",
+        "zh-CN": "机械雷兽"
     },
     "Mecha Ultralisk Cavern": {
         "en": "Mecha Ultralisk Cavern",
-        "ko": "메카 울트라리스크 동굴"
+        "ko": "메카 울트라리스크 동굴",
+        "zh-CN": "机械雷兽窟"
     },
     "Mecha Zergling": {
         "en": "Mecha Zergling",
-        "ko": "메카 저글링"
+        "ko": "메카 저글링",
+        "zh-CN": "机械跳虫"
     },
     "Medic": {
         "en": "Medic",
-        "ko": "의무관"
+        "ko": "의무관",
+        "zh-CN": "医疗兵"
     },
     "Medivac": {
         "en": "Medivac",
-        "ko": "의료선"
+        "ko": "의료선",
+        "zh-CN": "医疗运输机"
     },
     "Medivac Platform": {
         "en": "Medivac Platform",
-        "ko": "의료선 정거장"
+        "ko": "의료선 정거장",
+        "zh-CN": "医疗运输机平台"
     },
     "Mineral Shield": {
         "en": "Mineral Shield",
-        "ko": "광물 보호막"
+        "ko": "광물 보호막",
+        "zh-CN": "晶体护盾"
     },
     "Mirage": {
         "en": "Mirage",
-        "ko": "신기루"
+        "ko": "신기루",
+        "zh-CN": "幻影"
     },
     "Missile Command": {
         "en": "Missile Command",
-        "ko": "미사일 폭격"
+        "ko": "미사일 폭격",
+        "zh-CN": "飞弹大战"
     },
     "Missile Turret": {
         "en": "Missile Turret",
-        "ko": "미사일 포탑"
+        "ko": "미사일 포탑",
+        "zh-CN": "导弹塔"
     },
     "Moebius Corps Laser Drill": {
         "en": "Moebius Corps Laser Drill",
-        "ko": "뫼비우스 재단 레이저 천공기"
+        "ko": "뫼비우스 재단 레이저 천공기",
+        "zh-CN": "莫比斯军团激光钻机"
     },
     "Moebius Hybrid": {
         "en": "Moebius Hybrid",
-        "ko": "뫼비우스 혼종"
+        "ko": "뫼비우스 혼종",
+        "zh-CN": "莫比斯混合体"
     },
     "Molten Salamander": {
         "en": "Molten Salamander",
-        "ko": "용암 도롱뇽"
+        "ko": "용암 도롱뇽",
+        "zh-CN": "熔岩巨蜥"
     },
     "Mothership": {
         "en": "Mothership",
-        "ko": "모선"
+        "ko": "모선",
+        "zh-CN": "母舰"
     },
     "MULE": {
         "en": "MULE",
-        "ko": "지게로봇"
+        "ko": "지게로봇",
+        "zh-CN": "矿骡"
     },
     "Murvar": {
         "en": "Murvar",
-        "ko": "멀바르"
+        "ko": "멀바르",
+        "zh-CN": "穆尔瓦"
     },
     "Mutalisk": {
         "en": "Mutalisk",
-        "ko": "뮤탈리스크"
+        "ko": "뮤탈리스크",
+        "zh-CN": "异龙"
     },
     "Nexus": {
         "en": "Nexus",
-        "ko": "연결체"
+        "ko": "연결체",
+        "zh-CN": "星灵枢纽"
     },
     "Nova": {
         "en": "Nova",
-        "ko": "노바"
+        "ko": "노바",
+        "zh-CN": "诺娃"
     },
     "Nuclear Missile Silo": {
         "en": "Nuclear Missile Silo",
-        "ko": "핵 미사일 격납고"
+        "ko": "핵 미사일 격납고",
+        "zh-CN": "核弹发射井"
     },
     "Nuke": {
         "en": "Nuke",
-        "ko": "핵"
+        "ko": "핵",
+        "zh-CN": "聚变弹头"
     },
     "Nydus Network": {
         "en": "Nydus Network",
-        "ko": "땅굴망"
+        "ko": "땅굴망",
+        "zh-CN": "虫道网络"
     },
     "Nydus Worm": {
         "en": "Nydus Worm",
-        "ko": "땅굴벌레"
+        "ko": "땅굴벌레",
+        "zh-CN": "坑道虫"
     },
     "Observer": {
         "en": "Observer",
-        "ko": "관측선"
+        "ko": "관측선",
+        "zh-CN": "侦测器"
     },
     "Odin": {
         "en": "Odin",
-        "ko": "오딘"
+        "ko": "오딘",
+        "zh-CN": "奥丁"
     },
     "Omega Worm": {
         "en": "Omega Worm",
-        "ko": "오메가벌레"
+        "ko": "오메가벌레",
+        "zh-CN": "坑道虫欧米茄"
     },
     "Oracle": {
         "en": "Oracle",
-        "ko": "예언자"
+        "ko": "예언자",
+        "zh-CN": "先知"
     },
     "Orbital Command": {
         "en": "Orbital Command",
-        "ko": "궤도 사령부"
+        "ko": "궤도 사령부",
+        "zh-CN": "轨道控制基地"
     },
     "Overlord": {
         "en": "Overlord",
-        "ko": "대군주"
+        "ko": "대군주",
+        "zh-CN": "王虫"
     },
     "Overseer": {
         "en": "Overseer",
-        "ko": "감시군주"
+        "ko": "감시군주",
+        "zh-CN": "眼虫"
     },
     "Phoenix": {
         "en": "Phoenix",
-        "ko": "불사조"
+        "ko": "불사조",
+        "zh-CN": "凤凰"
     },
     "Photon Cannon": {
         "en": "Photon Cannon",
-        "ko": "광자포"
+        "ko": "광자포",
+        "zh-CN": "光子炮台"
     },
     "Pirate Capital Ship": {
         "en": "Pirate Capital Ship",
-        "ko": "해적 함선"
+        "ko": "해적 함선",
+        "zh-CN": "海盗主力舰"
     },
     "Planetary Fortress": {
         "en": "Planetary Fortress",
-        "ko": "행성 요새"
+        "ko": "행성 요새",
+        "zh-CN": "行星要塞"
     },
     "Point Defense Drone": {
         "en": "Point Defense Drone",
-        "ko": "국지 방어기"
+        "ko": "국지 방어기",
+        "zh-CN": "定点防御无人机"
     },
     "Pride of Augustgrad": {
         "en": "Pride of Augustgrad",
-        "ko": "아우구스트그라드의 자랑"
+        "ko": "아우구스트그라드의 자랑",
+        "zh-CN": "奥古斯特格勒之傲"
     },
     "Primal Drone": {
         "en": "Primal Drone",
-        "ko": "원시 일벌레"
+        "ko": "원시 일벌레",
+        "zh-CN": "原始工蜂"
     },
     "Primal Guardian": {
         "en": "Primal Guardian",
-        "ko": "원시 수호군주"
+        "ko": "원시 수호군주",
+        "zh-CN": "原始守护者"
     },
     "Primal Host": {
         "en": "Primal Host",
-        "ko": "원시 숙주"
+        "ko": "원시 숙주",
+        "zh-CN": "原始宿主"
     },
     "Primal Hydralisk": {
         "en": "Primal Hydralisk",
-        "ko": "원시 히드라리스크"
+        "ko": "원시 히드라리스크",
+        "zh-CN": "原始刺蛇"
     },
     "Primal Igniter": {
         "en": "Primal Igniter",
-        "ko": "원시 점화자"
+        "ko": "원시 점화자",
+        "zh-CN": "原始点火虫"
     },
     "Primal Mutalisk": {
         "en": "Primal Mutalisk",
-        "ko": "원시 뮤탈리스크"
+        "ko": "원시 뮤탈리스크",
+        "zh-CN": "原始异龙"
     },
     "Primal Roach": {
         "en": "Primal Roach",
-        "ko": "원시 바퀴"
+        "ko": "원시 바퀴",
+        "zh-CN": "原始蟑螂"
     },
     "Primal Ultralisk": {
         "en": "Primal Ultralisk",
-        "ko": "원시 울트라리스크"
+        "ko": "원시 울트라리스크",
+        "zh-CN": "原始雷兽"
     },
     "Primal Wurm": {
         "en": "Primal Wurm",
-        "ko": "원시 벌레"
+        "ko": "원시 벌레",
+        "zh-CN": "原始蠕虫"
     },
     "Primal Zergling": {
         "en": "Primal Zergling",
-        "ko": "원시 저글링"
+        "ko": "원시 저글링",
+        "zh-CN": "原始跳虫"
     },
     "Probe": {
         "en": "Probe",
-        "ko": "탐사정"
+        "ko": "탐사정",
+        "zh-CN": "探机"
     },
     "Propagator": {
         "en": "Propagator",
-        "ko": "번식자"
+        "ko": "번식자",
+        "zh-CN": "同化体"
     },
     "Psi-Indoctrinator": {
         "en": "Psi-Indoctrinator",
-        "ko": "사이오닉 개조 장치"
+        "ko": "사이오닉 개조 장치",
+        "zh-CN": "灵能教化装置（Psi-Indoctrinator）"
     },
     "Purifier Beam": {
         "en": "Purifier Beam",
-        "ko": "정화 광선"
+        "ko": "정화 광선",
+        "zh-CN": "净化光束"
     },
     "Pylon": {
         "en": "Pylon",
-        "ko": "수정탑"
+        "ko": "수정탑",
+        "zh-CN": "水晶塔"
     },
     "Queen": {
         "en": "Queen",
-        "ko": "여왕"
+        "ko": "여왕",
+        "zh-CN": "虫后"
     },
     "Railgun Turret": {
         "en": "Railgun Turret",
-        "ko": "레일건 포탑"
+        "ko": "레일건 포탑",
+        "zh-CN": "磁轨炮塔"
     },
     "Ravager": {
         "en": "Ravager",
-        "ko": "궤멸충"
+        "ko": "궤멸충",
+        "zh-CN": "破坏者"
     },
     "Ravasaur": {
         "en": "Ravasaur",
-        "ko": "라바사우르스"
+        "ko": "라바사우르스",
+        "zh-CN": "掠食龙"
     },
     "Raven": {
         "en": "Raven",
-        "ko": "밤까마귀"
+        "ko": "밤까마귀",
+        "zh-CN": "铁鸦"
     },
     "Raven Type-II": {
         "en": "Raven Type-II",
-        "ko": "밤까마귀 타입-Ⅱ"
+        "ko": "밤까마귀 타입-Ⅱ",
+        "zh-CN": "铁鸦II型"
     },
     "Raynor": {
         "en": "Raynor",
-        "ko": "레이너"
+        "ko": "레이너",
+        "zh-CN": "雷诺"
     },
     "Reaper": {
         "en": "Reaper",
-        "ko": "사신"
+        "ko": "사신",
+        "zh-CN": "收割者"
     },
     "Reaver": {
         "en": "Reaver",
-        "ko": "파괴자"
+        "ko": "파괴자",
+        "zh-CN": "掠夺者"
     },
     "Refinery": {
         "en": "Refinery",
-        "ko": "정제소"
+        "ko": "정제소",
+        "zh-CN": "精炼厂"
     },
     "Revitalizer": {
         "en": "Revitalizer",
-        "ko": "재충전기"
+        "ko": "재충전기",
+        "zh-CN": "恢复器"
     },
     "Roach": {
         "en": "Roach",
-        "ko": "바퀴"
+        "ko": "바퀴",
+        "zh-CN": "蟑螂"
     },
     "Roach Warren": {
         "en": "Roach Warren",
-        "ko": "바퀴 소굴"
+        "ko": "바퀴 소굴",
+        "zh-CN": "蟑螂温室"
     },
     "Robotics Bay": {
         "en": "Robotics Bay",
-        "ko": "로봇공학 지원소"
+        "ko": "로봇공학 지원소",
+        "zh-CN": "机械研究所"
     },
     "Robotics Facility": {
         "en": "Robotics Facility",
-        "ko": "로봇공학 시설"
+        "ko": "로봇공학 시설",
+        "zh-CN": "机械台"
     },
     "Scarab": {
         "en": "Scarab",
-        "ko": "갑충탄"
+        "ko": "갑충탄",
+        "zh-CN": "金甲虫弹"
     },
     "Science Vessel": {
         "en": "Science Vessel",
-        "ko": "과학선"
+        "ko": "과학선",
+        "zh-CN": "科学船"
     },
     "Scourge": {
         "en": "Scourge",
-        "ko": "갈귀"
+        "ko": "갈귀",
+        "zh-CN": "爆蚊"
     },
     "Scourge Nest": {
         "en": "Scourge Nest",
-        "ko": "갈귀 둥지"
+        "ko": "갈귀 둥지",
+        "zh-CN": "爆蚊巢穴"
     },
     "Scout": {
         "en": "Scout",
-        "ko": "정찰기"
+        "ko": "정찰기",
+        "zh-CN": "侦察机"
     },
     "SCV": {
         "en": "SCV",
-        "ko": "건설로봇"
+        "ko": "건설로봇",
+        "zh-CN": "SCV"
     },
     "Sentry": {
         "en": "Sentry",
-        "ko": "파수기"
+        "ko": "파수기",
+        "zh-CN": "机械哨兵"
     },
     "Sentry Bot": {
         "en": "Sentry Bot",
-        "ko": "경비로봇"
+        "ko": "경비로봇",
+        "zh-CN": "哨戒机器人（Sentry Bot）"
     },
     "Shadow Guard": {
         "en": "Shadow Guard",
-        "ko": "그림자 파수대"
+        "ko": "그림자 파수대",
+        "zh-CN": "暗影卫队"
     },
     "Shield Battery": {
         "en": "Shield Battery",
-        "ko": "보호막 충전소"
+        "ko": "보호막 충전소",
+        "zh-CN": "护盾充能器"
     },
     "Shock Division": {
         "en": "Shock Division",
-        "ko": "충격 전차"
+        "ko": "충격 전차",
+        "zh-CN": "震慑师"
     },
     "Shuttle": {
         "en": "Shuttle",
-        "ko": "왕복선"
+        "ko": "왕복선",
+        "zh-CN": "穿梭机"
     },
     "Siege Tank": {
         "en": "Siege Tank",
-        "ko": "공성 전차"
+        "ko": "공성 전차",
+        "zh-CN": "攻城坦克"
     },
     "Sky Fury": {
         "en": "Sky Fury",
-        "ko": "창공의 분노"
+        "ko": "창공의 분노",
+        "zh-CN": "天空之怒"
     },
     "Slayn Elemental": {
         "en": "Slayn Elemental",
-        "ko": "슬레인 원시 생물"
+        "ko": "슬레인 원시 생물",
+        "zh-CN": "斯雷恩元素生物（Slayn Elemental）"
     },
     "Small Egg": {
         "en": "Small Egg",
-        "ko": "작은 알"
+        "ko": "작은 알",
+        "zh-CN": "小型虫卵（Small Egg）"
     },
     "Sovereign Battlecruiser": {
         "en": "Sovereign Battlecruiser",
-        "ko": "군주 전투순양함"
+        "ko": "군주 전투순양함",
+        "zh-CN": "至尊战列巡航舰"
     },
     "Spawning Pool": {
         "en": "Spawning Pool",
-        "ko": "산란못"
+        "ko": "산란못",
+        "zh-CN": "分裂池"
     },
     "Spec Ops Ghost": {
         "en": "Spec Ops Ghost",
-        "ko": "특수 작전 유령"
+        "ko": "특수 작전 유령",
+        "zh-CN": "特战幽灵"
     },
     "Spine Crawler": {
         "en": "Spine Crawler",
-        "ko": "가시 촉수"
+        "ko": "가시 촉수",
+        "zh-CN": "脊针爬虫"
     },
     "Spinning Dizzy": {
         "en": "Spinning Dizzy",
-        "ko": "회전 화포"
+        "ko": "회전 화포",
+        "zh-CN": "转转小子"
     },
     "Spire": {
         "en": "Spire",
-        "ko": "둥지탑"
+        "ko": "둥지탑",
+        "zh-CN": "尖塔"
     },
     "Spore Crawler": {
         "en": "Spore Crawler",
-        "ko": "포자 촉수"
+        "ko": "포자 촉수",
+        "zh-CN": "孢子爬虫"
     },
     "Spotter": {
         "en": "Spotter",
-        "ko": "부식군주"
+        "ko": "부식군주",
+        "zh-CN": "监控体"
     },
     "Stalker": {
         "en": "Stalker",
-        "ko": "추적자"
+        "ko": "추적자",
+        "zh-CN": "追猎者"
     },
     "Slayer": {
         "en": "Slayer",
-        "ko": "학살자"
+        "ko": "학살자",
+        "zh-CN": "杀戮者"
     },
     "Stank": {
         "en": "Stank",
-        "ko": "구리구리스크"
+        "ko": "구리구리스크",
+        "zh-CN": "腐尸怪"
     },
     "Stargate": {
         "en": "Stargate",
-        "ko": "우주관문"
+        "ko": "우주관문",
+        "zh-CN": "星门"
     },
     "Starport": {
         "en": "Starport",
-        "ko": "우주공항"
+        "ko": "우주공항",
+        "zh-CN": "星港"
     },
     "Stasis Ward": {
         "en": "Stasis Ward",
-        "ko": "정지장 수호물"
+        "ko": "정지장 수호물",
+        "zh-CN": "静滞结界"
     },
     "Strike Fighter Platform": {
         "en": "Strike Fighter Platform",
-        "ko": "타격 전투기 플랫폼"
+        "ko": "타격 전투기 플랫폼",
+        "zh-CN": "攻击战斗机平台"
     },
     "Strike Goliath": {
         "en": "Strike Goliath",
-        "ko": "타격 골리앗"
+        "ko": "타격 골리앗",
+        "zh-CN": "强击歌利亚"
     },
     "Sunken Colony": {
         "en": "Sunken Colony",
-        "ko": "지하 군체"
+        "ko": "지하 군체",
+        "zh-CN": "地刺"
     },
     "Supplicant": {
         "en": "Supplicant",
-        "ko": "광신자"
+        "ko": "광신자",
+        "zh-CN": "死徒"
     },
     "Supply Bunker": {
         "en": "Supply Bunker",
-        "ko": "보급 벙커"
+        "ko": "보급 벙커",
+        "zh-CN": "补给地堡"
     },
     "Supply Depot": {
         "en": "Supply Depot",
-        "ko": "보급고"
+        "ko": "보급고",
+        "zh-CN": "补给站"
     },
     "Suppression Tower": {
         "en": "Suppression Tower",
-        "ko": "진압탑"
+        "ko": "진압탑",
+        "zh-CN": "压制塔"
     },
     "Swarm Host": {
         "en": "Swarm Host",
-        "ko": "군단 숙주"
+        "ko": "군단 숙주",
+        "zh-CN": "虫群宿主"
     },
     "Swarm Queen": {
         "en": "Swarm Queen",
-        "ko": "군단 여왕"
+        "ko": "군단 여왕",
+        "zh-CN": "虫后"
     },
     "Taldarin": {
         "en": "Taldarin",
-        "ko": "탈다린"
+        "ko": "탈다린",
+        "zh-CN": "塔尔达林"
     },
     "Talis": {
         "en": "Talis",
-        "ko": "탈리스"
+        "ko": "탈리스",
+        "zh-CN": "塔里斯"
     },
     "Tanker Truck": {
         "en": "Tanker Truck",
-        "ko": "유조 트럭"
+        "ko": "유조 트럭",
+        "zh-CN": "罐车（Tanker Truck）"
     },
     "Tech Lab": {
         "en": "Tech Lab",
-        "ko": "기술실"
+        "ko": "기술실",
+        "zh-CN": "科技实验室"
     },
     "Tech Reactor": {
         "en": "Tech Reactor",
-        "ko": "기술 반응로"
+        "ko": "기술 반응로",
+        "zh-CN": "科技反应堆"
     },
     "Tempest": {
         "en": "Tempest",
-        "ko": "폭풍함"
+        "ko": "폭풍함",
+        "zh-CN": "风暴战舰"
     },
     "Templar Archives": {
         "en": "Templar Archives",
-        "ko": "기사단 기록보관소"
+        "ko": "기사단 기록보관소",
+        "zh-CN": "圣堂武士文献馆"
     },
     "Terrazine Tank": {
         "en": "Terrazine Tank",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "地嗪储罐（Terrazine Tank）"
     },
     "Theia Raven": {
         "en": "Theia Raven",
-        "ko": "테이아 밤까마귀"
+        "ko": "테이아 밤까마귀",
+        "zh-CN": "忒伊亚铁鸦"
     },
     "Thor": {
         "en": "Thor",
-        "ko": "토르"
+        "ko": "토르",
+        "zh-CN": "雷神"
     },
     "Toxic Nest": {
         "en": "Toxic Nest",
-        "ko": "독성 둥지"
+        "ko": "독성 둥지",
+        "zh-CN": "剧毒巢穴"
     },
     "Turkey": {
         "en": "Turkey",
-        "ko": "칠면조"
+        "ko": "칠면조",
+        "zh-CN": "火鸡"
     },
     "Turking": {
         "en": "Turking",
-        "ko": "팔면조"
+        "ko": "팔면조",
+        "zh-CN": "火鸡王"
     },
     "Twilight Council": {
         "en": "Twilight Council",
-        "ko": "황혼 의회"
+        "ko": "황혼 의회",
+        "zh-CN": "光影议会"
     },
     "Twister": {
         "en": "Twister",
-        "ko": "회오리"
+        "ko": "회오리",
+        "zh-CN": "龙卷风暴"
     },
     "Tychus": {
         "en": "Tychus",
-        "ko": "타이커스"
+        "ko": "타이커스",
+        "zh-CN": "泰凯斯"
     },
     "Tyrannozor": {
         "en": "Tyrannozor",
-        "ko": "티라노조르"
+        "ko": "티라노조르",
+        "zh-CN": "暴龙兽"
     },
     "Ultralisk": {
         "en": "Ultralisk",
-        "ko": "울트라리스크"
+        "ko": "울트라리스크",
+        "zh-CN": "雷兽"
     },
     "Ultralisk Cavern": {
         "en": "Ultralisk Cavern",
-        "ko": "울트라리스크 동굴"
+        "ko": "울트라리스크 동굴",
+        "zh-CN": "雷兽窟"
     },
     "Vanguard": {
         "en": "Vanguard",
-        "ko": "선봉대"
+        "ko": "선봉대",
+        "zh-CN": "先锋"
     },
     "Viking": {
         "en": "Viking",
-        "ko": "바이킹"
+        "ko": "바이킹",
+        "zh-CN": "维京战机"
     },
     "Viper": {
         "en": "Viper",
-        "ko": "살모사"
+        "ko": "살모사",
+        "zh-CN": "飞蛇"
     },
     "Virophage": {
         "en": "Virophage",
-        "ko": "바이로파지"
+        "ko": "바이로파지",
+        "zh-CN": "噬毒体"
     },
     "Void Ray": {
         "en": "Void Ray",
-        "ko": "공허 포격기"
+        "ko": "공허 포격기",
+        "zh-CN": "虚空辉光舰"
     },
     "Void Reanimator": {
         "en": "Void Reanimator",
-        "ko": "공허 부활자"
+        "ko": "공허 부활자",
+        "zh-CN": "虚空重生者"
     },
     "Void Rift": {
         "en": "Void Rift",
-        "ko": "공허 균열"
+        "ko": "공허 균열",
+        "zh-CN": "虚空裂痕"
     },
     "Void Shard": {
         "en": "Void Shard",
-        "ko": "공허의 파편"
+        "ko": "공허의 파편",
+        "zh-CN": "虚空碎片"
     },
     "Void Sliver": {
         "en": "Void Sliver",
-        "ko": "공허 파편"
+        "ko": "공허 파편",
+        "zh-CN": "虚空裂片"
     },
     "Void Thrasher": {
         "en": "Void Thrasher",
-        "ko": "공허 분쇄자"
+        "ko": "공허 분쇄자",
+        "zh-CN": "虚空撕裂者"
     },
     "Volatile Infested": {
         "en": "Volatile Infested",
-        "ko": "폭발성 감염체"
+        "ko": "폭발성 감염체",
+        "zh-CN": "易爆感染体"
     },
     "Vulture": {
         "en": "Vulture",
-        "ko": "시체매"
+        "ko": "시체매",
+        "zh-CN": "秃鹫"
     },
     "War Pig": {
         "en": "War Pig",
-        "ko": "전쟁광"
+        "ko": "전쟁광",
+        "zh-CN": "战猪"
     },
     "War Prism": {
         "en": "War Prism",
-        "ko": "전쟁 분광기"
+        "ko": "전쟁 분광기",
+        "zh-CN": "战争棱镜"
     },
     "Warbringer": {
         "en": "Warbringer",
-        "ko": "전쟁인도자"
+        "ko": "전쟁인도자",
+        "zh-CN": "战争使者"
     },
     "Warhound": {
         "en": "Warhound",
-        "ko": "투견"
+        "ko": "투견",
+        "zh-CN": "战狼"
     },
     "Warp Gate": {
         "en": "Warp Gate",
-        "ko": "차원 관문"
+        "ko": "차원 관문",
+        "zh-CN": "折跃门"
     },
     "Warp Prism": {
         "en": "Warp Prism",
-        "ko": "차원 분광기"
+        "ko": "차원 분광기",
+        "zh-CN": "折跃棱镜"
     },
     "Wraith": {
         "en": "Wraith",
-        "ko": "망령"
+        "ko": "망령",
+        "zh-CN": "怨灵战机"
     },
     "Wrathwalker": {
         "en": "Wrathwalker",
-        "ko": "분노수호자"
+        "ko": "분노수호자",
+        "zh-CN": "天罚行者"
     },
     "Wyld Wyngs": {
         "en": "Wyld Wyngs",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "狂野之翼（Wyld Wyngs）"
     },
     "Xel'Naga Construct": {
         "en": "Xel'Naga Construct",
-        "ko": "젤나가 피조물"
+        "ko": "젤나가 피조물",
+        "zh-CN": "萨尔纳加构造体"
     },
     "Zagara": {
         "en": "Zagara",
-        "ko": "자가라"
+        "ko": "자가라",
+        "zh-CN": "扎加拉"
     },
     "Zealot": {
         "en": "Zealot",
-        "ko": "광전사"
+        "ko": "광전사",
+        "zh-CN": "狂热者"
     },
     "Zenith Stone": {
         "en": "Zenith Stone",
-        "ko": "천상석"
+        "ko": "천상석",
+        "zh-CN": "泽尼斯巨石"
     },
     "Zeratul": {
         "en": "Zeratul",
-        "ko": "제라툴"
+        "ko": "제라툴",
+        "zh-CN": "泽拉图"
     },
     "Zergling": {
         "en": "Zergling",
-        "ko": "저글링"
+        "ko": "저글링",
+        "zh-CN": "跳虫"
     },
     "Zweihaka": {
         "en": "Zweihaka",
-        "ko": "즈바이하카"
+        "ko": "즈바이하카",
+        "zh-CN": "泽哈卡"
     },
     "Ascendant": {
         "en": "Ascendant",
-        "ko": "승천자"
+        "ko": "승천자",
+        "zh-CN": "晋升者"
     },
     "Sentinel": {
         "en": "Sentinel",
-        "ko": "파수병"
+        "ko": "파수병",
+        "zh-CN": "哨兵"
     },
     "Legionnaire": {
         "en": "Legionnaire",
-        "ko": "군단병"
+        "ko": "군단병",
+        "zh-CN": "军团士兵"
     },
     "Widow Mine": {
         "en": "Widow Mine",
-        "ko": "땅거미 지뢰"
+        "ko": "땅거미 지뢰",
+        "zh-CN": "寡妇雷"
     },
     "Heavy Siege Tank": {
         "en": "Heavy Siege Tank",
-        "ko": "중장갑 공성 전차"
+        "ko": "중장갑 공성 전차",
+        "zh-CN": "重型攻城坦克"
     },
     "Raid Liberator": {
         "en": "Raid Liberator",
-        "ko": "습격 해방선"
+        "ko": "습격 해방선",
+        "zh-CN": "掠袭解放者"
     },
     "Spider Mine": {
         "en": "Spider Mine",
-        "ko": "거미 지뢰"
+        "ko": "거미 지뢰",
+        "zh-CN": "蜘蛛雷"
     },
     "Banshee": {
         "en": "Banshee",
-        "ko": "밴시"
+        "ko": "밴시",
+        "zh-CN": "女妖"
     },
     "Avatar of Essence": {
         "en": "Avatar of Essence",
-        "ko": "정수의 화신"
+        "ko": "정수의 화신",
+        "zh-CN": "精华化身"
     },
     "Avatar of Form": {
         "en": "Avatar of Form",
-        "ko": "형체의 화신"
+        "ko": "형체의 화신",
+        "zh-CN": "形体化身"
     },
     "Serdath": {
         "en": "Serdath",
-        "ko": "세르다스"
+        "ko": "세르다스",
+        "zh-CN": "塞达斯"
     },
     "Telbrus": {
         "en": "Telbrus",
-        "ko": "텔브루스"
+        "ko": "텔브루스",
+        "zh-CN": "特布鲁斯"
     },
     "Zoraya": {
         "en": "Zoraya",
-        "ko": "조라야"
+        "ko": "조라야",
+        "zh-CN": "佐拉亚"
     },
     "Tesseract Cannon": {
         "en": "Tesseract Cannon",
-        "ko": "테서랙트 포"
+        "ko": "테서랙트 포",
+        "zh-CN": "超维空间炮"
     },
     "Tesseract Monolith": {
         "en": "Tesseract Monolith",
-        "ko": "테서랙트 초석"
+        "ko": "테서랙트 초석",
+        "zh-CN": "超维空间巨石"
     },
     "Void Templar": {
         "en": "Void Templar",
-        "ko": "공허 기사"
+        "ko": "공허 기사",
+        "zh-CN": "虚空圣堂武士"
     },
     "Xel'Naga Abrogator": {
         "en": "Xel'Naga Abrogator",
-        "ko": "젤나가 중재기"
+        "ko": "젤나가 중재기",
+        "zh-CN": "萨尔纳加禁绝者"
     },
     "Xel'Naga Ambusher": {
         "en": "Xel'Naga Ambusher",
-        "ko": "젤나가 매복자"
+        "ko": "젤나가 매복자",
+        "zh-CN": "萨尔纳加伏击者"
     },
     "Xel'Naga Enforcer": {
         "en": "Xel'Naga Enforcer",
-        "ko": "젤나가 집행자"
+        "ko": "젤나가 집행자",
+        "zh-CN": "萨尔纳加执行者"
     },
     "Xel'Naga Shieldguard": {
         "en": "Xel'Naga Shieldguard",
-        "ko": "젤나가 방패수호기"
+        "ko": "젤나가 방패수호기",
+        "zh-CN": "萨尔纳加光盾卫士"
     },
     "Xel'Naga Void Array": {
         "en": "Xel'Naga Void Array",
-        "ko": "젤나가 공허 전송기"
+        "ko": "젤나가 공허 전송기",
+        "zh-CN": "萨尔纳加虚空阵列船"
     },
     "Fenix": {
         "en": "Fenix",
-        "ko": "피닉스"
+        "ko": "피닉스",
+        "zh-CN": "菲尼克斯"
     },
     "Mojo": {
         "en": "Mojo",
-        "ko": "모조"
+        "ko": "모조",
+        "zh-CN": "摩约"
     },
     "Hammer Securities": {
         "en": "Hammer Securities",
-        "ko": "망치 경호대"
+        "ko": "망치 경호대",
+        "zh-CN": "铁锤安保"
     },
     "Hut": {
         "en": "Hut",
-        "ko": ""
+        "ko": "",
+        "zh-CN": "小屋（Hut）"
     },
     "Hybrid Behemoth": {
         "en": "Hybrid Behemoth",
-        "ko": "거대 혼종"
+        "ko": "거대 혼종",
+        "zh-CN": "混合体巨兽"
     },
     "Hybrid Destroyer": {
         "en": "Hybrid Destroyer",
-        "ko": "혼종 파괴자"
+        "ko": "혼종 파괴자",
+        "zh-CN": "混合体毁灭者"
     },
     "Hybrid Dominator": {
         "en": "Hybrid Dominator",
-        "ko": "혼종 파멸자"
+        "ko": "혼종 파멸자",
+        "zh-CN": "混合体支配者"
     },
     "Hybrid Nemesis": {
         "en": "Hybrid Nemesis",
-        "ko": "혼종 네메시스"
+        "ko": "혼종 네메시스",
+        "zh-CN": "混合体天罚者"
     },
     "Hybrid Reaver": {
         "en": "Hybrid Reaver",
-        "ko": "혼종 약탈자"
+        "ko": "혼종 약탈자",
+        "zh-CN": "混合体掠夺者"
     },
     "Militarized Transport": {
         "en": "Militarized Transport",
-        "ko": "무장 수송"
+        "ko": "무장 수송",
+        "zh-CN": "武装运输船（Militarized Transport）"
     },
     "Wolf Statue": {
         "en": "Wolf Statue",
-        "ko": "늑대 동상"
+        "ko": "늑대 동상",
+        "zh-CN": "狼雕像（Wolf Statue）"
     },
     "Stetmann's Top Bar": {
         "en": "Stetmann's Top Bar",
-        "ko": "스텟먼 상단 패널"
+        "ko": "스텟먼 상단 패널",
+        "zh-CN": "斯台特曼面板技能"
     },
     "Zeratul's Top Bar": {
         "en": "Zeratul's Top Bar",
-        "ko": "제라툴 상단 패널"
+        "ko": "제라툴 상단 패널",
+        "zh-CN": "泽拉图面板技能"
     },
     "Vorazun's Top Bar": {
         "en": "Vorazun's Top Bar",
-        "ko": "보라준 상단 패널"
+        "ko": "보라준 상단 패널",
+        "zh-CN": "沃拉尊面板技能"
     },
     "Fenix's Top Bar": {
         "en": "Fenix's Top Bar",
-        "ko": "피닉스 상단 패널"
+        "ko": "피닉스 상단 패널",
+        "zh-CN": "菲尼克斯面板技能"
     },
     "Zagara's Top Bar": {
         "en": "Zagara's Top Bar",
-        "ko": "자가라 상단 패널"
+        "ko": "자가라 상단 패널",
+        "zh-CN": "扎加拉面板技能"
     },
     "Tychus' Top Bar": {
         "en": "Tychus' Top Bar",
-        "ko": "타이커스 상단 패널"
+        "ko": "타이커스 상단 패널",
+        "zh-CN": "泰凯斯面板技能"
     },
     "Swann's Top Bar": {
         "en": "Swann's Top Bar",
-        "ko": "스완 상단 패널"
+        "ko": "스완 상단 패널",
+        "zh-CN": "斯旺面板技能"
     },
     "Stukov's Top Bar": {
         "en": "Stukov's Top Bar",
-        "ko": "스투코프 상단 패널"
+        "ko": "스투코프 상단 패널",
+        "zh-CN": "斯托科夫面板技能"
     },
     "Raynor's Top Bar": {
         "en": "Raynor's Top Bar",
-        "ko": "레이너 상단 패널"
+        "ko": "레이너 상단 패널",
+        "zh-CN": "雷诺面板技能"
     },
     "Nova's Top Bar": {
         "en": "Nova's Top Bar",
-        "ko": "노바 상단 패널"
+        "ko": "노바 상단 패널",
+        "zh-CN": "诺娃面板技能"
     },
     "Mengsk's Top Bar": {
         "en": "Mengsk's Top Bar",
-        "ko": "멩스크 상단 패널"
+        "ko": "멩스크 상단 패널",
+        "zh-CN": "蒙斯克面板技能"
     },
     "Kerrigan's Top Bar": {
         "en": "Kerrigan's Top Bar",
-        "ko": "케리건 상단 패널"
+        "ko": "케리건 상단 패널",
+        "zh-CN": "凯瑞甘面板技能"
     },
     "Karax's Top Bar": {
         "en": "Karax's Top Bar",
-        "ko": "카락스 상단 패널"
+        "ko": "카락스 상단 패널",
+        "zh-CN": "凯拉克斯面板技能"
     },
     "Han and Horner's Top Bar": {
         "en": "Han and Horner's Top Bar",
-        "ko": "한과 호너 상단 패널"
+        "ko": "한과 호너 상단 패널",
+        "zh-CN": "霍纳与汉面板技能"
     },
     "Dehaka's Top Bar": {
         "en": "Dehaka's Top Bar",
-        "ko": "데하카 상단 패널"
+        "ko": "데하카 상단 패널",
+        "zh-CN": "德哈卡面板技能"
     },
     "Artanis' Top Bar": {
         "en": "Artanis' Top Bar",
-        "ko": "아르타니스 상단 패널"
+        "ko": "아르타니스 상단 패널",
+        "zh-CN": "阿塔尼斯面板技能"
     },
     "Abathur's Top Bar": {
         "en": "Abathur's Top Bar",
-        "ko": "아바투르 상단 패널"
+        "ko": "아바투르 상단 패널",
+        "zh-CN": "阿巴瑟面板技能"
     },
     "Alarak's Top Bar": {
         "en": "Alarak's Top Bar",
-        "ko": "알라라크 상단 패널"
+        "ko": "알라라크 상단 패널",
+        "zh-CN": "阿拉纳克面板技能"
     },
     "Photon Overcharge": {
         "en": "Photon Overcharge",
-        "ko": "광자 과충전"
+        "ko": "광자 과충전",
+        "zh-CN": "光子超载"
     },
     "Gary": {
         "en": "Gary",
-        "ko": "개리"
+        "ko": "개리",
+        "zh-CN": "盖瑞"
     },
     "Tychus Findlay": {
         "en": "Tychus Findlay",
-        "ko": "타이커스 핀들레이"
+        "ko": "타이커스 핀들레이",
+        "zh-CN": "泰凯斯·芬利"
     },
     "James 'Sirius' Sykes": {
         "en": "James 'Sirius' Sykes",
-        "ko": "제임스 \"시리우스\" 사이크스"
+        "ko": "제임스 \"시리우스\" 사이크스",
+        "zh-CN": "詹姆斯“天狼星”赛克斯"
     },
     "Nux": {
         "en": "Nux",
-        "ko": "넉스"
+        "ko": "넉스",
+        "zh-CN": "纳克斯"
     },
     "Kev 'Rattlesnake' West": {
         "en": "Kev 'Rattlesnake' West",
-        "ko": "케브 \"방울뱀\" 웨스트"
+        "ko": "케브 \"방울뱀\" 웨스트",
+        "zh-CN": "凯文“响尾蛇”韦斯特"
     },
     "Crooked Sam": {
         "en": "Crooked Sam",
-        "ko": "사기꾼 샘"
+        "ko": "사기꾼 샘",
+        "zh-CN": "“老油条”萨姆"
     },
     "Vega": {
         "en": "Vega",
-        "ko": "베가"
+        "ko": "베가",
+        "zh-CN": "维嘉"
     },
     "Miles 'Blaze' Lewis": {
         "en": "Miles 'Blaze' Lewis",
-        "ko": "마일스 \"블레이즈\" 루이스"
+        "ko": "마일스 \"블레이즈\" 루이스",
+        "zh-CN": "迈尔斯“布雷泽”刘易斯"
     },
     "Rob 'Cannonball' Boswell": {
         "en": "Rob 'Cannonball' Boswell",
-        "ko": "롭 \"대포알\" 보스웰"
+        "ko": "롭 \"대포알\" 보스웰",
+        "zh-CN": "罗布“弹头哥”博斯韦尔"
     }
 }

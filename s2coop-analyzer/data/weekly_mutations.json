@@ -7,7 +7,8 @@
       "WalkingInfested"
     ],
     "nameEn": "Train of the Dead",
-    "nameKo": "망자의 열차"
+    "nameKo": "망자의 열차",
+    "nameZhCn": "亡者列车"
   },
   "First Strike": {
     "map": "Chain of Ascension",
@@ -17,7 +18,8 @@
       "ReducedVision"
     ],
     "nameEn": "First Strike",
-    "nameKo": "선제 공격"
+    "nameKo": "선제 공격",
+    "nameZhCn": "先发制人"
   },
   "Time Lock": {
     "map": "Lock & Load",
@@ -27,7 +29,8 @@
       "TimeWarp"
     ],
     "nameEn": "Time Lock",
-    "nameKo": "제한 시간"
+    "nameKo": "제한 시간",
+    "nameZhCn": "时空枷锁"
   },
   "Bad Weather": {
     "map": "Rifts to Korhal",
@@ -36,7 +39,8 @@
       "VoidRifts"
     ],
     "nameEn": "Bad Weather",
-    "nameKo": "궂은 날씨"
+    "nameKo": "궂은 날씨",
+    "nameZhCn": "恶劣天气"
   },
   "Whiteout": {
     "map": "Void Launch",
@@ -45,7 +49,8 @@
       "NoResources"
     ],
     "nameEn": "White Out",
-    "nameKo": "하얀 세상"
+    "nameKo": "하얀 세상",
+    "nameZhCn": "雪茫危机"
   },
   "War is Hell": {
     "map": "Void Thrashing",
@@ -55,7 +60,8 @@
       "FireFight"
     ],
     "nameEn": "War Is Hell",
-    "nameKo": "전쟁은 지옥"
+    "nameKo": "전쟁은 지옥",
+    "nameZhCn": "战场炼狱"
   },
   "Temple of Pain": {
     "map": "Temple of the Past",
@@ -65,7 +71,8 @@
       "Entomb"
     ],
     "nameEn": "Temple of Pain",
-    "nameKo": "고통의 사원"
+    "nameKo": "고통의 사원",
+    "nameZhCn": "痛苦神庙"
   },
   "Spear of Your Doom": {
     "map": "Lock & Load",
@@ -75,7 +82,8 @@
       "TemporalField"
     ],
     "nameEn": "Spear of Your Doom",
-    "nameKo": "어둠의 창"
+    "nameKo": "어둠의 창",
+    "nameZhCn": "末日之矛"
   },
   "Special Delivery": {
     "map": "Void Launch",
@@ -85,7 +93,8 @@
       "DeathAOE"
     ],
     "nameEn": "Special Delivery",
-    "nameKo": "특별 배달"
+    "nameKo": "특별 배달",
+    "nameZhCn": "特别快递"
   },
   "Urban Warfare": {
     "map": "Rifts to Korhal",
@@ -95,7 +104,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "Urban Warfare",
-    "nameKo": "시가전"
+    "nameKo": "시가전",
+    "nameZhCn": "城市巷战"
   },
   "Wheel of Misfortune (Thrashers)": {
     "map": "Void Thrashing",
@@ -103,7 +113,8 @@
       "CycleRandom"
     ],
     "nameEn": "Wheel of Misfortune (Thrashers)",
-    "nameKo": "불운의 수레바퀴 (공허 분쇄)"
+    "nameKo": "불운의 수레바퀴 (공허 분쇄)",
+    "nameZhCn": "不幸之轮（虚空撕裂）"
   },
   "Perfect Storm": {
     "map": "Chain of Ascension",
@@ -113,7 +124,8 @@
       "Tornadoes"
     ],
     "nameEn": "Perfect Storm",
-    "nameKo": "완벽한 폭풍"
+    "nameKo": "완벽한 폭풍",
+    "nameZhCn": "完美风暴（Perfect Storm）"
   },
   "Boom Town": {
     "map": "Oblivion Express",
@@ -123,7 +135,8 @@
       "DeathAOE"
     ],
     "nameEn": "Boom Town",
-    "nameKo": "도시 폭발"
+    "nameKo": "도시 폭발",
+    "nameZhCn": "全面核战"
   },
   "Dark Ritual": {
     "map": "Temple of the Past",
@@ -132,7 +145,8 @@
       "UnitSpeed"
     ],
     "nameEn": "Dark Ritual",
-    "nameKo": "암흑의 의식"
+    "nameKo": "암흑의 의식",
+    "nameZhCn": "黑暗仪式"
   },
   "Out of Order": {
     "map": "The Vermillion Problem",
@@ -142,7 +156,8 @@
       "TimeWarp"
     ],
     "nameEn": "Out of Order",
-    "nameKo": "고장"
+    "nameKo": "고장",
+    "nameZhCn": "完全失控"
   },
   "Burning Legion": {
     "map": "Lock & Load",
@@ -152,7 +167,8 @@
       "VoidRifts"
     ],
     "nameEn": "Burning Legion",
-    "nameKo": "불타는 군단"
+    "nameKo": "불타는 군단",
+    "nameZhCn": "燃烧军团"
   },
   "Triple Threat": {
     "map": "Void Launch",
@@ -162,7 +178,8 @@
       "InfestedTerranSpawner"
     ],
     "nameEn": "Triple Threat",
-    "nameKo": "삼중 위협"
+    "nameKo": "삼중 위협",
+    "nameZhCn": "三重威胁"
   },
   "World on Fire": {
     "map": "The Vermillion Problem",
@@ -172,7 +189,8 @@
       "PurifierBeam"
     ],
     "nameEn": "World on Fire",
-    "nameKo": "불타는 세계"
+    "nameKo": "불타는 세계",
+    "nameZhCn": "烈焰战场"
   },
   "Flipping Out": {
     "map": "Chain of Ascension",
@@ -182,7 +200,8 @@
       "Vertigo"
     ],
     "nameEn": "Flipping Out",
-    "nameKo": "혼란"
+    "nameKo": "혼란",
+    "nameZhCn": "失心疯"
   },
   "Growing Threat": {
     "map": "Mist Opportunities",
@@ -192,7 +211,8 @@
       "Evolve"
     ],
     "nameEn": "Growing Threat",
-    "nameKo": "커져가는 위협"
+    "nameKo": "커져가는 위협",
+    "nameZhCn": "威胁递增"
   },
   "Miner Concerns": {
     "map": "Rifts to Korhal",
@@ -202,7 +222,8 @@
       "NoResources"
     ],
     "nameEn": "Miner Concerns",
-    "nameKo": "광부의 역경"
+    "nameKo": "광부의 역경",
+    "nameZhCn": "资源危机"
   },
   "Diplomatic Immunity": {
     "map": "Oblivion Express",
@@ -212,7 +233,8 @@
       "Polarity"
     ],
     "nameEn": "Diplomatic Immunity",
-    "nameKo": "외교 면역"
+    "nameKo": "외교 면역",
+    "nameZhCn": "外交豁免"
   },
   "Wheel of Misfortune (Lock)": {
     "map": "Lock & Load",
@@ -220,7 +242,8 @@
       "CycleRandom"
     ],
     "nameEn": "Wheel of Misfortune (Lock)",
-    "nameKo": "불운의 수레바퀴 (천상의 쟁탈전)"
+    "nameKo": "불운의 수레바퀴 (천상의 쟁탈전)",
+    "nameZhCn": "不幸之轮（天界封锁）"
   },
   "Breath of Destruction": {
     "map": "Mist Opportunities",
@@ -230,7 +253,8 @@
       "UnitSpeed"
     ],
     "nameEn": "Breath Of Destruction",
-    "nameKo": "파괴의 숨결"
+    "nameKo": "파괴의 숨결",
+    "nameZhCn": "毁灭之息"
   },
   "Fright Night": {
     "map": "Rifts to Korhal",
@@ -239,7 +263,8 @@
       "TrickOrTreat"
     ],
     "nameEn": "Fright Night",
-    "nameKo": "두려운 밤"
+    "nameKo": "두려운 밤",
+    "nameZhCn": "惊魂之夜"
   },
   "Conflagration": {
     "map": "Temple of the Past",
@@ -249,7 +274,8 @@
       "WalkingInfested"
     ],
     "nameEn": "Conflagration",
-    "nameKo": "대화재"
+    "nameKo": "대화재",
+    "nameZhCn": "玩火自焚"
   },
   "Explosive Results": {
     "map": "Void Thrashing",
@@ -259,7 +285,8 @@
       "DeathAOE"
     ],
     "nameEn": "Explosive Results",
-    "nameKo": "폭발성 결과물"
+    "nameKo": "폭발성 결과물",
+    "nameZhCn": "天轰地爆"
   },
   "Fowl Play": {
     "map": "Oblivion Express",
@@ -268,7 +295,8 @@
       "FoodHunt"
     ],
     "nameEn": "Fowl Play",
-    "nameKo": "칠면조 대소동"
+    "nameKo": "칠면조 대소동",
+    "nameZhCn": "捉鸡行动"
   },
   "Power Trip": {
     "map": "The Vermillion Problem",
@@ -278,7 +306,8 @@
       "OopsAllCasters"
     ],
     "nameEn": "Power Trip",
-    "nameKo": "넘치는 위력"
+    "nameKo": "넘치는 위력",
+    "nameZhCn": "能量超负"
   },
   "Shir Chaos": {
     "map": "Chain of Ascension",
@@ -288,7 +317,8 @@
       "UnitSpeed"
     ],
     "nameEn": "Shir Chaos",
-    "nameKo": "혼돈의 광란"
+    "nameKo": "혼돈의 광란",
+    "nameZhCn": "拉克希尔大乱斗"
   },
   "Survival of the Fittest": {
     "map": "Void Thrashing",
@@ -297,7 +327,8 @@
       "Evolve"
     ],
     "nameEn": "Survival of the Fittest",
-    "nameKo": "적자생존"
+    "nameKo": "적자생존",
+    "nameZhCn": "适者生存"
   },
   "Violent Night": {
     "map": "Void Launch",
@@ -306,7 +337,8 @@
       "KillKarma"
     ],
     "nameEn": "Violent Night",
-    "nameKo": "끔찍한 밤"
+    "nameKo": "끔찍한 밤",
+    "nameZhCn": "暴力之夜"
   },
   "Rumble in the Jungle": {
     "map": "Mist Opportunities",
@@ -316,7 +348,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "Rumble in the Jungle",
-    "nameKo": "밀림의 대난투"
+    "nameKo": "밀림의 대난투",
+    "nameZhCn": "丛林激斗"
   },
   "The Ultimate Price": {
     "map": "Lock & Load",
@@ -326,7 +359,8 @@
       "MissileBarrage"
     ],
     "nameEn": "The Ultimate Price",
-    "nameKo": "극한의 값어치"
+    "nameKo": "극한의 값어치",
+    "nameZhCn": "终极代价"
   },
   "Cremation": {
     "map": "Miner Evacuation",
@@ -335,7 +369,8 @@
       "Reanimators"
     ],
     "nameEn": "Cremation",
-    "nameKo": "화장"
+    "nameKo": "화장",
+    "nameZhCn": "火葬仪式"
   },
   "Shields Up!": {
     "map": "Void Launch",
@@ -345,7 +380,8 @@
       "ReducedVision"
     ],
     "nameEn": "Shield Up!",
-    "nameKo": "보호막 가동"
+    "nameKo": "보호막 가동",
+    "nameZhCn": "竖起护盾！"
   },
   "Ulnar New Year": {
     "map": "Lock & Load",
@@ -354,7 +390,8 @@
       "RedEnvelopes"
     ],
     "nameEn": "Ulnar New Year",
-    "nameKo": "울나르 새해"
+    "nameKo": "울나르 새해",
+    "nameZhCn": "乌历新年"
   },
   "Sick Micro": {
     "map": "Mist Opportunities",
@@ -363,7 +400,8 @@
       "OrderCosts"
     ],
     "nameEn": "Sick Micro",
-    "nameKo": "질병 활동"
+    "nameKo": "질병 활동",
+    "nameZhCn": "死疫横生"
   },
   "Blast from the Past": {
     "map": "Temple of the Past",
@@ -372,7 +410,8 @@
       "HybridNuke"
     ],
     "nameEn": "Blast from the Past",
-    "nameKo": "과거의 역습"
+    "nameKo": "과거의 역습",
+    "nameZhCn": "旧忆重惊"
   },
   "Portal Power": {
     "map": "Void Thrashing",
@@ -381,7 +420,8 @@
       "VoidRifts"
     ],
     "nameEn": "Portal Power",
-    "nameKo": "차원문의 힘"
+    "nameKo": "차원문의 힘",
+    "nameZhCn": "星门异动"
   },
   "Wheel of Misfortune (Lava)": {
     "map": "The Vermillion Problem",
@@ -389,7 +429,8 @@
       "CycleRandom"
     ],
     "nameEn": "Wheel of Misfortune (Lava)",
-    "nameKo": "불운의 수레바퀴 (버밀리언의 특종)"
+    "nameKo": "불운의 수레바퀴 (버밀리언의 특종)",
+    "nameZhCn": "不幸之轮（熔火危机）"
   },
   "Hostile Takeover": {
     "map": "Rifts to Korhal",
@@ -399,7 +440,8 @@
       "MissileBarrage"
     ],
     "nameEn": "Hostile Takeover",
-    "nameKo": "적대적 인수"
+    "nameKo": "적대적 인수",
+    "nameZhCn": "强行霸占"
   },
   "Grave Danger": {
     "map": "Temple of the Past",
@@ -409,7 +451,8 @@
       "WalkingInfested"
     ],
     "nameEn": "Grave Danger",
-    "nameKo": "죽음의 위험"
+    "nameKo": "죽음의 위험",
+    "nameZhCn": "死亡危机"
   },
   "The Injustice League": {
     "map": "Rifts to Korhal",
@@ -419,7 +462,8 @@
       "Inspiration"
     ],
     "nameEn": "Injustice League",
-    "nameKo": "악당 연맹"
+    "nameKo": "악당 연맹",
+    "nameZhCn": "不义联盟"
   },
   "No Money, More Problems": {
     "map": "The Vermillion Problem",
@@ -429,7 +473,8 @@
       "Tornadoes"
     ],
     "nameEn": "No Money, More Problems",
-    "nameKo": "자린고비"
+    "nameKo": "자린고비",
+    "nameZhCn": "没钱麻烦大了"
   },
   "Field of Screams": {
     "map": "Mist Opportunities",
@@ -438,7 +483,8 @@
       "Polarity"
     ],
     "nameEn": "Field of Screams",
-    "nameKo": "비명의 벌판"
+    "nameKo": "비명의 벌판",
+    "nameZhCn": "雷鸣弹啸"
   },
   "The Quick and the Dead": {
     "map": "Dead of Night",
@@ -447,7 +493,8 @@
       "UnitSpeed"
     ],
     "nameEn": "The Quick and the Dead",
-    "nameKo": "빠른 자와 죽은 자"
+    "nameKo": "빠른 자와 죽은 자",
+    "nameZhCn": "疫鬼狂潮"
   },
   "Out of Sight": {
     "map": "Miner Evacuation",
@@ -456,7 +503,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "Out of Sight",
-    "nameKo": "보이지 않는 적"
+    "nameKo": "보이지 않는 적",
+    "nameZhCn": "隐形威胁"
   },
   "Wheel of Misfortune (Trains)": {
     "map": "Oblivion Express",
@@ -464,7 +512,8 @@
       "CycleRandom"
     ],
     "nameEn": "Wheel of Misfortune (Trains)",
-    "nameKo": "불운의 수레바퀴 (망각행 고속열차)"
+    "nameKo": "불운의 수레바퀴 (망각행 고속열차)",
+    "nameZhCn": "不幸之轮（湮灭快车）"
   },
   "Frostbite": {
     "map": "Dead of Night",
@@ -473,7 +522,8 @@
       "Magnificent"
     ],
     "nameEn": "Frostbite",
-    "nameKo": "동상"
+    "nameKo": "동상",
+    "nameZhCn": "噬骨之寒"
   },
   "Certain Demise": {
     "map": "Chain of Ascension",
@@ -482,7 +532,8 @@
       "Reanimators"
     ],
     "nameEn": "Certain Demise",
-    "nameKo": "확정된 파멸"
+    "nameKo": "확정된 파멸",
+    "nameZhCn": "无间死局"
   },
   "Delivery Guaranteed": {
     "map": "Void Launch",
@@ -492,7 +543,8 @@
       "JustDie"
     ],
     "nameEn": "Delivery Guaranteed",
-    "nameKo": "배송 보장"
+    "nameKo": "배송 보장",
+    "nameZhCn": "火线快递"
   },
   "Dead Heat": {
     "map": "The Vermillion Problem",
@@ -502,7 +554,8 @@
       "WalkingInfested"
     ],
     "nameEn": "Dead Heat",
-    "nameKo": "죽음의 열기"
+    "nameKo": "죽음의 열기",
+    "nameZhCn": "烈火金刚"
   },
   "Cold is the Void": {
     "map": "Oblivion Express",
@@ -512,7 +565,8 @@
       "VoidRifts"
     ],
     "nameEn": "Cold Is The Void",
-    "nameKo": "차가운 공허"
+    "nameKo": "차가운 공허",
+    "nameZhCn": "寒冷即是虚空"
   },
   "Futile Resistance": {
     "map": "Lock & Load",
@@ -522,7 +576,8 @@
       "TemporalField"
     ],
     "nameEn": "Futile Resistance",
-    "nameKo": "부질없는 저항"
+    "nameKo": "부질없는 저항",
+    "nameZhCn": "异形进击"
   },
   "Hard Target": {
     "map": "Void Thrashing",
@@ -532,7 +587,8 @@
       "Polarity"
     ],
     "nameEn": "Hard Target",
-    "nameKo": "완고한 상대"
+    "nameKo": "완고한 상대",
+    "nameZhCn": "硬骨头"
   },
   "Charnel House": {
     "map": "Miner Evacuation",
@@ -542,7 +598,8 @@
       "PhotonOverload"
     ],
     "nameEn": "Charnel House",
-    "nameKo": "납골당"
+    "nameKo": "납골당",
+    "nameZhCn": "疫区逃生"
   },
   "Slow and Steady": {
     "map": "Mist Opportunities",
@@ -552,7 +609,8 @@
       "TimeWarp"
     ],
     "nameEn": "Slow and Steady",
-    "nameKo": "천천히 꾸준히"
+    "nameKo": "천천히 꾸준히",
+    "nameZhCn": "步步为营"
   },
   "Instant Karma": {
     "map": "Chain of Ascension",
@@ -562,7 +620,8 @@
       "DeathAOE"
     ],
     "nameEn": "Instant Karma",
-    "nameKo": "환각"
+    "nameKo": "환각",
+    "nameZhCn": "现世现报"
   },
   "Worn Out Welcome": {
     "map": "Temple of the Past",
@@ -572,7 +631,8 @@
       "LongRange"
     ],
     "nameEn": "Worn Out Welcome",
-    "nameKo": "고달픈 환영"
+    "nameKo": "고달픈 환영",
+    "nameZhCn": "仁至义尽"
   },
   "Moths to the Flame": {
     "map": "Rifts to Korhal",
@@ -582,7 +642,8 @@
       "PurifierBeam"
     ],
     "nameEn": "Moths to the Flame",
-    "nameKo": "화염 속 나방"
+    "nameKo": "화염 속 나방",
+    "nameZhCn": "飞蛾扑火"
   },
   "Fear and Lava": {
     "map": "The Vermillion Problem",
@@ -591,7 +652,8 @@
       "VoidRifts"
     ],
     "nameEn": "Fear and Lava",
-    "nameKo": "공포와 용암"
+    "nameKo": "공포와 용암",
+    "nameZhCn": "火海惊魂"
   },
   "Wheel of Misfortune (Launch)": {
     "map": "Void Launch",
@@ -599,7 +661,8 @@
       "CycleRandom"
     ],
     "nameEn": "Wheel of Misfortune (Launch)",
-    "nameKo": "불운의 수레바퀴 (공허의 출격)"
+    "nameKo": "불운의 수레바퀴 (공허의 출격)",
+    "nameZhCn": "不幸之轮（虚空降临）"
   },
   "Kill Bot Wars": {
     "map": "Mist Opportunities",
@@ -608,7 +671,8 @@
       "MomentOfSilence"
     ],
     "nameEn": "Kill Bot Wars",
-    "nameKo": "처치 로봇 전쟁"
+    "nameKo": "처치 로봇 전쟁",
+    "nameZhCn": "机器人大战"
   },
   "Magnetic Attraction": {
     "map": "Void Thrashing",
@@ -618,7 +682,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "Magnetic Pull",
-    "nameKo": "자기 인력"
+    "nameKo": "자기 인력",
+    "nameZhCn": "磁性牵引"
   },
   "Death from Below": {
     "map": "Miner Evacuation",
@@ -628,7 +693,8 @@
       "FireFight"
     ],
     "nameEn": "Death From Below",
-    "nameKo": "땅속에서 죽음이"
+    "nameKo": "땅속에서 죽음이",
+    "nameZhCn": "地发杀机"
   },
   "Watch the Skies": {
     "map": "Void Launch",
@@ -638,7 +704,8 @@
       "OrbitalStrike"
     ],
     "nameEn": "Watch the Skies",
-    "nameKo": "하늘 경계"
+    "nameKo": "하늘 경계",
+    "nameZhCn": "天发杀机"
   },
   "Think Fast": {
     "map": "Rifts to Korhal",
@@ -647,7 +714,8 @@
       "UnitSpeed"
     ],
     "nameEn": "Think Fast",
-    "nameKo": "빠른 결단"
+    "nameKo": "빠른 결단",
+    "nameZhCn": "兵贵神速"
   },
   "What Goes Around": {
     "map": "Scythe of Amon",
@@ -656,7 +724,8 @@
       "HybridNuke"
     ],
     "nameEn": "What Goes Around",
-    "nameKo": "자업자득"
+    "nameKo": "자업자득",
+    "nameZhCn": "自作自受"
   },
   "Bannable Offense": {
     "map": "Malwarfare",
@@ -665,7 +734,8 @@
       "OopsAllCasters"
     ],
     "nameEn": "Bannable Offense",
-    "nameKo": "금지된 공격"
+    "nameKo": "금지된 공격",
+    "nameZhCn": "封禁行为"
   },
   "Masters of Midnight": {
     "map": "Part and Parcel",
@@ -675,7 +745,8 @@
       "ReducedVision"
     ],
     "nameEn": "Masters of Midnight",
-    "nameKo": "자정의 지배자"
+    "nameKo": "자정의 지배자",
+    "nameZhCn": "嗜血夜魔"
   },
   "Night Drive": {
     "map": "Cradle of Death",
@@ -684,7 +755,8 @@
       "Magnificent"
     ],
     "nameEn": "Night Drive",
-    "nameKo": "야간 주행"
+    "nameKo": "야간 주행",
+    "nameZhCn": "雷场夜战"
   },
   "Get Out More": {
     "map": "Dead of Night",
@@ -694,7 +766,8 @@
       "DeathAOE"
     ],
     "nameEn": "Get Out More",
-    "nameKo": "집 밖은 위험해"
+    "nameKo": "집 밖은 위험해",
+    "nameZhCn": "极限压迫"
   },
   "Quick Killers": {
     "map": "Temple of the Past",
@@ -704,7 +777,8 @@
       "UnitSpeed"
     ],
     "nameEn": "Quick Killers",
-    "nameKo": "빠른 학살자"
+    "nameKo": "빠른 학살자",
+    "nameZhCn": "杀劫迫临"
   },
   "Unstable Environment": {
     "map": "Scythe of Amon",
@@ -714,7 +788,8 @@
       "Tornadoes"
     ],
     "nameEn": "Unstable Environment",
-    "nameKo": "불안정한 환경"
+    "nameKo": "불안정한 환경",
+    "nameZhCn": "时空气象战"
   },
   "Rest in Peace": {
     "map": "Void Thrashing",
@@ -723,7 +798,8 @@
       "Propagate"
     ],
     "nameEn": "Rest in Peace",
-    "nameKo": "평온한 안식"
+    "nameKo": "평온한 안식",
+    "nameZhCn": "死亡无声"
   },
   "Endless Infection": {
     "map": "Void Launch",
@@ -733,7 +809,8 @@
       "WalkingInfested"
     ],
     "nameEn": "Endless Infection",
-    "nameKo": "끝없는 전염"
+    "nameKo": "끝없는 전염",
+    "nameZhCn": "无尽感染"
   },
   "Battle Hardened": {
     "map": "Chain of Ascension",
@@ -743,7 +820,8 @@
       "MissileBarrage"
     ],
     "nameEn": "Battle Hardened",
-    "nameKo": "전투 단련"
+    "nameKo": "전투 단련",
+    "nameZhCn": "顽强作战"
   },
   "Wheel of Misfortune (Cradle)": {
     "map": "Cradle of Death",
@@ -751,7 +829,8 @@
       "CycleRandom"
     ],
     "nameEn": "Wheel of Misfortune (Cradle)",
-    "nameKo": "불운의 수레바퀴 (죽음의 요람)"
+    "nameKo": "불운의 수레바퀴 (죽음의 요람)",
+    "nameZhCn": "不幸之轮（死亡摇篮）"
   },
   "Cold Adaptation": {
     "map": "Miner Evacuation",
@@ -760,7 +839,8 @@
       "Evolve"
     ],
     "nameEn": "Chilling Adaptation",
-    "nameKo": "으스스한 적응"
+    "nameKo": "으스스한 적응",
+    "nameZhCn": "寒冷适应（Chilling Adaptation）"
   },
   "Price of Progress": {
     "map": "Malwarfare",
@@ -769,7 +849,8 @@
       "OrderCosts"
     ],
     "nameEn": "Price of Progress",
-    "nameKo": "진보의 대가"
+    "nameKo": "진보의 대가",
+    "nameZhCn": "进步的代价"
   },
   "Negative Reinforcement": {
     "map": "Part and Parcel",
@@ -778,7 +859,8 @@
       "DeathPull"
     ],
     "nameEn": "Negative Reinforcement",
-    "nameKo": "부정적인 증원"
+    "nameKo": "부정적인 증원",
+    "nameZhCn": "消极增援"
   },
   "Retribution": {
     "map": "Mist Opportunities",
@@ -787,7 +869,8 @@
       "VoidRifts"
     ],
     "nameEn": "Retribution",
-    "nameKo": "응징"
+    "nameKo": "응징",
+    "nameZhCn": "报应不爽"
   },
   "Rise from Ashes": {
     "map": "Scythe of Amon",
@@ -797,7 +880,8 @@
       "Reanimators"
     ],
     "nameEn": "Rise From Ashes",
-    "nameKo": "재에서 일어나라"
+    "nameKo": "재에서 일어나라",
+    "nameZhCn": "灰烬重生"
   },
   "Warp Zone": {
     "map": "Lock & Load",
@@ -807,7 +891,8 @@
       "Tornadoes"
     ],
     "nameEn": "Warp Zone",
-    "nameKo": "소환 지역"
+    "nameKo": "소환 지역",
+    "nameZhCn": "扭曲空间"
   },
   "Well Trained": {
     "map": "Oblivion Express",
@@ -817,7 +902,8 @@
       "Inspiration"
     ],
     "nameEn": "Well Trained",
-    "nameKo": "적절한 훈련"
+    "nameKo": "적절한 훈련",
+    "nameZhCn": "训练有素"
   },
   "Doomsday Report": {
     "map": "The Vermillion Problem",
@@ -827,7 +913,8 @@
       "Propagate"
     ],
     "nameEn": "Doomsday Report",
-    "nameKo": "파멸의 날 보고서"
+    "nameKo": "파멸의 날 보고서",
+    "nameZhCn": "末日报告"
   },
   "Safety Violation": {
     "map": "Miner Evacuation",
@@ -837,7 +924,8 @@
       "DeathAOE"
     ],
     "nameEn": "Safety Violation",
-    "nameKo": "안전 규정 위반"
+    "nameKo": "안전 규정 위반",
+    "nameZhCn": "安全违规"
   },
   "Temple of Rebirth": {
     "map": "Temple of the Past",
@@ -847,7 +935,8 @@
       "LifeLeech"
     ],
     "nameEn": "Temple of Rebirth",
-    "nameKo": "부활의 사원"
+    "nameKo": "부활의 사원",
+    "nameZhCn": "重生圣殿"
   },
   "Overclocked": {
     "map": "Malwarfare",
@@ -857,7 +946,8 @@
       "UnitSpeed"
     ],
     "nameEn": "Overclocked",
-    "nameKo": "오버클럭"
+    "nameKo": "오버클럭",
+    "nameZhCn": "疯狂超频"
   },
   "Attrition Warfare": {
     "map": "Void Thrashing",
@@ -866,7 +956,8 @@
       "SpiderMines"
     ],
     "nameEn": "Attrition Warfare",
-    "nameKo": "소모전"
+    "nameKo": "소모전",
+    "nameZhCn": "消耗战"
   },
   "Together Forever": {
     "map": "Chain of Ascension",
@@ -875,7 +966,8 @@
       "Polarity"
     ],
     "nameEn": "Together Forever",
-    "nameKo": "그대와 영원히"
+    "nameKo": "그대와 영원히",
+    "nameZhCn": "永不分离"
   },
   "Specter of Death": {
     "map": "Part and Parcel",
@@ -884,7 +976,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "Specter of Death",
-    "nameKo": "죽음의 악령"
+    "nameKo": "죽음의 악령",
+    "nameZhCn": "死亡鬼影"
   },
   "Distant Threat": {
     "map": "Dead of Night",
@@ -894,7 +987,8 @@
       "TimeWarp"
     ],
     "nameEn": "Distant Threat",
-    "nameKo": "머나먼 위협"
+    "nameKo": "머나먼 위협",
+    "nameZhCn": "远距威胁"
   },
   "Radiation Zone": {
     "map": "Rifts to Korhal",
@@ -904,7 +998,8 @@
       "InfestedTerranSpawner"
     ],
     "nameEn": "Radiation Zone",
-    "nameKo": "방사능 지역"
+    "nameKo": "방사능 지역",
+    "nameZhCn": "辐射区"
   },
   "Inner Power": {
     "map": "Temple of the Past",
@@ -913,7 +1008,8 @@
       "OopsAllCasters"
     ],
     "nameEn": "Inner Power",
-    "nameKo": "내면의 힘"
+    "nameKo": "내면의 힘",
+    "nameZhCn": "心灵力量"
   },
   "Moving Fees": {
     "map": "Cradle of Death",
@@ -922,7 +1018,8 @@
       "FireFight"
     ],
     "nameEn": "Moving Fees",
-    "nameKo": "이동 비용"
+    "nameKo": "이동 비용",
+    "nameZhCn": "调遣军费"
   },
   "Memorable Boss": {
     "map": "Void Launch",
@@ -931,7 +1028,8 @@
       "MomentOfSilence"
     ],
     "nameEn": "Memorable Boss",
-    "nameKo": "인상적인 우두머리"
+    "nameKo": "인상적인 우두머리",
+    "nameZhCn": "梦魇敌酋"
   },
   "Flip My Base": {
     "map": "Mist Opportunities",
@@ -941,7 +1039,8 @@
       "PurifierBeam"
     ],
     "nameEn": "Flip My Base",
-    "nameKo": "기지 뒤집기"
+    "nameKo": "기지 뒤집기",
+    "nameZhCn": "基地翻转"
   },
   "Firewall": {
     "map": "Malwarfare",
@@ -951,7 +1050,8 @@
       "SpiderMines"
     ],
     "nameEn": "Firewall",
-    "nameKo": "방화벽"
+    "nameKo": "방화벽",
+    "nameZhCn": "防火墙"
   },
   "Death and Taxes": {
     "map": "Dead of Night",
@@ -961,7 +1061,8 @@
       "NoResources"
     ],
     "nameEn": "Death and Taxes",
-    "nameKo": "죽음과 세금"
+    "nameKo": "죽음과 세금",
+    "nameZhCn": "死亡税金"
   },
   "Wheel of Misfortune (Evac)": {
     "map": "Miner Evacuation",
@@ -969,7 +1070,8 @@
       "CycleRandom"
     ],
     "nameEn": "Wheel of Misfortune (Evac)",
-    "nameKo": "불운의 수레바퀴 (광부 대피)"
+    "nameKo": "불운의 수레바퀴 (광부 대피)",
+    "nameZhCn": "不幸之轮（营救矿工）"
   },
   "Rubber and Glue": {
     "map": "Void Launch",
@@ -979,7 +1081,8 @@
       "TemporalField"
     ],
     "nameEn": "Rubber and Glue",
-    "nameKo": "고무와 접착제"
+    "nameKo": "고무와 접착제",
+    "nameZhCn": "感痛身受"
   },
   "Hell Train": {
     "map": "Oblivion Express",
@@ -988,7 +1091,8 @@
       "FireFight"
     ],
     "nameEn": "Hell Train",
-    "nameKo": "지옥 열차"
+    "nameKo": "지옥 열차",
+    "nameZhCn": "地狱列车"
   },
   "Infection Detected": {
     "map": "Malwarfare",
@@ -998,7 +1102,8 @@
       "DeathAOE"
     ],
     "nameEn": "Infection Detected",
-    "nameKo": "감염 감지"
+    "nameKo": "감염 감지",
+    "nameZhCn": "感染危机"
   },
   "Opportunities Unleashed": {
     "map": "Mist Opportunities",
@@ -1008,7 +1113,8 @@
       "UnitSpeed"
     ],
     "nameEn": "Opportunities Unleashed",
-    "nameKo": "기회 창출"
+    "nameKo": "기회 창출",
+    "nameZhCn": "机会尽出"
   },
   "One for All": {
     "map": "Temple of the Past",
@@ -1018,7 +1124,8 @@
       "Evolve"
     ],
     "nameEn": "One For All",
-    "nameKo": "모두를 위한 하나"
+    "nameKo": "모두를 위한 하나",
+    "nameZhCn": "一将千军"
   },
   "Experimental Artillery": {
     "map": "Part and Parcel",
@@ -1028,7 +1135,8 @@
       "PhotonOverload"
     ],
     "nameEn": "Experimental Artillery",
-    "nameKo": "실험용 대포"
+    "nameKo": "실험용 대포",
+    "nameZhCn": "实验巨炮"
   },
   "Nuclear Family": {
     "map": "Chain of Ascension",
@@ -1038,7 +1146,8 @@
       "InfestedTerranSpawner"
     ],
     "nameEn": "Nuclear Family",
-    "nameKo": "핵가족"
+    "nameKo": "핵가족",
+    "nameZhCn": "核族入侵"
   },
   "Die Together": {
     "map": "Scythe of Amon",
@@ -1047,7 +1156,8 @@
       "Polarity"
     ],
     "nameEn": "Die Together",
-    "nameKo": "같이 좀 죽어"
+    "nameKo": "같이 좀 죽어",
+    "nameZhCn": "同归于尽"
   },
   "Burning Evacuation": {
     "map": "Miner Evacuation",
@@ -1057,7 +1167,8 @@
       "FireFight"
     ],
     "nameEn": "Burning Evacuation",
-    "nameKo": "불타는 탈출"
+    "nameKo": "불타는 탈출",
+    "nameZhCn": "烈火营救"
   },
   "Assembly of Vengeance": {
     "map": "Temple of the Past",
@@ -1066,7 +1177,8 @@
       "HeroesFromTheStorm"
     ],
     "nameEn": "Assembly of Vengeance",
-    "nameKo": "몰려드는 복수"
+    "nameKo": "몰려드는 복수",
+    "nameZhCn": "复仇者集结"
   },
   "Railroad Switch": {
     "map": "Oblivion Express",
@@ -1075,7 +1187,8 @@
       "Polarity"
     ],
     "nameEn": "Railroad Switch",
-    "nameKo": "교대 작업"
+    "nameKo": "교대 작업",
+    "nameZhCn": "铁轨换线"
   },
   "Hostile Territory": {
     "map": "Dead of Night",
@@ -1085,7 +1198,8 @@
       "OopsAllCasters"
     ],
     "nameEn": "Hostile Territory",
-    "nameKo": "적대 구역"
+    "nameKo": "적대 구역",
+    "nameZhCn": "敌对领地"
   },
   "Media Blackout": {
     "map": "The Vermillion Problem",
@@ -1095,7 +1209,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "Media Blackout",
-    "nameKo": "전면 통제"
+    "nameKo": "전면 통제",
+    "nameZhCn": "媒体抹黑"
   },
   "Thunder Dome": {
     "map": "Lock & Load",
@@ -1104,7 +1219,8 @@
       "Magnificent"
     ],
     "nameEn": "Thunder Dome",
-    "nameKo": "천둥의 전장"
+    "nameKo": "천둥의 전장",
+    "nameZhCn": "雷霆穹顶"
   },
   "Dodge This": {
     "map": "Scythe of Amon",
@@ -1114,7 +1230,8 @@
       "OrbitalStrike"
     ],
     "nameEn": "Dodge This",
-    "nameKo": "피할 테면 피해 봐"
+    "nameKo": "피할 테면 피해 봐",
+    "nameZhCn": "躲灾避祸"
   },
   "Binary Choice": {
     "map": "Malwarfare",
@@ -1123,7 +1240,8 @@
       "Reanimators"
     ],
     "nameEn": "Binary Choice",
-    "nameKo": "양자택일"
+    "nameKo": "양자택일",
+    "nameZhCn": "二元选择"
   },
   "The Ascended": {
     "map": "Chain of Ascension",
@@ -1132,7 +1250,8 @@
       "Evolve"
     ],
     "nameEn": "The Ascended",
-    "nameKo": "승천자"
+    "nameKo": "승천자",
+    "nameZhCn": "升格蜕变"
   },
   "Enhanced Defenses": {
     "map": "Cradle of Death",
@@ -1142,7 +1261,8 @@
       "PhotonOverload"
     ],
     "nameEn": "Enhanced Defenses",
-    "nameKo": "향상된 방어"
+    "nameKo": "향상된 방어",
+    "nameZhCn": "森严壁垒"
   },
   "Double Trouble": {
     "map": "Void Launch",
@@ -1151,7 +1271,8 @@
       "Propagate"
     ],
     "nameEn": "Double Trouble",
-    "nameKo": "이중고"
+    "nameKo": "이중고",
+    "nameZhCn": "双重麻烦"
   },
   "And Drops and Rifts": {
     "map": "Part and Parcel",
@@ -1160,7 +1281,8 @@
       "VoidRifts"
     ],
     "nameEn": "And Drops and Rifts",
-    "nameKo": "배치와 균열"
+    "nameKo": "배치와 균열",
+    "nameZhCn": "星沉地裂"
   },
   "Catch the Train": {
     "map": "Oblivion Express",
@@ -1170,7 +1292,8 @@
       "UnitSpeed"
     ],
     "nameEn": "Catch the Train",
-    "nameKo": "기차를 잡아라"
+    "nameKo": "기차를 잡아라",
+    "nameZhCn": "赶夜车"
   },
   "Temple of Terror": {
     "map": "Temple of the Past",
@@ -1180,7 +1303,8 @@
       "Fear"
     ],
     "nameEn": "Temple Of Terror",
-    "nameKo": "공포의 사원"
+    "nameKo": "공포의 사원",
+    "nameZhCn": "恐惧神庙"
   },
   "Shining Bright": {
     "map": "Mist Opportunities",
@@ -1190,7 +1314,8 @@
       "PurifierBeam"
     ],
     "nameEn": "Shining Bright",
-    "nameKo": "찬란한 광휘"
+    "nameKo": "찬란한 광휘",
+    "nameZhCn": "光炫神迷"
   },
   "Endless Sparkles": {
     "map": "Miner Evacuation",
@@ -1199,7 +1324,8 @@
       "DeathAOE"
     ],
     "nameEn": "Endless Sparkles",
-    "nameKo": "끝없는 생기"
+    "nameKo": "끝없는 생기",
+    "nameZhCn": "无尽花火"
   },
   "Graveyard Shift": {
     "map": "Dead of Night",
@@ -1208,7 +1334,8 @@
       "PurifierBeam"
     ],
     "nameEn": "Graveyard Shift",
-    "nameKo": "야간 근무"
+    "nameKo": "야간 근무",
+    "nameZhCn": "坟场夜班"
   },
   "Robotic Revival": {
     "map": "Part and Parcel",
@@ -1218,7 +1345,8 @@
       "LaserDrill"
     ],
     "nameEn": "Robotic Revival",
-    "nameKo": "로봇 부활"
+    "nameKo": "로봇 부활",
+    "nameZhCn": "机器重生"
   },
   "Secret Storm": {
     "map": "Lock & Load",
@@ -1228,7 +1356,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "Secret Storm",
-    "nameKo": "비밀 폭풍"
+    "nameKo": "비밀 폭풍",
+    "nameZhCn": "秘密突击"
   },
   "Undermined": {
     "map": "Rifts to Korhal",
@@ -1237,7 +1366,8 @@
       "VoidRifts"
     ],
     "nameEn": "Undermined",
-    "nameKo": "침식"
+    "nameKo": "침식",
+    "nameZhCn": "暗地破坏"
   },
   "Astigmatism": {
     "map": "Malwarfare",
@@ -1247,7 +1377,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "Astigmatism",
-    "nameKo": "난시"
+    "nameKo": "난시",
+    "nameZhCn": "散光"
   },
   "Never Say Die": {
     "map": "Mist Opportunities",
@@ -1257,7 +1388,8 @@
       "LifeLeech"
     ],
     "nameEn": "Never Say Die",
-    "nameKo": "불굴"
+    "nameKo": "불굴",
+    "nameZhCn": "永不言死"
   },
   "Medieval Times": {
     "map": "Scythe of Amon",
@@ -1266,7 +1398,8 @@
       "Evolve"
     ],
     "nameEn": "Medieval Times",
-    "nameKo": "중세 시대"
+    "nameKo": "중세 시대",
+    "nameZhCn": "中世纪"
   },
   "Onslaught": {
     "map": "Dead of Night",
@@ -1276,7 +1409,8 @@
       "Reanimators"
     ],
     "nameEn": "Onslaught",
-    "nameKo": "맹습"
+    "nameKo": "맹습",
+    "nameZhCn": "全力猛攻"
   },
   "Equivalent Exchange": {
     "map": "Void Thrashing",
@@ -1285,7 +1419,8 @@
       "JustDie"
     ],
     "nameEn": "Equivalent Exchange",
-    "nameKo": "등가 교환"
+    "nameKo": "등가 교환",
+    "nameZhCn": "等价交换"
   },
   "Encroaching Madness": {
     "map": "Mist Opportunities",
@@ -1295,7 +1430,8 @@
       "VoidRifts"
     ],
     "nameEn": "Encroaching Madness",
-    "nameKo": "침범하는 광기"
+    "nameKo": "침범하는 광기",
+    "nameZhCn": "迫近的疯狂"
   },
   "Season of Giving": {
     "map": "Cradle of Death",
@@ -1305,7 +1441,8 @@
       "KillKarma"
     ],
     "nameEn": "Season of Giving",
-    "nameKo": "나눔의 계절"
+    "nameKo": "나눔의 계절",
+    "nameZhCn": "感恩季"
   },
   "Choices Choices": {
     "map": "Temple of the Past",
@@ -1315,7 +1452,8 @@
       "HybridNuke"
     ],
     "nameEn": "Choices Choices",
-    "nameKo": "선택 선택"
+    "nameKo": "선택 선택",
+    "nameZhCn": "决择抉择"
   },
   "Inordinate Response": {
     "map": "Scythe of Amon",
@@ -1324,7 +1462,8 @@
       "OopsAllCasters"
     ],
     "nameEn": "Inordinate Response",
-    "nameKo": "과도한 대응"
+    "nameKo": "과도한 대응",
+    "nameZhCn": "过度反应"
   },
   "By Fire Be Purged": {
     "map": "Oblivion Express",
@@ -1334,7 +1473,8 @@
       "FireFight"
     ],
     "nameEn": "By Fire Be Purged",
-    "nameKo": "불의 세례"
+    "nameKo": "불의 세례",
+    "nameZhCn": "火焰净化"
   },
   "Timely Reinforcements": {
     "map": "Miner Evacuation",
@@ -1343,7 +1483,8 @@
       "VoidRifts"
     ],
     "nameEn": "Timely Reinforcements",
-    "nameKo": "적시의 보강"
+    "nameKo": "적시의 보강",
+    "nameZhCn": "极速增援"
   },
   "Blind Tribute": {
     "map": "Chain of Ascension",
@@ -1352,7 +1493,8 @@
       "ReducedVision"
     ],
     "nameEn": "Blind Tribute",
-    "nameKo": "눈 먼 공물"
+    "nameKo": "눈 먼 공물",
+    "nameZhCn": "盲目进贡"
   },
   "Barrier to Entry": {
     "map": "Lock & Load",
@@ -1362,7 +1504,8 @@
       "Entomb"
     ],
     "nameEn": "Barrier to Entry",
-    "nameKo": "진입 방어막"
+    "nameKo": "진입 방어막",
+    "nameZhCn": "进击壁垒"
   },
   "Like Swatting Insects": {
     "map": "Cradle of Death",
@@ -1372,7 +1515,8 @@
       "InfestedTerranSpawner"
     ],
     "nameEn": "Like Swatting Insects",
-    "nameKo": "파리 같은 놈들"
+    "nameKo": "파리 같은 놈들",
+    "nameZhCn": "虫人海啸"
   },
   "Getting Along": {
     "map": "The Vermillion Problem",
@@ -1381,7 +1525,8 @@
       "SharedSupply"
     ],
     "nameEn": "Getting Along",
-    "nameKo": "어울림"
+    "nameKo": "어울림",
+    "nameZhCn": "心有灵犀"
   },
   "Knock Knock": {
     "map": "Dead of Night",
@@ -1390,7 +1535,8 @@
       "Propagate"
     ],
     "nameEn": "Knock Knock",
-    "nameKo": "똑똑"
+    "nameKo": "똑똑",
+    "nameZhCn": "夜半敲门"
   },
   "Dance Dance Evolution": {
     "map": "Mist Opportunities",
@@ -1400,7 +1546,8 @@
       "Evolve"
     ],
     "nameEn": "Dance Dance Evolution",
-    "nameKo": "댄스 댄스 에볼루션"
+    "nameKo": "댄스 댄스 에볼루션",
+    "nameZhCn": "舞动进化（Dance Dance Evolution）"
   },
   "Train of Pain": {
     "map": "Oblivion Express",
@@ -1410,7 +1557,8 @@
       "HybridNuke"
     ],
     "nameEn": "Train of Pain",
-    "nameKo": "고통의 열차"
+    "nameKo": "고통의 열차",
+    "nameZhCn": "痛苦列车（Train of Pain）"
   },
   "Resilient Rifts": {
     "map": "Rifts to Korhal",
@@ -1419,7 +1567,8 @@
       "VoidRifts"
     ],
     "nameEn": "Resilient Rifts",
-    "nameKo": "끈질긴 균열"
+    "nameKo": "끈질긴 균열",
+    "nameZhCn": "坚韧裂痕（Resilient Rifts）"
   },
   "Chain Explosions": {
     "map": "Chain of Ascension",
@@ -1428,7 +1577,8 @@
       "WalkingInfested"
     ],
     "nameEn": "Chain Explosion",
-    "nameKo": "연쇄 폭발"
+    "nameKo": "연쇄 폭발",
+    "nameZhCn": "连环爆炸"
   },
   "Call it a Comeback": {
     "map": "Temple of the Past",
@@ -1438,7 +1588,8 @@
       "JustDie"
     ],
     "nameEn": "Call It A Comeback",
-    "nameKo": "과거로의 회귀"
+    "nameKo": "과거로의 회귀",
+    "nameZhCn": "卷土重来"
   },
   "Explosive Hunt": {
     "map": "Part and Parcel",
@@ -1447,7 +1598,8 @@
       "NoResources"
     ],
     "nameEn": "Explosive Hunt",
-    "nameKo": "폭발 사냥"
+    "nameKo": "폭발 사냥",
+    "nameZhCn": "爆炸狩猎（Explosive Hunt）"
   },
   "Tax Day": {
     "map": "Void Launch",
@@ -1456,7 +1608,8 @@
       "OrderCosts"
     ],
     "nameEn": "Tax Day",
-    "nameKo": "납세일"
+    "nameKo": "납세일",
+    "nameZhCn": "纳税日（Tax Day）"
   },
   "Aggressive Recruitment": {
     "map": "Malwarfare",
@@ -1466,7 +1619,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "Aggressive Recruitment",
-    "nameKo": "공격적인 모집"
+    "nameKo": "공격적인 모집",
+    "nameZhCn": "强制征募（Aggressive Recruitment）"
   },
   "Scary Scavengers": {
     "map": "Dead of Night",
@@ -1475,7 +1629,8 @@
       "NoResources"
     ],
     "nameEn": "Scary Scavengers",
-    "nameKo": "무서운 착취자"
+    "nameKo": "무서운 착취자",
+    "nameZhCn": "惊魂拾荒者（Scary Scavengers）"
   },
   "Call of the Void": {
     "map": "Void Thrashing",
@@ -1484,7 +1639,8 @@
       "VoidRifts"
     ],
     "nameEn": "Call of the Void",
-    "nameKo": "공허의 부름"
+    "nameKo": "공허의 부름",
+    "nameZhCn": "虚空召唤"
   },
   "In the Name of Love": {
     "map": "Cradle of Death",
@@ -1494,7 +1650,8 @@
       "TimeWarp"
     ],
     "nameEn": "In the Name of Love",
-    "nameKo": "사랑의 이름으로"
+    "nameKo": "사랑의 이름으로",
+    "nameZhCn": "因爱之名"
   },
   "Locked and Loaded": {
     "map": "Lock & Load",
@@ -1504,7 +1661,8 @@
       "TemporalField"
     ],
     "nameEn": "Locked and Loaded",
-    "nameKo": "장전 완료"
+    "nameKo": "장전 완료",
+    "nameZhCn": "荷枪实弹"
   },
   "Of Mines and Miners": {
     "map": "Miner Evacuation",
@@ -1514,7 +1672,8 @@
       "MissileBarrage"
     ],
     "nameEn": "Of Mines and Miners",
-    "nameKo": "광부와 지뢰"
+    "nameKo": "광부와 지뢰",
+    "nameZhCn": "地雷与矿工（Of Mines and Miners）"
   },
   "The League of Vermillains": {
     "map": "The Vermillion Problem",
@@ -1523,7 +1682,8 @@
       "HeroesFromTheStorm"
     ],
     "nameEn": "The League Of Vermillans",
-    "nameKo": "리그 오브 버밀리언"
+    "nameKo": "리그 오브 버밀리언",
+    "nameZhCn": "维米尔恶人联盟（The League Of Vermillans）"
   },
   "Operation Cooperation": {
     "map": "Lock & Load",
@@ -1532,7 +1692,8 @@
       "Propagate"
     ],
     "nameEn": "Operation Cooperation",
-    "nameKo": "합동 작전"
+    "nameKo": "합동 작전",
+    "nameZhCn": "合作无间"
   },
   "Hot 'n' Cold": {
     "map": "Void Launch",
@@ -1542,7 +1703,8 @@
       "FireFight"
     ],
     "nameEn": "Hot 'n' Cold",
-    "nameKo": "뜨겁고 차가운"
+    "nameKo": "뜨겁고 차가운",
+    "nameZhCn": "冰火之歌"
   },
   "What We Do in the Shadows": {
     "map": "Void Thrashing",
@@ -1552,7 +1714,8 @@
       "AllEnemiesCloaked"
     ],
     "nameEn": "What We Do in the Shadows",
-    "nameKo": "어둠 속에서"
+    "nameKo": "어둠 속에서",
+    "nameZhCn": "吸血鬼生活"
   },
   "Hardware Malfunction": {
     "map": "Malwarfare",
@@ -1562,7 +1725,8 @@
       "SpiderMines"
     ],
     "nameEn": "Hardware Malfunction",
-    "nameKo": "하드웨어 장애"
+    "nameKo": "하드웨어 장애",
+    "nameZhCn": "硬件故障"
   },
   "Shared Pain": {
     "map": "Part and Parcel",
@@ -1571,7 +1735,8 @@
       "DeathPull"
     ],
     "nameEn": "Shared Pain",
-    "nameKo": "고통 분담"
+    "nameKo": "고통 분담",
+    "nameZhCn": "分担痛苦"
   },
   "The Longest Night": {
     "map": "Dead of Night",
@@ -1581,7 +1746,8 @@
       "PhotonOverload"
     ],
     "nameEn": "The Longest Night",
-    "nameKo": "기나긴 밤"
+    "nameKo": "기나긴 밤",
+    "nameZhCn": "漫漫长夜"
   },
   "The Quick and the Undead": {
     "map": "Scythe of Amon",
@@ -1590,7 +1756,8 @@
       "Reanimators"
     ],
     "nameEn": "The Quick and the Undead",
-    "nameKo": "빠른 자와 죽지 않는 자"
+    "nameKo": "빠른 자와 죽지 않는 자",
+    "nameZhCn": "迅捷亡尸"
   },
   "Decade of Decadence": {
     "map": "Rifts to Korhal",
@@ -1600,7 +1767,8 @@
       "RedEnvelopes"
     ],
     "nameEn": "Decade of Decadence",
-    "nameKo": "타락의 시기"
+    "nameKo": "타락의 시기",
+    "nameZhCn": "征战十年"
   },
   "Bubble Pop": {
     "map": "Cradle of Death",
@@ -1610,7 +1778,8 @@
       "TimeWarp"
     ],
     "nameEn": "Bubble Pop",
-    "nameKo": "방울방울"
+    "nameKo": "방울방울",
+    "nameZhCn": "泡泡世界"
   },
   "Coordinated Defense": {
     "map": "The Vermillion Problem",
@@ -1619,7 +1788,8 @@
       "Polarity"
     ],
     "nameEn": "Coordinated Defense",
-    "nameKo": "케르베로스 방어"
+    "nameKo": "케르베로스 방어",
+    "nameZhCn": "协同防御"
   },
   "Beggars Can't be Choosers": {
     "map": "Lock & Load",
@@ -1629,7 +1799,8 @@
       "NoResources"
     ],
     "nameEn": "Beggars Can't Be Choosers",
-    "nameKo": "찬밥 더운밥 가릴 때가 아니다"
+    "nameKo": "찬밥 더운밥 가릴 때가 아니다",
+    "nameZhCn": "饥不择食"
   },
   "My Bots!": {
     "map": "Mist Opportunities",
@@ -1638,7 +1809,8 @@
       "KillBots"
     ],
     "nameEn": "My Bots!",
-    "nameKo": "내 로봇!"
+    "nameKo": "내 로봇!",
+    "nameZhCn": "我的机器人！"
   },
   "Multitasking Trainer": {
     "map": "Malwarfare",
@@ -1647,7 +1819,8 @@
       "VoidRifts"
     ],
     "nameEn": "Multitasking Trainer",
-    "nameKo": "멀티태스킹 트레이너"
+    "nameKo": "멀티태스킹 트레이너",
+    "nameZhCn": "多线操作训练"
   },
   "Hello My Old Friend": {
     "map": "Scythe of Amon",
@@ -1657,7 +1830,8 @@
       "MomentOfSilence"
     ],
     "nameEn": "Hello My Old Friend",
-    "nameKo": "안녕 오랜 친구여"
+    "nameKo": "안녕 오랜 친구여",
+    "nameZhCn": "老友重聚"
   },
   "Of One Mind": {
     "map": "Rifts to Korhal",
@@ -1667,7 +1841,8 @@
       "SharedSupply"
     ],
     "nameEn": "Of One Mind",
-    "nameKo": "한 마음으로"
+    "nameKo": "한 마음으로",
+    "nameZhCn": "万众一心"
   },
   "Blasting Off Again": {
     "map": "Void Launch",
@@ -1677,7 +1852,8 @@
       "OopsAllCasters"
     ],
     "nameEn": "Blasting Off Again",
-    "nameKo": "다시 발사할 시간"
+    "nameKo": "다시 발사할 시간",
+    "nameZhCn": "发射升空"
   },
   "Enter the Nexus": {
     "map": "Cradle of Death",
@@ -1686,7 +1862,8 @@
       "HeroesFromTheStorm"
     ],
     "nameEn": "Enter the Nexus",
-    "nameKo": "시공의 폭풍 입장"
+    "nameKo": "시공의 폭풍 입장",
+    "nameZhCn": "进入时空枢纽"
   },
   "Death is Fleeting": {
     "map": "Dead of Night",
@@ -1695,7 +1872,8 @@
       "Reanimators"
     ],
     "nameEn": "Death is Fleeting",
-    "nameKo": "죽음은 잠깐이다"
+    "nameKo": "죽음은 잠깐이다",
+    "nameZhCn": "死亡转瞬即逝"
   },
   "Mass Manufacturing": {
     "map": "Part and Parcel",
@@ -1704,7 +1882,8 @@
       "VoidRifts"
     ],
     "nameEn": "Mass Manufacturing",
-    "nameKo": "대량생산"
+    "nameKo": "대량생산",
+    "nameZhCn": "批量生产"
   },
   "Fire in the Hole": {
     "map": "Miner Evacuation",
@@ -1713,6 +1892,7 @@
       "MissileBarrage"
     ],
     "nameEn": "Fire in the Hole",
-    "nameKo": "폭발 대피"
+    "nameKo": "폭발 대피",
+    "nameZhCn": "小心手雷"
   }
 }
