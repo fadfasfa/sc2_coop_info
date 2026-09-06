@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { writeFile } from "node:fs/promises";
 import { createLanguageManager } from "../src/app/i18n/languageManager";
 import { buildUnitRows } from "../src/app/overlay/component/GameStatTextViewModel";
 import { localizedLastSeen } from "../src/app/overlay/component/PlayerStatMode";
@@ -244,6 +245,12 @@ test("settings preview, delayed backend synchronization, save/restart and revert
     await page.goto("/");
     const select = languageSelect(page);
     await expect(select).toHaveValue("en");
+    const englishFont = await page.evaluate(
+        () => getComputedStyle(document.body).fontFamily,
+    );
+    expect(englishFont).not.toMatch(
+        /Microsoft YaHei|PingFang SC|Noto Sans CJK SC/,
+    );
     await expect(select.locator("option")).toHaveText([
         "English",
         "한국어",
@@ -253,6 +260,9 @@ test("settings preview, delayed backend synchronization, save/restart and revert
     await expect(
         page.getByRole("tab", { name: "设置", exact: true }),
     ).toBeVisible();
+    expect(
+        await page.evaluate(() => getComputedStyle(document.body).fontFamily),
+    ).toContain("Microsoft YaHei");
     await page.getByRole("button", { name: "保存", exact: true }).click();
     await expect
         .poll(() =>
@@ -276,6 +286,9 @@ test("settings preview, delayed backend synchronization, save/restart and revert
     await expect(
         page.getByRole("tab", { name: "설정", exact: true }),
     ).toBeVisible();
+    expect(
+        await page.evaluate(() => getComputedStyle(document.body).fontFamily),
+    ).toBe(englishFont);
     await expect
         .poll(() =>
             page.evaluate(
@@ -306,6 +319,9 @@ test("settings preview, delayed backend synchronization, save/restart and revert
         .toBe("en");
     await page.reload();
     await expect(select).toHaveValue("en");
+    expect(
+        await page.evaluate(() => getComputedStyle(document.body).fontFamily),
+    ).toBe(englishFont);
     expect(errors).toEqual([]);
 });
 
@@ -402,11 +418,95 @@ for (const viewport of [
             const geometry = await page.evaluate(() => ({
                 width: document.documentElement.clientWidth,
                 scroll: document.documentElement.scrollWidth,
+                overflowElements: [...document.querySelectorAll("*")]
+                    .filter((element) => {
+                        const rect = element.getBoundingClientRect();
+                        return (
+                            rect.width > 0 &&
+                            (rect.left < -1 || rect.right > innerWidth + 1)
+                        );
+                    })
+                    .map((element) => ({
+                        tag: element.tagName,
+                        className: element.className,
+                        text: element.textContent?.slice(0, 120),
+                        left: element.getBoundingClientRect().left,
+                        right: element.getBoundingClientRect().right,
+                        clientWidth: element.clientWidth,
+                        scrollWidth: element.scrollWidth,
+                        fontFamily: getComputedStyle(element).fontFamily,
+                    })),
             }));
+            await writeFile(
+                testInfo.outputPath(`${viewport.width}-${name}-geometry.json`),
+                JSON.stringify(geometry, null, 2),
+            );
             expect(
                 geometry.scroll,
                 `${name}: page horizontal overflow`,
             ).toBeLessThanOrEqual(geometry.width + 1);
+            if (name === "设置") {
+                const clippedButtonLabels = await page
+                    .getByRole("button")
+                    .evaluateAll((buttons) =>
+                        buttons.flatMap((button) => {
+                            const box = button.getBoundingClientRect();
+                            if (
+                                !box.width ||
+                                !box.height ||
+                                getComputedStyle(button).visibility === "hidden"
+                            )
+                                return [];
+                            const walker = document.createTreeWalker(
+                                button,
+                                NodeFilter.SHOW_TEXT,
+                            );
+                            const labels = [];
+                            while (walker.nextNode()) {
+                                const node = walker.currentNode;
+                                if (!node.textContent?.trim()) continue;
+                                const range = document.createRange();
+                                range.selectNodeContents(node);
+                                for (const text of range.getClientRects()) {
+                                    if (
+                                        text.width > 0 &&
+                                        text.height > 0 &&
+                                        (text.left < box.left - 1 ||
+                                            text.right > box.right + 1 ||
+                                            text.top < box.top - 1 ||
+                                            text.bottom > box.bottom + 1)
+                                    )
+                                        labels.push({
+                                            text: node.textContent,
+                                            button: {
+                                                left: box.left,
+                                                right: box.right,
+                                                top: box.top,
+                                                bottom: box.bottom,
+                                            },
+                                            textBounds: {
+                                                left: text.left,
+                                                right: text.right,
+                                                top: text.top,
+                                                bottom: text.bottom,
+                                            },
+                                        });
+                                }
+                            }
+                            return labels;
+                        }),
+                    );
+                await writeFile(
+                    testInfo.outputPath(
+                        `${viewport.width}-button-label-geometry.json`,
+                    ),
+                    JSON.stringify(clippedButtonLabels, null, 2),
+                );
+                expect(
+                    clippedButtonLabels,
+                    "Settings button labels must remain within their buttons, not overlap adjacent controls",
+                ).toEqual([]);
+            }
         }
         await page.getByRole("tab", { name: "设置", exact: true }).click();
         await languageSelect(page).selectOption("en");

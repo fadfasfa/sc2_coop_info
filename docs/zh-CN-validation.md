@@ -2,6 +2,10 @@
 
 更新：2026-09-06。当前结论：本地前端与资源回归通过；跨平台 Rust 自动门和 Windows 原生／真人试用尚未完成，不能据此宣称完整验收或提交稳定 PR。
 
+最新远端复核：[Actions 34004188099](https://github.com/fadfasfa/sc2_coop_info/actions/runs/34004188099) 的 macOS 对贡献 `0af667c8c0cf1414ed7827cbebb9acb30e1f59c2` 得到 **101/105 Playwright 通过、4 项失败**。失败是英文 commander mastery 分布列表横向溢出、16 logical cores 性能窗 DPR 1／1.5 两项中文累计行裁切，以及 800px 中文设置页 `scrollWidth=802 > 801`。原断言保留，修复后的同平台复验仍未完成，未重跑通过前不能关闭；下文 105/105 仅为本地 Windows 浏览器结果，不代表三平台 GO。
+
+后续最小修复已在本地验证：恢复英文／韩文原有字体回退，只给中文配置额外字体；中文性能窗减少固定间距、中文设置响应式堆叠及快捷键标签换行。原四项失败组本地4/4通过（5.7秒），随后完整105/105通过（49.0秒），两组typecheck、build、diff检查通过。新增按钮文字边界与英韩字体恢复断言均通过；800px设置页宽／scrollWidth均800，16核中文性能最后文字底边570px。此为 Windows 浏览器修后证据，仍待新提交在远端macOS复验，不覆盖既有失败记录。
+
 ## 范围与可复现命令
 
 上游基线是 `fb16c6c7eacb4b5f3589e22795b0fc45334b01a1`，应用版本为 0.4.10。该基线相对 0.4.10 tag 仅有文档差异。此次本地 QA 对象是贡献提交 `d5e957458e036f9079810d08f21927e816005504` 加后续中文布局修复及独立回归测试，不是未修改的 `d5e9574` 本身。具体贡献 SHA 以对应 Actions／包 manifest 为准；最终提交后的 Actions 结果必须重新绑定最终 SHA。
@@ -49,6 +53,8 @@ Playwright 使用 `CI=true`，自行启动仅绑定回环地址的开发服务�
 | 16 logical cores | 671 px | 586 px | 中文受测文本均在窗内，无相互遮挡。 |
 | 32 logical cores | 1007 px | 906 px | 两种语言仍有底部 CPU 行／累计值被固定高度裁切；中文没有新增高度回归，但不代表 32 核全可读通过。 |
 
+上述数值来自本地 Windows 浏览器，不跨平台外推。最新 macOS 相同矩阵为16核英文702／中文611px、32核英文1054／中文947px；16核中文“累计”和“92.4%”两片段在590–611px，截图确认底部实际裁切，故两DPR测试失败。所有性能矩阵中文字相撞／横向溢出仍为0。800px设置截图还显示长快捷键按钮文字伸出按钮边界，回归测试已增加实际按钮文字边界检查，不能仅以页面宽度代表标签可读。
+
 32 logical cores 是本机硬件对应场景，不能以 16 核结果替代。此为既有固定高度布局边界，未扩大为性能采样或窗口布局重构。浏览器 DPR 1.5 是栅格缩放检查，**不是 Windows 150% 原生显示缩放验收**。
 
 ## 真实录像／缓存缺失：不计为解析通过
@@ -92,5 +98,9 @@ Playwright 使用 `CI=true`，自行启动仅绑定回环地址的开发服务�
 ## English summary
 
 Local resource contracts, both TypeScript checks, production frontend build and all 105 Playwright tests passed. The 18 affected Chinese tests were rerun after persisting geometry evidence and passed again. Tests use synthetic data only, preserve canonical identity/statistics, and explicitly check text-to-text collisions rather than only container bounds.
+
+The subsequent macOS run for `0af667c8` passed 101/105 Playwright tests and failed four layout checks (English mastery-list overflow, two 16-core Chinese performance total-row clipping checks, and 800px Chinese settings overflow). Same-platform reruns of the fixes remain pending; the earlier local Windows result is not a cross-platform GO.
+
+Minimal font-fallback/spacing/responsive fixes subsequently passed the original four failing tests and all 105 tests locally again, including stronger button-text containment and English/Korean font-restoration assertions. Both type checks and the build passed. The corrected commit still needs a macOS CI rerun; local Windows passing does not close that platform's failures.
 
 Windows Rust passed for the earlier unbundled `d5e9574` candidate; the final commit and new Rust tests still require CI. macOS/Linux share the same upstream baseline `E0624` private-method error. Fifteen data-dependent tests returned early because real replay/cache fixtures were absent, and three existing real-data benchmarks remained ignored: none is claimed as real replay validation. A 32-core performance overlay still clips bottom rows in both languages at its fixed 400×600 default size, although Chinese adds no clipping regression. Browser DPR 1.5 does not replace native Windows 150% scaling, historical replay or the ordinary-co-op/weekly-mutation human trials. The 49 provisional translations and existing seven dependency-audit findings remain disclosed. The complete release/PR gate is not yet satisfied.

@@ -46,8 +46,7 @@ export function createConfigTheme(mode: ConfigThemeMode) {
             divider: isDark ? "#243145" : "#d7e1ee",
         },
         typography: {
-            fontFamily:
-                'Inter, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif',
+            fontFamily: 'Inter, "Segoe UI", Arial, sans-serif',
         },
         shape: {
             borderRadius: 8,
@@ -68,6 +67,10 @@ export function createConfigTheme(mode: ConfigThemeMode) {
                         background: isDark ? "#0b1220" : "#f3f7fb",
                         color: isDark ? "#e5e7eb" : "#0f172a",
                         padding: 0,
+                        "&:lang(zh-CN)": {
+                            fontFamily:
+                                'Inter, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif',
+                        },
                     },
                     "#app": {
                         minHeight: "100%",
@@ -83,8 +86,11 @@ export function createConfigTheme(mode: ConfigThemeMode) {
                     root: {
                         textTransform: "none",
                         borderRadius: 8,
-                        fontFamily:
-                            'Inter, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif',
+                        fontFamily: 'Inter, "Segoe UI", Arial, sans-serif',
+                        "&:lang(zh-CN)": {
+                            fontFamily:
+                                'Inter, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif',
+                        },
                     },
                 },
             },

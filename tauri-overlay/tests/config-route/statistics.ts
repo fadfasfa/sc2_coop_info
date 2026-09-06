@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { writeFile } from "node:fs/promises";
 import {
     expectedLocalReplayTimestamp,
     installTauriMock,
@@ -9,7 +10,7 @@ test.describe("Config route statistics", () => {
 
     test("commander mastery statistics render same-category distribution graphs", async ({
         page,
-    }) => {
+    }, testInfo) => {
         await installTauriMock(page, {
             status: "ok",
             stats: {
@@ -202,6 +203,33 @@ test.describe("Config route statistics", () => {
             .evaluateAll((lists) =>
                 lists.every((list) => list.scrollWidth <= list.clientWidth + 1),
             );
+        const masteryGeometry = await page
+            .getByTestId("mastery-distribution-prestige-list")
+            .evaluateAll((lists) =>
+                lists.map((list) => ({
+                    clientWidth: list.clientWidth,
+                    scrollWidth: list.scrollWidth,
+                    fontFamily: getComputedStyle(list).fontFamily,
+                    children: [...list.querySelectorAll("*")].map((child) => ({
+                        tag: child.tagName,
+                        className: child.className,
+                        text: child.textContent,
+                        left: child.getBoundingClientRect().left,
+                        right: child.getBoundingClientRect().right,
+                        clientWidth: child.clientWidth,
+                        scrollWidth: child.scrollWidth,
+                        fontFamily: getComputedStyle(child).fontFamily,
+                    })),
+                })),
+            );
+        await writeFile(
+            testInfo.outputPath("mastery-list-geometry.json"),
+            JSON.stringify(masteryGeometry, null, 2),
+        );
+        await page.screenshot({
+            path: testInfo.outputPath("mastery-list-layout.png"),
+            fullPage: true,
+        });
         expect(masteryPrestigeListsFit).toBe(true);
         await expect(page.getByText("Prestige 0").first()).toBeVisible();
         await expect(page.getByText("Prestige 1").first()).toBeVisible();
