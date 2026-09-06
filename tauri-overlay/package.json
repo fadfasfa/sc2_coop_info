@@ -9,7 +9,8 @@
         "typecheck": "tsgo --noEmit",
         "typecheck:tests": "tsgo --noEmit -p tsconfig.tests.json",
         "format": "prettier . --write",
-        "test:config": "npx playwright test"
+        "test:config": "npx playwright test",
+        "test:zh-cn": "node --test tests/zh-cn-resources.test.mjs"
     },
     "dependencies": {
         "@emotion/react": "^11.14.0",

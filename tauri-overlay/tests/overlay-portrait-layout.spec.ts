@@ -219,14 +219,12 @@ test("overlay layout stays within portrait viewport width", async ({
     const metrics = await page.evaluate(() => {
         const bg = document.querySelector("#bgdiv");
         const stats = document.querySelector("#stats");
-        const otherstats = document.querySelector("#otherstats");
-        const playerstats = document.querySelector("#playerstats");
+        const killbar = document.querySelector("#percent1");
         const charts = document.querySelector("#charts");
         if (
             !(bg instanceof HTMLElement) ||
             !(stats instanceof HTMLElement) ||
-            !(otherstats instanceof HTMLElement) ||
-            !(playerstats instanceof HTMLElement) ||
+            !(killbar instanceof HTMLElement) ||
             !(charts instanceof HTMLElement)
         ) {
             throw new Error("Overlay layout nodes are missing");
@@ -234,8 +232,7 @@ test("overlay layout stays within portrait viewport width", async ({
 
         const bgRect = bg.getBoundingClientRect();
         const statsRect = stats.getBoundingClientRect();
-        const otherstatsRect = otherstats.getBoundingClientRect();
-        const playerstatsRect = playerstats.getBoundingClientRect();
+        const killbarRect = killbar.getBoundingClientRect();
         const chartsRect = charts.getBoundingClientRect();
 
         return {
@@ -250,17 +247,16 @@ test("overlay layout stays within portrait viewport width", async ({
                 right: statsRect.right,
                 width: statsRect.width,
             },
-            otherstatsRect: {
-                left: otherstatsRect.left,
-                right: otherstatsRect.right,
-                width: otherstatsRect.width,
+            killbarRect: {
+                left: killbarRect.left,
+                right: killbarRect.right,
+                width: killbarRect.width,
             },
             chartsRect: {
                 left: chartsRect.left,
                 right: chartsRect.right,
                 width: chartsRect.width,
             },
-            playerstatsWidth: playerstatsRect.width,
         };
     });
 
@@ -269,15 +265,12 @@ test("overlay layout stays within portrait viewport width", async ({
     expect(metrics.bgRect.right).toBeLessThanOrEqual(metrics.innerWidth + 1);
     expect(metrics.statsRect.left).toBeGreaterThanOrEqual(-1);
     expect(metrics.statsRect.right).toBeLessThanOrEqual(metrics.innerWidth + 1);
-    expect(metrics.otherstatsRect.left).toBeGreaterThanOrEqual(-1);
-    expect(metrics.otherstatsRect.right).toBeLessThanOrEqual(
+    expect(metrics.killbarRect.left).toBeGreaterThanOrEqual(-1);
+    expect(metrics.killbarRect.right).toBeLessThanOrEqual(
         metrics.innerWidth + 1,
     );
     expect(metrics.chartsRect.left).toBeGreaterThanOrEqual(-1);
     expect(metrics.chartsRect.right).toBeLessThanOrEqual(
-        metrics.innerWidth + 1,
-    );
-    expect(metrics.playerstatsWidth).toBeLessThanOrEqual(
         metrics.innerWidth + 1,
     );
 });

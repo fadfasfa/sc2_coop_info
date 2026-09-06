@@ -72,6 +72,8 @@ export type ConfigRouteMockOptions = {
     readonly folderPickerResponses?: ConfigRouteFolderPickerResponses;
     readonly tabResponses?: ConfigRouteTabResponses;
     readonly monitorCatalog?: readonly ConfigRouteMonitor[];
+    readonly liveApplyDelayMs?: number;
+    readonly sessionStorageKey?: string;
 };
 
 type ConfigRouteMockInitPayload = {
@@ -105,6 +107,11 @@ export async function installTauriMock(
             ...((overrides && overrides.settings) || {}),
         };
         let activeSettings = cloneJson(settings);
+        if (overrides.sessionStorageKey) {
+            const saved = sessionStorage.getItem(overrides.sessionStorageKey);
+            if (saved) settings = JSON.parse(saved) as TestJsonObject;
+            activeSettings = cloneJson(settings);
+        }
         const randomizerCatalog: TestJsonObject =
             overrides.randomizerCatalog || {
                 commander_mastery: {
@@ -351,6 +358,14 @@ export async function installTauriMock(
                 }
                 if (command === "config_update") {
                     const nextSettings = request?.settings || activeSettings;
+                    if (
+                        request?.persist === false &&
+                        overrides.liveApplyDelayMs
+                    ) {
+                        await new Promise((resolve) =>
+                            setTimeout(resolve, overrides.liveApplyDelayMs),
+                        );
+                    }
                     activeSettings = cloneJson(nextSettings);
                     if (request?.persist === false) {
                         window.__SCO_CONFIG_APPLY_REQUESTS__.push(
@@ -360,6 +375,11 @@ export async function installTauriMock(
                         settings = cloneJson(nextSettings);
                         activeSettings = cloneJson(nextSettings);
                         window.__SCO_CONFIG_SAVE_REQUESTS__.push(settings);
+                        if (overrides.sessionStorageKey)
+                            sessionStorage.setItem(
+                                overrides.sessionStorageKey,
+                                JSON.stringify(settings),
+                            );
                     }
                     return {
                         status: "ok",

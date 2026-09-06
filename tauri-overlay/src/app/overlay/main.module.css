@@ -3,6 +3,87 @@
         "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Segoe UI",
         sans-serif;
     overflow-wrap: anywhere;
+    --overlay-horizontal-unit: min(1vh, calc((100vw - 4vh) / 48));
+    --overlay-stats-width: min(48vh, calc(100vw - 4vh));
+}
+
+/* Chinese labels need real rows: the legacy absolute offsets put the map
+   and commanders in the same line and cannot accommodate wrapped text. */
+.overlayPageRoot:lang(zh-CN) :global(#name1),
+.overlayPageRoot:lang(zh-CN) :global(#name2) {
+    display: inline-block;
+    position: static;
+    width: 50%;
+    height: auto;
+    line-height: 1.2;
+    white-space: normal;
+    vertical-align: top;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#name2) {
+    text-align: right;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#mutators) {
+    position: static;
+    margin-bottom: 0.6vh;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#com1),
+.overlayPageRoot:lang(zh-CN) :global(#com2) {
+    position: static;
+    width: 50%;
+    max-width: 50%;
+    height: auto;
+    min-height: 1.4em;
+    line-height: 1.4;
+    white-space: normal;
+    flex-wrap: wrap;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.commander-level-name) {
+    overflow: visible;
+    white-space: normal;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#map),
+.overlayPageRoot:lang(zh-CN) :global(#record),
+.overlayPageRoot:lang(zh-CN) :global(#brutal) {
+    position: static;
+    width: 100%;
+    height: auto;
+    line-height: 1.4;
+    white-space: normal;
+    text-align: center;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#apm1),
+.overlayPageRoot:lang(zh-CN) :global(#apm2) {
+    display: inline-block;
+    position: static;
+    width: 50%;
+    height: auto;
+    line-height: 1.4;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#apm2) {
+    text-align: right;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.commstats) {
+    margin-top: 1.5vh;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.prestige),
+.overlayPageRoot:lang(zh-CN) :global(.mastery) {
+    height: auto;
+    line-height: 1.25;
+    white-space: normal;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.units-table thead th) {
+    line-height: 1.25;
+    white-space: normal;
 }
 
 @font-face {

@@ -74,6 +74,24 @@
     width: 100%;
 }
 
+@media (max-width: 600px) {
+    .configPage:lang(zh-CN) .statsTopGrid > :global(.MuiGrid-root) {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .configPage:lang(zh-CN) .statsCheckCols,
+    .configPage:lang(zh-CN) .statsFiltersSide,
+    .configPage:lang(zh-CN) .statsSplit,
+    .configPage:lang(zh-CN) .statsCommandersSplit {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .configPage:lang(zh-CN) .statsSideActions {
+        grid-column: auto;
+    }
+}
+
 .configPage .statsCheckCols {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -614,6 +632,17 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+@media (max-width: 600px) {
+    .configPage .mainSettingsColumn:lang(zh-CN) {
+        width: 100%;
+        min-inline-size: 0;
+    }
+
+    .configPage .mainSettingsContent:lang(zh-CN) > .card {
+        row-gap: 12px;
+    }
 }
 
 .configPage .mainSettingsTop {

@@ -321,7 +321,7 @@ export default function SettingsTab({
                 .join(" ")}
         >
             <Grid container className={styles.card}>
-                <Grid size={4}>
+                <Grid size={4} className={styles.mainSettingsColumn}>
                     <div className={styles.mainSettingsTop}>
                         <div className={styles.mainSettingsGroups}>
                             <section className={styles.mainSettingsGroup}>
@@ -635,7 +635,7 @@ export default function SettingsTab({
                         </div>
                     </div>
                 </Grid>
-                <Grid size={4}>
+                <Grid size={4} className={styles.mainSettingsColumn}>
                     <div className={styles.mainSettingsTop}>
                         <div className={styles.mainSettingsGroups}>
                             <div className={styles.mainSettingsGroup}>
@@ -858,7 +858,7 @@ export default function SettingsTab({
                         </div>
                     </div>
                 </Grid>
-                <Grid size={4}>
+                <Grid size={4} className={styles.mainSettingsColumn}>
                     <div className={styles.mainSettingsGroups}>
                         <div
                             className={[

@@ -167,3 +167,34 @@
 .performanceCpuValue.isLow {
     color: var(--performance-muted);
 }
+
+@media (max-width: 600px) {
+    .performanceOverlayRoot:lang(zh-CN) {
+        --performance-gap: 16px;
+        padding: 10px;
+    }
+
+    .performanceOverlayRoot:lang(zh-CN) .performanceStatGrid,
+    .performanceOverlayRoot:lang(zh-CN) .performanceProcessCpu,
+    .performanceOverlayRoot:lang(zh-CN) .performanceCpuRow {
+        column-gap: 6px;
+    }
+
+    .performanceOverlayRoot:lang(zh-CN) .performanceColumn h1,
+    .performanceOverlayRoot:lang(zh-CN) .performanceCpuList h2 {
+        font-size: 20px;
+    }
+
+    .performanceOverlayRoot:lang(zh-CN) .performanceLabel,
+    .performanceOverlayRoot:lang(zh-CN) .performanceSectionTitle,
+    .performanceOverlayRoot:lang(zh-CN) .performanceValue,
+    .performanceOverlayRoot:lang(zh-CN) .performanceCpuLabel,
+    .performanceOverlayRoot:lang(zh-CN) .performanceCpuValue {
+        font-size: 15px;
+    }
+
+    .performanceOverlayRoot:lang(zh-CN) .performanceProcessCpu,
+    .performanceOverlayRoot:lang(zh-CN) .performanceCpuList {
+        margin-top: 20px;
+    }
+}
