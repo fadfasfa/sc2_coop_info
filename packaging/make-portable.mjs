@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
+import { assertPublicSources, publicEditorSettings } from './source-policy.mjs';
 
 const [sourceArg, packagingArg, outputArg] = process.argv.slice(2);
 assert(sourceArg && packagingArg && outputArg, 'Expected source, packaging repository and NEW output directory');
@@ -19,7 +20,10 @@ assert.equal(target.portable, true);
 const binary = path.join(source, 'target/release/sco-tauri-overlay.exe');
 assert(fs.existsSync(binary), 'Missing Windows EXE');
 const tracked = git(source, ['ls-files', '-z']).split('\0').filter(Boolean);
-assert(tracked.every(p => !/\.SC2Replay$|(^|\/)(\.env(?:\..*)?|auth\.json|settings\.json|accounts\.json)$/i.test(p)), 'Private fixture/config in source');
+assertPublicSources(tracked, tracked.includes(publicEditorSettings) ? {
+  expected: git(source, ['rev-parse', `${target.upstreamBase}:${publicEditorSettings}`]),
+  actual: git(source, ['hash-object', `--path=${publicEditorSettings}`, publicEditorSettings]),
+} : {});
 fs.mkdirSync(output, { recursive: true });
 fs.copyFileSync(binary, path.join(output, 'SC2_Coop_Info_ZhCN_Portable.exe'));
 fs.cpSync(path.join(source, 's2coop-analyzer/data'), path.join(output, 'data'), { recursive: true });

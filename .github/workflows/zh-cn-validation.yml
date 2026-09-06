@@ -18,6 +18,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Packaging source allowlist regression
+        run: node --test packaging/source-policy.test.mjs
       - id: target
         shell: bash
         run: |
@@ -122,6 +124,7 @@ jobs:
         run: |
           set -o pipefail
           git diff --exit-code
+          node --test .packaging-source/packaging/source-policy.test.mjs 2>&1 | tee validation-evidence/package-source-policy.txt
           node .packaging-source/packaging/apply-portable.mjs "$GITHUB_WORKSPACE" 2>&1 | tee validation-evidence/portable-apply.txt
           git diff --check
           PORTABLE_QA_SOURCE="$GITHUB_WORKSPACE" node --test .packaging-source/packaging/portable-contract.test.mjs 2>&1 | tee validation-evidence/portable-contract.txt
