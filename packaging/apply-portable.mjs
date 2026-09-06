@@ -117,7 +117,8 @@ delete config.plugins.updater;
 config.bundle.active = false;
 config.bundle.createUpdaterArtifacts = false;
 files.set(configPath, JSON.stringify(config, null, 4)+'\n');
-files.set(rust+'portable_runtime.rs', fs.readFileSync(path.join(here, 'portable_runtime.rs'), 'utf8'));
+files.set(rust+'portable_runtime.rs', fs.readFileSync(path.join(here, 'portable_runtime.rs'), 'utf8')+'\n#[cfg(test)]\n#[path = "portable_qa_tests.rs"]\nmod qa_tests;\n');
+files.set(rust+'portable_qa_tests.rs', fs.readFileSync(path.join(here, 'portable_qa_tests.rs'), 'utf8'));
 for (const [file, text] of files) {
   assert(!/downloadAndInstall|download_and_install|\.autolaunch\(|delete_value\(/.test(text), `External side effect remains in ${file}`);
 }

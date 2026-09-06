@@ -23,12 +23,19 @@ fn checked_directory(path: &Path) -> Result<(), String> {
 }
 
 fn prepare() -> Result<PathBuf, String> {
-    use std::io::Write;
     if std::env::var_os("WEBVIEW2_USER_DATA_FOLDER").is_some() {
         return Err("WEBVIEW2_USER_DATA_FOLDER override is set; refusing a non-portable WebView profile".into());
     }
     let executable = std::env::current_exe().map_err(|e| e.to_string())?;
     let root = executable.parent().ok_or("Executable has no parent")?;
+    prepare_at(root)
+}
+
+fn prepare_at(root: &Path) -> Result<PathBuf, String> {
+    use std::io::Write;
+    if !root.is_absolute() {
+        return Err("Portable executable directory must be absolute".into());
+    }
     // Do not follow directory junctions or symlinks into another installation.
     for ancestor in root.ancestors() {
         checked_directory(ancestor)?;

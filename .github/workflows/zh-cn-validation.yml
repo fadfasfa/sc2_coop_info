@@ -41,6 +41,7 @@ jobs:
         with:
           ref: ${{ needs.target.outputs.sha }}
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -93,6 +94,13 @@ jobs:
         run: |
           set -o pipefail
           npm run typecheck:tests 2>&1 | tee ../validation-evidence/typecheck-tests.txt
+      - name: Chinese resource and identity regression
+        if: ${{ !cancelled() }}
+        working-directory: tauri-overlay
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:zh-cn 2>&1 | tee ../validation-evidence/chinese-resources.txt
       - name: Browser regression
         if: ${{ !cancelled() }}
         working-directory: tauri-overlay
@@ -116,16 +124,17 @@ jobs:
           git diff --exit-code
           node .packaging-source/packaging/apply-portable.mjs "$GITHUB_WORKSPACE" 2>&1 | tee validation-evidence/portable-apply.txt
           git diff --check
+          PORTABLE_QA_SOURCE="$GITHUB_WORKSPACE" node --test .packaging-source/packaging/portable-contract.test.mjs 2>&1 | tee validation-evidence/portable-contract.txt
       - name: Portable isolation verification and EXE build (no bundler)
         if: ${{ success() && runner.os == 'Windows' && needs.target.outputs.portable == 'true' }}
         working-directory: tauri-overlay
         shell: bash
         run: |
           set -o pipefail
-          cargo test --locked -p sco-tauri-overlay --lib portable_runtime::tests -- --nocapture 2>&1 | tee ../validation-evidence/portable-rust-tests.txt
+          cargo test --locked -p sco-tauri-overlay --lib portable_runtime:: -- --nocapture 2>&1 | tee ../validation-evidence/portable-rust-tests.txt
           npm run typecheck 2>&1 | tee ../validation-evidence/portable-typecheck.txt
           npm run typecheck:tests 2>&1 | tee ../validation-evidence/portable-typecheck-tests.txt
-          npm run tauri -- build --no-bundle -- --locked 2>&1 | tee ../validation-evidence/portable-build.txt
+          npm run tauri -- build --no-bundle --no-sign -- --locked 2>&1 | tee ../validation-evidence/portable-build.txt
       - name: Package exact binary, data, licenses, source and hashes
         if: ${{ success() && runner.os == 'Windows' && needs.target.outputs.portable == 'true' }}
         shell: pwsh
@@ -148,7 +157,7 @@ jobs:
         if: ${{ !cancelled() }}
         shell: bash
         run: |
-          node -e 'const fs=require("fs"); const p="validation-evidence/rust-tests.txt"; const s=fs.existsSync(p)?fs.readFileSync(p,"utf8"):"Rust tests did not run"; fs.writeFileSync("validation-evidence/real-replay-skips.txt",s.split(/\r?\n/).filter(l=>/skipping|ignored|did not run/i.test(l)).join("\n"));'
+          node -e 'const fs=require("fs"); const p="validation-evidence/rust-tests.txt"; const s=(fs.existsSync(p)?fs.readFileSync(p,"utf8"):"Rust tests did not run").replace(/\u001b\[[0-9;]*m/g,""); let suite="unknown"; const rows=[]; for(const line of s.split(/\r?\n/)){const match=line.match(/Running\s+(.*?)\s+\(/); if(match) suite=match[1]; if(/skipping|did not run|\.\.\.\s+ignored\b|\b[1-9]\d* ignored;/i.test(line)) rows.push(suite+"\t"+line.trim());} fs.writeFileSync("validation-evidence/real-replay-skips.txt",rows.join("\n"));'
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

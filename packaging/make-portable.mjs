@@ -26,7 +26,7 @@ fs.cpSync(path.join(source, 's2coop-analyzer/data'), path.join(output, 'data'), 
 fs.copyFileSync(path.join(source, 'LICENSE'), path.join(output, 'LICENSE'));
 fs.copyFileSync(path.join(packaging, 'packaging/PORTABLE-README.md'), path.join(output, 'README.md'));
 // Exact patched source, including the otherwise-untracked safety module.
-for (const file of [...tracked, 'tauri-overlay/src-tauri/src/portable_runtime.rs']) {
+for (const file of [...tracked, 'tauri-overlay/src-tauri/src/portable_runtime.rs', 'tauri-overlay/src-tauri/src/portable_qa_tests.rs']) {
   const destination = path.join(output, 'source', file);
   fs.mkdirSync(path.dirname(destination), { recursive: true });
   fs.copyFileSync(path.join(source, file), destination);
@@ -45,6 +45,8 @@ const manifest = {
   tools: Object.fromEntries([['node', process.execPath], ['rustc', 'rustc'], ['cargo', 'cargo']].map(([name, exe]) => [name, execFileSync(exe, ['--version'], { encoding: 'utf8' }).trim()])),
   files: {},
 };
+manifest.tools.npm = fs.readFileSync(path.join(source, 'validation-evidence/identity.txt'), 'utf8').trim().split(/\r?\n/)[2];
+manifest.tools.tauriCli = JSON.parse(fs.readFileSync(path.join(source, 'tauri-overlay/node_modules/@tauri-apps/cli/package.json'), 'utf8')).version;
 function hashTree(folder, relative = '') {
   for (const entry of fs.readdirSync(folder, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
     assert(!entry.isSymbolicLink(), 'No link-like package content');
