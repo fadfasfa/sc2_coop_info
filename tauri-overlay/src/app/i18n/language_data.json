@@ -2665,6 +2665,26 @@
         "ko": "무작위 선택을 생성했습니다",
         "zh-CN": "随机选择已生成"
     },
+    "ui_status_shortcut_created": {
+        "en": "Desktop shortcut created",
+        "ko": "바탕 화면 바로 가기가 생성되었습니다",
+        "zh-CN": "已创建桌面快捷方式"
+    },
+    "ui_status_shortcut_unchanged": {
+        "en": "Desktop shortcut already up to date",
+        "ko": "바탕 화면 바로 가기가 이미 최신 상태입니다",
+        "zh-CN": "桌面快捷方式已是最新，无需更新"
+    },
+    "ui_status_shortcut_replaced": {
+        "en": "Desktop shortcut replaced",
+        "ko": "바탕 화면 바로 가기가 교체되었습니다",
+        "zh-CN": "已替换桌面快捷方式"
+    },
+    "ui_status_shortcut_failed": {
+        "en": "Desktop shortcut failed",
+        "ko": "바탕 화면 바로 가기 작업에 실패했습니다",
+        "zh-CN": "桌面快捷方式操作失败"
+    },
     "ui_status_shortcut_unavailable": {
         "en": "Create desktop shortcut is not available in this build",
         "ko": "이 빌드에서는 바탕 화면 바로 가기 생성을 사용할 수 없습니다",

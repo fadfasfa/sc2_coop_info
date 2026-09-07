@@ -35,6 +35,9 @@ export function renderStatusMessage(
 // Only recognized application chrome is localized. Unknown diagnostics, file
 // paths and logger details remain verbatim, and the backend payload is untouched.
 const BACKEND_STATUS_KEYS: Record<string, string> = {
+    "Desktop shortcut created": "ui_status_shortcut_created",
+    "Desktop shortcut already up to date": "ui_status_shortcut_unchanged",
+    "Desktop shortcut replaced": "ui_status_shortcut_replaced",
     "Action processed": "ui_status_action_completed",
     "Overlay visibility toggled": "ui_status_overlay_toggled",
     "Overlay shown": "ui_status_overlay_shown",
@@ -93,6 +96,17 @@ export function localizeBackendStatus(
     if (languageManager.currentLanguage() === "en") return message;
     const key = BACKEND_STATUS_KEYS[message];
     if (key) return languageManager.translate(key);
+    const shortcutFailure = /^Desktop shortcut failed: (.+)$/s.exec(message);
+    if (shortcutFailure) {
+        return renderStatusMessage(
+            statusMessage(
+                "ui_status_shortcut_failed",
+                undefined,
+                shortcutFailure[1],
+            ),
+            languageManager,
+        );
+    }
 
     const phase = /^(Simple|Detailed) analysis: ([a-z ]+)\.$/.exec(message);
     if (phase && ANALYSIS_PHASE_KEYS[phase[2]]) {

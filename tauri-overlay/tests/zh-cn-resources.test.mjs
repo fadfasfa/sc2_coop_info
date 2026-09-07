@@ -126,13 +126,13 @@ for (const file of files)
             }
         assert(translations(after, file) > 0);
     });
-test("all 1,365 existing text values plus 85 new UI values are translated", () => {
+test("all 1,365 existing text values plus 89 new UI values are translated", () => {
     assert.equal(
         files.reduce(
             (count, file) => count + translations(read(file), file),
             0,
         ),
-        1450,
+        1454,
     );
 });
 test("mastery and prestige index spot checks retain semantic pairing", () => {

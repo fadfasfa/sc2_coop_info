@@ -450,21 +450,74 @@ impl AppSettings {
 struct AppSettingsOps;
 
 impl AppSettingsOps {
+    fn language_from_locale(locale: &str) -> String {
+        let normalized = locale.trim().replace('_', "-").to_ascii_lowercase();
+        let subtags = normalized.split('-').collect::<Vec<_>>();
+        let is_simplified_chinese = subtags.first() == Some(&"zh")
+            && !subtags.contains(&"hant")
+            && matches!(subtags.get(1).copied(), Some("cn" | "sg" | "hans"));
+        if is_simplified_chinese {
+            return "zh-CN".to_string();
+        }
+
+        locale
+            .split('-')
+            .next()
+            .filter(|language| !language.is_empty())
+            .unwrap_or("en")
+            .to_string()
+    }
+
     fn get_system_language() -> String {
-        let default = "en";
-        let locale = sys_locale::get_locale();
+        sys_locale::get_locale()
+            .as_deref()
+            .map(Self::language_from_locale)
+            .unwrap_or_else(|| "en".to_string())
+    }
+}
 
-        let language = if let Some(locale) = locale.as_ref() {
-            locale
-                .split("-")
-                .next()
-                .filter(|language| !language.is_empty())
-                .unwrap_or(default)
-        } else {
-            "en"
-        };
+#[cfg(test)]
+mod locale_language_tests {
+    use super::AppSettingsOps;
 
-        language.to_string()
+    #[test]
+    fn simplified_chinese_locales_use_zh_cn() {
+        for locale in [
+            "zh-CN",
+            "zh-SG",
+            "zh-Hans",
+            "zh-Hans-CN",
+            "ZH_cn",
+            "Zh_hAnS_sG",
+        ] {
+            assert_eq!(AppSettingsOps::language_from_locale(locale), "zh-CN");
+        }
+    }
+
+    #[test]
+    fn explicit_traditional_chinese_is_not_forced_to_simplified() {
+        for locale in [
+            "zh-Hant",
+            "zh-Hant-TW",
+            "zh-Hant-CN",
+            "zh_Hant_CN",
+            "zh_TW",
+        ] {
+            assert_ne!(AppSettingsOps::language_from_locale(locale), "zh-CN");
+        }
+    }
+
+    #[test]
+    fn other_locales_preserve_existing_language_extraction() {
+        for (locale, expected) in [
+            ("en-US", "en"),
+            ("ko-KR", "ko"),
+            ("fr-FR", "fr"),
+            ("EN_us", "EN_us"),
+            ("", "en"),
+        ] {
+            assert_eq!(AppSettingsOps::language_from_locale(locale), expected);
+        }
     }
 }
 

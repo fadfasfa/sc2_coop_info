@@ -1,5 +1,25 @@
 # 简体中文验证记录 / zh-CN validation
 
+## 2026-09-07：个人 fork Draft PR 收口
+
+目标为 `fadfasfa/sc2_coop_info:codex/zh-cn` → `fadfasfa/sc2_coop_info:main`，由仓库所有者审查、手动合并；不向原作者仓库发布 PR，不合并个人便携包装分支。以下为本轮复验，下方历史结果保留，不混作当前提交验收。
+
+- `npm run typecheck`、`npm run typecheck:tests`、`npm run build` 通过；构建仅保留大 chunk 警告。
+- `npm run test:zh-cn`：10/10 通过，包括原英文／韩文值、canonical 顺序、资源和排程保真；新增快捷方式反馈后共有 1,454 个中文文本值。
+- `npm run test:config -- --workers=2`：118/118 通过，包含快捷方式创建／幂等／替换／失败／不可用的中英文反馈、设置页与中文悬浮窗回归。测试使用合成数据和 Tauri mock，不代表原生动作或真人对局通过。
+- 在 Windows PowerShell 中由 `& .\tauri-overlay\tests\desktop-shortcut-windows.ps1` 调用 Rust 内嵌的实际生产脚本，10 项检查通过：已知桌面只读解析、四字段、中文及特殊字符、幂等读取、既有备份保留、锁定链接／备份失败保护、回滚备份保留及损坏旧链接拒绝且不写入。测试只创建独立临时 fixture，结束后删除该 fixture，不写真实桌面。此测试不执行 Rust 编排代码或新 EXE。
+- 独立快捷方式审查指出崩溃后残留文件锁的问题，已改用内核命名 mutex；实际脚本测试还发现 PowerShell 5 的 null 参数转换使回滚失败，已改用 `[NullString]::Value` 并重跑通过。mutex 与 Rust 编排仍待原生编译测试。
+- 本机 PATH 与标准用户 Rust 安装位置均没有可用 Cargo/Rust 工具链；未宣称当前 Rust 检查、工作区测试或 Windows 新包构建通过。
+- 独立差异审查发现新安装的 `zh-CN` 系统语言被截断为 `zh` 并回退英文；已按完整 locale 修正简体中文默认选择，保留用户已保存设置及其他语言行为，并新增三组 Rust 纯函数测试（本机未运行）。
+- 只读复核 [Actions 34110738466](https://github.com/fadfasfa/sc2_coop_info/actions/runs/34110738466)：Windows job 被取消；macOS/Linux 的 Rust 测试因 `capture_focused_window_visible_region` 的 `E0624` 失败。该运行绑定旧贡献 `24a0205`，不能用于当前快捷方式修复验收。
+- 现有便携包 manifest 仍绑定 `f195a5a6`；未用旧包冒充当前源码产物，也未启动非隔离 EXE、读取原版配置或真实录像。
+- 旧包只读完整性复核为 666/666 文件哈希匹配；既有桌面入口仍指向该旧包。这不是本次快捷方式代码的新包启动验收。
+- 当前 PR 必须保留 Draft：最终 SHA 的 Rust/native、便携包 manifest/hash/启动路径、双屏/DPI/拔插和普通合作／周突变真人验收未闭环。49 个暂译项和历史跳过项仍按下文披露。
+
+English: This review is for the owner's fork only. All 118 local browser tests, both TypeScript checks, the frontend build and 10 resource-contract tests passed. Native Rust, a new isolated package and real-game acceptance remain pending; the PR is a draft, not a release-ready claim. Personal packaging and private user data are excluded.
+
+## 历史验证记录
+
 更新：2026-09-06。当前结论：本地前端与资源回归通过；跨平台 Rust 自动门和 Windows 原生／真人试用尚未完成，不能据此宣称完整验收或提交稳定 PR。
 
 最新远端复核：[Actions 34004188099](https://github.com/fadfasfa/sc2_coop_info/actions/runs/34004188099) 的 macOS 对贡献 `0af667c8c0cf1414ed7827cbebb9acb30e1f59c2` 得到 **101/105 Playwright 通过、4 项失败**。失败是英文 commander mastery 分布列表横向溢出、16 logical cores 性能窗 DPR 1／1.5 两项中文累计行裁切，以及 800px 中文设置页 `scrollWidth=802 > 801`。原断言保留，修复后的同平台复验仍未完成，未重跑通过前不能关闭；下文 105/105 仅为本地 Windows 浏览器结果，不代表三平台 GO。
