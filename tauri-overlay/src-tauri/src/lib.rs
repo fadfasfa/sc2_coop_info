@@ -209,3 +209,4 @@ impl TauriOverlayApp {
             .expect("error while running tauri");
     }
 }
+mod desktop_shortcut;
