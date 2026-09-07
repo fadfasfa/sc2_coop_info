@@ -204,7 +204,13 @@ for (const width of [480, 1000])
         });
         await emitOverlay(page, "sco://overlay-replay-payload", payload);
         await expect(page.locator("#stats")).toBeVisible();
-        const english = await page.locator("#stats").innerText();
+        const replayText = () =>
+            page.locator("#stats").evaluate((stats) => {
+                const clone = stats.cloneNode(true) as HTMLElement;
+                clone.querySelector("#session")?.remove();
+                return clone.textContent ?? "";
+            });
+        const english = await replayText();
         await emitOverlay(page, "sco://overlay-language-preview", {
             language: "zh-CN",
         });
@@ -214,7 +220,10 @@ for (const width of [480, 1000])
         await expect(
             page.getByText("Unknown QA Unit", { exact: true }),
         ).toBeVisible();
-        const chinese = await page.locator("#stats").innerText();
+        // The Chinese session footer is intentionally part of the replay
+        // document flow; it is not replay payload data and is excluded from
+        // this language-invariance comparison.
+        const chinese = await replayText();
         expect(chinese.match(/[0-9]+(?:\.[0-9]+)?/g)).toEqual(
             english.match(/[0-9]+(?:\.[0-9]+)?/g),
         );
@@ -296,6 +305,134 @@ for (const width of [480, 1000])
         ).toEqual([]);
         expect(text.horizontalOverflow).toEqual([]);
     });
+
+test.describe("Chinese replay flow layout", () => {
+    for (const viewport of [
+        { width: 1280, height: 720 },
+        { width: 1920, height: 1080 },
+        { width: 480, height: 720 },
+    ]) {
+        test(`session footer stays below long enemy/unit content at ${viewport.width}x${viewport.height}`, async ({
+            page,
+        }) => {
+            await page.setViewportSize(viewport);
+            await installZhOverlayMock(page, "zh-CN");
+            await page.goto("/#/overlay");
+            await page.addStyleTag({
+                content: "html,body { background: #20252b !important; }",
+            });
+
+            const longUnit =
+                "超长中文单位名称用于验证表格行高不会覆盖相邻统计内容";
+            const payload: OverlayReplayPayload = {
+                file: "fixtures/qa-only-long.SC2Replay",
+                map_name: "一张名称很长的中文合作地图用于验证正常文档流布局",
+                main: "中文主玩家名称很长不会覆盖右侧玩家",
+                ally: "中文队友名称很长不会覆盖左侧玩家",
+                mainCommander: "Raynor",
+                allyCommander: "Kerrigan",
+                mainAPM: 123,
+                allyAPM: 87,
+                mainkills: 100,
+                allykills: 200,
+                result: "Victory",
+                difficulty: "Brutal",
+                enemy: "Terran",
+                length: 1000,
+                "B+": 0,
+                weekly: false,
+                extension: false,
+                mainCommanderLevel: 15,
+                allyCommanderLevel: 15,
+                mainMasteryLevel: 90,
+                allyMasteryLevel: 90,
+                mainMasteries: [30, 30, 30, 30, 30, 30],
+                allyMasteries: [30, 30, 30, 30, 30, 30],
+                mainUnits: Object.fromEntries(
+                    Array.from({ length: 5 }, (_, index) => [
+                        `${longUnit}${index + 1}`,
+                        [index + 1, index, 20 + index, 0.2],
+                    ]),
+                ),
+                allyUnits: Object.fromEntries(
+                    Array.from({ length: 5 }, (_, index) => [
+                        `${longUnit}队友${index + 1}`,
+                        [index + 1, index, 30 + index, 0.3],
+                    ]),
+                ),
+                amon_units: Object.fromEntries(
+                    Array.from({ length: 7 }, (_, index) => [
+                        `${longUnit}敌军${index + 1}`,
+                        [index + 1, index, 40 + index, 0.4],
+                    ]),
+                ),
+                mainIcons: {},
+                allyIcons: {},
+                mutators: ["Black Death"],
+                bonus: [],
+                mainPrestige: "Renegade Commander",
+                allyPrestige: "Queen of Blades",
+                comp: "Terran",
+                Victory: 3,
+                Defeat: 1,
+            };
+
+            await emitOverlay(page, "sco://overlay-init-colors-duration", {
+                language: "zh-CN",
+                duration: 120,
+                show_charts: false,
+                show_session: true,
+                session_victory: 12,
+                session_defeat: 4,
+            });
+            await emitOverlay(page, "sco://overlay-replay-payload", payload);
+            await expect(page.locator("#session")).toBeVisible();
+            await expect(page.locator("#morestats")).toHaveCSS("display", "grid");
+            await page.waitForTimeout(1100);
+
+            const geometry = await page.evaluate(() => {
+                const box = (selector: string) => {
+                    const element = document.querySelector(selector);
+                    if (!element) throw new Error(`Missing ${selector}`);
+                    const rect = element.getBoundingClientRect();
+                    return {
+                        left: rect.left,
+                        right: rect.right,
+                        top: rect.top,
+                        bottom: rect.bottom,
+                    };
+                };
+                return {
+                    session: box("#session"),
+                    amon: box("#amon"),
+                    amonUnits: box("#CMunits3"),
+                    stats: box("#stats"),
+                };
+            });
+            expect(geometry.session.top).toBeGreaterThanOrEqual(
+                geometry.amon.bottom - 1,
+            );
+            expect(geometry.session.top).toBeGreaterThanOrEqual(
+                geometry.amonUnits.bottom - 1,
+            );
+            expect(geometry.session.right).toBeLessThanOrEqual(
+                viewport.width + 1,
+            );
+            expect(geometry.session.left).toBeGreaterThanOrEqual(-1);
+            expect(geometry.stats.bottom).toBeLessThanOrEqual(
+                viewport.height + 1,
+            );
+
+            const text = await textGeometry(
+                page,
+                "#session, #map, #com1, #com2, #CMname1, #CMname2, #CMname3, #CMtalent1, #CMtalent2, #comp, .units-table th, .units-table td",
+            );
+            expect(text.collisions).toEqual([]);
+            expect(text.horizontalOverflow).toEqual([]);
+            expect(text.verticalOverflow).toEqual([]);
+        });
+    }
+});
 
 for (const cores of [16, 32])
     for (const deviceScaleFactor of [1, 1.5]) {

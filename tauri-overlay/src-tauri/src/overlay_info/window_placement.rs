@@ -1,14 +1,28 @@
 use super::*;
 
 impl OverlayInfoOps {
-    fn selected_monitor_from_settings<R: Runtime>(
+    fn target_monitor_from_runtime<R: Runtime>(
         window: &tauri::WebviewWindow<R>,
         settings_value: &AppSettings,
     ) -> Result<monitor_settings::MonitorDescriptor, String> {
-        monitor_settings::MonitorSettingsOps::selected_monitor_for_window(
-            window,
+        let monitors = monitor_settings::MonitorSettingsOps::monitor_descriptors(window);
+        let state = window.state::<BackendState>();
+        let current_window_rect = crate::ActiveWindowDetector::sc2_window_rect_for_placement()
+            .ok()
+            .flatten()
+            .map(|rect| (rect.x(), rect.y(), rect.width(), rect.height()));
+        if let Some(current) = current_window_rect.and_then(|rect|
+            monitor_settings::MonitorSettingsOps::monitor_for_window_rect(&monitors, rect))
+        {
+            state.set_latest_sc2_monitor(current);
+        }
+        monitor_settings::MonitorSettingsOps::target_monitor(
+            &monitors,
+            current_window_rect,
+            state.latest_sc2_monitor().as_ref(),
             settings_value.overlay_placement().monitor(),
         )
+        .ok_or_else(|| "No monitors detected".to_string())
     }
 }
 
@@ -202,19 +216,21 @@ impl OverlayInfoOps {
 }
 
 impl OverlayInfoOps {
-    pub fn apply_overlay_placement(window: &tauri::WebviewWindow) -> Result<(), String> {
+    pub fn apply_overlay_placement<R: Runtime>(
+        window: &tauri::WebviewWindow<R>,
+    ) -> Result<(), String> {
         let state = window.state::<BackendState>();
         OverlayInfoOps::apply_overlay_placement_from_settings(window, &state.read_settings_memory())
     }
 }
 
 impl OverlayInfoOps {
-    pub fn apply_overlay_placement_from_settings(
-        window: &tauri::WebviewWindow,
+    pub fn apply_overlay_placement_from_settings<R: Runtime>(
+        window: &tauri::WebviewWindow<R>,
         settings_value: &AppSettings,
     ) -> Result<(), String> {
         let settings = settings_value.overlay_placement();
-        let selected = OverlayInfoOps::selected_monitor_from_settings(window, settings_value)?;
+        let selected = OverlayInfoOps::target_monitor_from_runtime(window, settings_value)?;
         let (size, _) =
             OverlayInfoOps::overlay_window_bounds_for_monitor(OverlayWindowBoundsInput::new(
                 OverlayMonitorGeometry::new(
@@ -247,7 +263,9 @@ impl OverlayInfoOps {
 }
 
 impl OverlayInfoOps {
-    pub fn stabilize_overlay_bounds(window: &tauri::WebviewWindow) -> Result<(), String> {
+    pub fn stabilize_overlay_bounds<R: Runtime>(
+        window: &tauri::WebviewWindow<R>,
+    ) -> Result<(), String> {
         let state = window.state::<BackendState>();
         OverlayInfoOps::stabilize_overlay_bounds_from_settings(
             window,
@@ -257,12 +275,12 @@ impl OverlayInfoOps {
 }
 
 impl OverlayInfoOps {
-    fn stabilize_overlay_bounds_from_settings(
-        window: &tauri::WebviewWindow,
+    fn stabilize_overlay_bounds_from_settings<R: Runtime>(
+        window: &tauri::WebviewWindow<R>,
         settings_value: &AppSettings,
     ) -> Result<(), String> {
         let settings = settings_value.overlay_placement();
-        let selected = OverlayInfoOps::selected_monitor_from_settings(window, settings_value)?;
+        let selected = OverlayInfoOps::target_monitor_from_runtime(window, settings_value)?;
         let (target_size, _) =
             OverlayInfoOps::overlay_window_bounds_for_monitor(OverlayWindowBoundsInput::new(
                 OverlayMonitorGeometry::new(
@@ -286,20 +304,21 @@ impl OverlayInfoOps {
             window
                 .set_size(target_size)
                 .map_err(|error| format!("Failed to stabilize overlay size: {error}"))?;
-            return Ok(());
         }
 
         let final_position = OverlayInfoOps::overlay_window_position_for_monitor(
             selected.position_x(),
             selected.position_y(),
             selected.width(),
-            current_size.width,
+            target_size.width,
             settings.top_offset(),
             settings.right_offset(),
         );
 
-        window
-            .set_position(final_position)
-            .map_err(|error| format!("Failed to set overlay position: {error}"))
+        if window.outer_position().ok() != Some(final_position) {
+            window.set_position(final_position)
+                .map_err(|error| format!("Failed to set overlay position: {error}"))?;
+        }
+        Ok(())
     }
 }

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
     type CommanderMasteryData,
     LanguageManager,
@@ -81,6 +81,58 @@ export default function GameStatText({
         overlayLanguageManager.englishLabel(value);
     const statsPayload = payload;
     const replayDataActiveRef = useRef<boolean>(false);
+    const statsRef = useRef<HTMLDivElement>(null);
+    const isChinese = language === "zh-CN";
+
+    useLayoutEffect(() => {
+        const stats = statsRef.current;
+        if (stats == null) return;
+
+        // The Chinese replay layout is intentionally in normal flow, so its
+        // measured height is meaningful even when several labels wrap. Keep a
+        // readable floor for unusually short windows instead of allowing the
+        // footer or the last unit rows to be clipped by the overlay viewport.
+        const updateScale = () => {
+            if (!isChinese) {
+                stats.style.removeProperty("--overlay-content-scale");
+                return;
+            }
+
+            stats.style.setProperty("--overlay-content-scale", "1");
+            const rect = stats.getBoundingClientRect();
+            const contentHeight = Math.max(stats.scrollHeight, rect.height, 1);
+            const availableHeight = Math.max(
+                window.innerHeight - rect.top - 1,
+                1,
+            );
+            const scale = Math.max(
+                0.6,
+                Math.min(1, availableHeight / contentHeight),
+            );
+            stats.style.setProperty(
+                "--overlay-content-scale",
+                scale.toFixed(4),
+            );
+        };
+
+        const frame = window.requestAnimationFrame(updateScale);
+        const observer = new ResizeObserver(updateScale);
+        observer.observe(stats);
+        window.addEventListener("resize", updateScale);
+        return () => {
+            window.cancelAnimationFrame(frame);
+            observer.disconnect();
+            window.removeEventListener("resize", updateScale);
+        };
+    }, [
+        isChinese,
+        language,
+        replayModeVisible,
+        sessionDefeatCount,
+        sessionVictoryCount,
+        showSessionStats,
+        statsPayload,
+    ]);
 
     useEffect(() => {
         const active = replayModeVisible && statsPayload != null;
@@ -455,6 +507,7 @@ export default function GameStatText({
         <>
             <div
                 id="stats"
+                ref={statsRef}
                 className="overlay-stats-panel"
                 style={statsPanelStyle}
             >
@@ -546,7 +599,9 @@ export default function GameStatText({
                         id="morestats"
                         style={{
                             display: viewModel?.showReplaySections
-                                ? "block"
+                                ? isChinese
+                                    ? "grid"
+                                    : "block"
                                 : "none",
                         }}
                     >
@@ -674,6 +729,24 @@ export default function GameStatText({
                         </div>
                     </div>
                 ))}
+                {isChinese ? (
+                    <div className="overlay-session-footer">
+                        <div
+                            id="session"
+                            style={{
+                                display:
+                                    replayModeVisible && showSessionStats
+                                        ? "block"
+                                        : "none",
+                                opacity: auxiliaryOverlayState.visible
+                                    ? 0.6
+                                    : 0,
+                            }}
+                        >
+                            {sessionText}
+                        </div>
+                    </div>
+                ) : null}
             </div>
             <div id="otherstats" className="overlay-auxiliary-panel">
                 <div
@@ -684,18 +757,20 @@ export default function GameStatText({
                 >
                     {randomizerText}
                 </div>
-                <div
-                    id="session"
-                    style={{
-                        display:
-                            replayModeVisible && showSessionStats
-                                ? "block"
-                                : "none",
-                        opacity: auxiliaryOverlayState.visible ? 0.6 : 0,
-                    }}
-                >
-                    {sessionText}
-                </div>
+                {!isChinese ? (
+                    <div
+                        id="session"
+                        style={{
+                            display:
+                                replayModeVisible && showSessionStats
+                                    ? "block"
+                                    : "none",
+                            opacity: auxiliaryOverlayState.visible ? 0.6 : 0,
+                        }}
+                    >
+                        {sessionText}
+                    </div>
+                ) : null}
                 <div id="loader" />
             </div>
             <div

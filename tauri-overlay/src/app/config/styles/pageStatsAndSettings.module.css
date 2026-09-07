@@ -712,6 +712,14 @@
     width: 100%;
 }
 
+.configPage .mainRowDescription {
+    margin-top: 5px;
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
 .configPage .mainSettingsRowGrid {
     width: 100%;
 }

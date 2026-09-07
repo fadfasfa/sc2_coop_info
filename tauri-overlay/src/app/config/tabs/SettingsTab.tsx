@@ -1050,6 +1050,15 @@ export default function SettingsTab({
                                                     ),
                                                 )}
                                             </select>
+                                            <div
+                                                className={
+                                                    styles.mainRowDescription
+                                                }
+                                            >
+                                                {t(
+                                                    "ui_settings_monitor_follow_description",
+                                                )}
+                                            </div>
                                         </Grid>
                                     </Grid>
                                 </Grid>

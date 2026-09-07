@@ -494,11 +494,34 @@ impl OverlayInfoOps {
             return Ok(false);
         };
         let state = app.state::<BackendState>();
+        // Capture the SC2 display before checking whether the player overlay
+        // should currently sync. During replay display the player overlay is
+        // hidden, but the last game display remains the preferred placement
+        // target for the post-game statistics window.
+        let sc2_rect = match crate::today_win_bonus::TodayWinBonusDetector::sc2_window_rect() {
+            Ok(rect) => rect,
+            // A transient active-window enumeration failure must not prevent
+            // the post-game window from using its remembered monitor.
+            Err(error) if state.overlay_replay_data_active() => {
+                crate::sco_debug!("[SCO/sc2-overlay] SC2 window unavailable during replay display: {error}");
+                None
+            }
+            Err(error) => return Err(error),
+        };
+        if let Some(rect) = sc2_rect {
+            let monitors = monitor_settings::MonitorSettingsOps::monitor_descriptors(&window);
+            if let Some(monitor) = monitor_settings::MonitorSettingsOps::monitor_for_window_rect(
+                &monitors,
+                (rect.x(), rect.y(), rect.width(), rect.height()),
+            ) {
+                state.set_latest_sc2_monitor(monitor);
+            }
+        }
         if !OverlayInfoOps::sc2_overlay_should_sync(state.overlay_replay_data_active()) {
             let _ = window.hide();
             return Ok(false);
         }
-        let Some(rect) = crate::today_win_bonus::TodayWinBonusDetector::sc2_window_rect()? else {
+        let Some(rect) = sc2_rect else {
             if window.is_visible().unwrap_or(false) && state.sc2_overlay_keep_visible_active() {
                 return Ok(false);
             }
@@ -580,9 +603,7 @@ impl OverlayInfoOps {
             loop {
                 thread::sleep(Duration::from_millis(500));
                 match OverlayInfoOps::sync_sc2_overlay_window_to_sc2(&app) {
-                    Ok(_) => {
-                        last_error = None;
-                    }
+                    Ok(_) => { last_error = None; }
                     Err(error) => {
                         if last_error.as_deref() != Some(error.as_str()) {
                             crate::sco_warn!(
@@ -591,6 +612,13 @@ impl OverlayInfoOps {
                         }
                         last_error = Some(error);
                     }
+                }
+                // Replay placement must not depend on player-overlay focus detection succeeding.
+                if let Some(window) = app.get_webview_window(OVERLAY_WINDOW_LABEL)
+                    && window.is_visible().unwrap_or(false)
+                    && let Err(error) = OverlayInfoOps::stabilize_overlay_bounds(&window)
+                {
+                    crate::sco_debug!("[SCO/overlay] Failed to follow SC2 monitor: {error}");
                 }
             }
         });
@@ -602,6 +630,9 @@ impl OverlayInfoOps {
         OverlayInfoOps::sync_overlay_runtime_settings(app);
         OverlayInfoOps::hide_sc2_overlay_window(app);
         if let Some(overlay_window) = app.get_webview_window(OVERLAY_WINDOW_LABEL) {
+            if let Err(error) = OverlayInfoOps::apply_overlay_placement(&overlay_window) {
+                crate::sco_warn!("[SCO/overlay] Failed to follow SC2 monitor: {error}");
+            }
             let _ = overlay_window.set_focusable(false);
             let _ = overlay_window.show();
         }

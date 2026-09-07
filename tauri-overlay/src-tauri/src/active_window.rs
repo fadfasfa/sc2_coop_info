@@ -108,6 +108,32 @@ impl ActiveWindowDetector {
         Ok(Self::focused_window_info()?.filter(ActiveWindowInfo::is_sc2_window))
     }
 
+    /// Placement-only lookup; never captures pixels or changes focus.
+    /// Keep the player overlay on the existing focused-window API.
+    pub fn sc2_window_rect_for_placement() -> Result<Option<ActiveWindowRect>, String> {
+        if let Ok(Some(info)) = Self::focused_sc2_window_info()
+            && let Some(rect) = info.rect()
+        {
+            return Ok(Some(rect));
+        }
+        let windows = xcap::Window::all()
+            .map_err(|error| format!("Failed to enumerate SC2 windows: {error}"))?;
+        Ok(windows.into_iter().find_map(|window| {
+            if window.is_minimized().unwrap_or(true)
+                || !Self::is_sc2_window_identity(
+                    &window.app_name().unwrap_or_default(),
+                    &window.title().unwrap_or_default(),
+                )
+            {
+                return None;
+            }
+            ActiveWindowRect::new(
+                window.x().ok()?, window.y().ok()?,
+                window.width().ok()?, window.height().ok()?,
+            )
+        }))
+    }
+
     pub fn spawn_focus_listener<F>(callback: F) -> Result<ActiveWindowListener, String>
     where
         F: Fn(bool) + Send + 'static,

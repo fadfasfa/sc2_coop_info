@@ -48,6 +48,14 @@ impl MonitorDescriptor {
     pub fn height(&self) -> u32 {
         self.height
     }
+
+    pub fn matches_exactly(&self, other: &Self) -> bool {
+        self.name == other.name
+            && self.position_x == other.position_x
+            && self.position_y == other.position_y
+            && self.width == other.width
+            && self.height == other.height
+    }
 }
 
 pub struct MonitorSettingsOps;
@@ -222,6 +230,81 @@ impl MonitorSettingsOps {
     ) -> Option<&MonitorDescriptor> {
         let index = MonitorSettingsOps::selected_monitor_index(requested_monitor, monitors.len())?;
         monitors.get(index)
+    }
+}
+
+impl MonitorSettingsOps {
+    /// Return the monitor containing the window's center, falling back to the
+    /// monitor with the largest intersection for windows spanning displays or
+    /// whose center lies exactly on a display boundary.
+    pub fn monitor_for_window_rect(
+        monitors: &[MonitorDescriptor],
+        rect: (i32, i32, u32, u32),
+    ) -> Option<MonitorDescriptor> {
+        let (window_x, window_y, window_width, window_height) = rect;
+        if window_width == 0 || window_height == 0 {
+            return None;
+        }
+
+        let center_x = i64::from(window_x) + i64::from(window_width) / 2;
+        let center_y = i64::from(window_y) + i64::from(window_height) / 2;
+        if let Some(monitor) = monitors.iter().find(|monitor| {
+            let left = i64::from(monitor.position_x);
+            let top = i64::from(monitor.position_y);
+            let right = left + i64::from(monitor.width);
+            let bottom = top + i64::from(monitor.height);
+            center_x >= left && center_x < right && center_y >= top && center_y < bottom
+        }) {
+            return Some(monitor.clone());
+        }
+
+        let window_left = i64::from(window_x);
+        let window_top = i64::from(window_y);
+        let window_right = window_left + i64::from(window_width);
+        let window_bottom = window_top + i64::from(window_height);
+        monitors
+            .iter()
+            .filter_map(|monitor| {
+                let left = window_left.max(i64::from(monitor.position_x));
+                let top = window_top.max(i64::from(monitor.position_y));
+                let right = window_right.min(
+                    i64::from(monitor.position_x) + i64::from(monitor.width),
+                );
+                let bottom = window_bottom.min(
+                    i64::from(monitor.position_y) + i64::from(monitor.height),
+                );
+                let area = (right - left).max(0) * (bottom - top).max(0);
+                (area > 0).then_some((area, monitor))
+            })
+            .max_by_key(|(area, _monitor)| *area)
+            .map(|(_area, monitor)| monitor.clone())
+    }
+
+    pub fn matching_recent_monitor(
+        monitors: &[MonitorDescriptor],
+        recent: Option<&MonitorDescriptor>,
+    ) -> Option<MonitorDescriptor> {
+        recent.and_then(|recent| {
+            monitors
+                .iter()
+                .find(|monitor| monitor.matches_exactly(recent))
+                .cloned()
+        })
+    }
+
+    /// Resolve the placement target without relying on the current enumeration
+    /// index. The saved monitor index remains the final, backwards-compatible
+    /// fallback only.
+    pub fn target_monitor(
+        monitors: &[MonitorDescriptor],
+        current_window_rect: Option<(i32, i32, u32, u32)>,
+        recent_monitor: Option<&MonitorDescriptor>,
+        requested_monitor: usize,
+    ) -> Option<MonitorDescriptor> {
+        current_window_rect
+            .and_then(|rect| Self::monitor_for_window_rect(monitors, rect))
+            .or_else(|| Self::matching_recent_monitor(monitors, recent_monitor))
+            .or_else(|| Self::selected_monitor_descriptor(monitors, requested_monitor).cloned())
     }
 }
 
