@@ -1,0 +1,189 @@
+name: Windows portable package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packaging/**"
+      - ".github/workflows/windows-portable.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-portable-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    env:
+      CI: true
+      CARGO_BUILD_JOBS: 2
+      CARGO_PROFILE_DEV_DEBUG: 0
+      CARGO_PROFILE_TEST_DEBUG: 0
+    steps:
+      - name: Check out packaging sources
+        uses: actions/checkout@v4
+        with:
+          path: packaging-repo
+          persist-credentials: false
+
+      - name: Read and validate exact build target
+        id: target
+        shell: pwsh
+        run: |
+          $target = Get-Content -LiteralPath packaging-repo/packaging/build-target.json -Raw | ConvertFrom-Json
+          if ($target.repository -ne $env:GITHUB_REPOSITORY) { throw "Build target repository does not match this repository" }
+          if ($target.contribution -notmatch '^[a-f0-9]{40}$') { throw "Expected an exact lowercase contribution commit" }
+          if ($target.portable -ne $true) { throw "Portable build target must be enabled explicitly" }
+          "sha=$($target.contribution)" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "label=$($target.label)" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Packaging source policy regressions
+        shell: pwsh
+        run: node --test packaging-repo/packaging/source-policy.test.mjs
+
+      - name: Check out exact merged application source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.target.outputs.sha }}
+          path: source
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: source/tauri-overlay/package-lock.json
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: source
+          cache-on-failure: true
+
+      - name: Record exact source and reject private tracked inputs
+        working-directory: source
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path validation-evidence | Out-Null
+          $tracked = @(git ls-files)
+          if ($tracked -match '(^|/)\.env(?:\.|$)' -or $tracked -match '\.SC2Replay$') {
+            throw "Private configuration or replay input is tracked"
+          }
+          @(
+            (git rev-parse HEAD)
+            (node --version)
+            (npm --version)
+            (rustc --version)
+            (cargo --version)
+          ) | Set-Content -LiteralPath validation-evidence/identity.txt -Encoding utf8
+          if ((git rev-parse HEAD) -ne '${{ steps.target.outputs.sha }}') { throw "Checked out source identity drifted" }
+
+      - name: Install frontend dependencies
+        working-directory: source/tauri-overlay
+        shell: pwsh
+        run: npm ci --no-audit --no-fund
+
+      - name: Build frontend assets required by native compilation
+        working-directory: source/tauri-overlay
+        shell: pwsh
+        run: |
+          npm run build 2>&1 | Tee-Object -FilePath ../validation-evidence/frontend-build-before-rust.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Full Rust workspace tests
+        working-directory: source
+        shell: pwsh
+        run: |
+          cargo test --workspace --locked -- --nocapture 2>&1 | Tee-Object -FilePath validation-evidence/rust-tests.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Frontend type checks and build
+        working-directory: source/tauri-overlay
+        shell: pwsh
+        run: |
+          npm run typecheck 2>&1 | Tee-Object -FilePath ../validation-evidence/typecheck.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run typecheck:tests 2>&1 | Tee-Object -FilePath ../validation-evidence/typecheck-tests.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run test:zh-cn 2>&1 | Tee-Object -FilePath ../validation-evidence/chinese-resources.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run build 2>&1 | Tee-Object -FilePath ../validation-evidence/frontend-build.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Full frontend browser regression (120 tests)
+        working-directory: source/tauri-overlay
+        shell: pwsh
+        run: |
+          npx playwright install chromium
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run test:config -- --workers=2 --reporter=line 2>&1 | Tee-Object -FilePath ../validation-evidence/playwright.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Apply fail-closed portable transformation in isolated checkout
+        shell: pwsh
+        run: |
+          git -C source diff --exit-code
+          if ($LASTEXITCODE -ne 0) { throw "Unmodified source gates changed tracked files" }
+          node packaging-repo/packaging/apply-portable.mjs source 2>&1 | Tee-Object -FilePath source/validation-evidence/portable-apply.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          git -C source diff --check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $env:PORTABLE_QA_SOURCE = (Resolve-Path source).Path
+          node --test packaging-repo/packaging/portable-contract.test.mjs 2>&1 | Tee-Object -FilePath source/validation-evidence/portable-contract.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Portable isolation tests and no-bundle EXE build
+        working-directory: source/tauri-overlay
+        shell: pwsh
+        run: |
+          cargo test --locked -p sco-tauri-overlay --lib portable_runtime:: -- --nocapture 2>&1 | Tee-Object -FilePath ../validation-evidence/portable-rust-tests.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run typecheck 2>&1 | Tee-Object -FilePath ../validation-evidence/portable-typecheck.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run typecheck:tests 2>&1 | Tee-Object -FilePath ../validation-evidence/portable-typecheck-tests.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run tauri -- build --no-bundle --no-sign -- --locked 2>&1 | Tee-Object -FilePath ../validation-evidence/portable-build.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Package exact EXE, public source and manifest
+        shell: pwsh
+        run: |
+          node packaging-repo/packaging/make-portable.mjs source packaging-repo portable/SC2_Coop_Info_ZhCN_Portable
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Compress-Archive -LiteralPath portable/SC2_Coop_Info_ZhCN_Portable -DestinationPath portable/SC2_Coop_Info_ZhCN_Portable.zip
+          $packageHash = (Get-FileHash -LiteralPath portable/SC2_Coop_Info_ZhCN_Portable.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$packageHash  SC2_Coop_Info_ZhCN_Portable.zip" | Set-Content -LiteralPath portable/SC2_Coop_Info_ZhCN_Portable.zip.sha256 -Encoding utf8
+
+      - name: Upload portable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: SC2-Coop-Info-ZhCN-Portable-${{ steps.target.outputs.sha }}
+          path: |
+            portable/SC2_Coop_Info_ZhCN_Portable.zip
+            portable/SC2_Coop_Info_ZhCN_Portable.zip.sha256
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Record real-replay skips separately
+        if: ${{ !cancelled() }}
+        working-directory: source
+        shell: bash
+        run: |
+          node -e 'const fs=require("fs"); const p="validation-evidence/rust-tests.txt"; const s=(fs.existsSync(p)?fs.readFileSync(p,"utf8"):"Rust tests did not run").replace(/\u001b\[[0-9;]*m/g,""); let suite="unknown"; const rows=[]; for(const line of s.split(/\r?\n/)){const match=line.match(/Running\s+(.*?)\s+\(/); if(match) suite=match[1]; if(/skipping|did not run|\.\.\.\s+ignored\b|\b[1-9]\d* ignored;/i.test(line)) rows.push(suite+"\t"+line.trim());} fs.writeFileSync("validation-evidence/real-replay-skips.txt",rows.join("\n"));'
+
+      - name: Upload validation evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-windows-${{ steps.target.outputs.label }}
+          path: |
+            source/validation-evidence/
+            source/tauri-overlay/test-results/
+            source/tauri-overlay/src-tauri/src/bindings/
+          retention-days: 30
