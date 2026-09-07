@@ -2,96 +2,172 @@
     "raiding_party": {
         "en": "Raiding Party",
         "ko": "습격단",
-        "aliases": ["Raiding Party", "습격단"]
+        "aliases": [
+            "Raiding Party",
+            "습격단"
+        ],
+        "zh-CN": "突击团"
     },
     "shadow_tech": {
         "en": "Shadow Tech",
         "ko": "어둠의 기술",
-        "aliases": ["Shadow Tech", "어둠의 기술"]
+        "aliases": [
+            "Shadow Tech",
+            "어둠의 기술"
+        ],
+        "zh-CN": "暗影科技团"
     },
     "machines_of_war": {
         "en": "Machines of War",
         "ko": "전쟁 기계",
-        "aliases": ["Machines of War", "전쟁 기계"]
+        "aliases": [
+            "Machines of War",
+            "전쟁 기계"
+        ],
+        "zh-CN": "战争机械团"
     },
     "classic_infantry": {
         "en": "Classic Infantry",
         "ko": "클래식 보병",
-        "aliases": ["Classic Infantry", "클래식 보병"]
+        "aliases": [
+            "Classic Infantry",
+            "클래식 보병"
+        ],
+        "zh-CN": "旧世步兵团"
     },
     "classic_mech": {
         "en": "Classic Mech",
         "ko": "클래식 기계",
-        "aliases": ["Classic Mech", "클래식 기계"]
+        "aliases": [
+            "Classic Mech",
+            "클래식 기계"
+        ],
+        "zh-CN": "旧世机械团"
     },
     "dominion_battlegroup": {
         "en": "Dominion Battlegroup",
         "ko": "자치령 전투단",
-        "aliases": ["Dominion Battlegroup", "자치령 전투단"]
+        "aliases": [
+            "Dominion Battlegroup",
+            "자치령 전투단"
+        ],
+        "zh-CN": "帝国战斗群"
     },
     "ravaging_infestation": {
         "en": "Ravaging Infestation",
         "ko": "궤멸 감염",
-        "aliases": ["Ravaging Infestation", "궤멸 감염"]
+        "aliases": [
+            "Ravaging Infestation",
+            "궤멸 감염"
+        ],
+        "zh-CN": "肆虐扩散"
     },
     "brooding_corruption": {
         "en": "Brooding Corruption",
         "ko": "타락 무리",
-        "aliases": ["Brooding Corruption", "타락 무리"]
+        "aliases": [
+            "Brooding Corruption",
+            "타락 무리"
+        ],
+        "zh-CN": "滋生腐化"
     },
     "explosive_threats": {
         "en": "Explosive Threats",
         "ko": "폭발 위협",
-        "aliases": ["Explosive Threats", "폭발 위협"]
+        "aliases": [
+            "Explosive Threats",
+            "폭발 위협"
+        ],
+        "zh-CN": "爆炸威胁"
     },
     "invasionary_swarm": {
         "en": "Invasionary Swarm",
         "ko": "침공 군단",
-        "aliases": ["Invasionary Swarm", "침공 군단"]
+        "aliases": [
+            "Invasionary Swarm",
+            "침공 군단"
+        ],
+        "zh-CN": "侵略虫群"
     },
     "devouring_scourge": {
         "en": "Devouring Scourge",
         "ko": "포식 갈귀",
-        "aliases": ["Devouring Scourge", "포식 갈귀"]
+        "aliases": [
+            "Devouring Scourge",
+            "포식 갈귀"
+        ],
+        "zh-CN": "遮天蔽日"
     },
     "masters_and_machines": {
         "en": "Masters and Machines",
         "ko": "대가와 기계",
-        "aliases": ["Masters and Machines", "대가와 기계"]
+        "aliases": [
+            "Masters and Machines",
+            "대가와 기계"
+        ],
+        "zh-CN": "大师机械"
     },
     "towering_walkers": {
         "en": "Towering Walkers",
         "ko": "보행 거수",
-        "aliases": ["Towering Walkers", "보행 거수"]
+        "aliases": [
+            "Towering Walkers",
+            "보행 거수"
+        ],
+        "zh-CN": "步战机甲"
     },
     "hope_of_the_khalai": {
         "en": "Hope of the Khalai",
         "ko": "칼라이의 희망",
-        "aliases": ["Hope of the Khalai", "칼라이의 희망"]
+        "aliases": [
+            "Hope of the Khalai",
+            "칼라이의 희망"
+        ],
+        "zh-CN": "卡莱的希望"
     },
     "shadow_disruption": {
         "en": "Shadow Disruption",
         "ko": "암흑 분열",
-        "aliases": ["Shadow Disruption", "암흑 분열"]
+        "aliases": [
+            "Shadow Disruption",
+            "암흑 분열"
+        ],
+        "zh-CN": "暗影袭扰"
     },
     "disruptive_artillery": {
         "en": "Disruptive Artillery",
         "ko": "분열 병기",
-        "aliases": ["Disruptive Artillery", "분열 병기"]
+        "aliases": [
+            "Disruptive Artillery",
+            "분열 병기"
+        ],
+        "zh-CN": "袭扰炮击"
     },
     "siege_of_storms": {
         "en": "Siege of Storms",
         "ko": "폭풍 포위",
-        "aliases": ["Siege of Storms", "폭풍 포위"]
+        "aliases": [
+            "Siege of Storms",
+            "폭풍 포위"
+        ],
+        "zh-CN": "风暴迫临"
     },
     "vanguard_of_aiur": {
         "en": "Vanguard of Aiur",
         "ko": "아이어의 선봉대",
-        "aliases": ["Vanguard of Aiur", "아이어의 선봉대"]
+        "aliases": [
+            "Vanguard of Aiur",
+            "아이어의 선봉대"
+        ],
+        "zh-CN": "艾尔先锋"
     },
     "fleet_of_the_matriarch": {
         "en": "Fleet of the Matriarch",
         "ko": "대모의 함대",
-        "aliases": ["Fleet of the Matriarch", "대모의 함대"]
+        "aliases": [
+            "Fleet of the Matriarch",
+            "대모의 함대"
+        ],
+        "zh-CN": "族长之军"
     }
 }

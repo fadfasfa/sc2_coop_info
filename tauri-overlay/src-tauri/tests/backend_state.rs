@@ -1,6 +1,6 @@
 use sco_tauri_overlay::{
-    AppSettings, BackendState, ReplayInfo, StartupAnalysisRequestOutcome, StatsState,
-    TauriOverlayOps,
+    AppSettings, BackendState, MonitorDescriptor, ReplayInfo, StartupAnalysisRequestOutcome,
+    StatsState, TauriOverlayOps,
 };
 use std::time::Duration;
 
@@ -65,6 +65,19 @@ fn backend_state_flags_are_instance_local() {
 
     assert!(first.performance_edit_mode());
     assert!(!second.performance_edit_mode());
+}
+
+#[test]
+fn backend_state_keeps_latest_sc2_monitor_per_instance() {
+    let first = BackendState::new();
+    let second = BackendState::new();
+    let monitor = MonitorDescriptor::new("External", -1920, 0, 1920, 1080);
+
+    assert_eq!(first.latest_sc2_monitor(), None);
+    first.set_latest_sc2_monitor(monitor.clone());
+
+    assert_eq!(first.latest_sc2_monitor(), Some(monitor));
+    assert_eq!(second.latest_sc2_monitor(), None);
 }
 
 #[test]

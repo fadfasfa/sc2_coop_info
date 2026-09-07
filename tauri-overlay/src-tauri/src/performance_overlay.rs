@@ -22,6 +22,7 @@ struct CpuUsageRow {
 
 #[derive(Serialize)]
 struct PerformancePayload {
+    language: &'static str,
     #[serde(rename = "processTitle")]
     process_title: String,
     #[serde(rename = "sc2Ram")]
@@ -233,6 +234,7 @@ impl PerformanceOverlayOps {
         let global_cpu = system.global_cpu_usage();
 
         PerformancePayload {
+            language: "en",
             process_title: "StarCraft II".to_string(),
             sc2_ram: "-".to_string(),
             sc2_read: "-".to_string(),
@@ -261,6 +263,7 @@ impl PerformanceOverlayOps {
         settings: &AppSettings,
     ) -> PerformancePayload {
         let mut payload = PerformanceOverlayOps::default_payload(system, networks);
+        payload.language = settings.overlay_language();
         let process_names = settings.performance_process_names();
         let process = system.processes().values().find(|candidate| {
             let process_name = candidate.name().to_string_lossy();

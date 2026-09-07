@@ -47,6 +47,12 @@ test.describe("Config route settings", () => {
             "1 - ASUS VG27A",
             "2 - LG C2",
         ]);
+        await expect(
+            page.getByText(
+                "Prefer the monitor where SC2 is running; use the selected monitor when SC2 cannot be detected.",
+                { exact: true },
+            ),
+        ).toBeVisible();
     });
 
     test("settings tab keeps the supported toggles and hides removed overlay-only settings", async ({

@@ -316,7 +316,7 @@ function prestigeLabelForLanguage(
     prestigeNames: PrestigeNameMap,
     commander: string,
     prestige: number,
-    language: "en" | "ko",
+    language: import("../../i18n/languageManager").AppLanguage,
 ): string {
     const localized = prestigeNames[commander];
     if (!localized) {
@@ -326,6 +326,7 @@ function prestigeLabelForLanguage(
     return (
         localized[language]?.[prestige] ||
         localized.en?.[prestige] ||
+        localized.ko?.[prestige] ||
         `P${prestige}`
     );
 }

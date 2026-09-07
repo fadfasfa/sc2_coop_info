@@ -132,6 +132,7 @@ impl RandomizerOps {
                     LocalizedLabels {
                         en: value.en.clone(),
                         ko: value.ko.clone(),
+                        zh_cn: Some(value.zh_cn.clone()),
                     },
                 )
             })
@@ -477,12 +478,14 @@ impl RandomizerOps {
                     .map(|value| LocalizedText {
                         en: RandomizerOps::decode_html_entities(&value.name.en),
                         ko: RandomizerOps::decode_html_entities(&value.name.ko),
+                        zh_cn: Some(RandomizerOps::decode_html_entities(&value.name.zh_cn)),
                     })
                     .unwrap_or_default();
                 let description = data
                     .map(|value| LocalizedText {
                         en: RandomizerOps::decode_html_entities(&value.description.en),
                         ko: RandomizerOps::decode_html_entities(&value.description.ko),
+                        zh_cn: Some(RandomizerOps::decode_html_entities(&value.description.zh_cn)),
                     })
                     .unwrap_or_default();
                 let icon_name_source = if name.en.is_empty() {

@@ -93,6 +93,13 @@ impl BackendStateOps {
                 frequency: row.frequency,
                 kills: row.kills,
                 last_seen_relative: BackendStateOps::relative_last_seen_text(row.last_seen),
+                last_seen_seconds: (row.last_seen > 0).then(|| {
+                    SystemTime::now()
+                        .duration_since(UNIX_EPOCH)
+                        .unwrap_or_default()
+                        .as_secs()
+                        .saturating_sub(row.last_seen)
+                }),
                 note,
             },
         )

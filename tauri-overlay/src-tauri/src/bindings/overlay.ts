@@ -30,9 +30,9 @@ export type FirstWinBonusTimerPayload = { visible: boolean, available: boolean, 
 
 export type GamesRowPayload = { file: string, date: number, map: string, result: string, difficulty: string, p1: string, p2: string, slot1_commander: string, slot2_commander: string, enemy: string, main_commander: string, ally_commander: string, length: number, main_apm: number, ally_apm: number, main_kills: number, ally_kills: number, extension: boolean, brutal_plus: number, weekly: boolean, weekly_name?: string, mutators: Array<UiMutatorRow>, is_mutation: boolean, };
 
-export type LocalizedLabels = { ko: Array<string>, en: Array<string>, };
+export type LocalizedLabels = { ko: Array<string>, en: Array<string>, "zh-CN"?: Array<string>, };
 
-export type LocalizedText = { ko: string, en: string, };
+export type LocalizedText = { ko: string, en: string, "zh-CN"?: string, };
 
 export type MonitorOption = { index: number, label: string, };
 
@@ -50,7 +50,7 @@ export type OverlayLanguagePreviewPayload = { language: string, };
 
 export type OverlayPlayerStatsPayload = { data: { [key in string]: OverlayPlayerStatsRow }, };
 
-export type OverlayPlayerStatsRow = { "kind": "no_games", note?: string, } | { "kind": "stats", wins: number, losses: number, apm: number, commander: string, frequency: number, kills: number, last_seen_relative: string, note?: string, };
+export type OverlayPlayerStatsRow = { "kind": "no_games", note?: string, } | { "kind": "stats", wins: number, losses: number, apm: number, commander: string, frequency: number, kills: number, last_seen_relative: string, last_seen_seconds?: number, note?: string, };
 
 export type OverlayRandomizerBrutalPlus = { brutal_plus: number, mutator_points: OverlayRandomizerRange, mutator_count: OverlayRandomizerRange, };
 
@@ -128,4 +128,4 @@ export type StatsUnitDataPayload = { main: Record<string, ({ count: number } & R
 
 export type UiMutatorRow = { id: string, name: LocalizedText, iconName: string, description: LocalizedText, };
 
-export type WeeklyRowPayload = { mutation: string, nameEn: string, nameKo: string, map: string, mutators: Array<UiMutatorRow>, mutationOrder: number, isCurrent: boolean, nextDurationDays: number, nextDuration: string, difficulty: string, wins: number, losses: number, winrate: number, };
+export type WeeklyRowPayload = { mutation: string, nameEn: string, nameKo: string, nameZhCn?: string, map: string, mutators: Array<UiMutatorRow>, mutationOrder: number, isCurrent: boolean, nextDurationDays: number, nextDuration: string, difficulty: string, wins: number, losses: number, winrate: number, };

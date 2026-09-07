@@ -29,7 +29,7 @@ const bonusNumbers: Record<string, number> = {
 type LocalizableValue = string | number | boolean | null | undefined;
 type OverlayPrestigeNameCatalog = Record<
     string,
-    { en: string[]; ko: string[] }
+    { en: string[]; ko: string[]; "zh-CN"?: string[] }
 >;
 type IconPayload = OverlayReplayPayload["mainIcons"];
 type UnitStatsMap = OverlayReplayPayload["mainUnits"];
@@ -445,7 +445,7 @@ function prestigeLabelForLanguage(
     prestigeNames: OverlayPrestigeNameCatalog,
     commander: string,
     prestige: number,
-    language: "en" | "ko",
+    language: import("../../i18n/languageManager").AppLanguage,
 ): string {
     const localized = prestigeNames[commander];
     if (localized == null) {
@@ -453,8 +453,9 @@ function prestigeLabelForLanguage(
     }
 
     return (
-        localized[language]?.[prestige] ??
-        localized.en?.[prestige] ??
+        localized[language]?.[prestige] ||
+        localized.en?.[prestige] ||
+        localized.ko?.[prestige] ||
         `P${prestige}`
     );
 }

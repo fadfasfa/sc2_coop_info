@@ -23,6 +23,7 @@ type ReplayVisualGroupCount = {
     count: number;
 };
 type ReplayVisualUnitCountRow = {
+    unitType: string;
     label: string;
     count: number;
 };
@@ -144,20 +145,30 @@ function topUnitCounts(
     layers: ReplayVisualLayerState,
     localizeUnitName: (value: string) => string,
 ): readonly ReplayVisualUnitCountRow[] {
-    const counts = new Map<string, number>();
+    const counts = new Map<string, { count: number; displayName: string }>();
     for (const unit of units) {
         if (!layers[unit.group]) {
             continue;
         }
-        const label = localizeUnitName(unit.display_name || unit.unit_type);
-        counts.set(label, (counts.get(label) || 0) + 1);
+        // Translated display names are not identities: distinct units can share
+        // the same label in any language. Keep the parser's canonical type.
+        const unitType = unit.unit_type || unit.display_name;
+        const current = counts.get(unitType);
+        counts.set(unitType, {
+            count: (current?.count || 0) + 1,
+            displayName: current?.displayName || unit.display_name || unitType,
+        });
     }
     return Array.from(counts.entries())
-        .map(([label, count]) => ({ label, count }))
+        .map(([unitType, { count, displayName }]) => ({
+            unitType,
+            count,
+            label: localizeUnitName(displayName),
+        }))
         .sort(
             (left, right) =>
                 right.count - left.count ||
-                left.label.localeCompare(right.label),
+                left.unitType.localeCompare(right.unitType),
         )
         .slice(0, 10);
 }
@@ -545,7 +556,7 @@ export default function ReplayVisualPlayer({
                         ) : (
                             topUnits.map((unit) => (
                                 <div
-                                    key={unit.label}
+                                    key={unit.unitType}
                                     className={styles.visualCountRow}
                                 >
                                     <span>{asTableValue(unit.label)}</span>

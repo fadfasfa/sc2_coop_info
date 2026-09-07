@@ -55,6 +55,10 @@ impl TauriOverlayOps {
         if overlay_runtime_changed {
             overlay_info::OverlayInfoOps::sync_overlay_runtime_settings(app);
         }
+        if previous_settings.overlay_language() != next_settings.overlay_language() {
+            TauriOverlayOps::refresh_tray_language(app);
+            TauriOverlayOps::refresh_window_titles(app);
+        }
 
         let previous_show_charts = previous_settings.show_charts();
         let show_charts = next_settings.show_charts();
@@ -329,6 +333,28 @@ impl ConfigCommands {
             .unwrap_or("");
 
         match action {
+            "create_desktop_shortcut" => {
+                // Shell/COM and filesystem work must not occupy an async worker.
+                // The entire operation stays on one blocking thread so that the
+                // Windows mutex is acquired and released by the same thread.
+                let result = tauri::async_runtime::spawn_blocking(
+                    crate::desktop_shortcut::create_or_update,
+                )
+                .await
+                .map_err(|error| format!("Desktop shortcut failed: worker failed: {error}"))?;
+                Ok(match result {
+                    Ok(update) => OverlayActionResponse::success_with_path(
+                        update.message(),
+                        update.path().display().to_string(),
+                    ),
+                    Err(error) if error == "Create desktop shortcut is not available in this build" => {
+                        OverlayActionResponse::failure(error)
+                    }
+                    Err(error) => OverlayActionResponse::failure(format!(
+                        "Desktop shortcut failed: {error}"
+                    )),
+                })
+            }
             "set_player_note" => {
                 let player_name = body
                     .as_ref()

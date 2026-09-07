@@ -77,6 +77,9 @@ export default function Sc2OverlayPage() {
     const [overlayLanguageManager] = useState(() =>
         createLanguageManager(language),
     );
+    useEffect(() => {
+        document.documentElement.lang = language;
+    }, [language]);
     const [displayMode, setDisplayMode] = useState<DisplayStatus>({
         mode: DisplayMode.None,
         immediate: true,
@@ -87,8 +90,8 @@ export default function Sc2OverlayPage() {
         useState<FirstWinBonusTimerPayload | null>(null);
 
     function applyOverlayLanguage(nextLanguage: string): void {
-        setLanguage(nextLanguage);
         overlayLanguageManager.setLanguage(nextLanguage);
+        setLanguage(overlayLanguageManager.currentLanguage());
     }
 
     function languagePreviewEventHandler({
@@ -345,7 +348,10 @@ export default function Sc2OverlayPage() {
     }, [displayMode, playerStatPayload]);
 
     return (
-        <div className={styles.overlayPageRoot}>
+        <div
+            lang={overlayLanguageManager.currentLanguage()}
+            className={styles.overlayPageRoot}
+        >
             <PlayerStatMode
                 payload={playerStatPayload}
                 visible={displayMode.mode === DisplayMode.PlayerStats}

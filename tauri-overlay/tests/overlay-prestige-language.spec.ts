@@ -30,6 +30,9 @@ async function installOverlayPrestigeLanguageMock(
         let nextCallbackId = 1;
         let nextEventListenerId = 1;
 
+        window.__TAURI_EVENT_PLUGIN_INTERNALS__ = {
+            unregisterListener: () => {},
+        };
         window.__TAURI_INTERNALS__ = {
             transformCallback: (callback: (payload: MockEvent) => void) => {
                 const id = nextCallbackId++;
@@ -61,6 +64,18 @@ async function installOverlayPrestigeLanguageMock(
                     return null;
                 }
 
+                // Match the current typed Tauri command while retaining legacy transport coverage.
+                if (command === "config_action") {
+                    return {
+                        status: "ok",
+                        result: { ok: true },
+                        message: "ok",
+                    };
+                }
+                if (command === "config_get") {
+                    command = "config_request";
+                    request = { ...request, method: "GET", path: "/config" };
+                }
                 if (command !== "config_request") {
                     throw new Error(`Unexpected command: ${command}`);
                 }
@@ -147,6 +162,16 @@ test("overlay prestige labels follow the selected language", async ({
             session_victory: 0,
             session_defeat: 0,
             language: "en",
+            prestige_names: {
+                Raynor: {
+                    en: ["Raynor", "Renegade Commander"],
+                    ko: ["레이너", "무법자 사령관"],
+                },
+                Kerrigan: {
+                    en: ["Kerrigan", "Queen of Blades"],
+                    ko: ["케리건", "칼날 여왕"],
+                },
+            },
         });
         runtime.__emitMockEvent?.("sco://overlay-replay-payload", {
             file: "prestige-language-test.SC2Replay",

@@ -264,6 +264,7 @@ export default function PlayersTab({
                     </div>
                 </div>
                 <TablePagination
+                    languageManager={languageManager}
                     currentPage={currentPage}
                     onPageChange={handlePageChange}
                     totalRows={totalRowsForPagination}
@@ -558,6 +559,7 @@ export default function PlayersTab({
                     </table>
                 </div>
                 <TablePagination
+                    languageManager={languageManager}
                     currentPage={currentPage}
                     onPageChange={handlePageChange}
                     totalRows={totalRowsForPagination}

@@ -3,16 +3,18 @@ import commanderMasteryDataJson from "./commander_mastery.json";
 import unitCompositionData from "./unit_composition.json";
 import unitTranslationData from "./unit_translation_data.json";
 
-export type AppLanguage = "en" | "ko";
+export type AppLanguage = "en" | "ko" | "zh-CN";
 type LocalizableValue = string | number | boolean | null | undefined;
 export type LanguageValue = {
     en?: string | null;
     ko?: string | null;
+    "zh-CN"?: string | null;
 };
 
 type LanguageEntry = {
     en: string;
     ko: string;
+    "zh-CN"?: string;
     aliases?: string[];
     asset_en?: string;
 };
@@ -22,11 +24,13 @@ type UnitCompositionData = Record<string, LanguageEntry>;
 type UnitTranslationEntry = {
     en: string;
     ko: string;
+    "zh-CN"?: string;
 };
 type UnitTranslationData = Record<string, UnitTranslationEntry>;
 export type LocalizedCommanderMasteryLabels = {
     en: string[];
     ko: string[];
+    "zh-CN"?: string[];
 };
 export type CommanderMasteryData = Record<
     string,
@@ -34,7 +38,6 @@ export type CommanderMasteryData = Record<
 >;
 
 const DEFAULT_LANGUAGE: AppLanguage = "en";
-const ENGLISH_LANGUAGE: AppLanguage = "en";
 const DIFFICULTY_ID_PREFIX = "difficulty_";
 const entries: LanguageData = languageData as LanguageData;
 const commanderMasteryEntries: CommanderMasteryData =
@@ -54,7 +57,32 @@ function normalizeAliasKey(value: string): string {
 }
 
 function isAppLanguage(value: string): value is AppLanguage {
-    return value === "en" || value === "ko";
+    return value === "en" || value === "ko" || value === "zh-CN";
+}
+
+// Display labels are aliases only when they identify exactly one entity.
+// Repeated UI phrases and translated names must never pick an arbitrary ID.
+function createAliasIndex(
+    data: Record<string, LanguageEntry | UnitTranslationEntry>,
+): Map<string, string> {
+    const index = new Map<string, string>();
+    const candidates = new Map<string, Set<string>>();
+    for (const [id, entry] of Object.entries(data)) {
+        const aliases = "aliases" in entry ? entry.aliases || [] : [];
+        for (const label of [entry.en, entry.ko, entry["zh-CN"], ...aliases]) {
+            if (!label?.trim()) continue;
+            const key = normalizeAliasKey(label);
+            const ids = candidates.get(key) || new Set<string>();
+            ids.add(id);
+            candidates.set(key, ids);
+        }
+    }
+    for (const [alias, ids] of candidates) {
+        if (ids.size === 1) index.set(alias, [...ids][0]);
+    }
+    // Canonical keys are authoritative even when another label resembles one.
+    for (const id of Object.keys(data)) index.set(normalizeAliasKey(id), id);
+    return index;
 }
 
 export class LanguageManager {
@@ -65,42 +93,11 @@ export class LanguageManager {
 
     constructor(language: string) {
         this.language = isAppLanguage(language) ? language : DEFAULT_LANGUAGE;
-        this.aliasToId = new Map<string, string>();
-        this.unitCompositionAliasToId = new Map<string, string>();
-        this.unitAliasToKey = new Map<string, string>();
-
-        for (const [id, entry] of Object.entries(entries)) {
-            this.aliasToId.set(normalizeAliasKey(id), id);
-            this.aliasToId.set(normalizeAliasKey(entry.en), id);
-            this.aliasToId.set(normalizeAliasKey(entry.ko), id);
-
-            if (Array.isArray(entry.aliases)) {
-                for (const alias of entry.aliases) {
-                    this.aliasToId.set(normalizeAliasKey(alias), id);
-                }
-            }
-        }
-
-        for (const [key, entry] of Object.entries(unitEntries)) {
-            this.unitAliasToKey.set(normalizeAliasKey(key), key);
-            this.unitAliasToKey.set(normalizeAliasKey(entry.en), key);
-            this.unitAliasToKey.set(normalizeAliasKey(entry.ko), key);
-        }
-
-        for (const [id, entry] of Object.entries(unitCompositionEntries)) {
-            this.unitCompositionAliasToId.set(normalizeAliasKey(id), id);
-            this.unitCompositionAliasToId.set(normalizeAliasKey(entry.en), id);
-            this.unitCompositionAliasToId.set(normalizeAliasKey(entry.ko), id);
-
-            if (Array.isArray(entry.aliases)) {
-                for (const alias of entry.aliases) {
-                    this.unitCompositionAliasToId.set(
-                        normalizeAliasKey(alias),
-                        id,
-                    );
-                }
-            }
-        }
+        this.aliasToId = createAliasIndex(entries);
+        this.unitCompositionAliasToId = createAliasIndex(
+            unitCompositionEntries,
+        );
+        this.unitAliasToKey = createAliasIndex(unitEntries);
     }
 
     currentLanguage(): AppLanguage {
@@ -115,16 +112,9 @@ export class LanguageManager {
             return "";
         }
 
-        const preferred = value[language];
-        if (typeof preferred === "string" && preferred.trim() !== "") {
-            return preferred;
-        }
-
-        const fallbackLanguage: AppLanguage =
-            language === ENGLISH_LANGUAGE ? "ko" : ENGLISH_LANGUAGE;
-        const fallback = value[fallbackLanguage];
-        if (typeof fallback === "string" && fallback.trim() !== "") {
-            return fallback;
+        for (const candidate of [language, "en", "ko"] as const) {
+            const label = value[candidate];
+            if (typeof label === "string" && label.trim() !== "") return label;
         }
 
         return "";
@@ -141,7 +131,7 @@ export class LanguageManager {
         if (!entry) {
             return id;
         }
-        return entry[this.language] || entry[ENGLISH_LANGUAGE] || id;
+        return this.localizedValue(entry) || id;
     }
 
     idFromValue(value: LocalizableValue): string | null {
@@ -226,7 +216,7 @@ export class LanguageManager {
         }
 
         const entry = unitCompositionEntries[unitCompositionId];
-        return entry?.[this.language] || entry?.[ENGLISH_LANGUAGE] || trimmed;
+        return this.localizedValue(entry) || trimmed;
     }
 
     localizeDifficulty(value: LocalizableValue): string {
@@ -262,6 +252,11 @@ export class LanguageManager {
         return localizedParts.length > 0 ? localizedParts.join("/") : trimmed;
     }
 
+    canonicalUnitKey(value: string): string {
+        const trimmed = value.trim();
+        return this.unitAliasToKey.get(normalizeAliasKey(trimmed)) || trimmed;
+    }
+
     localizeUnitName(value: LocalizableValue): string {
         if (value === null || value === undefined) {
             return "";
@@ -286,13 +281,7 @@ export class LanguageManager {
             return trimmed;
         }
 
-        const localizedName = entry[this.language];
-
-        if (localizedName && localizedName.length !== 0) {
-            return localizedName;
-        } else {
-            return entry[ENGLISH_LANGUAGE] || trimmed;
-        }
+        return this.localizedValue(entry) || trimmed;
     }
 
     englishLabel(value: LocalizableValue): string {
@@ -361,9 +350,19 @@ export class LanguageManager {
     private localizedCommanderMasteryLabels(
         labels: LocalizedCommanderMasteryLabels,
     ): string[] {
-        return labels[this.language].length > 0
-            ? labels[this.language]
-            : labels.en;
+        const preferred = labels[this.language];
+        const count = Math.max(
+            preferred?.length || 0,
+            labels.en.length,
+            labels.ko.length,
+        );
+        return Array.from(
+            { length: count },
+            (_, index) =>
+                [preferred?.[index], labels.en[index], labels.ko[index]].find(
+                    (label) => typeof label === "string" && label.trim() !== "",
+                ) || "",
+        );
     }
 }
 

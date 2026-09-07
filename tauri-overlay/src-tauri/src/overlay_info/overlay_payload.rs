@@ -18,9 +18,16 @@ impl OverlayReplayPayload {
         if let Some(lookup) = dictionary
             .prestige_names_json
             .get(&commander)
-            .and_then(|value| match language {
-                "ko" => value.ko.get(index).or_else(|| value.en.get(index)),
-                _ => value.en.get(index),
+            .and_then(|value| {
+                let preferred = match language {
+                    "zh-CN" => &value.zh_cn,
+                    "ko" => &value.ko,
+                    _ => &value.en,
+                };
+                [preferred, &value.en, &value.ko]
+                    .into_iter()
+                    .filter_map(|labels| labels.get(index))
+                    .find(|label| !label.trim().is_empty())
             })
             .map(String::as_str)
         {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { statusMessage, type StatusMessage } from "../statusMessage";
 import type {
     ConfigPlayersPayload,
     ConfigReplaysPayload,
@@ -47,7 +48,7 @@ export type LoadTabOptions = {
 
 type UseConfigTabDataArgs = {
     setIsBusy: React.Dispatch<React.SetStateAction<boolean>>;
-    safeStatus: (message: string) => void;
+    safeStatus: (message: StatusMessage) => void;
 };
 
 type UseConfigTabDataResult = {
@@ -233,9 +234,15 @@ export function useConfigTabData({
                     ...current,
                     [tabId]: getTabPayload(tabId, payload),
                 }));
-                safeStatus(`${tabId} refreshed`);
+                safeStatus(statusMessage(`ui_status_${tabId}_refreshed`));
             } catch (error) {
-                safeStatus(`Failed to load ${tabId}: ${error.message}`);
+                safeStatus(
+                    statusMessage(
+                        `ui_status_load_${tabId}_failed`,
+                        undefined,
+                        error.message,
+                    ),
+                );
             } finally {
                 if (tabLoadInFlightRef.current[tabId] === requestKey) {
                     tabLoadInFlightRef.current[tabId] = null;

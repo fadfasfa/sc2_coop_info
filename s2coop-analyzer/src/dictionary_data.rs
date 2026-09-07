@@ -85,6 +85,8 @@ transparent_json_wrapper!(MutatorBrutalPlusJson, Vec<MutatorBrutalPlusEntryJson>
 pub struct LocalizedPrestigeNames {
     pub en: Vec<String>,
     pub ko: Vec<String>,
+    #[serde(rename = "zh-CN", default)]
+    pub zh_cn: Vec<String>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -93,6 +95,8 @@ pub struct LocalizedMutatorText {
     pub en: String,
     #[serde(default)]
     pub ko: String,
+    #[serde(rename = "zh-CN", default)]
+    pub zh_cn: String,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -114,6 +118,8 @@ pub struct WeeklyMutationJson {
     #[serde(default)]
     #[serde(rename = "nameKo")]
     pub name_ko: String,
+    #[serde(rename = "nameZhCn", default)]
+    pub name_zh_cn: String,
     pub map: String,
     pub mutators: Vec<String>,
 }

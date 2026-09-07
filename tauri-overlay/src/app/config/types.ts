@@ -110,6 +110,7 @@ export type StatisticsPayload = Omit<
 export type LocalizedMasteryNames = {
     en: string[];
     ko: string[];
+    "zh-CN"?: string[];
 };
 
 export type CommanderMasteryEntry = string[] | LocalizedMasteryNames;
@@ -119,6 +120,7 @@ export type PrestigeNameMap = Record<string, LocalizedLabels>;
 export type LocalizedText = {
     en?: string | null;
     ko?: string | null;
+    "zh-CN"?: string | null;
 };
 
 export type MutatorData = {

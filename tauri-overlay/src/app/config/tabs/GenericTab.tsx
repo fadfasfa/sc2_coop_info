@@ -3,6 +3,7 @@ import * as React from "react";
 import type { AppSettings } from "../../../bindings/overlay";
 import type { JsonValue } from "../types";
 import styles from "../configStyles";
+import type { LanguageManager } from "../../i18n/languageManager";
 
 type TabGroup = {
     title: string;
@@ -17,6 +18,7 @@ type ConfigTab = {
 };
 
 type GenericTabProps = {
+    languageManager: LanguageManager;
     tab: ConfigTab;
     draft: AppSettings | null;
     settings: AppSettings | null;
@@ -41,6 +43,7 @@ export default function GenericTab({
     onChange,
     renderNode,
     getAtPath,
+    languageManager,
 }: GenericTabProps) {
     const groups = tab.groups || [];
     return (
@@ -52,7 +55,7 @@ export default function GenericTab({
                         .filter(Boolean)
                         .join(" ")}
                 >
-                    <h3>{group.title}</h3>
+                    <h3>{languageManager.translate(group.title)}</h3>
                     {group.placeholder ? (
                         <p className={styles.note}>{group.placeholder}</p>
                     ) : null}
@@ -66,7 +69,8 @@ export default function GenericTab({
                                         rel="noreferrer"
                                         onClick={() => openUrl(href)}
                                     >
-                                        {label}
+                                        {languageManager.translate(label)} -{" "}
+                                        {href.replace(/^mailto:/, "")}
                                     </a>
                                 </li>
                             ))}

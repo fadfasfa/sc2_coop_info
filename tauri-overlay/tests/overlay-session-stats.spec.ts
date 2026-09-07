@@ -85,6 +85,18 @@ async function installOverlaySessionStatsMock(
                     return null;
                 }
 
+                // Match the current typed Tauri command while retaining legacy transport coverage.
+                if (command === "config_action") {
+                    return {
+                        status: "ok",
+                        result: { ok: true },
+                        message: "ok",
+                    };
+                }
+                if (command === "config_get") {
+                    command = "config_request";
+                    request = { ...request, method: "GET", path: "/config" };
+                }
                 if (command !== "config_request") {
                     throw new Error(`Unexpected command: ${command}`);
                 }
@@ -186,7 +198,10 @@ test("session stats stay replay-only and update immediately from runtime setting
         runtime.__emitMockEvent?.("sco://overlay-player-stats", { data: {} });
     });
 
-    await expect(page.locator("#session")).toBeHidden();
+    // Player stats now own a separate sc2-overlay window; they must not hide
+    // the replay-only session panel (see sc2-overlay-player-stats-hotkey).
+    await expect(page.locator("#session")).toBeVisible();
+    await expect(page.locator("#session")).toContainText("4 wins/5 games");
 
     await page.evaluate(() => {
         const runtime = window as typeof window & {

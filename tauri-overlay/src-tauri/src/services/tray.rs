@@ -9,6 +9,16 @@ pub struct TrayState {
 }
 
 impl TauriOverlayOps {
+    pub fn refresh_tray_language(app: &AppHandle<Wry>) {
+        if let Some(menu) = overlay_info::OverlayInfoOps::build_tray_menu(app)
+            && let Ok(tray_slot) = app.state::<TrayState>().tray_icon.lock()
+            && let Some(tray) = tray_slot.as_ref()
+            && let Err(error) = tray.set_menu(Some(menu))
+        {
+            crate::sco_warn!("Failed to update tray menu language: {error}");
+        }
+    }
+
     pub fn setup_tray_icon(app: &tauri::App<Wry>) {
         if let Some(tray_menu) = overlay_info::OverlayInfoOps::build_tray_menu(app.app_handle()) {
             let mut tray_builder = TrayIconBuilder::new()

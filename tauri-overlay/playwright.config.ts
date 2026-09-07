@@ -2,6 +2,8 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
     testDir: "tests",
+    // Node's resource-contract suite runs via test:zh-cn, not Playwright.
+    testIgnore: "**/*.test.mjs",
     timeout: 60_000,
     expect: {
         timeout: 5_000,

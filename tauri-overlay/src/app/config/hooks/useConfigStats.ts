@@ -1,4 +1,5 @@
 import * as React from "react";
+import { statusMessage, type StatusMessage } from "../statusMessage";
 import type {
     AppSettings,
     AnalysisStatusPayload,
@@ -47,7 +48,7 @@ type UseConfigStatsArgs = {
     activeTab: string;
     draft: AppSettings | null;
     isBusy: boolean;
-    safeStatus: (message: string) => void;
+    safeStatus: (message: StatusMessage) => void;
     setIsBusy: React.Dispatch<React.SetStateAction<boolean>>;
     setTabData: React.Dispatch<React.SetStateAction<TabDataState>>;
     tabData: TabDataState;
@@ -399,16 +400,29 @@ export function useConfigStats({
         });
     }
 
-    async function postStatsAction<T extends { message?: string }>(
-        request: () => Promise<T>,
-    ): Promise<T | null> {
+    async function postStatsAction<
+        T extends { message?: string; result?: { ok: boolean } },
+    >(request: () => Promise<T>): Promise<T | null> {
         setIsBusy(true);
         try {
             const result = await request();
-            safeStatus(result.message || "Action completed");
+            safeStatus(
+                result.message ||
+                    statusMessage(
+                        result.result?.ok === false
+                            ? "ui_status_action_failed"
+                            : "ui_status_action_completed",
+                    ),
+            );
             return result;
         } catch (error) {
-            safeStatus(`Action failed: ${error.message}`);
+            safeStatus(
+                statusMessage(
+                    "ui_status_action_failed",
+                    undefined,
+                    error.message,
+                ),
+            );
             return null;
         } finally {
             setIsBusy(false);
@@ -551,7 +565,7 @@ export function useConfigStats({
                 completedAt: Date.now(),
             };
             if (!silent) {
-                safeStatus("statistics refreshed");
+                safeStatus(statusMessage("ui_status_statistics_refreshed"));
             }
         } catch (error) {
             console.warn("[SCO/ui] refreshStatistics failed", error);
@@ -568,7 +582,13 @@ export function useConfigStats({
                 inFlight: false,
                 completedAt: Date.now(),
             };
-            safeStatus(`Failed to load statistics: ${error.message}`);
+            safeStatus(
+                statusMessage(
+                    "ui_status_load_statistics_failed",
+                    undefined,
+                    error.message,
+                ),
+            );
         } finally {
             if (statsQueryRef.current.requestSeq === requestSeq) {
                 const desiredQuery = statsQueryRef.current.desiredQuery;

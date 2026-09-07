@@ -445,6 +445,7 @@ export default function GamesTab({
                     </div>
                 </div>
                 <TablePagination
+                    languageManager={languageManager}
                     currentPage={currentPage}
                     onPageChange={handlePageChange}
                     totalRows={totalRowsForPagination}
@@ -726,6 +727,7 @@ export default function GamesTab({
                     </table>
                 </div>
                 <TablePagination
+                    languageManager={languageManager}
                     currentPage={currentPage}
                     onPageChange={handlePageChange}
                     totalRows={totalRowsForPagination}

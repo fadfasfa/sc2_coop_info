@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import type { LanguageManager } from "../../i18n/languageManager";
 import type { DisplayValue, JsonValue } from "../types";
 import styles from "../configStyles";
+import { localizeBackendStatus } from "../statusMessage";
 import type { SettingsActions, SettingsValueReader } from "./settingsTabTypes";
 import {
     clamp,
@@ -47,7 +48,8 @@ export default function SettingsAnalysisGroup({
     );
     const normalizedAnalysisStatus = asTableValue(currentAnalysisStatus).trim();
     const generalAnalysisStatus =
-        normalizedAnalysisStatus || t("ui_stats_analysis_idle");
+        localizeBackendStatus(normalizedAnalysisStatus, languageManager) ||
+        t("ui_stats_analysis_idle");
 
     const logicalCoreCount = getLogicalCoreCount();
     const defaultAnalysisWorkerThreads = getDefaultAnalysisWorkerThreads();

@@ -1,3 +1,242 @@
+.overlayPageRoot:lang(zh-CN) {
+    --overlay-font-family:
+        "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Segoe UI",
+        sans-serif;
+    overflow-wrap: anywhere;
+    --overlay-horizontal-unit: min(1vh, calc((100vw - 4vh) / 48));
+    --overlay-stats-width: min(48vh, calc(100vw - 4vh));
+}
+
+/* Chinese labels need real rows: the legacy absolute offsets put the map
+   and commanders in the same line and cannot accommodate wrapped text. */
+.overlayPageRoot:lang(zh-CN) :global(#name1),
+.overlayPageRoot:lang(zh-CN) :global(#name2) {
+    display: inline-block;
+    position: static;
+    width: 50%;
+    height: auto;
+    line-height: 1.2;
+    white-space: normal;
+    vertical-align: top;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#name2) {
+    text-align: right;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#mutators) {
+    position: static;
+    margin-bottom: 0.6vh;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#com1),
+.overlayPageRoot:lang(zh-CN) :global(#com2) {
+    position: static;
+    width: 50%;
+    max-width: 50%;
+    height: auto;
+    min-height: 1.4em;
+    line-height: 1.4;
+    white-space: normal;
+    flex-wrap: wrap;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.commander-level-name) {
+    overflow: visible;
+    white-space: normal;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#map),
+.overlayPageRoot:lang(zh-CN) :global(#record),
+.overlayPageRoot:lang(zh-CN) :global(#brutal) {
+    position: static;
+    width: 100%;
+    height: auto;
+    line-height: 1.4;
+    white-space: normal;
+    text-align: center;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#apm1),
+.overlayPageRoot:lang(zh-CN) :global(#apm2) {
+    display: inline-block;
+    position: static;
+    width: 50%;
+    height: auto;
+    line-height: 1.4;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#apm2) {
+    text-align: right;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.commstats) {
+    margin-top: 1.5vh;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.prestige),
+.overlayPageRoot:lang(zh-CN) :global(.mastery) {
+    height: auto;
+    line-height: 1.25;
+    white-space: normal;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.units-table thead th) {
+    line-height: 1.25;
+    white-space: normal;
+}
+
+/* Replay statistics use a real document flow in Simplified Chinese. The
+   legacy English/Korean rules below intentionally remain unchanged. */
+.overlayPageRoot:lang(zh-CN) :global(#stats) {
+    transform: scale(var(--overlay-content-scale, 1));
+    transform-origin: top right;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#topstats) {
+    display: block;
+    margin-bottom: 0;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#morestats) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 1vh;
+    row-gap: 0.35vh;
+    margin-top: 0.8vh;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #com1),
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #com2),
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #apm1),
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #apm2) {
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #com1) {
+    grid-column: 1;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #com2) {
+    grid-column: 2;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #map),
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #record),
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #brutal) {
+    grid-column: 1 / -1;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #apm1) {
+    grid-column: 1;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#morestats > #apm2) {
+    grid-column: 2;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.commstats) {
+    margin-top: 1.2vh;
+    min-width: 0;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#commstats2),
+.overlayPageRoot:lang(zh-CN) :global(#amon) {
+    margin-top: 1vh;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(#CMunits3) {
+    margin-top: 0.6vh;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.commander-header) {
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.commander-header > div:first-child) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.units) {
+    margin-top: 0.6vh;
+    padding: 0;
+    min-width: 0;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.units-table) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    table-layout: fixed;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.units-table th),
+.overlayPageRoot:lang(zh-CN) :global(.units-table td) {
+    min-width: 0;
+    height: auto;
+    line-height: 1.45;
+    padding-top: 0.15vh;
+    padding-bottom: 0.15vh;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.units-table thead th) {
+    min-width: 0;
+    max-width: 100%;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.units-table-name-cell),
+.overlayPageRoot:lang(zh-CN) :global(.units-table-name-value) {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.units-table-name-value) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-overflow: clip;
+    line-height: 1.45;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.units-table-col-number),
+.overlayPageRoot:lang(zh-CN) :global(.units-table-kill-percent-value),
+.overlayPageRoot:lang(zh-CN) :global(.units-table-kill-count-value) {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.overlay-session-footer) {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    min-width: 0;
+    margin-top: 1.4vh;
+    padding-bottom: 0.8vh;
+    color: white;
+    font-size: 1.5vh;
+    line-height: 1.35;
+    text-align: right;
+}
+
+.overlayPageRoot:lang(zh-CN) :global(.overlay-session-footer #session) {
+    width: 100%;
+    height: auto;
+    min-height: 1.35em;
+    max-width: 100%;
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
 @font-face {
     font-family: "Eurostile";
     src: url("/overlay/Eurostile-Reg.otf") format("opentype");

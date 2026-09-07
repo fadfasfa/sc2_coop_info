@@ -56,11 +56,13 @@ function localizedWeeklyMutationName(
     languageManager: LanguageManager,
     asTableValue: (value: DisplayValue) => string,
 ): string {
-    const preferred =
-        languageManager.currentLanguage() === "ko" ? row.nameKo : row.nameEn;
-    const fallback =
-        languageManager.currentLanguage() === "ko" ? row.nameEn : row.nameKo;
-    const localizedName = asTableValue(preferred || fallback);
+    const localizedName = asTableValue(
+        languageManager.localizedValue({
+            en: row.nameEn,
+            ko: row.nameKo,
+            "zh-CN": row.nameZhCn,
+        }),
+    );
     if (localizedName !== "") {
         return localizedName;
     }
@@ -81,7 +83,10 @@ function localizedMutatorName(
     languageManager: LanguageManager,
     asTableValue: (value: DisplayValue) => string,
 ): string {
-    return asTableValue(languageManager.localizedValue(mutator.name));
+    return (
+        asTableValue(languageManager.localizedValue(mutator.name)) ||
+        asTableValue(mutator.id)
+    );
 }
 
 function localizeWeeklyDuration(
@@ -410,7 +415,9 @@ export default function WeekliesTab({
                                         <div
                                             className={styles.statsDetailEmpty}
                                         >
-                                            No mutator details available.
+                                            {t(
+                                                "ui_weeklies_no_mutator_details",
+                                            )}
                                         </div>
                                     ) : (
                                         selectedMutators.map(

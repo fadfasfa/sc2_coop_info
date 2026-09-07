@@ -26,6 +26,7 @@ use crate::services::replay_watcher::ReplayWatcherMessage;
 use crate::{
     AppSettings, FirstWinBonusAcquiredTime, Sc2GameState, Sc2GameStateTracker,
     Sc2GameStateTransition, StatsState,
+    monitor_settings::MonitorDescriptor,
     overlay_info::{ResolvedHotkeyBinding, RuntimeFlags},
 };
 
@@ -70,6 +71,7 @@ pub struct BackendState {
     stats_current_replay_files: Arc<Mutex<HashSet<String>>>,
     overlay_replay_data_active: AtomicBool,
     sc2_overlay_keep_visible_until_millis: AtomicU64,
+    latest_sc2_monitor: Arc<Mutex<Option<MonitorDescriptor>>>,
     first_win_bonus_timer_visible: AtomicBool,
     first_win_bonus_timer_hide_after_millis: AtomicU64,
     latest_replay_file_modified_time_seconds: AtomicU64,
@@ -129,6 +131,7 @@ impl BackendState {
             stats_current_replay_files: Arc::new(Mutex::new(HashSet::new())),
             overlay_replay_data_active: AtomicBool::new(false),
             sc2_overlay_keep_visible_until_millis: AtomicU64::new(0),
+            latest_sc2_monitor: Arc::new(Mutex::new(None)),
             first_win_bonus_timer_visible: AtomicBool::new(false),
             first_win_bonus_timer_hide_after_millis: AtomicU64::new(0),
             latest_replay_file_modified_time_seconds: AtomicU64::new(0),
@@ -177,6 +180,19 @@ impl BackendState {
     pub fn set_overlay_replay_data_active(&self, active: bool) {
         self.overlay_replay_data_active
             .store(active, Ordering::Release);
+    }
+
+    pub fn latest_sc2_monitor(&self) -> Option<MonitorDescriptor> {
+        self.latest_sc2_monitor
+            .lock()
+            .ok()
+            .and_then(|monitor| monitor.clone())
+    }
+
+    pub fn set_latest_sc2_monitor(&self, monitor: MonitorDescriptor) {
+        if let Ok(mut latest) = self.latest_sc2_monitor.lock() {
+            *latest = Some(monitor);
+        }
     }
 
     pub fn enter_player_stats_overlay_mode(&self) {

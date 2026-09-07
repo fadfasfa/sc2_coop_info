@@ -5,6 +5,48 @@ import type {
     OverlayPlayerStatsRow,
 } from "../../../bindings/overlay";
 
+function translatedPlayerText(
+    languageManager: LanguageManager,
+    id: string,
+    values: Record<string, ReactNode>,
+): ReactNode {
+    return languageManager
+        .translate(id)
+        .split(/(\{\{\w+\}\})/g)
+        .map((part, index) => (
+            <Fragment key={index}>
+                {/^\{\{\w+\}\}$/.test(part)
+                    ? (values[part.slice(2, -2)] ?? part)
+                    : part}
+            </Fragment>
+        ));
+}
+
+export function localizedLastSeen(
+    seconds: number | null | undefined,
+    fallback: string,
+    languageManager: LanguageManager,
+): string {
+    if (seconds == null || !Number.isFinite(seconds) || seconds < 0) {
+        return fallback;
+    }
+    const units: Array<[Intl.RelativeTimeFormatUnit, number]> = [
+        ["year", 365 * 86400],
+        ["month", 30 * 86400],
+        ["day", 86400],
+        ["hour", 3600],
+        ["minute", 60],
+        ["second", 1],
+    ];
+    const [unit, divisor] = units.find(([, size]) => seconds >= size) ?? [
+        "second",
+        1,
+    ];
+    return new Intl.RelativeTimeFormat(languageManager.currentLanguage(), {
+        numeric: "auto",
+    }).format(-Math.floor(seconds / divisor), unit);
+}
+
 function renderPlayerStatRow(
     playerName: string,
     row: OverlayPlayerStatsRow,
@@ -13,8 +55,15 @@ function renderPlayerStatRow(
     if (row.kind === "no_games") {
         return (
             <>
-                No games played with{" "}
-                <span className="player_stat">{playerName}</span>
+                {translatedPlayerText(
+                    overlayLanguageManager,
+                    "ui_overlay_player_no_games",
+                    {
+                        player: (
+                            <span className="player_stat">{playerName}</span>
+                        ),
+                    },
+                )}
                 {row.note != null && row.note !== "" ? (
                     <>
                         <br />
@@ -34,11 +83,29 @@ function renderPlayerStatRow(
 
     return (
         <>
-            You played {totalGames} games with{" "}
-            <span className="player_stat">{playerName}</span> ({winRate}%
-            winrate | {killRate}% kills | {row.apm} APM)
+            {translatedPlayerText(
+                overlayLanguageManager,
+                "ui_overlay_player_summary",
+                {
+                    player: <span className="player_stat">{playerName}</span>,
+                    games: totalGames,
+                    winRate,
+                    killRate,
+                    apm: row.apm,
+                },
+            )}
             <br />
-            Last game played together: {row.last_seen_relative}
+            {translatedPlayerText(
+                overlayLanguageManager,
+                "ui_overlay_player_last_seen",
+                {
+                    time: localizedLastSeen(
+                        row.last_seen_seconds,
+                        row.last_seen_relative,
+                        overlayLanguageManager,
+                    ),
+                },
+            )}
             {row.note != null && row.note !== "" ? (
                 <>
                     <br />

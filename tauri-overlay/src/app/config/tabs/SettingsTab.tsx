@@ -122,6 +122,7 @@ export default function SettingsTab({
         formatManualFirstWinBonusTimeDisplay(
             read(["first_win_bonus_times", server], null),
             t("ui_settings_first_win_bonus_manual_never_set"),
+            languageManager.currentLanguage(),
         );
     const promptManualFirstWinBonusTime = (server: Sc2Server) => {
         const value = window.prompt(
@@ -320,7 +321,7 @@ export default function SettingsTab({
                 .join(" ")}
         >
             <Grid container className={styles.card}>
-                <Grid size={4}>
+                <Grid size={4} className={styles.mainSettingsColumn}>
                     <div className={styles.mainSettingsTop}>
                         <div className={styles.mainSettingsGroups}>
                             <section className={styles.mainSettingsGroup}>
@@ -634,7 +635,7 @@ export default function SettingsTab({
                         </div>
                     </div>
                 </Grid>
-                <Grid size={4}>
+                <Grid size={4} className={styles.mainSettingsColumn}>
                     <div className={styles.mainSettingsTop}>
                         <div className={styles.mainSettingsGroups}>
                             <div className={styles.mainSettingsGroup}>
@@ -857,7 +858,7 @@ export default function SettingsTab({
                         </div>
                     </div>
                 </Grid>
-                <Grid size={4}>
+                <Grid size={4} className={styles.mainSettingsColumn}>
                     <div className={styles.mainSettingsGroups}>
                         <div
                             className={[
@@ -978,10 +979,7 @@ export default function SettingsTab({
                                                 ]
                                                     .filter(Boolean)
                                                     .join(" ")}
-                                                value={String(
-                                                    read(["language"], "en") ||
-                                                        "en",
-                                                )}
+                                                value={languageManager.currentLanguage()}
                                                 onChange={(event) =>
                                                     onChange(
                                                         ["language"],
@@ -994,6 +992,9 @@ export default function SettingsTab({
                                                 </option>
                                                 <option value="ko">
                                                     {t("ui_language_korean")}
+                                                </option>
+                                                <option value="zh-CN">
+                                                    简体中文
                                                 </option>
                                             </select>
                                         </Grid>
@@ -1049,6 +1050,15 @@ export default function SettingsTab({
                                                     ),
                                                 )}
                                             </select>
+                                            <div
+                                                className={
+                                                    styles.mainRowDescription
+                                                }
+                                            >
+                                                {t(
+                                                    "ui_settings_monitor_follow_description",
+                                                )}
+                                            </div>
                                         </Grid>
                                     </Grid>
                                 </Grid>

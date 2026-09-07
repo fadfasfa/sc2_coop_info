@@ -2,1745 +2,2807 @@
     "ui_settings_language_label": {
         "en": "Language",
         "ko": "언어",
-        "aliases": ["Language", "언어"]
+        "aliases": [
+            "Language",
+            "언어"
+        ],
+        "zh-CN": "语言"
     },
     "ui_settings_start_with_windows": {
         "en": "Start with Windows",
-        "ko": "Windows 시작 시 실행"
+        "ko": "Windows 시작 시 실행",
+        "zh-CN": "随 Windows 启动"
     },
     "ui_settings_start_minimized": {
         "en": "Start minimized",
-        "ko": "최소화된 상태로 시작"
+        "ko": "최소화된 상태로 시작",
+        "zh-CN": "启动时最小化"
     },
     "ui_settings_auto_update": {
         "en": "Audo update on launch",
-        "ko": "시작 시 자동 업데이트"
+        "ko": "시작 시 자동 업데이트",
+        "zh-CN": "启动时自动更新"
     },
     "ui_settings_minimize_to_tray": {
         "en": "Minimize to tray",
-        "ko": "트레이로 최소화"
+        "ko": "트레이로 최소화",
+        "zh-CN": "最小化到托盘"
     },
     "ui_settings_enable_logging": {
         "en": "Enable logging",
-        "ko": "파일에 로그 남기기"
+        "ko": "파일에 로그 남기기",
+        "zh-CN": "记录日志"
     },
     "ui_settings_show_session_stats": {
         "en": "Show session stats",
-        "ko": "세션 통계 표시"
+        "ko": "세션 통계 표시",
+        "zh-CN": "显示本次会话统计"
     },
     "ui_settings_show_player_stats_and_notes": {
         "en": "Show player stats and notes at game start",
-        "ko": "게임 시작 시 플레이어 통계와 메모 표시"
+        "ko": "게임 시작 시 플레이어 통계와 메모 표시",
+        "zh-CN": "开局时显示玩家统计和备注"
     },
     "ui_settings_show_replay_info_after_game": {
         "en": "Show replay info after the game ends",
-        "ko": "게임 종료 후 리플레이 정보 표시"
+        "ko": "게임 종료 후 리플레이 정보 표시",
+        "zh-CN": "对局结束后显示录像信息"
     },
     "ui_settings_duration": {
         "en": "Overlay duration (seconds)",
-        "ko": "오버레이 표시 시간 (초)"
+        "ko": "오버레이 표시 시간 (초)",
+        "zh-CN": "悬浮窗显示时长（秒）"
     },
     "ui_settings_analysis_worker_threads": {
         "en": "Worker core count",
-        "ko": "작업 코어 개수"
+        "ko": "작업 코어 개수",
+        "zh-CN": "分析工作核心数"
     },
     "ui_settings_monitor": {
         "en": "Monitor",
-        "ko": "모니터"
+        "ko": "모니터",
+        "zh-CN": "显示器"
+    },
+    "ui_settings_monitor_follow_description": {
+        "en": "Prefer the monitor where SC2 is running; use the selected monitor when SC2 cannot be detected.",
+        "ko": "SC2가 실행 중인 모니터를 우선 사용하며, SC2를 감지할 수 없을 때 선택한 모니터를 사용합니다.",
+        "zh-CN": "优先跟随 SC2 所在显示器；无法检测时使用所选显示器。"
     },
     "ui_settings_show_charts": {
         "en": "Show charts",
-        "ko": "차트 표시"
+        "ko": "차트 표시",
+        "zh-CN": "显示图表"
     },
     "ui_settings_hide_nicknames_in_overlay": {
         "en": "Hide nicknames in overlay",
-        "ko": "오버레이에서 닉네임 숨기기"
+        "ko": "오버레이에서 닉네임 숨기기",
+        "zh-CN": "在悬浮窗中隐藏昵称"
     },
     "ui_settings_first_win_bonus_timer": {
         "en": "First win bonus timer",
-        "ko": "첫 승 보너스 타이머"
+        "ko": "첫 승 보너스 타이머",
+        "zh-CN": "首胜奖励计时器"
     },
     "ui_settings_first_win_bonus_timer_hidden": {
         "en": "Do not display",
-        "ko": "표시하지 않음"
+        "ko": "표시하지 않음",
+        "zh-CN": "不显示"
     },
     "ui_settings_first_win_bonus_timer_available_only": {
         "en": "Only when available",
-        "ko": "습득 가능할 때만 표시"
+        "ko": "습득 가능할 때만 표시",
+        "zh-CN": "仅在奖励可用时显示"
     },
     "ui_settings_first_win_bonus_timer_always": {
         "en": "Always display",
-        "ko": "항상 표시"
+        "ko": "항상 표시",
+        "zh-CN": "始终显示"
     },
     "ui_settings_first_win_bonus_group": {
         "en": "First win bonus records",
-        "ko": "첫 승 보너스 기록"
+        "ko": "첫 승 보너스 기록",
+        "zh-CN": "首胜奖励记录"
     },
     "ui_settings_first_win_bonus_servers_shown": {
         "en": "Servers shown",
-        "ko": "표시할 서버"
+        "ko": "표시할 서버",
+        "zh-CN": "显示的服务器"
     },
     "ui_settings_first_win_bonus_servers_latest": {
         "en": "Latest server only",
-        "ko": "최근 서버만"
+        "ko": "최근 서버만",
+        "zh-CN": "仅最近使用的服务器"
     },
     "ui_settings_first_win_bonus_servers_all": {
         "en": "All  servers",
-        "ko": "모든 서버"
+        "ko": "모든 서버",
+        "zh-CN": "所有服务器"
     },
     "ui_sc2_server_america": {
         "en": "America",
-        "ko": "아메리카"
+        "ko": "아메리카",
+        "zh-CN": "美洲"
     },
     "ui_sc2_server_europe": {
         "en": "Europe",
-        "ko": "유럽"
+        "ko": "유럽",
+        "zh-CN": "欧洲"
     },
     "ui_sc2_server_asia": {
         "en": "Asia",
-        "ko": "아시아"
+        "ko": "아시아",
+        "zh-CN": "亚洲"
     },
     "ui_settings_first_win_bonus_manual_label": {
         "en": "Latest first win bonus time",
-        "ko": "최근 첫 승 보너스 시간"
+        "ko": "최근 첫 승 보너스 시간",
+        "zh-CN": "最近一次首胜奖励时间"
     },
     "ui_settings_first_win_bonus_manual_button": {
         "en": "Set manually",
-        "ko": "직접 설정"
+        "ko": "직접 설정",
+        "zh-CN": "手动设置"
     },
     "ui_settings_first_win_bonus_manual_never_set": {
         "en": "Never set",
-        "ko": "설정되지 않음"
+        "ko": "설정되지 않음",
+        "zh-CN": "尚未设置"
     },
     "ui_settings_first_win_bonus_manual_prompt": {
         "en": "Enter the latest {{server}} first win bonus time (YYYY-MM-DD HH:mm).",
-        "ko": "{{server}} 서버의 최근 첫 승 보너스 시간을 입력하세요 (YYYY-MM-DD HH:mm)."
+        "ko": "{{server}} 서버의 최근 첫 승 보너스 시간을 입력하세요 (YYYY-MM-DD HH:mm).",
+        "zh-CN": "请输入{{server}}最近一次首胜奖励时间（YYYY-MM-DD HH:mm）。"
     },
     "ui_settings_first_win_bonus_manual_invalid": {
         "en": "Invalid time. Use YYYY-MM-DD HH:mm.",
-        "ko": "잘못된 시간입니다. YYYY-MM-DD HH:mm 형식을 사용하세요."
+        "ko": "잘못된 시간입니다. YYYY-MM-DD HH:mm 형식을 사용하세요.",
+        "zh-CN": "时间无效，请使用 YYYY-MM-DD HH:mm 格式。"
     },
     "ui_settings_dark_theme": {
         "en": "Dark theme",
-        "ko": "다크 테마"
+        "ko": "다크 테마",
+        "zh-CN": "深色主题"
     },
     "ui_settings_paths_description": {
         "en": "StarCraft II account folder / Screenshot folder",
-        "ko": "스타크래프트 II 계정 폴더 / 스크린샷 폴더"
+        "ko": "스타크래프트 II 계정 폴더 / 스크린샷 폴더",
+        "zh-CN": "《星际争霸II》账号目录 / 截图目录"
     },
     "ui_settings_account_folder": {
         "en": "Change",
-        "ko": "변경"
+        "ko": "변경",
+        "zh-CN": "更改"
     },
     "ui_settings_account_folder_path_title": {
         "en": "Account folder path",
-        "ko": "계정 폴더 경로"
+        "ko": "계정 폴더 경로",
+        "zh-CN": "账号目录路径"
     },
     "ui_settings_open_account_folder": {
         "en": "Open",
-        "ko": "열기"
+        "ko": "열기",
+        "zh-CN": "打开"
     },
     "ui_settings_screenshot_folder": {
         "en": "Change",
-        "ko": "변경"
+        "ko": "변경",
+        "zh-CN": "更改"
     },
     "ui_settings_screenshot_folder_path_title": {
         "en": "Screenshot folder path",
-        "ko": "스크린샷 폴더 경로"
+        "ko": "스크린샷 폴더 경로",
+        "zh-CN": "截图目录路径"
     },
     "ui_settings_open_screenshot_folder": {
         "en": "Open",
-        "ko": "열기"
+        "ko": "열기",
+        "zh-CN": "打开"
     },
     "ui_settings_account_folder_empty": {
         "en": "SC2 Account folder empty",
-        "ko": "스타크래프트2 계정 폴더 없음"
+        "ko": "스타크래프트2 계정 폴더 없음",
+        "zh-CN": "尚未设置 SC2 账号目录"
     },
     "ui_settings_screenshot_folder_empty": {
         "en": "Screenshot folder empty",
-        "ko": "스크린샷 폴더 없음"
+        "ko": "스크린샷 폴더 없음",
+        "zh-CN": "尚未设置截图目录"
     },
     "ui_settings_hotkeys": {
         "en": "Hotkeys",
-        "ko": "단축키"
+        "ko": "단축키",
+        "zh-CN": "快捷键"
     },
     "ui_settings_hotkey_show_hide": {
         "en": "Show / Hide",
-        "ko": "표시 / 숨기기"
+        "ko": "표시 / 숨기기",
+        "zh-CN": "显示 / 隐藏"
     },
     "ui_settings_hotkey_show": {
         "en": "Show",
-        "ko": "표시"
+        "ko": "표시",
+        "zh-CN": "显示"
     },
     "ui_settings_hotkey_hide": {
         "en": "Hide",
-        "ko": "숨기기"
+        "ko": "숨기기",
+        "zh-CN": "隐藏"
     },
     "ui_settings_hotkey_show_newer_replay": {
         "en": "Show newer replay",
-        "ko": "최근 리플레이 표시"
+        "ko": "최근 리플레이 표시",
+        "zh-CN": "显示较新的录像"
     },
     "ui_settings_hotkey_show_older_replay": {
         "en": "Show older replay",
-        "ko": "이전 리플레이 표시"
+        "ko": "이전 리플레이 표시",
+        "zh-CN": "显示较早的录像"
     },
     "ui_settings_hotkey_show_player_stats": {
         "en": "Show player stats",
-        "ko": "플레이어 통계 표시"
+        "ko": "플레이어 통계 표시",
+        "zh-CN": "显示玩家统计"
     },
     "ui_settings_hotkey_recording": {
         "en": "Recording...",
-        "ko": "기록 중..."
+        "ko": "기록 중...",
+        "zh-CN": "正在记录按键…"
     },
     "ui_settings_hotkey_press_shortcut": {
         "en": "Press shortcut",
-        "ko": "단축키 입력"
+        "ko": "단축키 입력",
+        "zh-CN": "请按快捷键"
     },
     "ui_settings_customize_colors": {
         "en": "Customize colors",
-        "ko": "색상 사용자 지정"
+        "ko": "색상 사용자 지정",
+        "zh-CN": "自定义颜色"
     },
     "ui_settings_player_1": {
         "en": "Player 1",
-        "ko": "플레이어 1"
+        "ko": "플레이어 1",
+        "zh-CN": "玩家 1"
     },
     "ui_settings_player_2": {
         "en": "Player 2",
-        "ko": "플레이어 2"
+        "ko": "플레이어 2",
+        "zh-CN": "玩家 2"
     },
     "ui_settings_amon": {
         "en": "Amon",
-        "ko": "아몬"
+        "ko": "아몬",
+        "zh-CN": "埃蒙"
     },
     "ui_settings_mastery": {
         "en": "Mastery",
-        "ko": "마스터 힘"
+        "ko": "마스터 힘",
+        "zh-CN": "精通"
     },
     "ui_settings_color_suffix": {
         "en": "color",
-        "ko": "색상"
+        "ko": "색상",
+        "zh-CN": "颜色"
     },
     "ui_settings_overlay_screenshot": {
         "en": "Overlay screenshot",
-        "ko": "오버레이 스크린샷"
+        "ko": "오버레이 스크린샷",
+        "zh-CN": "截取悬浮窗"
     },
     "ui_settings_parse_replay": {
         "en": "Parse replay",
-        "ko": "리플레이 분석"
+        "ko": "리플레이 분석",
+        "zh-CN": "解析录像"
     },
     "ui_settings_create_desktop_shortcut": {
         "en": "Create desktop shortcut",
-        "ko": "바탕 화면 바로가기 만들기"
+        "ko": "바탕 화면 바로가기 만들기",
+        "zh-CN": "创建桌面快捷方式"
     },
     "ui_settings_check_for_update": {
         "en": "Check for update",
-        "ko": "최신 버전 체크"
+        "ko": "최신 버전 체크",
+        "zh-CN": "检查更新"
     },
     "ui_update_confirm_question": {
         "en": "A new version exists.  Do you wish to update?",
-        "ko": "새 버전이 존재합니다.  업데이트 하시겠습니까?"
+        "ko": "새 버전이 존재합니다.  업데이트 하시겠습니까?",
+        "zh-CN": "有新版本可用，是否更新？"
     },
     "ui_update_no_update_exists": {
         "en": "This is the newest version.",
-        "ko": "현재 버전이 최신 버전입니다."
+        "ko": "현재 버전이 최신 버전입니다.",
+        "zh-CN": "当前已是最新版本。"
     },
     "ui_settings_reset": {
         "en": "Revert",
-        "ko": "되돌리기"
+        "ko": "되돌리기",
+        "zh-CN": "恢复"
     },
     "ui_settings_apply": {
         "en": "Save",
-        "ko": "저장"
+        "ko": "저장",
+        "zh-CN": "保存"
     },
     "ui_settings_launch_setting": {
         "en": "Launch setting",
-        "ko": "실행 설정"
+        "ko": "실행 설정",
+        "zh-CN": "启动设置"
     },
     "ui_settings_overlay_options": {
         "en": "Overlay options",
-        "ko": "오버레이 옵션"
+        "ko": "오버레이 옵션",
+        "zh-CN": "悬浮窗选项"
     },
     "ui_settings_etc": {
         "en": "Etc",
-        "ko": "기타"
+        "ko": "기타",
+        "zh-CN": "其他"
     },
     "ui_patch_notes_title": {
         "en": "Patch notes",
-        "ko": "패치 노트"
+        "ko": "패치 노트",
+        "zh-CN": "更新说明"
     },
     "ui_patch_notes_current": {
         "en": "current",
-        "ko": "현재"
+        "ko": "현재",
+        "zh-CN": "当前版本"
     },
     "ui_patch_notes_latest": {
         "en": "latest",
-        "ko": "최신"
+        "ko": "최신",
+        "zh-CN": "最新版本"
     },
     "ui_patch_notes_loading": {
         "en": "Loading patch notes…",
-        "ko": "패치 노트를 불러오는 중…"
+        "ko": "패치 노트를 불러오는 중…",
+        "zh-CN": "正在加载更新说明…"
     },
     "ui_patch_notes_error": {
         "en": "Patch notes could not be loaded.",
-        "ko": "패치 노트를 불러올 수 없습니다."
+        "ko": "패치 노트를 불러올 수 없습니다.",
+        "zh-CN": "无法加载更新说明。"
     },
     "ui_patch_notes_retry": {
         "en": "Retry",
-        "ko": "다시 시도"
+        "ko": "다시 시도",
+        "zh-CN": "重试"
     },
     "ui_patch_notes_empty": {
         "en": "No releases are available.",
-        "ko": "사용 가능한 릴리스가 없습니다."
+        "ko": "사용 가능한 릴리스가 없습니다.",
+        "zh-CN": "暂无可用版本。"
     },
     "ui_patch_notes_no_content": {
         "en": "No patch notes provided.",
-        "ko": "제공된 패치 노트가 없습니다."
+        "ko": "제공된 패치 노트가 없습니다.",
+        "zh-CN": "未提供更新说明。"
     },
     "ui_patch_notes_show_more": {
         "en": "Show more",
-        "ko": "더 보기"
+        "ko": "더 보기",
+        "zh-CN": "显示更多"
     },
     "ui_tab_settings": {
         "en": "Settings",
-        "ko": "설정"
+        "ko": "설정",
+        "zh-CN": "设置"
     },
     "ui_tab_games": {
         "en": "Games",
-        "ko": "게임"
+        "ko": "게임",
+        "zh-CN": "对局"
     },
     "ui_tab_players": {
         "en": "Players",
-        "ko": "플레이어"
+        "ko": "플레이어",
+        "zh-CN": "玩家"
     },
     "ui_tab_weeklies": {
         "en": "Weeklies",
-        "ko": "주간 돌연변이"
+        "ko": "주간 돌연변이",
+        "zh-CN": "周突变"
     },
     "ui_tab_statistics": {
         "en": "Statistics",
-        "ko": "통계"
+        "ko": "통계",
+        "zh-CN": "统计"
     },
     "ui_statistics_subtab_maps": {
         "en": "Maps",
-        "ko": "맵"
+        "ko": "맵",
+        "zh-CN": "地图"
     },
     "ui_statistics_subtab_allied_commanders": {
         "en": "Allied commanders",
-        "ko": "동맹 사령관"
+        "ko": "동맹 사령관",
+        "zh-CN": "盟友指挥官"
     },
     "ui_statistics_subtab_my_commanders": {
         "en": "My commanders",
-        "ko": "내 사령관"
+        "ko": "내 사령관",
+        "zh-CN": "我的指挥官"
     },
     "ui_statistics_subtab_difficulty_regions": {
         "en": "Difficulty and regions",
-        "ko": "난이도 및 지역"
+        "ko": "난이도 및 지역",
+        "zh-CN": "难度与地区"
     },
     "ui_statistics_subtab_unit_stats": {
         "en": "Unit stats",
-        "ko": "유닛 통계"
+        "ko": "유닛 통계",
+        "zh-CN": "单位统计"
     },
     "ui_statistics_subtab_amon_stats": {
         "en": "Amon stats",
-        "ko": "아몬 통계"
+        "ko": "아몬 통계",
+        "zh-CN": "埃蒙统计"
     },
     "ui_statistics_subtab_detailed_analysis": {
         "en": "Detailed analysis",
-        "ko": "상세 분석"
+        "ko": "상세 분석",
+        "zh-CN": "详细分析"
     },
     "ui_tab_randomizer": {
         "en": "Randomizer",
-        "ko": "랜덤 선택"
+        "ko": "랜덤 선택",
+        "zh-CN": "随机选择器"
     },
     "ui_tab_performance": {
         "en": "Performance",
-        "ko": "성능"
+        "ko": "성능",
+        "zh-CN": "性能"
     },
     "ui_tab_links": {
         "en": "Links",
-        "ko": "링크"
+        "ko": "링크",
+        "zh-CN": "链接"
     },
     "ui_games_search": {
         "en": "Search",
-        "ko": "검색"
+        "ko": "검색",
+        "zh-CN": "搜索"
     },
     "ui_games_filter_difficulty": {
         "en": "Difficulty",
-        "ko": "난이도"
+        "ko": "난이도",
+        "zh-CN": "难度"
     },
     "ui_games_filter_mode": {
         "en": "Mode",
-        "ko": "유형"
+        "ko": "유형",
+        "zh-CN": "模式"
     },
     "ui_games_column_map": {
         "en": "Map",
-        "ko": "맵"
+        "ko": "맵",
+        "zh-CN": "地图"
     },
     "ui_games_column_result": {
         "en": "Result",
-        "ko": "결과"
+        "ko": "결과",
+        "zh-CN": "结果"
     },
     "ui_games_column_player_1": {
         "en": "Player 1",
-        "ko": "플레이어 1"
+        "ko": "플레이어 1",
+        "zh-CN": "玩家 1"
     },
     "ui_games_column_player_2": {
         "en": "Player 2",
-        "ko": "플레이어 2"
+        "ko": "플레이어 2",
+        "zh-CN": "玩家 2"
     },
     "ui_games_column_enemy": {
         "en": "Enemy",
-        "ko": "적"
+        "ko": "적",
+        "zh-CN": "敌军"
     },
     "ui_games_column_length": {
         "en": "Playtime",
-        "ko": "게임 시간"
+        "ko": "게임 시간",
+        "zh-CN": "对局时长"
     },
     "ui_games_column_difficulty": {
         "en": "Difficulty",
-        "ko": "난이도"
+        "ko": "난이도",
+        "zh-CN": "难度"
     },
     "ui_games_column_mutators": {
         "en": "Mutators",
-        "ko": "돌연변이원"
+        "ko": "돌연변이원",
+        "zh-CN": "突变因子"
     },
     "ui_games_column_time": {
         "en": "Time",
-        "ko": "시간"
+        "ko": "시간",
+        "zh-CN": "时间"
     },
     "ui_games_column_actions": {
         "en": "Actions",
-        "ko": "동작"
+        "ko": "동작",
+        "zh-CN": "操作"
     },
     "ui_language_english": {
         "en": "English",
         "ko": "English",
-        "aliases": ["English", "영어"]
+        "aliases": [
+            "English",
+            "영어"
+        ],
+        "zh-CN": "English"
     },
     "ui_language_korean": {
         "en": "한국어",
         "ko": "한국어",
-        "aliases": ["Korean", "한국어"]
+        "aliases": [
+            "Korean",
+            "한국어"
+        ],
+        "zh-CN": "한국어"
     },
     "ui_overlay_weekly": {
         "en": "Weekly",
-        "ko": "주간"
+        "ko": "주간",
+        "zh-CN": "周突变"
     },
     "ui_overlay_custom": {
         "en": "Custom",
-        "ko": "사용자 지정"
+        "ko": "사용자 지정",
+        "zh-CN": "自定义"
     },
     "ui_overlay_randomized_commander": {
         "en": "Randomized commander",
-        "ko": "무작위 사령관"
+        "ko": "무작위 사령관",
+        "zh-CN": "随机指挥官"
     },
     "ui_overlay_session": {
         "en": "Session",
-        "ko": "세션"
+        "ko": "세션",
+        "zh-CN": "本次会话"
     },
     "ui_overlay_wins": {
         "en": "wins",
-        "ko": "승"
+        "ko": "승",
+        "zh-CN": "胜"
     },
     "ui_overlay_games": {
         "en": "games",
-        "ko": "게임"
+        "ko": "게임",
+        "zh-CN": "局"
     },
     "ui_overlay_kills": {
         "en": "kills",
-        "ko": "처치"
+        "ko": "처치",
+        "zh-CN": "击杀"
     },
     "ui_overlay_best_time": {
         "en": "BEST TIME!",
-        "ko": "최고 기록!"
+        "ko": "최고 기록!",
+        "zh-CN": "最佳用时！"
     },
     "ui_overlay_no_data": {
         "en": "NO DATA",
-        "ko": "데이터 없음"
+        "ko": "데이터 없음",
+        "zh-CN": "暂无数据"
     },
     "ui_overlay_no_player_data": {
         "en": "No player data available",
-        "ko": "플레이어 데이터가 없습니다"
+        "ko": "플레이어 데이터가 없습니다",
+        "zh-CN": "暂无玩家数据"
     },
     "ui_overlay_first_win_bonus_title": {
         "en": "First win bonus",
-        "ko": "첫 승 보너스"
+        "ko": "첫 승 보너스",
+        "zh-CN": "首胜奖励"
     },
     "ui_overlay_first_win_bonus_available": {
         "en": "Available now",
-        "ko": "지금 가능"
+        "ko": "지금 가능",
+        "zh-CN": "现已可用"
     },
     "ui_overlay_first_win_bonus_unmeasured": {
         "en": "-",
-        "ko": "-"
+        "ko": "-",
+        "zh-CN": "-"
     },
     "ui_overlay_first_win_bonus_remaining": {
         "en": "Available in {{time}}",
-        "ko": "{{time}} 후 획득 가능"
+        "ko": "{{time}} 후 획득 가능",
+        "zh-CN": "{{time}}后可用"
     },
     "ui_overlay_my_commander_placeholder": {
         "en": "[Me]",
-        "ko": "[나]"
+        "ko": "[나]",
+        "zh-CN": "[我方]"
     },
     "ui_overlay_ally_commander_placeholder": {
         "en": "[Ally]",
-        "ko": "[동맹]"
+        "ko": "[동맹]",
+        "zh-CN": "[盟友]"
     },
     "ui_overlay_note": {
         "en": "Player note",
-        "ko": "플레이어 메모"
+        "ko": "플레이어 메모",
+        "zh-CN": "玩家备注"
     },
     "ui_overlay_metric_army": {
         "en": "Army value",
-        "ko": "전투 유닛 가치"
+        "ko": "전투 유닛 가치",
+        "zh-CN": "部队价值"
     },
     "ui_overlay_metric_supply": {
         "en": "Supply used",
-        "ko": "보급품 사용량"
+        "ko": "보급품 사용량",
+        "zh-CN": "已用补给"
     },
     "ui_overlay_metric_killed": {
         "en": "Kill count",
-        "ko": "처치 수"
+        "ko": "처치 수",
+        "zh-CN": "击杀数"
     },
     "ui_overlay_metric_mining": {
         "en": "Resource collection rate",
-        "ko": "자원 수집률"
+        "ko": "자원 수집률",
+        "zh-CN": "资源采集速率"
     },
     "race_terran": {
         "en": "Terran",
         "ko": "테란",
-        "aliases": ["Terran", "테란"]
+        "aliases": [
+            "Terran",
+            "테란"
+        ],
+        "zh-CN": "人类"
     },
     "race_zerg": {
         "en": "Zerg",
         "ko": "저그",
-        "aliases": ["Zerg", "저그"]
+        "aliases": [
+            "Zerg",
+            "저그"
+        ],
+        "zh-CN": "异虫"
     },
     "race_protoss": {
         "en": "Protoss",
         "ko": "프로토스",
-        "aliases": ["Protoss", "프로토스"]
+        "aliases": [
+            "Protoss",
+            "프로토스"
+        ],
+        "zh-CN": "星灵"
     },
     "race_random": {
         "en": "Random",
         "ko": "무작위",
-        "aliases": ["Random", "무작위"]
+        "aliases": [
+            "Random",
+            "무작위"
+        ],
+        "zh-CN": "随机"
     },
     "race_unknown": {
         "en": "Unknown",
         "ko": "알 수 없음",
-        "aliases": ["Unknown", "알 수 없음"]
+        "aliases": [
+            "Unknown",
+            "알 수 없음"
+        ],
+        "zh-CN": "未知"
     },
     "result_victory": {
         "en": "Victory",
         "ko": "승리",
-        "aliases": ["Victory", "승리"]
+        "aliases": [
+            "Victory",
+            "승리"
+        ],
+        "zh-CN": "胜利"
     },
     "result_defeat": {
         "en": "Defeat",
         "ko": "패배",
-        "aliases": ["Defeat", "패배"]
+        "aliases": [
+            "Defeat",
+            "패배"
+        ],
+        "zh-CN": "失败"
     },
     "result_failed": {
         "en": "Failed",
         "ko": "실패",
-        "aliases": ["Failed", "실패", "Unparsed"]
+        "aliases": [
+            "Failed",
+            "실패",
+            "Unparsed"
+        ],
+        "zh-CN": "失败"
     },
     "result_undecided": {
         "en": "Undecided",
         "ko": "미결정",
-        "aliases": ["Undecided", "미결정"]
+        "aliases": [
+            "Undecided",
+            "미결정"
+        ],
+        "zh-CN": "未定"
     },
     "result_win": {
         "en": "Win",
         "ko": "승리",
-        "aliases": ["Win", "승"]
+        "aliases": [
+            "Win",
+            "승"
+        ],
+        "zh-CN": "胜"
     },
     "result_loss": {
         "en": "Loss",
         "ko": "패배",
-        "aliases": ["Loss", "패"]
+        "aliases": [
+            "Loss",
+            "패"
+        ],
+        "zh-CN": "负"
     },
     "difficulty_casual": {
         "en": "Casual",
         "ko": "캐주얼",
-        "aliases": ["Casual", "캐주얼"]
+        "aliases": [
+            "Casual",
+            "캐주얼"
+        ],
+        "zh-CN": "休闲"
     },
     "difficulty_normal": {
         "en": "Normal",
         "ko": "보통",
-        "aliases": ["Normal", "보통"]
+        "aliases": [
+            "Normal",
+            "보통"
+        ],
+        "zh-CN": "普通"
     },
     "difficulty_hard": {
         "en": "Hard",
         "ko": "어려움",
-        "aliases": ["Hard", "어려움"]
+        "aliases": [
+            "Hard",
+            "어려움"
+        ],
+        "zh-CN": "困难"
     },
     "difficulty_brutal": {
         "en": "Brutal",
         "ko": "아주 어려움",
-        "aliases": ["Brutal", "아주 어려움"]
+        "aliases": [
+            "Brutal",
+            "아주 어려움"
+        ],
+        "zh-CN": "残酷"
     },
     "difficulty_brutal_plus": {
         "en": "Brutal+",
         "ko": "아주 어려움+",
-        "aliases": ["Brutal+", "아주 어려움+"]
+        "aliases": [
+            "Brutal+",
+            "아주 어려움+"
+        ],
+        "zh-CN": "残酷+"
     },
     "difficulty_brutal_plus_1": {
         "en": "B+1",
         "ko": "아주 어려움+1",
-        "aliases": ["B+1", "Brutal+1", "아주 어려움+1"]
+        "aliases": [
+            "B+1",
+            "Brutal+1",
+            "아주 어려움+1"
+        ],
+        "zh-CN": "残酷+1"
     },
     "difficulty_brutal_plus_2": {
         "en": "B+2",
         "ko": "아주 어려움+2",
-        "aliases": ["B+2", "Brutal+2", "아주 어려움+2"]
+        "aliases": [
+            "B+2",
+            "Brutal+2",
+            "아주 어려움+2"
+        ],
+        "zh-CN": "残酷+2"
     },
     "difficulty_brutal_plus_3": {
         "en": "B+3",
         "ko": "아주 어려움+3",
-        "aliases": ["B+3", "Brutal+3", "아주 어려움+3"]
+        "aliases": [
+            "B+3",
+            "Brutal+3",
+            "아주 어려움+3"
+        ],
+        "zh-CN": "残酷+3"
     },
     "difficulty_brutal_plus_4": {
         "en": "B+4",
         "ko": "아주 어려움+4",
-        "aliases": ["B+4", "Brutal+4", "아주 어려움+4"]
+        "aliases": [
+            "B+4",
+            "Brutal+4",
+            "아주 어려움+4"
+        ],
+        "zh-CN": "残酷+4"
     },
     "difficulty_brutal_plus_5": {
         "en": "B+5",
         "ko": "아주 어려움+5",
-        "aliases": ["B+5", "Brutal+5", "아주 어려움+5"]
+        "aliases": [
+            "B+5",
+            "Brutal+5",
+            "아주 어려움+5"
+        ],
+        "zh-CN": "残酷+5"
     },
     "difficulty_brutal_plus_6": {
         "en": "B+6",
         "ko": "아주 어려움+6",
-        "aliases": ["B+6", "Brutal+6", "아주 어려움+6"]
+        "aliases": [
+            "B+6",
+            "Brutal+6",
+            "아주 어려움+6"
+        ],
+        "zh-CN": "残酷+6"
     },
     "commander_abathur": {
         "en": "Abathur",
         "ko": "아바투르",
-        "aliases": ["Abathur", "아바투르"]
+        "aliases": [
+            "Abathur",
+            "아바투르"
+        ],
+        "zh-CN": "阿巴瑟"
     },
     "commander_alarak": {
         "en": "Alarak",
         "ko": "알라라크",
-        "aliases": ["Alarak", "알라라크"]
+        "aliases": [
+            "Alarak",
+            "알라라크"
+        ],
+        "zh-CN": "阿拉纳克"
     },
     "commander_artanis": {
         "en": "Artanis",
         "ko": "아르타니스",
-        "aliases": ["Artanis", "아르타니스"]
+        "aliases": [
+            "Artanis",
+            "아르타니스"
+        ],
+        "zh-CN": "阿塔尼斯"
     },
     "commander_dehaka": {
         "en": "Dehaka",
         "ko": "데하카",
-        "aliases": ["Dehaka", "데하카"]
+        "aliases": [
+            "Dehaka",
+            "데하카"
+        ],
+        "zh-CN": "德哈卡"
     },
     "commander_fenix": {
         "en": "Fenix",
         "ko": "피닉스",
-        "aliases": ["Fenix", "피닉스"]
+        "aliases": [
+            "Fenix",
+            "피닉스"
+        ],
+        "zh-CN": "菲尼克斯"
     },
     "commander_horner": {
         "en": "Han & Horner",
         "ko": "한과 호너",
-        "aliases": ["Horner", "Han & Horner", "한과 호너"],
-        "asset_en": "Horner"
+        "aliases": [
+            "Horner",
+            "Han & Horner",
+            "한과 호너"
+        ],
+        "asset_en": "Horner",
+        "zh-CN": "霍纳与汉"
     },
     "commander_karax": {
         "en": "Karax",
         "ko": "카락스",
-        "aliases": ["Karax", "카락스"]
+        "aliases": [
+            "Karax",
+            "카락스"
+        ],
+        "zh-CN": "凯拉克斯"
     },
     "commander_kerrigan": {
         "en": "Kerrigan",
         "ko": "케리건",
-        "aliases": ["Kerrigan", "케리건"]
+        "aliases": [
+            "Kerrigan",
+            "케리건"
+        ],
+        "zh-CN": "凯瑞甘"
     },
     "commander_mengsk": {
         "en": "Mengsk",
         "ko": "멩스크",
-        "aliases": ["Mengsk", "멩스크"]
+        "aliases": [
+            "Mengsk",
+            "멩스크"
+        ],
+        "zh-CN": "蒙斯克"
     },
     "commander_nova": {
         "en": "Nova",
         "ko": "노바",
-        "aliases": ["Nova", "노바"]
+        "aliases": [
+            "Nova",
+            "노바"
+        ],
+        "zh-CN": "诺娃"
     },
     "commander_raynor": {
         "en": "Raynor",
         "ko": "레이너",
-        "aliases": ["Raynor", "레이너"]
+        "aliases": [
+            "Raynor",
+            "레이너"
+        ],
+        "zh-CN": "雷诺"
     },
     "commander_stetmann": {
         "en": "Stetmann",
         "ko": "스텟먼",
-        "aliases": ["Stetmann", "스텟먼"]
+        "aliases": [
+            "Stetmann",
+            "스텟먼"
+        ],
+        "zh-CN": "斯台特曼"
     },
     "commander_stukov": {
         "en": "Stukov",
         "ko": "스투코프",
-        "aliases": ["Stukov", "스투코프"]
+        "aliases": [
+            "Stukov",
+            "스투코프"
+        ],
+        "zh-CN": "斯托科夫"
     },
     "commander_swann": {
         "en": "Swann",
         "ko": "스완",
-        "aliases": ["Swann", "스완"]
+        "aliases": [
+            "Swann",
+            "스완"
+        ],
+        "zh-CN": "斯旺"
     },
     "commander_tychus": {
         "en": "Tychus",
         "ko": "타이커스",
-        "aliases": ["Tychus", "타이커스"]
+        "aliases": [
+            "Tychus",
+            "타이커스"
+        ],
+        "zh-CN": "泰凯斯"
     },
     "commander_vorazun": {
         "en": "Vorazun",
         "ko": "보라준",
-        "aliases": ["Vorazun", "보라준"]
+        "aliases": [
+            "Vorazun",
+            "보라준"
+        ],
+        "zh-CN": "沃拉尊"
     },
     "commander_zagara": {
         "en": "Zagara",
         "ko": "자가라",
-        "aliases": ["Zagara", "자가라"]
+        "aliases": [
+            "Zagara",
+            "자가라"
+        ],
+        "zh-CN": "扎加拉"
     },
     "commander_zeratul": {
         "en": "Zeratul",
         "ko": "제라툴",
-        "aliases": ["Zeratul", "제라툴"]
+        "aliases": [
+            "Zeratul",
+            "제라툴"
+        ],
+        "zh-CN": "泽拉图"
     },
     "map_void_thrashing": {
         "en": "Void Thrashing",
         "ko": "공허 분쇄",
-        "aliases": ["Void Thrashing", "공허 분쇄"]
+        "aliases": [
+            "Void Thrashing",
+            "공허 분쇄"
+        ],
+        "zh-CN": "虚空撕裂"
     },
     "map_void_launch": {
         "en": "Void Launch",
         "ko": "공허의 출격",
-        "aliases": ["Void Launch", "공허의 출격"]
+        "aliases": [
+            "Void Launch",
+            "공허의 출격"
+        ],
+        "zh-CN": "虚空降临"
     },
     "map_temple_of_the_past": {
         "en": "Temple of the Past",
         "ko": "과거의 사원",
-        "aliases": ["Temple of the Past", "과거의 사원"]
+        "aliases": [
+            "Temple of the Past",
+            "과거의 사원"
+        ],
+        "zh-CN": "往日神庙"
     },
     "map_miner_evacuation": {
         "en": "Miner Evacuation",
         "ko": "광부 대피",
-        "aliases": ["Miner Evacuation", "광부 대피"]
+        "aliases": [
+            "Miner Evacuation",
+            "광부 대피"
+        ],
+        "zh-CN": "营救矿工"
     },
     "map_oblivion_express": {
         "en": "Oblivion Express",
         "ko": "망각행 고속열차",
-        "aliases": ["Oblivion Express", "망각행 고속열차"]
+        "aliases": [
+            "Oblivion Express",
+            "망각행 고속열차"
+        ],
+        "zh-CN": "湮灭快车"
     },
     "map_the_vermillion_problem": {
         "en": "The Vermillion Problem",
         "ko": "버밀리언의 특종",
-        "aliases": ["The Vermillion Problem", "버밀리언의 특종"]
+        "aliases": [
+            "The Vermillion Problem",
+            "버밀리언의 특종"
+        ],
+        "zh-CN": "熔火危机"
     },
     "map_chain_of_ascension": {
         "en": "Chain of Ascension",
         "ko": "승천의 사슬",
-        "aliases": ["Chain of Ascension", "승천의 사슬"]
+        "aliases": [
+            "Chain of Ascension",
+            "승천의 사슬"
+        ],
+        "zh-CN": "升格之链"
     },
     "map_scythe_of_amon": {
         "en": "Scythe of Amon",
         "ko": "아몬의 낫",
-        "aliases": ["Scythe of Amon", "아몬의 낫"]
+        "aliases": [
+            "Scythe of Amon",
+            "아몬의 낫"
+        ],
+        "zh-CN": "黑暗杀星"
     },
     "map_mist_opportunities": {
         "en": "Mist Opportunities",
         "ko": "안갯속 표류기",
-        "aliases": ["Mist Opportunities", "안갯속 표류기"]
+        "aliases": [
+            "Mist Opportunities",
+            "안갯속 표류기"
+        ],
+        "zh-CN": "机会渺茫"
     },
     "map_malwarfare": {
         "en": "Malwarfare",
         "ko": "잘못된 전쟁",
-        "aliases": ["Malwarfare", "잘못된 전쟁"]
+        "aliases": [
+            "Malwarfare",
+            "잘못된 전쟁"
+        ],
+        "zh-CN": "净网行动"
     },
     "map_dead_of_night": {
         "en": "Dead of Night",
         "ko": "죽음의 밤",
-        "aliases": ["Dead of Night", "죽음의 밤"]
+        "aliases": [
+            "Dead of Night",
+            "죽음의 밤"
+        ],
+        "zh-CN": "亡者之夜"
     },
     "map_cradle_of_death": {
         "en": "Cradle of Death",
         "ko": "죽음의 요람",
-        "aliases": ["Cradle of Death", "죽음의 요람"]
+        "aliases": [
+            "Cradle of Death",
+            "죽음의 요람"
+        ],
+        "zh-CN": "死亡摇篮"
     },
     "map_lock_and_load": {
         "en": "Lock & Load",
         "ko": "천상의 쟁탈전",
-        "aliases": ["Lock & Load", "천상의 쟁탈전"]
+        "aliases": [
+            "Lock & Load",
+            "천상의 쟁탈전"
+        ],
+        "zh-CN": "天界封锁"
     },
     "map_rifts_to_korhal": {
         "en": "Rifts to Korhal",
         "ko": "코랄의 균열",
-        "aliases": ["Rifts to Korhal", "코랄의 균열"]
+        "aliases": [
+            "Rifts to Korhal",
+            "코랄의 균열"
+        ],
+        "zh-CN": "克哈裂痕"
     },
     "map_the_sky_is_falling": {
         "en": "The Sky is Falling",
         "ko": "하늘이 무너져도",
-        "aliases": ["The Sky is Falling", "하늘이 무너져도"]
+        "aliases": [
+            "The Sky is Falling",
+            "하늘이 무너져도"
+        ],
+        "zh-CN": "天穹坠落"
     },
     "map_part_and_parcel": {
         "en": "Part and Parcel",
         "ko": "핵심 부품",
-        "aliases": ["Part and Parcel", "핵심 부품"]
+        "aliases": [
+            "Part and Parcel",
+            "핵심 부품"
+        ],
+        "zh-CN": "聚铁成兵"
     },
     "ui_common_refresh": {
         "en": "Refresh",
-        "ko": "새로고침"
+        "ko": "새로고침",
+        "zh-CN": "刷新"
     },
     "ui_common_expand": {
         "en": "Expand",
-        "ko": "펼치기"
+        "ko": "펼치기",
+        "zh-CN": "展开"
     },
     "ui_common_collapse": {
         "en": "Collapse",
-        "ko": "접기"
+        "ko": "접기",
+        "zh-CN": "收起"
     },
     "ui_common_close": {
         "en": "Close",
-        "ko": "닫기"
+        "ko": "닫기",
+        "zh-CN": "关闭"
     },
     "ui_common_loading": {
         "en": "Loading...",
-        "ko": "불러오는 중..."
+        "ko": "불러오는 중...",
+        "zh-CN": "正在加载…"
     },
     "ui_common_play": {
         "en": "Play",
-        "ko": "재생"
+        "ko": "재생",
+        "zh-CN": "播放"
     },
     "ui_common_pause": {
         "en": "Pause",
-        "ko": "일시정지"
+        "ko": "일시정지",
+        "zh-CN": "暂停"
     },
     "ui_common_previous": {
         "en": "Previous",
-        "ko": "이전"
+        "ko": "이전",
+        "zh-CN": "上一项"
     },
     "ui_common_next": {
         "en": "Next",
-        "ko": "다음"
+        "ko": "다음",
+        "zh-CN": "下一项"
     },
     "ui_common_from": {
         "en": "From",
-        "ko": "시작"
+        "ko": "시작",
+        "zh-CN": "从"
     },
     "ui_common_to": {
         "en": "To",
-        "ko": "종료"
+        "ko": "종료",
+        "zh-CN": "至"
     },
     "ui_common_minimum": {
         "en": "Min",
-        "ko": "최소"
+        "ko": "최소",
+        "zh-CN": "最小"
     },
     "ui_common_maximum": {
         "en": "Max",
-        "ko": "최대"
+        "ko": "최대",
+        "zh-CN": "最大"
     },
     "ui_common_sum": {
         "en": "Sum",
-        "ko": "합계"
+        "ko": "합계",
+        "zh-CN": "总和"
     },
     "ui_common_total": {
         "en": "Total",
-        "ko": "총합"
+        "ko": "총합",
+        "zh-CN": "合计"
     },
     "ui_games_empty": {
         "en": "No games loaded yet",
-        "ko": "아직 불러온 게임이 없습니다"
+        "ko": "아직 불러온 게임이 없습니다",
+        "zh-CN": "尚未加载对局"
     },
     "ui_games_empty_filtered": {
         "en": "No matching games",
-        "ko": "검색 조건에 맞는 게임이 없습니다"
+        "ko": "검색 조건에 맞는 게임이 없습니다",
+        "zh-CN": "没有符合条件的对局"
     },
     "ui_games_action_overlay": {
         "en": "Overlay",
-        "ko": "오버레이"
+        "ko": "오버레이",
+        "zh-CN": "悬浮窗"
     },
     "ui_games_action_visual": {
         "en": "Visual",
-        "ko": "시각화"
+        "ko": "시각화",
+        "zh-CN": "可视化"
     },
     "ui_games_action_chat": {
         "en": "Chat",
-        "ko": "채팅"
+        "ko": "채팅",
+        "zh-CN": "聊天"
     },
     "ui_games_action_file": {
         "en": "File",
-        "ko": "파일"
+        "ko": "파일",
+        "zh-CN": "文件"
     },
     "ui_games_chat_title": {
         "en": "Replay Chat",
-        "ko": "리플레이 채팅"
+        "ko": "리플레이 채팅",
+        "zh-CN": "录像聊天记录"
     },
     "ui_games_chat_loading": {
         "en": "Loading replay chat",
-        "ko": "리플레이 채팅을 불러오는 중"
+        "ko": "리플레이 채팅을 불러오는 중",
+        "zh-CN": "正在加载录像聊天记录"
     },
     "ui_games_chat_no_messages": {
         "en": "No chat messages in this replay.",
-        "ko": "이 리플레이에는 채팅 메시지가 없습니다."
+        "ko": "이 리플레이에는 채팅 메시지가 없습니다.",
+        "zh-CN": "此录像中没有聊天消息。"
     },
     "ui_games_chat_no_chat_available": {
         "en": "No chat available for this replay.",
-        "ko": "이 리플레이에서는 채팅을 사용할 수 없습니다."
+        "ko": "이 리플레이에서는 채팅을 사용할 수 없습니다.",
+        "zh-CN": "此录像无可用聊天记录。"
     },
     "ui_games_chat_failed": {
         "en": "Failed to load chat.",
-        "ko": "채팅을 불러오지 못했습니다."
+        "ko": "채팅을 불러오지 못했습니다.",
+        "zh-CN": "加载聊天记录失败。"
     },
     "ui_games_visual_title": {
         "en": "Replay Player",
-        "ko": "리플레이 플레이어"
+        "ko": "리플레이 플레이어",
+        "zh-CN": "录像播放器"
     },
     "ui_games_visual_loading": {
         "en": "Loading replay player",
-        "ko": "리플레이 플레이어를 불러오는 중"
+        "ko": "리플레이 플레이어를 불러오는 중",
+        "zh-CN": "正在加载录像播放器"
     },
     "ui_games_visual_failed": {
         "en": "Failed to load replay player.",
-        "ko": "리플레이 플레이어를 불러오지 못했습니다."
+        "ko": "리플레이 플레이어를 불러오지 못했습니다.",
+        "zh-CN": "加载录像播放器失败。"
     },
     "ui_games_visual_no_data": {
         "en": "No visual replay data available.",
-        "ko": "사용할 수 있는 리플레이 시각화 데이터가 없습니다."
+        "ko": "사용할 수 있는 리플레이 시각화 데이터가 없습니다.",
+        "zh-CN": "暂无录像可视化数据。"
     },
     "ui_games_visual_no_frames": {
         "en": "No visual frames were found in this replay.",
-        "ko": "이 리플레이에서 시각화 프레임을 찾지 못했습니다."
+        "ko": "이 리플레이에서 시각화 프레임을 찾지 못했습니다.",
+        "zh-CN": "此录像中没有找到可视化帧。"
     },
     "ui_games_visual_canvas_label": {
         "en": "Replay map canvas",
-        "ko": "리플레이 맵 캔버스"
+        "ko": "리플레이 맵 캔버스",
+        "zh-CN": "录像地图画布"
     },
     "ui_games_visual_time": {
         "en": "Time",
-        "ko": "시간"
+        "ko": "시간",
+        "zh-CN": "时间"
     },
     "ui_games_visual_units": {
         "en": "Units",
-        "ko": "유닛"
+        "ko": "유닛",
+        "zh-CN": "单位"
     },
     "ui_games_visual_units_short": {
         "en": "units",
-        "ko": "유닛"
+        "ko": "유닛",
+        "zh-CN": "个单位"
     },
     "ui_games_visual_assaults": {
         "en": "Assaults",
-        "ko": "공세"
+        "ko": "공세",
+        "zh-CN": "进攻波次"
     },
     "ui_games_visual_map_size": {
         "en": "Map size",
-        "ko": "맵 크기"
+        "ko": "맵 크기",
+        "zh-CN": "地图尺寸"
     },
     "ui_games_visual_group_buildings": {
         "en": "Buildings",
-        "ko": "건물"
+        "ko": "건물",
+        "zh-CN": "建筑"
     },
     "ui_games_visual_group_attack_units": {
         "en": "Attack units",
-        "ko": "공격 유닛"
+        "ko": "공격 유닛",
+        "zh-CN": "进攻单位"
     },
     "ui_games_visual_group_defense_buildings": {
         "en": "Defense buildings",
-        "ko": "방어 건물"
+        "ko": "방어 건물",
+        "zh-CN": "防御建筑"
     },
     "ui_games_visual_group_enemy_assaults": {
         "en": "Enemy assaults",
-        "ko": "적 공세"
+        "ko": "적 공세",
+        "zh-CN": "敌军进攻波次"
     },
     "ui_games_visual_current_assault": {
         "en": "Current assault",
-        "ko": "현재 공세"
+        "ko": "현재 공세",
+        "zh-CN": "当前进攻波次"
     },
     "ui_games_visual_no_assault": {
         "en": "No assault reached yet.",
-        "ko": "아직 도달한 공세가 없습니다."
+        "ko": "아직 도달한 공세가 없습니다.",
+        "zh-CN": "尚未出现进攻波次。"
     },
     "ui_games_visual_top_units": {
         "en": "Visible units",
-        "ko": "표시 중인 유닛"
+        "ko": "표시 중인 유닛",
+        "zh-CN": "可见单位"
     },
     "ui_games_visual_no_units": {
         "en": "No units visible.",
-        "ko": "표시 중인 유닛이 없습니다."
+        "ko": "표시 중인 유닛이 없습니다.",
+        "zh-CN": "没有可见单位。"
     },
     "ui_games_visual_timeline": {
         "en": "Replay timeline",
-        "ko": "리플레이 타임라인"
+        "ko": "리플레이 타임라인",
+        "zh-CN": "录像时间轴"
     },
     "ui_games_visual_speed": {
         "en": "Speed",
-        "ko": "속도"
+        "ko": "속도",
+        "zh-CN": "速度"
     },
     "ui_games_player_1_fallback": {
         "en": "Player 1",
-        "ko": "플레이어 1"
+        "ko": "플레이어 1",
+        "zh-CN": "玩家 1"
     },
     "ui_games_player_2_fallback": {
         "en": "Player 2",
-        "ko": "플레이어 2"
+        "ko": "플레이어 2",
+        "zh-CN": "玩家 2"
     },
     "ui_games_system": {
         "en": "System",
-        "ko": "시스템"
+        "ko": "시스템",
+        "zh-CN": "系统"
     },
     "ui_games_unknown_map": {
         "en": "Unknown map",
-        "ko": "알 수 없는 맵"
+        "ko": "알 수 없는 맵",
+        "zh-CN": "未知地图"
     },
     "ui_games_unknown_result": {
         "en": "Unknown result",
-        "ko": "알 수 없는 결과"
+        "ko": "알 수 없는 결과",
+        "zh-CN": "未知结果"
     },
     "ui_players_column_player": {
         "en": "Player",
-        "ko": "플레이어"
+        "ko": "플레이어",
+        "zh-CN": "玩家"
     },
     "ui_players_column_handle": {
         "en": "Handle",
-        "ko": "핸들"
+        "ko": "핸들",
+        "zh-CN": "玩家标识"
     },
     "ui_players_column_wins": {
         "en": "Wins",
-        "ko": "승리"
+        "ko": "승리",
+        "zh-CN": "胜场"
     },
     "ui_players_column_losses": {
         "en": "Losses",
-        "ko": "패배"
+        "ko": "패배",
+        "zh-CN": "负场"
     },
     "ui_players_column_winrate": {
         "en": "Winrate",
-        "ko": "승률"
+        "ko": "승률",
+        "zh-CN": "胜率"
     },
     "ui_players_column_apm": {
         "en": "APM",
-        "ko": "APM"
+        "ko": "APM",
+        "zh-CN": "APM"
     },
     "ui_players_column_commander": {
         "en": "Commander",
-        "ko": "사령관"
+        "ko": "사령관",
+        "zh-CN": "指挥官"
     },
     "ui_players_column_kill_percent": {
         "en": "Kill%",
-        "ko": "처치 비율"
+        "ko": "처치 비율",
+        "zh-CN": "击杀占比"
     },
     "ui_players_column_last_seen": {
         "en": "Last Seen",
-        "ko": "마지막 플레이"
+        "ko": "마지막 플레이",
+        "zh-CN": "最近同场"
     },
     "ui_players_column_note": {
         "en": "Player note",
-        "ko": "플레이어 메모"
+        "ko": "플레이어 메모",
+        "zh-CN": "玩家备注"
     },
     "ui_players_search_placeholder": {
         "en": "Search handle, username, or note",
-        "ko": "핸들, 사용자명 또는 메모 검색"
+        "ko": "핸들, 사용자명 또는 메모 검색",
+        "zh-CN": "搜索玩家标识、用户名或备注"
     },
     "ui_players_empty": {
         "en": "No player data loaded yet",
-        "ko": "아직 불러온 플레이어 데이터가 없습니다"
+        "ko": "아직 불러온 플레이어 데이터가 없습니다",
+        "zh-CN": "尚未加载玩家数据"
     },
     "ui_players_memo_placeholder": {
         "en": "Memo",
-        "ko": "메모"
+        "ko": "메모",
+        "zh-CN": "备注"
     },
     "ui_players_handles": {
         "en": "Handles",
-        "ko": "핸들"
+        "ko": "핸들",
+        "zh-CN": "玩家标识"
     },
     "ui_players_usernames": {
         "en": "Usernames",
-        "ko": "사용자명"
+        "ko": "사용자명",
+        "zh-CN": "用户名"
     },
     "ui_players_handle_count_one": {
         "en": "handle",
-        "ko": "개 핸들"
+        "ko": "개 핸들",
+        "zh-CN": "个玩家标识"
     },
     "ui_players_handle_count_other": {
         "en": "handles",
-        "ko": "개 핸들"
+        "ko": "개 핸들",
+        "zh-CN": "个玩家标识"
     },
     "ui_weeklies_column_mutation": {
         "en": "Mutation",
-        "ko": "돌연변이"
+        "ko": "돌연변이",
+        "zh-CN": "突变"
     },
     "ui_weeklies_column_next_in": {
         "en": "Next In",
-        "ko": "등장 시간"
+        "ko": "등장 시간",
+        "zh-CN": "距离下次轮换"
     },
     "ui_weeklies_column_best_difficulty": {
         "en": "Best Difficulty",
-        "ko": "최고 난이도"
+        "ko": "최고 난이도",
+        "zh-CN": "最高通关难度"
     },
     "ui_weeklies_column_wins": {
         "en": "Wins",
-        "ko": "승리"
+        "ko": "승리",
+        "zh-CN": "胜场"
     },
     "ui_weeklies_column_losses": {
         "en": "Losses",
-        "ko": "패배"
+        "ko": "패배",
+        "zh-CN": "负场"
     },
     "ui_weeklies_column_winrate": {
         "en": "Winrate",
-        "ko": "승률"
+        "ko": "승률",
+        "zh-CN": "胜率"
     },
     "ui_weeklies_empty": {
         "en": "No weekly data loaded yet",
-        "ko": "아직 불러온 주간 돌연변이 데이터가 없습니다"
+        "ko": "아직 불러온 주간 돌연변이 데이터가 없습니다",
+        "zh-CN": "尚未加载周突变数据"
     },
     "ui_weeklies_now": {
         "en": "Now",
         "ko": "현재",
-        "aliases": ["Now", "현재"]
+        "aliases": [
+            "Now",
+            "현재"
+        ],
+        "zh-CN": "当前"
     },
     "ui_weeklies_current": {
         "en": "Current",
         "ko": "현재",
-        "aliases": ["Current", "현재"]
+        "aliases": [
+            "Current",
+            "현재"
+        ],
+        "zh-CN": "本周"
     },
     "ui_weeklies_duration_week_suffix": {
         "en": "w",
         "ko": "주",
-        "aliases": ["w", "주"]
+        "aliases": [
+            "w",
+            "주"
+        ],
+        "zh-CN": "周"
     },
     "ui_weeklies_duration_day_suffix": {
         "en": "d",
         "ko": "일",
-        "aliases": ["d", "일"]
+        "aliases": [
+            "d",
+            "일"
+        ],
+        "zh-CN": "天"
     },
     "ui_randomizer_title": {
         "en": "Randomizer",
-        "ko": "랜덤 선택"
+        "ko": "랜덤 선택",
+        "zh-CN": "随机选择器"
     },
     "ui_randomizer_unavailable": {
         "en": "Randomizer data is not available from the backend yet.",
-        "ko": "백엔드에서 아직 랜덤 선택 데이터를 제공하지 않습니다."
+        "ko": "백엔드에서 아직 랜덤 선택 데이터를 제공하지 않습니다.",
+        "zh-CN": "后端尚未提供随机选择器数据。"
     },
     "ui_randomizer_mode": {
         "en": "Mode:",
-        "ko": "모드:"
+        "ko": "모드:",
+        "zh-CN": "模式："
     },
     "ui_randomizer_mode_aria": {
         "en": "Randomizer mode",
-        "ko": "랜덤 선택 모드"
+        "ko": "랜덤 선택 모드",
+        "zh-CN": "随机选择器模式"
     },
     "ui_randomizer_mode_commander": {
         "en": "Commander",
-        "ko": "사령관"
+        "ko": "사령관",
+        "zh-CN": "指挥官"
     },
     "ui_randomizer_mode_mutator": {
         "en": "Mutator",
-        "ko": "돌연변이원"
+        "ko": "돌연변이원",
+        "zh-CN": "突变因子"
     },
     "ui_randomizer_mastery_mode": {
         "en": "Mastery mode",
-        "ko": "마스터 힘 구성"
+        "ko": "마스터 힘 구성",
+        "zh-CN": "精通模式"
     },
     "ui_randomizer_mastery_mode_aria": {
         "en": "Mastery mode",
-        "ko": "마스터 힘 구성"
+        "ko": "마스터 힘 구성",
+        "zh-CN": "精通模式"
     },
     "ui_randomizer_mastery_all_in": {
         "en": "All points into one",
-        "ko": "모든 마스터 힘 단일 항목에 투자"
+        "ko": "모든 마스터 힘 단일 항목에 투자",
+        "zh-CN": "每组全部投入同一项"
     },
     "ui_randomizer_mastery_random": {
         "en": "Fully random mastery",
-        "ko": "무작위 마스터 힘"
+        "ko": "무작위 마스터 힘",
+        "zh-CN": "完全随机分配精通"
     },
     "ui_randomizer_mastery_none": {
         "en": "No mastery generated",
-        "ko": "마스터 힘 사용 안 함"
+        "ko": "마스터 힘 사용 안 함",
+        "zh-CN": "不生成精通"
     },
     "ui_randomizer_random_map": {
         "en": "Random map",
-        "ko": "무작위 맵"
+        "ko": "무작위 맵",
+        "zh-CN": "随机地图"
     },
     "ui_randomizer_random_enemy_race": {
         "en": "Random enemy race",
-        "ko": "무작위 적 종족"
+        "ko": "무작위 적 종족",
+        "zh-CN": "随机敌军种族"
     },
     "ui_randomizer_choices_title": {
         "en": "Commander and prestige choices",
-        "ko": "사령관 및 위신 선택"
+        "ko": "사령관 및 위신 선택",
+        "zh-CN": "指挥官与威望候选"
     },
     "ui_randomizer_commander_column": {
         "en": "Commander",
-        "ko": "사령관"
+        "ko": "사령관",
+        "zh-CN": "指挥官"
     },
     "ui_randomizer_toggle_prestige_all": {
         "en": "Toggle P{{prestige}} for all commanders",
-        "ko": "모든 사령관의 위신{{prestige}} 전환"
+        "ko": "모든 사령관의 위신{{prestige}} 전환",
+        "zh-CN": "切换所有指挥官的 P{{prestige}}"
     },
     "ui_randomizer_toggle_all_prestiges": {
         "en": "Toggle all prestiges for {{commander}}",
-        "ko": "{{commander}}의 모든 위신 전환"
+        "ko": "{{commander}}의 모든 위신 전환",
+        "zh-CN": "切换{{commander}}的全部威望"
     },
     "ui_randomizer_mutator_mode": {
         "en": "Mode",
-        "ko": "모드"
+        "ko": "모드",
+        "zh-CN": "模式"
     },
     "ui_randomizer_mutator_mode_aria": {
         "en": "Mutator generation mode",
-        "ko": "돌연변이원 생성 모드"
+        "ko": "돌연변이원 생성 모드",
+        "zh-CN": "突变因子生成模式"
     },
     "ui_randomizer_mutator_mode_all_random": {
         "en": "All random",
-        "ko": "전체 무작위"
+        "ko": "전체 무작위",
+        "zh-CN": "完全随机"
     },
     "ui_randomizer_mutator_mode_brutal_plus": {
         "en": "Brutal+N generation",
-        "ko": "아주 어려움+N 생성"
+        "ko": "아주 어려움+N 생성",
+        "zh-CN": "残酷+N 生成"
     },
     "ui_randomizer_mutator_settings_title": {
         "en": "Mutator generator",
-        "ko": "돌연변이원 생성"
+        "ko": "돌연변이원 생성",
+        "zh-CN": "突变因子生成器"
     },
     "ui_randomizer_mutator_min_aria": {
         "en": "Minimum mutators",
-        "ko": "최소 돌연변이원 수"
+        "ko": "최소 돌연변이원 수",
+        "zh-CN": "最少突变因子数"
     },
     "ui_randomizer_mutator_max_aria": {
         "en": "Maximum mutators",
-        "ko": "최대 돌연변이원 수"
+        "ko": "최대 돌연변이원 수",
+        "zh-CN": "最多突变因子数"
     },
     "ui_randomizer_mutator_brutal_plus": {
         "en": "Level",
-        "ko": "단계"
+        "ko": "단계",
+        "zh-CN": "等级"
     },
     "ui_randomizer_mutator_brutal_plus_aria": {
         "en": "Brutal+ level",
-        "ko": "아주 어려움+ 단계"
+        "ko": "아주 어려움+ 단계",
+        "zh-CN": "残酷+等级"
     },
     "ui_randomizer_mutator_all_random_summary": {
         "en": "Select a random mutator count between {{min}}-{{max}}.",
-        "ko": "{{min}}-{{max}}개 사이로 돌연변이원 수를 무작위 선택합니다."
+        "ko": "{{min}}-{{max}}개 사이로 돌연변이원 수를 무작위 선택합니다.",
+        "zh-CN": "随机选择 {{min}}—{{max}} 个突变因子。"
     },
     "ui_randomizer_mutator_pool_summary": {
         "en": "Available mutators: {{count}}",
-        "ko": "사용 가능한 돌연변이원: {{count}}"
+        "ko": "사용 가능한 돌연변이원: {{count}}",
+        "zh-CN": "可用突变因子：{{count}}"
     },
     "ui_randomizer_generate": {
         "en": "Generate",
-        "ko": "생성"
+        "ko": "생성",
+        "zh-CN": "生成"
     },
     "ui_randomizer_result": {
         "en": "Result",
-        "ko": "결과"
+        "ko": "결과",
+        "zh-CN": "结果"
     },
     "ui_randomizer_empty_result": {
         "en": "Generate a commander, prestige, and mastery setup.",
-        "ko": "사령관, 위신, 마스터 힘 구성을 생성하세요."
+        "ko": "사령관, 위신, 마스터 힘 구성을 생성하세요.",
+        "zh-CN": "生成一组指挥官、威望与精通配置。"
     },
     "ui_randomizer_mutator_empty_result": {
         "en": "Generate a mutator list.",
-        "ko": "돌연변이원 목록을 생성하세요."
+        "ko": "돌연변이원 목록을 생성하세요.",
+        "zh-CN": "生成突变因子列表。"
     },
     "ui_randomizer_mutator_points": {
         "en": "Points",
-        "ko": "포인트"
+        "ko": "포인트",
+        "zh-CN": "分值"
     },
     "ui_randomizer_mutator_count": {
         "en": "Count",
-        "ko": "개수"
+        "ko": "개수",
+        "zh-CN": "数量"
     },
     "ui_randomizer_mutator_total_points": {
         "en": "Total points",
-        "ko": "총 포인트"
+        "ko": "총 포인트",
+        "zh-CN": "总分值"
     },
     "ui_randomizer_mutator_result_head_random": {
         "en": "Random mutators ({{count}})",
-        "ko": "무작위 돌연변이원 ({{count}}개)"
+        "ko": "무작위 돌연변이원 ({{count}}개)",
+        "zh-CN": "随机突变因子（{{count}} 个）"
     },
     "ui_randomizer_mutator_result_head_bplus": {
         "en": "{{brutalPlus}} matching mutators",
-        "ko": "{{brutalPlus}} 맞춤 돌연변이원"
+        "ko": "{{brutalPlus}} 맞춤 돌연변이원",
+        "zh-CN": "符合{{brutalPlus}}的突变因子"
     },
     "ui_randomizer_mutator_point_value": {
         "en": "{{points}} pt",
-        "ko": "{{points}}점"
+        "ko": "{{points}}점",
+        "zh-CN": "{{points}} 分"
     },
     "ui_table_rows_summary": {
         "en": "Rows {{start}}-{{end}} of {{total}}",
-        "ko": "{{total}}개 중 {{start}}-{{end}}행"
+        "ko": "{{total}}개 중 {{start}}-{{end}}행",
+        "zh-CN": "第 {{start}}—{{end}} 行，共 {{total}} 行"
     },
     "ui_table_page_summary": {
         "en": "Page {{page}} / {{total}}",
-        "ko": "{{page}} / {{total}}페이지"
+        "ko": "{{page}} / {{total}}페이지",
+        "zh-CN": "第 {{page}} / {{total}} 页"
     },
     "ui_stats_select_commander": {
         "en": "Select a commander",
-        "ko": "사령관을 선택하세요"
+        "ko": "사령관을 선택하세요",
+        "zh-CN": "选择指挥官"
     },
     "ui_stats_mastery": {
         "en": "Mastery",
-        "ko": "마스터 힘"
+        "ko": "마스터 힘",
+        "zh-CN": "精通"
     },
     "ui_stats_statistics_postfix": {
         "en": "statistics",
-        "ko": "통계"
+        "ko": "통계",
+        "zh-CN": "统计"
     },
     "ui_stats_prestige_selection": {
         "en": "Prestige selection",
-        "ko": "위신 선택"
+        "ko": "위신 선택",
+        "zh-CN": "威望选择"
     },
     "ui_stats_mastery_fallback": {
         "en": "Mastery {{index}}",
-        "ko": "마스터 힘 {{index}}"
+        "ko": "마스터 힘 {{index}}",
+        "zh-CN": "精通 {{index}}"
     },
     "ui_stats_mastery_choice_1": {
         "en": "Choice 1",
-        "ko": "선택 1"
+        "ko": "선택 1",
+        "zh-CN": "选项 1"
     },
     "ui_stats_mastery_choice_2": {
         "en": "Choice 2",
-        "ko": "선택 2"
+        "ko": "선택 2",
+        "zh-CN": "选项 2"
     },
     "ui_stats_mastery_choice_even": {
         "en": "Even",
-        "ko": "균등"
+        "ko": "균등",
+        "zh-CN": "均等"
     },
     "ui_stats_mastery_choice_1_leaning": {
         "en": "Choice 1 leaning",
-        "ko": "선택 1 우세"
+        "ko": "선택 1 우세",
+        "zh-CN": "偏向选项 1"
     },
     "ui_stats_mastery_choice_2_leaning": {
         "en": "Choice 2 leaning",
-        "ko": "선택 2 우세"
+        "ko": "선택 2 우세",
+        "zh-CN": "偏向选项 2"
     },
     "ui_stats_mastery_distribution_graph_label": {
         "en": "{{prestige}} {{mastery}} ratio distribution",
-        "ko": "{{prestige}} {{mastery}} 비율 분포"
+        "ko": "{{prestige}} {{mastery}} 비율 분포",
+        "zh-CN": "{{prestige}} {{mastery}}比例分布"
     },
     "ui_stats_commander_label": {
         "en": "Commander",
-        "ko": "사령관"
+        "ko": "사령관",
+        "zh-CN": "指挥官"
     },
     "ui_stats_prestige_label": {
         "en": "Prestige",
-        "ko": "위신"
+        "ko": "위신",
+        "zh-CN": "威望"
     },
     "ui_stats_mastery_level": {
         "en": "Mastery level",
-        "ko": "마스터 레벨"
+        "ko": "마스터 레벨",
+        "zh-CN": "精通等级"
     },
     "ui_stats_masteries": {
         "en": "Masteries",
-        "ko": "마스터 힘"
+        "ko": "마스터 힘",
+        "zh-CN": "精通"
     },
     "ui_stats_no_mastery_data": {
         "en": "No mastery data",
-        "ko": "마스터 힘 데이터 없음"
+        "ko": "마스터 힘 데이터 없음",
+        "zh-CN": "暂无精通数据"
     },
     "ui_stats_map_name": {
         "en": "Map name",
-        "ko": "맵 이름"
+        "ko": "맵 이름",
+        "zh-CN": "地图名称"
     },
     "ui_stats_avg": {
         "en": "Avg",
-        "ko": "평균"
+        "ko": "평균",
+        "zh-CN": "平均"
     },
     "ui_stats_fastest": {
         "en": "Fastest",
-        "ko": "최단"
+        "ko": "최단",
+        "zh-CN": "最快"
     },
     "ui_stats_freq": {
         "en": "Freq",
-        "ko": "빈도"
+        "ko": "빈도",
+        "zh-CN": "频率"
     },
     "ui_stats_wins": {
         "en": "Wins",
-        "ko": "승리"
+        "ko": "승리",
+        "zh-CN": "胜场"
     },
     "ui_stats_losses": {
         "en": "Losses",
-        "ko": "패배"
+        "ko": "패배",
+        "zh-CN": "负场"
     },
     "ui_stats_win_percent": {
         "en": "Win%",
-        "ko": "승률"
+        "ko": "승률",
+        "zh-CN": "胜率"
     },
     "ui_stats_bonus": {
         "en": "Bonus",
-        "ko": "보너스"
+        "ko": "보너스",
+        "zh-CN": "奖励目标"
     },
     "ui_stats_no_map_data": {
         "en": "No map data for current filters",
-        "ko": "현재 필터에 맞는 맵 데이터가 없습니다"
+        "ko": "현재 필터에 맞는 맵 데이터가 없습니다",
+        "zh-CN": "当前筛选条件下没有地图数据"
     },
     "ui_stats_select_map": {
         "en": "Select a map",
-        "ko": "맵을 선택하세요"
+        "ko": "맵을 선택하세요",
+        "zh-CN": "选择地图"
     },
     "ui_stats_find_file": {
         "en": "Find file",
-        "ko": "파일 찾기"
+        "ko": "파일 찾기",
+        "zh-CN": "定位文件"
     },
     "ui_stats_show_overlay": {
         "en": "Show overlay",
-        "ko": "오버레이 표시"
+        "ko": "오버레이 표시",
+        "zh-CN": "显示悬浮窗"
     },
     "ui_stats_allied_commander": {
         "en": "Allied commander",
-        "ko": "동맹 사령관"
+        "ko": "동맹 사령관",
+        "zh-CN": "盟友指挥官"
     },
     "ui_stats_commander": {
         "en": "Commander",
-        "ko": "사령관"
+        "ko": "사령관",
+        "zh-CN": "指挥官"
     },
     "ui_stats_kills": {
         "en": "Kills",
-        "ko": "처치"
+        "ko": "처치",
+        "zh-CN": "击杀"
     },
     "ui_stats_frequency_corrected_note": {
         "en": "* Frequency has been corrected for your commander preferences",
-        "ko": "* 빈도는 내 사령관 선호도를 기준으로 보정되었습니다"
+        "ko": "* 빈도는 내 사령관 선호도를 기준으로 보정되었습니다",
+        "zh-CN": "* 频率已按你的指挥官偏好进行校正"
     },
     "ui_stats_region": {
         "en": "Region",
-        "ko": "지역"
+        "ko": "지역",
+        "zh-CN": "地区"
     },
     "ui_stats_frequency": {
         "en": "Frequency",
-        "ko": "빈도"
+        "ko": "빈도",
+        "zh-CN": "频率"
     },
     "ui_stats_winrate": {
         "en": "Winrate",
-        "ko": "승률"
+        "ko": "승률",
+        "zh-CN": "胜率"
     },
     "ui_stats_ascension_level": {
         "en": "Ascension level",
-        "ko": "승천 레벨"
+        "ko": "승천 레벨",
+        "zh-CN": "巅峰等级"
     },
     "ui_stats_prestiges_unlocked": {
         "en": "Prestiges unlocked",
-        "ko": "해금한 위신"
+        "ko": "해금한 위신",
+        "zh-CN": "已解锁威望"
     },
     "ui_stats_maxed_commanders": {
         "en": "Maxed commanders",
-        "ko": "만렙 사령관"
+        "ko": "만렙 사령관",
+        "zh-CN": "满级指挥官"
     },
     "ui_stats_difficulty": {
         "en": "Difficulty",
-        "ko": "난이도"
+        "ko": "난이도",
+        "zh-CN": "难度"
     },
     "ui_stats_unit_stats_title": {
         "en": "Unit stats ({{side}}) - {{commander}}",
-        "ko": "유닛 통계 ({{side}}) - {{commander}}"
+        "ko": "유닛 통계 ({{side}}) - {{commander}}",
+        "zh-CN": "单位统计（{{side}}）— {{commander}}"
     },
     "ui_stats_side_main": {
         "en": "Main",
-        "ko": "본인"
+        "ko": "본인",
+        "zh-CN": "我方"
     },
     "ui_stats_side_ally": {
         "en": "Ally",
-        "ko": "동맹"
+        "ko": "동맹",
+        "zh-CN": "盟友"
     },
     "ui_stats_unit": {
         "en": "Unit",
-        "ko": "유닛"
+        "ko": "유닛",
+        "zh-CN": "单位"
     },
     "ui_stats_created": {
         "en": "Created",
-        "ko": "생성"
+        "ko": "생성",
+        "zh-CN": "创建"
     },
     "ui_stats_lost": {
         "en": "Lost",
-        "ko": "손실"
+        "ko": "손실",
+        "zh-CN": "损失"
     },
     "ui_stats_lost_percent": {
         "en": "Lost%",
-        "ko": "손실률"
+        "ko": "손실률",
+        "zh-CN": "损失比例"
     },
     "ui_stats_kills_percent": {
         "en": "Kills%",
-        "ko": "처치 비율"
+        "ko": "처치 비율",
+        "zh-CN": "击杀占比"
     },
     "ui_stats_games_suffix": {
         "en": "games",
-        "ko": "게임"
+        "ko": "게임",
+        "zh-CN": "局"
     },
     "ui_stats_mind_control_note": {
         "en": "* Kills from mind-controlled units are counted towards casters",
-        "ko": "* 정신 제어한 유닛의 처치는 시전자에게 합산됩니다"
+        "ko": "* 정신 제어한 유닛의 처치는 시전자에게 합산됩니다",
+        "zh-CN": "* 被精神控制单位的击杀计入施法者"
     },
     "ui_stats_units_requires_full": {
         "en": "Run detailed analysis to unlock unit statistics.",
-        "ko": "유닛 통계를 보려면 상세 분석을 실행하세요."
+        "ko": "유닛 통계를 보려면 상세 분석을 실행하세요.",
+        "zh-CN": "运行详细分析以解锁单位统计。"
     },
     "ui_stats_amon_requires_full": {
         "en": "Run detailed analysis to unlock Amon unit statistics.",
-        "ko": "아몬 유닛 통계를 보려면 상세 분석을 실행하세요."
+        "ko": "아몬 유닛 통계를 보려면 상세 분석을 실행하세요.",
+        "zh-CN": "运行详细分析以解锁埃蒙单位统计。"
     },
     "ui_stats_detailed_stats_note": {
         "en": "This tab only shows statistics from detailedly parsed replays. Detailedly parsed files: {{detailed}} / {{total}}.",
-        "ko": "이 탭은 상세 분석된 리플레이의 통계만 표시합니다. 상세 분석된 파일: {{detailed}} / {{total}}."
+        "ko": "이 탭은 상세 분석된 리플레이의 통계만 표시합니다. 상세 분석된 파일: {{detailed}} / {{total}}.",
+        "zh-CN": "此页仅显示已详细解析录像的统计数据。已详细解析文件：{{detailed}} / {{total}}。"
     },
     "ui_stats_name": {
         "en": "Name",
-        "ko": "이름"
+        "ko": "이름",
+        "zh-CN": "名称"
     },
     "ui_stats_detailed_description": {
         "en": "Run detailed analysis to generate the cache and unlock various detailed statistics.",
-        "ko": "상세 분석을 실행하여 캐시를 생성하고 다양한 상세 통계를 확인할 수 있습니다"
+        "ko": "상세 분석을 실행하여 캐시를 생성하고 다양한 상세 통계를 확인할 수 있습니다",
+        "zh-CN": "运行详细分析以生成缓存并解锁各项详细统计。"
     },
     "ui_stats_detailed_warning": {
         "en": "Warning! This might take a long time and the PC will be less responsive.",
-        "ko": "경고! 시간이 오래 걸릴 수 있으며 PC 반응 속도가 느려질 수 있습니다."
+        "ko": "경고! 시간이 오래 걸릴 수 있으며 PC 반응 속도가 느려질 수 있습니다.",
+        "zh-CN": "警告：此操作可能耗时较长，并降低电脑的响应速度。"
     },
     "ui_stats_run_simple_analysis": {
         "en": "Run simple analysis",
-        "ko": "간단 분석 실행"
+        "ko": "간단 분석 실행",
+        "zh-CN": "运行简单分析"
     },
     "ui_stats_simple_running": {
         "en": "Simple analysis running...",
-        "ko": "간단 분석 실행 중..."
+        "ko": "간단 분석 실행 중...",
+        "zh-CN": "正在运行简单分析…"
     },
     "ui_stats_stop_analyzing": {
         "en": "Stop analyzing",
-        "ko": "분석 중지"
+        "ko": "분석 중지",
+        "zh-CN": "停止分析"
     },
     "ui_stats_run_detailed_analysis": {
         "en": "Run detailed analysis",
-        "ko": "상세 분석 실행"
+        "ko": "상세 분석 실행",
+        "zh-CN": "运行详细分析"
     },
     "ui_stats_detailed_running": {
         "en": "Detailed analysis running...",
-        "ko": "상세 분석 실행 중..."
+        "ko": "상세 분석 실행 중...",
+        "zh-CN": "正在运行详细分析…"
     },
     "ui_stats_detailed_analysis_at_start": {
         "en": "Perform detailed analysis at start",
-        "ko": "시작 시 상세 분석 수행"
+        "ko": "시작 시 상세 분석 수행",
+        "zh-CN": "启动时执行详细分析"
     },
     "ui_stats_detailed_not_started": {
         "en": "Detailed analysis: not started.",
-        "ko": "상세 분석: 시작되지 않음."
+        "ko": "상세 분석: 시작되지 않음.",
+        "zh-CN": "详细分析：尚未开始。"
     },
     "ui_stats_delete_parsed_data": {
         "en": "Delete parsed data",
-        "ko": "분석된 데이터 삭제"
+        "ko": "분석된 데이터 삭제",
+        "zh-CN": "删除解析数据"
     },
     "ui_stats_idle": {
         "en": "Idle",
-        "ko": "대기 중"
+        "ko": "대기 중",
+        "zh-CN": "空闲"
     },
     "ui_stats_parsing_status": {
         "en": "Parsing status: {{value}}",
-        "ko": "분석 상태: {{value}}"
+        "ko": "분석 상태: {{value}}",
+        "zh-CN": "解析状态：{{value}}"
     },
     "ui_stats_cached_files": {
         "en": "Previously cached files: {{value}}",
-        "ko": "이전에 캐시된 파일: {{value}}"
+        "ko": "이전에 캐시된 파일: {{value}}",
+        "zh-CN": "已有缓存文件：{{value}}"
     },
     "ui_stats_progress": {
         "en": "Progress: {{current}}/{{total}}",
-        "ko": "진행률: {{current}}/{{total}}"
+        "ko": "진행률: {{current}}/{{total}}",
+        "zh-CN": "进度：{{current}}/{{total}}"
     },
     "ui_stats_failed_files": {
         "en": "Failed files: {{value}}",
-        "ko": "실패한 파일: {{value}}"
+        "ko": "실패한 파일: {{value}}",
+        "zh-CN": "失败文件：{{value}}"
     },
     "ui_stats_skipped_files": {
         "en": "Skipped files: {{value}}",
-        "ko": "건너뛴 파일: {{value}}"
+        "ko": "건너뛴 파일: {{value}}",
+        "zh-CN": "跳过文件：{{value}}"
     },
     "ui_stats_total_time": {
         "en": "Total time taken: {{value}}",
-        "ko": "총 소요 시간: {{value}}"
+        "ko": "총 소요 시간: {{value}}",
+        "zh-CN": "总耗时：{{value}}"
     },
     "ui_stats_no_statistics": {
         "en": "No statistics loaded.",
-        "ko": "불러온 통계가 없습니다."
+        "ko": "불러온 통계가 없습니다.",
+        "zh-CN": "尚未加载统计数据。"
     },
     "ui_stats_simple_not_ready": {
         "en": "Simple analysis: not ready yet.",
-        "ko": "간단 분석: 아직 준비되지 않음."
+        "ko": "간단 분석: 아직 준비되지 않음.",
+        "zh-CN": "简单分析：尚未就绪。"
     },
     "ui_stats_waiting_simple_startup": {
         "en": "Simple analysis: waiting for startup.",
-        "ko": "간단 분석: 시작 대기 중."
+        "ko": "간단 분석: 시작 대기 중.",
+        "zh-CN": "简单分析：等待启动。"
     },
     "ui_stats_analysis_running": {
         "en": "Analysis is running...",
-        "ko": "분석 실행 중..."
+        "ko": "분석 실행 중...",
+        "zh-CN": "分析运行中…"
     },
     "ui_stats_analysis_idle": {
         "en": "Analysis is idle.",
-        "ko": "분석이 대기 중입니다."
+        "ko": "분석이 대기 중입니다.",
+        "zh-CN": "分析空闲。"
     },
     "ui_stats_region_americas": {
         "en": "Americas",
-        "ko": "아메리카"
+        "ko": "아메리카",
+        "zh-CN": "美洲"
     },
     "ui_stats_region_europe": {
         "en": "Europe",
-        "ko": "유럽"
+        "ko": "유럽",
+        "zh-CN": "欧洲"
     },
     "ui_stats_region_asia": {
         "en": "Asia",
-        "ko": "아시아"
+        "ko": "아시아",
+        "zh-CN": "亚洲"
     },
     "ui_stats_region_china": {
         "en": "China",
-        "ko": "중국"
+        "ko": "중국",
+        "zh-CN": "中国"
     },
     "ui_stats_normal_games": {
         "en": "Normal games",
-        "ko": "일반 게임"
+        "ko": "일반 게임",
+        "zh-CN": "普通对局"
     },
     "ui_stats_mutations": {
         "en": "Mutations",
-        "ko": "돌연변이"
+        "ko": "돌연변이",
+        "zh-CN": "突变"
     },
     "ui_stats_include_wins": {
         "en": "Wins",
-        "ko": "승리"
+        "ko": "승리",
+        "zh-CN": "胜场"
     },
     "ui_stats_include_losses": {
         "en": "Losses",
-        "ko": "패배"
+        "ko": "패배",
+        "zh-CN": "负场"
     },
     "ui_stats_override_folder": {
         "en": "Override folder selection",
-        "ko": "폴더 선택 무시"
+        "ko": "폴더 선택 무시",
+        "zh-CN": "覆盖目录选择"
     },
     "ui_stats_include_multibox": {
         "en": "Include multi-box games",
-        "ko": "멀티박스 게임 포함"
+        "ko": "멀티박스 게임 포함",
+        "zh-CN": "包含多开对局"
     },
     "ui_stats_include_levels_1_14": {
         "en": "1-14",
-        "ko": "1-14"
+        "ko": "1-14",
+        "zh-CN": "1—14"
     },
     "ui_stats_include_levels_15_plus": {
         "en": "15+",
-        "ko": "15+"
+        "ko": "15+",
+        "zh-CN": "15+"
     },
     "ui_stats_include_normal_mastery_sum": {
         "en": "<= 90",
-        "ko": "<= 90"
+        "ko": "<= 90",
+        "zh-CN": "≤ 90"
     },
     "ui_stats_include_abnormal_mastery_sum": {
         "en": "> 90",
-        "ko": "> 90"
+        "ko": "> 90",
+        "zh-CN": "> 90"
     },
     "ui_stats_group_difficulty": {
         "en": "Difficulty",
-        "ko": "난이도"
+        "ko": "난이도",
+        "zh-CN": "难度"
     },
     "ui_stats_group_region": {
         "en": "Region",
-        "ko": "지역"
+        "ko": "지역",
+        "zh-CN": "地区"
     },
     "ui_stats_group_game_type": {
         "en": "Game type",
-        "ko": "게임 유형"
+        "ko": "게임 유형",
+        "zh-CN": "对局类型"
     },
     "ui_stats_group_game_type_result": {
         "en": "Game type / result",
-        "ko": "게임 유형 / 결과"
+        "ko": "게임 유형 / 결과",
+        "zh-CN": "对局类型 / 结果"
     },
     "ui_stats_group_game_result": {
         "en": "Game result",
-        "ko": "게임 결과"
+        "ko": "게임 결과",
+        "zh-CN": "对局结果"
     },
     "ui_stats_group_level": {
         "en": "Level",
-        "ko": "레벨"
+        "ko": "레벨",
+        "zh-CN": "等级"
     },
     "ui_stats_group_main_level": {
         "en": "Main level",
-        "ko": "내 레벨"
+        "ko": "내 레벨",
+        "zh-CN": "我方等级"
     },
     "ui_stats_group_main_mastery": {
         "en": "Main mastery point",
-        "ko": "내 마스터 힘"
+        "ko": "내 마스터 힘",
+        "zh-CN": "我方精通点数"
     },
     "ui_stats_group_ally_level": {
         "en": "Ally level",
-        "ko": "동맹 레벨"
+        "ko": "동맹 레벨",
+        "zh-CN": "盟友等级"
     },
     "ui_stats_group_ally_mastery": {
         "en": "Ally mastery point",
-        "ko": "동맹 마스터 힘"
+        "ko": "동맹 마스터 힘",
+        "zh-CN": "盟友精通点数"
     },
     "ui_stats_group_etc": {
         "en": "Etc",
-        "ko": "기타"
+        "ko": "기타",
+        "zh-CN": "其他"
     },
     "ui_stats_game_length_minutes": {
         "en": "Game length (minutes)",
-        "ko": "게임 시간(분)"
+        "ko": "게임 시간(분)",
+        "zh-CN": "对局时长（分钟）"
     },
     "ui_stats_replay_date": {
         "en": "Replay date",
-        "ko": "리플레이 날짜"
+        "ko": "리플레이 날짜",
+        "zh-CN": "录像日期"
     },
     "ui_stats_filter_ally_player": {
         "en": "Filter by ally player name",
-        "ko": "동맹 플레이어 이름으로 필터"
+        "ko": "동맹 플레이어 이름으로 필터",
+        "zh-CN": "按盟友玩家名称筛选"
     },
     "ui_stats_dump_data": {
         "en": "Dump Data",
-        "ko": "데이터 덤프"
+        "ko": "데이터 덤프",
+        "zh-CN": "导出数据"
     },
     "ui_stats_games_found": {
         "en": "Games found: {{value}}",
-        "ko": "찾은 게임: {{value}}"
+        "ko": "찾은 게임: {{value}}",
+        "zh-CN": "找到的对局：{{value}}"
     },
     "ui_footer_saving": {
         "en": "Saving...",
-        "ko": "저장 중..."
+        "ko": "저장 중...",
+        "zh-CN": "正在保存…"
     },
     "ui_footer_apply_save": {
         "en": "Save",
-        "ko": "저장"
+        "ko": "저장",
+        "zh-CN": "保存"
     },
     "ui_footer_reset": {
         "en": "Revert",
-        "ko": "되돌리기"
+        "ko": "되돌리기",
+        "zh-CN": "恢复"
     },
     "ui_footer_reload": {
         "en": "Reload",
-        "ko": "다시 불러오기"
+        "ko": "다시 불러오기",
+        "zh-CN": "重新加载"
     },
     "ui_status_loading_settings": {
         "en": "Loading settings...",
-        "ko": "설정을 불러오는 중..."
+        "ko": "설정을 불러오는 중...",
+        "zh-CN": "正在加载设置…"
     },
     "ui_performance_overlay_title": {
         "en": "Performance overlay:",
-        "ko": "성능 오버레이:"
+        "ko": "성능 오버레이:",
+        "zh-CN": "性能悬浮窗："
     },
     "ui_performance_overlay_description": {
         "en": "Shows performance overlay with CPU/RAM/Disk/Network usage for system and StarCraft II.",
-        "ko": "시스템과 스타크래프트 II의 CPU/RAM/디스크/네트워크 사용량을 보여주는 성능 오버레이입니다."
+        "ko": "시스템과 스타크래프트 II의 CPU/RAM/디스크/네트워크 사용량을 보여주는 성능 오버레이입니다.",
+        "zh-CN": "显示系统及《星际争霸II》的 CPU、内存、磁盘与网络占用。"
     },
     "ui_performance_overlay_details": {
         "en": "Read and Write stats are disk usage of StarCraft II (current and total). CPUc is per core CPU usage. 100% means one core fully used.",
-        "ko": "Read와 Write는 스타크래프트 II의 디스크 사용량(현재 및 누적)입니다. CPUc는 코어별 CPU 사용량이며, 100%는 코어 하나를 완전히 사용 중임을 뜻합니다."
+        "ko": "Read와 Write는 스타크래프트 II의 디스크 사용량(현재 및 누적)입니다. CPUc는 코어별 CPU 사용량이며, 100%는 코어 하나를 완전히 사용 중임을 뜻합니다.",
+        "zh-CN": "读写统计是《星际争霸II》的磁盘用量（当前值与累计值）。CPUc 为按单核心折算的 CPU 占用率，100% 表示占满一个核心。"
     },
     "ui_performance_show_overlay": {
         "en": "Show performance overlay",
-        "ko": "성능 오버레이 표시"
+        "ko": "성능 오버레이 표시",
+        "zh-CN": "显示性能悬浮窗"
     },
     "ui_performance_change_position": {
         "en": "Change overlay position",
-        "ko": "오버레이 위치 변경"
+        "ko": "오버레이 위치 변경",
+        "zh-CN": "调整悬浮窗位置"
     },
     "ui_performance_hotkey_title": {
         "en": "Hotkey for showing/hiding overlay",
-        "ko": "오버레이 표시/숨김 단축키"
+        "ko": "오버레이 표시/숨김 단축키",
+        "zh-CN": "显示 / 隐藏悬浮窗的快捷键"
     },
     "ui_performance_targets_title": {
         "en": "Target executables",
-        "ko": "대상 실행 파일"
+        "ko": "대상 실행 파일",
+        "zh-CN": "目标可执行文件"
     },
     "ui_performance_targets_description": {
         "en": "This is a list of exact process names from performance_processes in settings.json, one executable per line.",
-        "ko": "settings.json의 performance_processes에 들어가는 정확한 프로세스 이름 목록이며, 한 줄에 실행 파일 하나씩 입력합니다."
+        "ko": "settings.json의 performance_processes에 들어가는 정확한 프로세스 이름 목록이며, 한 줄에 실행 파일 하나씩 입력합니다.",
+        "zh-CN": "这里列出 settings.json 中 performance_processes 的精确进程名称，每行一个可执行文件。"
+    },
+    "ui_language_chinese_simplified": {
+        "en": "简体中文",
+        "ko": "简体中文",
+        "zh-CN": "简体中文"
+    },
+    "ui_links_project": {
+        "en": "Project",
+        "ko": "프로젝트",
+        "zh-CN": "项目主页"
+    },
+    "ui_links_email": {
+        "en": "Email",
+        "ko": "이메일",
+        "zh-CN": "电子邮箱"
+    },
+    "ui_overlay_player_no_games": {
+        "en": "No games played with {{player}}",
+        "ko": "{{player}} 님과 플레이한 게임이 없습니다",
+        "zh-CN": "尚未与{{player}}一起游戏"
+    },
+    "ui_overlay_player_summary": {
+        "en": "You played {{games}} games with {{player}} ({{winRate}}% winrate | {{killRate}}% kills | {{apm}} APM)",
+        "ko": "{{player}} 님과 {{games}}게임 플레이 (승률 {{winRate}}% | 처치 {{killRate}}% | {{apm}} APM)",
+        "zh-CN": "你与{{player}}同场 {{games}} 局（胜率 {{winRate}}% | 击杀占比 {{killRate}}% | {{apm}} APM）"
+    },
+    "ui_overlay_player_last_seen": {
+        "en": "Last game played together: {{time}}",
+        "ko": "마지막 함께한 게임: {{time}}",
+        "zh-CN": "最近一次同场：{{time}}"
+    },
+    "ui_performance_overlay_drag": {
+        "en": "Drag performance overlay",
+        "ko": "성능 오버레이 이동",
+        "zh-CN": "拖动性能悬浮窗"
+    },
+    "ui_performance_overlay_ram": {
+        "en": "RAM",
+        "ko": "RAM",
+        "zh-CN": "内存"
+    },
+    "ui_performance_overlay_read": {
+        "en": "Read",
+        "ko": "읽기",
+        "zh-CN": "读取"
+    },
+    "ui_performance_overlay_write": {
+        "en": "Write",
+        "ko": "쓰기",
+        "zh-CN": "写入"
+    },
+    "ui_performance_overlay_system": {
+        "en": "System",
+        "ko": "시스템",
+        "zh-CN": "系统"
+    },
+    "ui_performance_overlay_down": {
+        "en": "Down",
+        "ko": "다운로드",
+        "zh-CN": "下载"
+    },
+    "ui_performance_overlay_upload": {
+        "en": "Upload",
+        "ko": "업로드",
+        "zh-CN": "上传"
+    },
+    "ui_performance_overlay_cpu_utilization": {
+        "en": "CPU utilization",
+        "ko": "CPU 사용률",
+        "zh-CN": "CPU 占用率"
+    },
+    "ui_performance_overlay_total": {
+        "en": "total",
+        "ko": "합계",
+        "zh-CN": "累计"
+    },
+    "ui_weeklies_no_mutator_details": {
+        "en": "No mutator details available.",
+        "ko": "돌연변이원 정보가 없습니다.",
+        "zh-CN": "暂无突变因子详情。"
+    },
+    "ui_status_folder_selected": {
+        "en": "Folder selected and applied. Click Save to persist.",
+        "ko": "폴더를 선택하고 적용했습니다. 저장하려면 저장을 클릭하세요.",
+        "zh-CN": "已选择并应用目录，点击“保存”以保留设置。"
+    },
+    "ui_status_action_completed": {
+        "en": "Action completed",
+        "ko": "작업 완료",
+        "zh-CN": "操作已完成"
+    },
+    "ui_status_action_failed": {
+        "en": "Action failed",
+        "ko": "작업 실패",
+        "zh-CN": "操作失败"
+    },
+    "ui_status_applied": {
+        "en": "Changes applied immediately. Click Save to persist.",
+        "ko": "변경 사항을 즉시 적용했습니다. 저장하려면 저장을 클릭하세요.",
+        "zh-CN": "更改已立即生效，点击“保存”以保留设置。"
+    },
+    "ui_status_apply_failed": {
+        "en": "Failed to apply changes",
+        "ko": "변경 사항 적용 실패",
+        "zh-CN": "应用更改失败"
+    },
+    "ui_status_first_win_failed": {
+        "en": "Failed to save first win bonus time",
+        "ko": "첫 승 보너스 시간 저장 실패",
+        "zh-CN": "保存首胜奖励时间失败"
+    },
+    "ui_status_first_win_saved": {
+        "en": "First win bonus time saved.",
+        "ko": "첫 승 보너스 시간을 저장했습니다.",
+        "zh-CN": "首胜奖励时间已保存。"
+    },
+    "ui_status_folder_empty": {
+        "en": "Folder path is empty",
+        "ko": "폴더 경로가 비어 있습니다",
+        "zh-CN": "目录路径为空"
+    },
+    "ui_status_folder_opened": {
+        "en": "Opened folder",
+        "ko": "폴더를 열었습니다",
+        "zh-CN": "已打开目录"
+    },
+    "ui_status_load_settings_failed": {
+        "en": "Failed to load settings",
+        "ko": "설정 불러오기 실패",
+        "zh-CN": "加载设置失败"
+    },
+    "ui_status_load_statistics_failed": {
+        "en": "Failed to load statistics",
+        "ko": "통계 불러오기 실패",
+        "zh-CN": "加载统计数据失败"
+    },
+    "ui_status_open_folder_failed": {
+        "en": "Failed to open folder",
+        "ko": "폴더 열기 실패",
+        "zh-CN": "打开目录失败"
+    },
+    "ui_status_player_note_cleared": {
+        "en": "Player note cleared",
+        "ko": "플레이어 메모를 지웠습니다",
+        "zh-CN": "玩家备注已清空"
+    },
+    "ui_status_player_note_failed": {
+        "en": "Failed to save player note",
+        "ko": "플레이어 메모 저장 실패",
+        "zh-CN": "保存玩家备注失败"
+    },
+    "ui_status_player_note_saved": {
+        "en": "Player note saved",
+        "ko": "플레이어 메모를 저장했습니다",
+        "zh-CN": "玩家备注已保存"
+    },
+    "ui_status_replay_sent": {
+        "en": "Replay sent to overlay",
+        "ko": "리플레이를 오버레이로 보냈습니다",
+        "zh-CN": "已将录像发送到悬浮窗"
+    },
+    "ui_status_reverted": {
+        "en": "Reverted to saved settings.",
+        "ko": "저장된 설정으로 되돌렸습니다.",
+        "zh-CN": "已恢复为已保存的设置。"
+    },
+    "ui_status_save_failed": {
+        "en": "Failed to save",
+        "ko": "저장 실패",
+        "zh-CN": "保存失败"
+    },
+    "ui_status_saved": {
+        "en": "Saved to settings.json",
+        "ko": "settings.json에 저장했습니다",
+        "zh-CN": "已保存到 settings.json"
+    },
+    "ui_status_select_folder_failed": {
+        "en": "Failed to select folder",
+        "ko": "폴더 선택 실패",
+        "zh-CN": "选择目录失败"
+    },
+    "ui_status_select_replay": {
+        "en": "Select a replay first",
+        "ko": "먼저 리플레이를 선택하세요",
+        "zh-CN": "请先选择录像"
+    },
+    "ui_status_settings_loaded": {
+        "en": "Settings loaded",
+        "ko": "설정을 불러왔습니다",
+        "zh-CN": "设置已加载"
+    },
+    "ui_status_statistics_refreshed": {
+        "en": "Statistics refreshed",
+        "ko": "통계를 새로 고쳤습니다",
+        "zh-CN": "统计数据已刷新"
+    },
+    "ui_status_games_refreshed": {
+        "en": "Games refreshed",
+        "ko": "게임 목록을 새로 고쳤습니다",
+        "zh-CN": "对局列表已刷新"
+    },
+    "ui_status_players_refreshed": {
+        "en": "Players refreshed",
+        "ko": "플레이어 목록을 새로 고쳤습니다",
+        "zh-CN": "玩家列表已刷新"
+    },
+    "ui_status_weeklies_refreshed": {
+        "en": "Weeklies refreshed",
+        "ko": "주간 돌연변이를 새로 고쳤습니다",
+        "zh-CN": "周突变已刷新"
+    },
+    "ui_status_load_games_failed": {
+        "en": "Failed to load games",
+        "ko": "게임 목록 불러오기 실패",
+        "zh-CN": "加载对局列表失败"
+    },
+    "ui_status_load_players_failed": {
+        "en": "Failed to load players",
+        "ko": "플레이어 목록 불러오기 실패",
+        "zh-CN": "加载玩家列表失败"
+    },
+    "ui_status_load_weeklies_failed": {
+        "en": "Failed to load weeklies",
+        "ko": "주간 돌연변이 불러오기 실패",
+        "zh-CN": "加载周突变失败"
+    },
+    "ui_status_screenshot_saved": {
+        "en": "Overlay screenshot saved",
+        "ko": "오버레이 스크린샷을 저장했습니다",
+        "zh-CN": "悬浮窗截图已保存"
+    },
+    "ui_status_screenshot_failed": {
+        "en": "Failed to save overlay screenshot",
+        "ko": "오버레이 스크린샷 저장 실패",
+        "zh-CN": "保存悬浮窗截图失败"
+    },
+    "ui_replay_path_prompt": {
+        "en": "Replay file path (*.SC2Replay)",
+        "ko": "리플레이 파일 경로 (*.SC2Replay)",
+        "zh-CN": "录像文件路径（*.SC2Replay）"
+    },
+    "ui_status_overlay_toggled": {
+        "en": "Overlay visibility toggled",
+        "ko": "오버레이 표시 상태를 전환했습니다",
+        "zh-CN": "已切换悬浮窗显示状态"
+    },
+    "ui_status_overlay_shown": {
+        "en": "Overlay shown",
+        "ko": "오버레이를 표시했습니다",
+        "zh-CN": "悬浮窗已显示"
+    },
+    "ui_status_overlay_hidden": {
+        "en": "Overlay hidden",
+        "ko": "오버레이를 숨겼습니다",
+        "zh-CN": "悬浮窗已隐藏"
+    },
+    "ui_status_player_overlay_toggled": {
+        "en": "Overlay player stats toggled",
+        "ko": "오버레이 플레이어 통계를 전환했습니다",
+        "zh-CN": "已切换玩家统计悬浮窗"
+    },
+    "ui_status_performance_shown": {
+        "en": "Performance overlay shown",
+        "ko": "성능 오버레이를 표시했습니다",
+        "zh-CN": "性能悬浮窗已显示"
+    },
+    "ui_status_performance_hidden": {
+        "en": "Performance overlay hidden",
+        "ko": "성능 오버레이를 숨겼습니다",
+        "zh-CN": "性能悬浮窗已隐藏"
+    },
+    "ui_status_performance_reposition_enabled": {
+        "en": "Performance overlay reposition mode enabled",
+        "ko": "성능 오버레이 위치 조정 모드를 활성화했습니다",
+        "zh-CN": "已启用性能悬浮窗位置调整模式"
+    },
+    "ui_status_performance_reposition_disabled": {
+        "en": "Performance overlay reposition mode disabled",
+        "ko": "성능 오버레이 위치 조정 모드를 비활성화했습니다",
+        "zh-CN": "已关闭性能悬浮窗位置调整模式"
+    },
+    "ui_status_replay_moved": {
+        "en": "Replay moved",
+        "ko": "리플레이를 이동했습니다",
+        "zh-CN": "已切换录像"
+    },
+    "ui_status_replay_move_ignored": {
+        "en": "Replay move ignored",
+        "ko": "리플레이 이동을 무시했습니다",
+        "zh-CN": "已忽略录像切换请求"
+    },
+    "ui_status_no_replays": {
+        "en": "No replays available",
+        "ko": "사용 가능한 리플레이가 없습니다",
+        "zh-CN": "暂无可用录像"
+    },
+    "ui_status_randomizer_generated": {
+        "en": "Random selection generated",
+        "ko": "무작위 선택을 생성했습니다",
+        "zh-CN": "随机选择已生成"
+    },
+    "ui_status_shortcut_created": {
+        "en": "Desktop shortcut created",
+        "ko": "바탕 화면 바로 가기가 생성되었습니다",
+        "zh-CN": "已创建桌面快捷方式"
+    },
+    "ui_status_shortcut_unchanged": {
+        "en": "Desktop shortcut already up to date",
+        "ko": "바탕 화면 바로 가기가 이미 최신 상태입니다",
+        "zh-CN": "桌面快捷方式已是最新，无需更新"
+    },
+    "ui_status_shortcut_replaced": {
+        "en": "Desktop shortcut replaced",
+        "ko": "바탕 화면 바로 가기가 교체되었습니다",
+        "zh-CN": "已替换桌面快捷方式"
+    },
+    "ui_status_shortcut_failed": {
+        "en": "Desktop shortcut failed",
+        "ko": "바탕 화면 바로 가기 작업에 실패했습니다",
+        "zh-CN": "桌面快捷方式操作失败"
+    },
+    "ui_status_shortcut_unavailable": {
+        "en": "Create desktop shortcut is not available in this build",
+        "ko": "이 빌드에서는 바탕 화면 바로 가기 생성을 사용할 수 없습니다",
+        "zh-CN": "此构建不支持创建桌面快捷方式"
+    },
+    "ui_status_analysis_not_running": {
+        "en": "Detailed analysis is not running.",
+        "ko": "상세 분석이 실행 중이 아닙니다.",
+        "zh-CN": "详细分析未运行。"
+    },
+    "ui_status_analysis_stop_requested": {
+        "en": "Detailed analysis will stop after the current work finishes.",
+        "ko": "현재 작업이 끝나면 상세 분석이 중지됩니다.",
+        "zh-CN": "详细分析将在当前工作完成后停止。"
+    },
+    "ui_status_analysis_stop_failed": {
+        "en": "Detailed analysis stop could not be requested.",
+        "ko": "상세 분석 중지를 요청하지 못했습니다.",
+        "zh-CN": "无法请求停止详细分析。"
+    },
+    "ui_status_analysis_startup_enabled": {
+        "en": "Detailed analysis at startup enabled.",
+        "ko": "시작 시 상세 분석을 활성화했습니다.",
+        "zh-CN": "已启用启动时详细分析。"
+    },
+    "ui_status_analysis_startup_disabled": {
+        "en": "Detailed analysis at startup disabled.",
+        "ko": "시작 시 상세 분석을 비활성화했습니다.",
+        "zh-CN": "已禁用启动时详细分析。"
+    },
+    "ui_status_screenshot_requested": {
+        "en": "Overlay screenshot requested",
+        "ko": "오버레이 스크린샷을 요청했습니다",
+        "zh-CN": "已请求截取悬浮窗"
+    },
+    "ui_status_analysis_simple": {
+        "en": "Simple analysis",
+        "ko": "간단 분석",
+        "zh-CN": "简单分析"
+    },
+    "ui_status_analysis_detailed": {
+        "en": "Detailed analysis",
+        "ko": "상세 분석",
+        "zh-CN": "详细分析"
+    },
+    "ui_status_analysis_phase": {
+        "en": "{{mode}}: {{phase}}.",
+        "ko": "{{mode}}: {{phase}}.",
+        "zh-CN": "{{mode}}：{{phase}}。"
+    },
+    "ui_status_phase_not_started": {
+        "en": "not started",
+        "ko": "시작하지 않음",
+        "zh-CN": "尚未开始"
+    },
+    "ui_status_phase_not_ready": {
+        "en": "not ready yet",
+        "ko": "아직 준비되지 않음",
+        "zh-CN": "尚未就绪"
+    },
+    "ui_status_phase_waiting": {
+        "en": "waiting for startup",
+        "ko": "시작 대기 중",
+        "zh-CN": "等待启动"
+    },
+    "ui_status_phase_startup_requested": {
+        "en": "startup requested while the frontend loads",
+        "ko": "화면 로딩 중 시작 요청됨",
+        "zh-CN": "已在界面加载期间请求启动"
+    },
+    "ui_status_phase_started": {
+        "en": "started in background",
+        "ko": "백그라운드에서 시작됨",
+        "zh-CN": "已在后台启动"
+    },
+    "ui_status_phase_running": {
+        "en": "already running",
+        "ko": "이미 실행 중",
+        "zh-CN": "已经在运行"
+    },
+    "ui_status_phase_scanning": {
+        "en": "scanning replays",
+        "ko": "리플레이 검색 중",
+        "zh-CN": "正在扫描录像"
+    },
+    "ui_status_phase_generating_cache": {
+        "en": "generating cache",
+        "ko": "캐시 생성 중",
+        "zh-CN": "正在生成缓存"
+    },
+    "ui_status_phase_cache_completed": {
+        "en": "cache generation completed",
+        "ko": "캐시 생성 완료",
+        "zh-CN": "缓存生成完成"
+    },
+    "ui_status_phase_building_statistics": {
+        "en": "building statistics",
+        "ko": "통계 생성 중",
+        "zh-CN": "正在生成统计"
+    },
+    "ui_status_phase_stopping": {
+        "en": "stopping",
+        "ko": "중지 중",
+        "zh-CN": "正在停止"
+    },
+    "ui_status_phase_stopped": {
+        "en": "stopped",
+        "ko": "중지됨",
+        "zh-CN": "已停止"
+    },
+    "ui_status_phase_completed": {
+        "en": "completed",
+        "ko": "완료",
+        "zh-CN": "已完成"
+    },
+    "ui_status_phase_failed": {
+        "en": "failed",
+        "ko": "실패",
+        "zh-CN": "失败"
     }
 }

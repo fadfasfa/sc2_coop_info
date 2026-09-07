@@ -628,14 +628,16 @@ impl ReplayInfo {
             .map(|mutator| {
                 let mutator_id =
                     TauriOverlayOps::canonical_mutator_id_with_dictionary(mutator, dictionary);
-                let (name_en, name_ko, description_en, description_ko) = dictionary
+                let (name_en, name_ko, name_zh_cn, description_en, description_ko, description_zh_cn) = dictionary
                     .mutator_data(&mutator_id)
                     .map(|value| {
                         (
                             TauriOverlayOps::decode_html_entities(&value.name.en),
                             TauriOverlayOps::decode_html_entities(&value.name.ko),
+                            TauriOverlayOps::decode_html_entities(&value.name.zh_cn),
                             TauriOverlayOps::decode_html_entities(&value.description.en),
                             TauriOverlayOps::decode_html_entities(&value.description.ko),
+                            TauriOverlayOps::decode_html_entities(&value.description.zh_cn),
                         )
                     })
                     .unwrap_or_default();
@@ -658,11 +660,13 @@ impl ReplayInfo {
                     name: shared_types::LocalizedText {
                         en: display_name_en,
                         ko: name_ko,
+                        zh_cn: Some(name_zh_cn),
                     },
                     icon_name,
                     description: shared_types::LocalizedText {
                         en: description_en,
                         ko: description_ko,
+                        zh_cn: Some(description_zh_cn),
                     },
                 }
             })
@@ -706,6 +710,7 @@ impl ReplayInfo {
                     name: shared_types::LocalizedText {
                         en: display_name.clone(),
                         ko: String::new(),
+                        zh_cn: None,
                     },
                     icon_name: display_name,
                     description: shared_types::LocalizedText::default(),

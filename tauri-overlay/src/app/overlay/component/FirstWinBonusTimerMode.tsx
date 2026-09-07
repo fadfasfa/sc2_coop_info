@@ -21,7 +21,10 @@ function formatDuration(totalSeconds: number): string {
     return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
-function formatNextAvailableTime(value?: string): string | null {
+function formatNextAvailableTime(
+    value?: string,
+    language?: string,
+): string | null {
     if (value == null || value.trim() === "") {
         return null;
     }
@@ -38,6 +41,10 @@ function formatNextAvailableTime(value?: string): string | null {
     const period = hours24 >= 12 ? "PM" : "AM";
     const hours12 = hours24 % 12 === 0 ? 12 : hours24 % 12;
     const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    if (language === "zh-CN") {
+        return `${year}-${month}-${day} ${String(hours24).padStart(2, "0")}:${minutes}`;
+    }
 
     return `${year}-${month}-${day} ${hours12}:${minutes} ${period}`;
 }
@@ -133,7 +140,10 @@ export default function FirstWinBonusTimerMode({
             {entries.map((entry, index) => {
                 const nextAvailableTime = entry.available
                     ? null
-                    : formatNextAvailableTime(entry.nextAvailableTime);
+                    : formatNextAvailableTime(
+                          entry.nextAvailableTime,
+                          overlayLanguageManager.currentLanguage(),
+                      );
                 return (
                     <div
                         className="first-win-bonus-server-row"

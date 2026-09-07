@@ -1,10 +1,14 @@
 import * as React from "react";
-import { createLanguageManager } from "../../i18n/languageManager";
+import {
+    createLanguageManager,
+    type LanguageManager,
+} from "../../i18n/languageManager";
 import styles from "../configStyles";
 
 export const TABLE_ROWS_PER_PAGE = 20;
 
 type TablePaginationProps = {
+    languageManager?: LanguageManager;
     currentPage: number;
     onPageChange: (page: number) => void;
     totalRows: number;
@@ -53,8 +57,8 @@ export function TablePagination({
     totalRows,
     rowsPerPage = TABLE_ROWS_PER_PAGE,
     hideWhenSinglePage = true,
+    languageManager = createLanguageManager(),
 }: TablePaginationProps) {
-    const languageManager = createLanguageManager();
     const t = (id: string) => languageManager.translate(id);
     const formatText = (
         id: string,

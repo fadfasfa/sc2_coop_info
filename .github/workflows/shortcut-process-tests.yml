@@ -1,0 +1,28 @@
+name: Shortcut process timeout tests
+
+on:
+  pull_request:
+    paths:
+      - "tauri-overlay/src-tauri/src/bounded_process.rs"
+      - ".github/workflows/shortcut-process-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  process-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Compile the production runner without Tauri dependencies
+        shell: bash
+        run: rustc --edition=2024 --test tauri-overlay/src-tauri/src/bounded_process.rs -o bounded-process-tests.exe
+      - name: Test bounded output and child termination
+        shell: bash
+        run: ./bounded-process-tests.exe

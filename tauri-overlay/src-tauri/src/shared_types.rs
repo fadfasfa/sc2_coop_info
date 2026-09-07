@@ -16,6 +16,9 @@ impl SharedTypesOps {
 pub struct LocalizedLabels {
     pub ko: Vec<String>,
     pub en: Vec<String>,
+    #[serde(rename = "zh-CN", default, skip_serializing_if = "Option::is_none")]
+    #[ts(optional)]
+    pub zh_cn: Option<Vec<String>>,
 }
 
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize, TS)]
@@ -23,6 +26,9 @@ pub struct LocalizedLabels {
 pub struct LocalizedText {
     pub ko: String,
     pub en: String,
+    #[serde(rename = "zh-CN", default, skip_serializing_if = "Option::is_none")]
+    #[ts(optional)]
+    pub zh_cn: Option<String>,
 }
 
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize, TS)]
@@ -377,6 +383,9 @@ pub enum OverlayPlayerStatsRow {
         frequency: f64,
         kills: f64,
         last_seen_relative: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        #[ts(optional, type = "number")]
+        last_seen_seconds: Option<u64>,
         #[ts(optional)]
         note: Option<String>,
     },
