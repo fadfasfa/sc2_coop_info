@@ -1,5 +1,15 @@
 # 简体中文验证记录 / zh-CN validation
 
+## PR #1 后续：快捷方式辅助进程超时
+
+- 将快捷方式动作移到 `spawn_blocking`，保持整个事务及 Windows mutex 在同一工作线程执行；不再阻塞异步工作线程。
+- 新增标准库子进程执行器：单次 helper 15 秒截止，终止确认与输出回收分别有 2 秒宽限；stdout/stderr 并行持续读取、限额保存，避免管道背压和无界输出。
+- 超时后终止并回收子进程；安装阶段失败不假定旧链接未变，而是在确认退出后检查现场再决定是否恢复备份。无法确认退出时保留现场并阻止后续快捷方式操作，不影响设置页解除 busy。
+- 本轮前端两组类型检查、资源合同 10/10、build 通过；完整 Playwright 120/120 通过，包含两项中英文延迟超时反馈／解除 busy／再次点击回归。
+- 现有 Windows COM 生产脚本隔离 fixture 的 10 项检查重跑通过。该 fixture 不执行 Rust 子进程编排。
+- 新增 Rust 成功输出、双流大输出、挂起子进程和后代进程持有输出管道的执行器测试。本机仍缺少 Rust 工具链，无法在本机运行这些 Rust 测试。
+- 新增只读权限的 `Shortcut process timeout tests` CI，在 Windows/macOS/Linux 直接编译生产 `bounded_process.rs` 并运行上述测试；具体结果绑定对应 PR 提交和 Actions run，不打包、不发布、不使用签名密钥。该窄测试不能代替整个 Tauri 应用原生构建，新包及真人验收缺口保持不变。
+
 ## 2026-09-07：个人 fork Draft PR 收口
 
 目标为 `fadfasfa/sc2_coop_info:codex/zh-cn` → `fadfasfa/sc2_coop_info:main`，由仓库所有者审查、手动合并；不向原作者仓库发布 PR，不合并个人便携包装分支。以下为本轮复验，下方历史结果保留，不混作当前提交验收。

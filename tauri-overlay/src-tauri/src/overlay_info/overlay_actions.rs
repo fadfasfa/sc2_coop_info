@@ -147,18 +147,6 @@ impl OverlayInfoOps {
                 ),
                 Err(error) => crate::OverlayActionResponse::failure(error),
             }),
-            "create_desktop_shortcut" => Some(match crate::desktop_shortcut::create_or_update() {
-                Ok(update) => crate::OverlayActionResponse::success_with_path(
-                    update.message(),
-                    update.path().display().to_string(),
-                ),
-                Err(error) if error == "Create desktop shortcut is not available in this build" => {
-                    crate::OverlayActionResponse::failure(error)
-                }
-                Err(error) => crate::OverlayActionResponse::failure(format!(
-                    "Desktop shortcut failed: {error}"
-                )),
-            }),
             "randomizer_generate" => Some(match state.dictionary_data() {
                 Ok(dictionary) => {
                     match randomizer::RandomizerOps::generate_from_body_with_dictionary(

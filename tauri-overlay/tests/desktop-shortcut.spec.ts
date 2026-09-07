@@ -1,6 +1,57 @@
 import { expect, test } from "@playwright/test";
 import { installTauriMock } from "./helpers/config-route-mock";
 
+for (const language of ["en", "zh-CN"] as const) {
+    test(`shortcut timeout clears busy and permits retry: ${language}`, async ({
+        page,
+    }) => {
+        await installTauriMock(page, null, [], {
+            settings: { language },
+            actionDelayMs: { create_desktop_shortcut: 500 },
+            actionResponses: {
+                create_desktop_shortcut: {
+                    status: "ok",
+                    result: { ok: false, path: null },
+                    message:
+                        "Desktop shortcut failed: Windows shortcut helper timed out",
+                },
+            },
+        });
+        await page.goto("/");
+        const button = page.getByRole("button", {
+            name:
+                language === "en"
+                    ? "Create desktop shortcut"
+                    : "创建桌面快捷方式",
+            exact: true,
+        });
+        await button.click();
+        await expect(button).toBeDisabled();
+        await expect(
+            page.getByText(
+                language === "en"
+                    ? "Desktop shortcut failed: Windows shortcut helper timed out"
+                    : "桌面快捷方式操作失败: Windows shortcut helper timed out",
+                { exact: true },
+            ),
+        ).toBeVisible();
+        await expect(button).toBeEnabled();
+        await button.click();
+        await expect
+            .poll(() =>
+                page.evaluate(
+                    () =>
+                        window.__SCO_ACTION_REQUESTS__.filter(
+                            (request) =>
+                                request?.action === "create_desktop_shortcut",
+                        ).length,
+                ),
+            )
+            .toBe(2);
+        await expect(button).toBeEnabled();
+    });
+}
+
 const outcomes = [
     [true, "Desktop shortcut created", "已创建桌面快捷方式"],
     [

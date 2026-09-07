@@ -27,6 +27,7 @@ impl ShortcutUpdate {
 #[cfg(windows)]
 mod windows_shortcut {
     use super::ShortcutUpdate;
+    use crate::bounded_process::{BoundedOutput, run_bounded};
     use serde::Deserialize;
     use std::{
         ffi::OsString,
@@ -34,7 +35,8 @@ mod windows_shortcut {
         os::windows::process::CommandExt,
         path::{Path, PathBuf},
         process::Command,
-        time::{SystemTime, UNIX_EPOCH},
+        sync::atomic::{AtomicBool, Ordering},
+        time::{Duration, SystemTime, UNIX_EPOCH},
     };
     use windows::{
         Win32::{
@@ -45,6 +47,9 @@ mod windows_shortcut {
     };
 
     const CREATE_NO_WINDOW: u32 = 0x0800_0000;
+    const POWERSHELL_TIMEOUT: Duration = Duration::from_secs(15);
+    const HELPER_OUTPUT_LIMIT: usize = 64 * 1024;
+    static HELPER_STATE_UNCERTAIN: AtomicBool = AtomicBool::new(false);
     const SHORTCUT_NAME: &str = "SC2 Coop Info.lnk";
     const DESKTOP_SCRIPT: &str = r#"
 $ErrorActionPreference = 'Stop'
@@ -129,12 +134,31 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
         }
     }
 
-    struct TempShortcut(PathBuf);
+    struct TempShortcut {
+        path: PathBuf,
+        remove_on_drop: bool,
+    }
+
+    impl TempShortcut {
+        fn new(path: PathBuf) -> Self {
+            Self {
+                path,
+                remove_on_drop: true,
+            }
+        }
+
+        fn preserve(&mut self) {
+            self.remove_on_drop = false;
+        }
+    }
 
     impl Drop for TempShortcut {
         fn drop(&mut self) {
-            if self.0.exists() {
-                let _ = fs::remove_file(&self.0);
+            if self.remove_on_drop
+                && !HELPER_STATE_UNCERTAIN.load(Ordering::Acquire)
+                && self.path.exists()
+            {
+                let _ = fs::remove_file(&self.path);
             }
         }
     }
@@ -167,6 +191,7 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
     }
 
     pub fn create_or_update() -> Result<ShortcutUpdate, String> {
+        ensure_helper_state_known()?;
         if cfg!(debug_assertions) {
             return Err("Create desktop shortcut is not available in this build".into());
         }
@@ -190,6 +215,7 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
     }
 
     fn create_or_update_at(target: &Path, link: &Path) -> Result<ShortcutUpdate, String> {
+        ensure_helper_state_known()?;
         if !target.is_file() {
             return Err(format!("shortcut target does not exist: {}", target.display()));
         }
@@ -205,28 +231,51 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
 
         let _lock = UpdateLock::acquire()?;
         let expected = ShortcutFields::for_target(target)?;
-        if link.is_file() {
+        let previous = if link.is_file() {
             let fields = read_fields(link).map_err(|error| {
                 format!("cannot inspect existing shortcut; it was left unchanged: {error}")
             })?;
             if fields.matches(&expected) {
                 return Ok(ShortcutUpdate::Unchanged(link.to_path_buf()));
             }
+            Some(fields)
         } else if link.exists() {
             return Err(format!(
                 "shortcut path is not a regular file: {}",
                 link.display()
             ));
-        }
+        } else {
+            None
+        };
 
-        let temp = TempShortcut(unique_temp_link(link));
-        write_shortcut(&expected, &temp.0)?;
-        if !read_fields(&temp.0)?.matches(&expected) {
+        let mut temp = TempShortcut::new(unique_temp_link(link));
+        if let Err(error) = write_shortcut(&expected, &temp.path) {
+            if HELPER_STATE_UNCERTAIN.load(Ordering::Acquire) {
+                temp.preserve();
+            }
+            return Err(error);
+        }
+        let staged_fields = match read_fields(&temp.path) {
+            Ok(fields) => fields,
+            Err(error) => {
+                if HELPER_STATE_UNCERTAIN.load(Ordering::Acquire) {
+                    temp.preserve();
+                }
+                return Err(error);
+            }
+        };
+        if !staged_fields.matches(&expected) {
             return Err("shortcut verification failed before installation".into());
         }
 
         let backup = link.is_file().then(|| available_backup_path(link)).transpose()?;
-        install_shortcut(&temp.0, link, backup.as_deref())?;
+        install_shortcut(
+            &mut temp,
+            link,
+            backup.as_deref(),
+            &expected,
+            previous.as_ref(),
+        )?;
         match read_fields(link) {
             Ok(fields) if fields.matches(&expected) => {}
             result => {
@@ -234,6 +283,12 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
                     Ok(_) => "shortcut verification failed after installation".to_string(),
                     Err(error) => format!("cannot verify installed shortcut: {error}"),
                 };
+                if HELPER_STATE_UNCERTAIN.load(Ordering::Acquire) {
+                    temp.preserve();
+                    return Err(format!(
+                        "{verification}; helper termination is unconfirmed, so transaction evidence was preserved and shortcut updates are disabled until application restart"
+                    ));
+                }
                 return Err(match rollback_failed_install(link, backup.as_deref()) {
                     Ok(outcome) => format!("{verification}; {outcome}"),
                     Err(rollback) => format!("{verification}; rollback failed: {rollback}"),
@@ -248,6 +303,17 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             },
             None => ShortcutUpdate::Created(link.to_path_buf()),
         })
+    }
+
+    fn ensure_helper_state_known() -> Result<(), String> {
+        if HELPER_STATE_UNCERTAIN.load(Ordering::Acquire) {
+            Err(
+                "a previous shortcut helper could not be confirmed stopped; restart the application and inspect the shortcut before retrying"
+                    .into(),
+            )
+        } else {
+            Ok(())
+        }
     }
 
     fn validate_target(target: &Path) -> Result<(), String> {
@@ -306,23 +372,91 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             .map_err(|error| format!("invalid shortcut readback: {error}"))
     }
 
-    fn install_shortcut(temp: &Path, link: &Path, backup: Option<&Path>) -> Result<(), String> {
+    fn install_shortcut(
+        temp: &mut TempShortcut,
+        link: &Path,
+        backup: Option<&Path>,
+        expected: &ShortcutFields,
+        previous: Option<&ShortcutFields>,
+    ) -> Result<(), String> {
         let mut environment = vec![
-            ("SCO_SHORTCUT_TEMP", temp.as_os_str().to_os_string()),
+            ("SCO_SHORTCUT_TEMP", temp.path.as_os_str().to_os_string()),
             ("SCO_SHORTCUT_LINK", link.as_os_str().to_os_string()),
         ];
         if let Some(backup) = backup {
             environment.push(("SCO_SHORTCUT_BACKUP", backup.as_os_str().to_os_string()));
         }
-        run_powershell(INSTALL_SCRIPT, &environment)?;
-        Ok(())
+        match run_powershell_detailed(INSTALL_SCRIPT, &environment) {
+            Ok(_) => Ok(()),
+            Err(failure) if !failure.cleanup_confirmed => {
+                temp.preserve();
+                Err(format!(
+                    "{}; helper termination is unconfirmed, so the staged shortcut and any backup were preserved and shortcut updates are disabled until application restart",
+                    failure.message
+                ))
+            }
+            Err(failure) => {
+                let result = reconcile_failed_install(
+                    link,
+                    backup,
+                    expected,
+                    previous,
+                    &failure.message,
+                );
+                if HELPER_STATE_UNCERTAIN.load(Ordering::Acquire) {
+                    temp.preserve();
+                }
+                result
+            }
+        }
+    }
+
+    fn reconcile_failed_install(
+        link: &Path,
+        backup: Option<&Path>,
+        expected: &ShortcutFields,
+        previous: Option<&ShortcutFields>,
+        helper_error: &str,
+    ) -> Result<(), String> {
+        match read_fields(link) {
+            Ok(fields) if fields.matches(expected) => Ok(()),
+            Ok(fields)
+                if previous.is_some_and(|previous| fields.matches(previous))
+                    && backup.is_none_or(|backup| !backup.exists()) =>
+            {
+                Err(format!(
+                    "{helper_error}; previous shortcut was inspected and remains unchanged"
+                ))
+            }
+            inspection => {
+                let observed = match inspection {
+                    Ok(_) => "installed shortcut has unexpected fields".to_string(),
+                    Err(error) if link.exists() => {
+                        format!("installed shortcut cannot be inspected: {error}")
+                    }
+                    Err(error) => format!("shortcut is absent after helper failure: {error}"),
+                };
+                if HELPER_STATE_UNCERTAIN.load(Ordering::Acquire) {
+                    return Err(format!(
+                        "{helper_error}; {observed}; inspection helper termination is unconfirmed, so transaction evidence was preserved and shortcut updates are disabled until application restart"
+                    ));
+                }
+                Err(match rollback_failed_install(link, backup) {
+                    Ok(outcome) => format!("{helper_error}; {observed}; {outcome}"),
+                    Err(rollback) => {
+                        format!("{helper_error}; {observed}; rollback failed: {rollback}")
+                    }
+                })
+            }
+        }
     }
 
     fn rollback_failed_install(link: &Path, backup: Option<&Path>) -> Result<String, String> {
+        ensure_helper_state_known()?;
         match backup {
             Some(backup) if backup.is_file() && link.is_file() => {
-                let restore = TempShortcut(unique_temp_link(link));
-                fs::copy(backup, &restore.0).map_err(|error| {
+                let mut restore = TempShortcut::new(unique_temp_link(link));
+                fs::copy(backup, &restore.path).map_err(|error| {
                     format!(
                         "cannot stage {} for restore: {error}; backup remains at {}",
                         backup.display(),
@@ -330,11 +464,37 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
                     )
                 })?;
                 let environment = [
-                    ("SCO_SHORTCUT_RESTORE", restore.0.as_os_str().to_os_string()),
+                    (
+                        "SCO_SHORTCUT_RESTORE",
+                        restore.path.as_os_str().to_os_string(),
+                    ),
                     ("SCO_SHORTCUT_LINK", link.as_os_str().to_os_string()),
                 ];
-                run_powershell(RESTORE_SCRIPT, &environment).map_err(|error| {
-                    format!("{error}; backup remains at {}", backup.display())
+                if let Err(error) = run_powershell(RESTORE_SCRIPT, &environment) {
+                    if HELPER_STATE_UNCERTAIN.load(Ordering::Acquire) {
+                        restore.preserve();
+                    }
+                    return Err(format!("{error}; backup remains at {}", backup.display()));
+                }
+                Ok(format!(
+                    "previous shortcut restored; backup preserved at {}",
+                    backup.display()
+                ))
+            }
+            Some(backup) if backup.is_file() && !link.exists() => {
+                let restore = TempShortcut::new(unique_temp_link(link));
+                fs::copy(backup, &restore.path).map_err(|error| {
+                    format!(
+                        "cannot stage {} for restore: {error}; backup remains at {}",
+                        backup.display(),
+                        backup.display()
+                    )
+                })?;
+                fs::rename(&restore.path, link).map_err(|error| {
+                    format!(
+                        "cannot restore missing shortcut: {error}; backup remains at {}",
+                        backup.display()
+                    )
                 })?;
                 Ok(format!(
                     "previous shortcut restored; backup preserved at {}",
@@ -445,8 +605,28 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             .ok_or_else(|| format!("Windows PowerShell is unavailable: {}", path.display()))
     }
 
+    struct HelperFailure {
+        message: String,
+        cleanup_confirmed: bool,
+    }
+
     fn run_powershell(script: &str, environment: &[(&str, OsString)]) -> Result<String, String> {
-        let mut command = Command::new(powershell_path()?);
+        run_powershell_detailed(script, environment).map_err(|failure| failure.message)
+    }
+
+    fn run_powershell_detailed(
+        script: &str,
+        environment: &[(&str, OsString)],
+    ) -> Result<String, HelperFailure> {
+        ensure_helper_state_known().map_err(|message| HelperFailure {
+            message,
+            cleanup_confirmed: false,
+        })?;
+        let path = powershell_path().map_err(|message| HelperFailure {
+            message,
+            cleanup_confirmed: true,
+        })?;
+        let mut command = Command::new(path);
         command
             .args([
                 "-NoLogo",
@@ -473,19 +653,79 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
         for (name, value) in environment {
             command.env(name, value);
         }
-        let output = command
-            .output()
-            .map_err(|error| format!("cannot start Windows shortcut helper: {error}"))?;
-        if !output.status.success() {
-            let diagnostic = String::from_utf8_lossy(&output.stderr).trim().to_string();
-            return Err(if diagnostic.is_empty() {
-                format!("Windows shortcut helper exited with {}", output.status)
-            } else {
-                format!("Windows shortcut helper failed: {diagnostic}")
+        let output = run_bounded(&mut command, POWERSHELL_TIMEOUT, HELPER_OUTPUT_LIMIT).map_err(
+            |error| HelperFailure {
+                message: format!("cannot start Windows shortcut helper: {error}"),
+                cleanup_confirmed: true,
+            },
+        )?;
+        if !output.cleanup_confirmed {
+            HELPER_STATE_UNCERTAIN.store(true, Ordering::Release);
+        }
+        if output.timed_out {
+            return Err(HelperFailure {
+                message: format_helper_timeout(&output),
+                cleanup_confirmed: output.cleanup_confirmed,
             });
         }
-        String::from_utf8(output.stdout)
-            .map_err(|error| format!("Windows shortcut helper returned invalid UTF-8: {error}"))
+        if let Some(cleanup) = &output.cleanup_error {
+            return Err(HelperFailure {
+                message: format!("Windows shortcut helper cleanup failed: {cleanup}"),
+                cleanup_confirmed: output.cleanup_confirmed,
+            });
+        }
+        if !output.status.is_some_and(|status| status.success()) {
+            let diagnostic = helper_diagnostic(&output);
+            let message = if diagnostic.is_empty() {
+                match output.status {
+                    Some(status) => format!("Windows shortcut helper exited with {status}"),
+                    None => "Windows shortcut helper exited without a status".to_string(),
+                }
+            } else {
+                format!("Windows shortcut helper failed: {diagnostic}")
+            };
+            return Err(HelperFailure {
+                message,
+                cleanup_confirmed: output.cleanup_confirmed,
+            });
+        }
+        String::from_utf8(output.stdout).map_err(|error| HelperFailure {
+            message: format!("Windows shortcut helper returned invalid UTF-8: {error}"),
+            cleanup_confirmed: output.cleanup_confirmed,
+        })
+    }
+
+    fn format_helper_timeout(output: &BoundedOutput) -> String {
+        let status = output
+            .status
+            .map(|status| format!("; terminated with {status}"))
+            .unwrap_or_default();
+        let cleanup = output
+            .cleanup_error
+            .as_ref()
+            .map(|error| format!("; cleanup failed: {error}"))
+            .unwrap_or_default();
+        let diagnostic = helper_diagnostic(output);
+        let diagnostic = (!diagnostic.is_empty())
+            .then(|| format!("; diagnostic: {diagnostic}"))
+            .unwrap_or_default();
+        format!(
+            "Windows shortcut helper timed out after {} seconds{status}{cleanup}{diagnostic}",
+            POWERSHELL_TIMEOUT.as_secs()
+        )
+    }
+
+    fn helper_diagnostic(output: &BoundedOutput) -> String {
+        let (bytes, truncated) = if output.stderr.is_empty() {
+            (&output.stdout, output.stdout_truncated)
+        } else {
+            (&output.stderr, output.stderr_truncated)
+        };
+        let mut diagnostic = String::from_utf8_lossy(bytes).trim().to_string();
+        if truncated {
+            diagnostic.push_str(" [output truncated]");
+        }
+        diagnostic
     }
 
     #[cfg(test)]

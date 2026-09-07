@@ -69,6 +69,7 @@ export type ConfigRouteMockOptions = {
     readonly settings?: TestJsonObject;
     readonly randomizerCatalog?: TestJsonObject;
     readonly actionResponses?: ConfigRouteActionResponses;
+    readonly actionDelayMs?: Readonly<Record<string, number>>;
     readonly folderPickerResponses?: ConfigRouteFolderPickerResponses;
     readonly tabResponses?: ConfigRouteTabResponses;
     readonly monitorCatalog?: readonly ConfigRouteMonitor[];
@@ -496,6 +497,13 @@ export async function installTauriMock(
                 if (command === "config_action") {
                     window.__SCO_ACTION_REQUESTS__.push(request || null);
                     const action = request?.action;
+                    const delay = action
+                        ? overrides.actionDelayMs?.[action]
+                        : 0;
+                    if (delay)
+                        await new Promise((resolve) =>
+                            setTimeout(resolve, delay),
+                        );
                     if (action && actionResponses[action]) {
                         return actionResponses[action];
                     }

@@ -7,6 +7,8 @@ mod active_window;
 mod app_settings;
 mod autostart;
 mod backend_state;
+#[cfg(any(windows, test))]
+mod bounded_process;
 mod command_payloads;
 mod commands;
 mod db;
