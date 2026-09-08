@@ -1,8 +1,8 @@
 {
   "repository": "fadfasfa/sc2_coop_info",
   "upstreamBase": "fb16c6c7eacb4b5f3589e22795b0fc45334b01a1",
-  "contribution": "27e0b2cf4cdc58c44217ef40006d1f355f502116",
-  "label": "main-27e0b2cf-portable",
+  "contribution": "e217f961cc5cf73df841958a1d0fdea68ba53eae",
+  "label": "main-e217f961-portable",
   "portable": true,
   "packagingVersion": "2"
 }
