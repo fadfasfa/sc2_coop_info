@@ -51,6 +51,74 @@ mod windows_shortcut {
     const HELPER_OUTPUT_LIMIT: usize = 64 * 1024;
     static HELPER_STATE_UNCERTAIN: AtomicBool = AtomicBool::new(false);
     const SHORTCUT_NAME: &str = "SC2 Coop Info.lnk";
+    const INTEROP_SCRIPT: &str = r#"
+Add-Type -TypeDefinition @'
+using System;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
+using System.Text;
+
+[ComImport, Guid("000214F9-0000-0000-C000-000000000046"),
+ InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+interface IShellLinkW {
+    void GetPath([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder path, int capacity, IntPtr findData, uint flags);
+    void GetIDList(out IntPtr itemIdList);
+    void SetIDList(IntPtr itemIdList);
+    void GetDescription([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder description, int capacity);
+    void SetDescription([MarshalAs(UnmanagedType.LPWStr)] string description);
+    void GetWorkingDirectory([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder directory, int capacity);
+    void SetWorkingDirectory([MarshalAs(UnmanagedType.LPWStr)] string directory);
+    void GetArguments([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder arguments, int capacity);
+    void SetArguments([MarshalAs(UnmanagedType.LPWStr)] string arguments);
+    void GetHotkey(out short hotkey);
+    void SetHotkey(short hotkey);
+    void GetShowCmd(out int showCommand);
+    void SetShowCmd(int showCommand);
+    void GetIconLocation([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder iconPath, int capacity, out int iconIndex);
+    void SetIconLocation([MarshalAs(UnmanagedType.LPWStr)] string iconPath, int iconIndex);
+    void SetRelativePath([MarshalAs(UnmanagedType.LPWStr)] string path, uint reserved);
+    void Resolve(IntPtr window, uint flags);
+    void SetPath([MarshalAs(UnmanagedType.LPWStr)] string path);
+}
+
+[ComImport, Guid("00021401-0000-0000-C000-000000000046")]
+class ShellLink {}
+
+public static class UnicodeShellLink {
+    const int BufferCapacity = 32768;
+
+    public static void Write(string target, string arguments, string workingDirectory,
+                             string iconPath, int iconIndex, string linkPath) {
+        IShellLinkW link = (IShellLinkW)new ShellLink();
+        try {
+            link.SetPath(target);
+            link.SetArguments(arguments);
+            link.SetWorkingDirectory(workingDirectory);
+            link.SetIconLocation(iconPath, iconIndex);
+            ((IPersistFile)link).Save(linkPath, true);
+        } finally { Marshal.FinalReleaseComObject(link); }
+    }
+
+    public static string[] Read(string linkPath) {
+        IShellLinkW link = (IShellLinkW)new ShellLink();
+        try {
+            ((IPersistFile)link).Load(linkPath, 0);
+            StringBuilder target = new StringBuilder(BufferCapacity);
+            StringBuilder arguments = new StringBuilder(BufferCapacity);
+            StringBuilder workingDirectory = new StringBuilder(BufferCapacity);
+            StringBuilder iconPath = new StringBuilder(BufferCapacity);
+            int iconIndex;
+            link.GetPath(target, target.Capacity, IntPtr.Zero, 4);
+            link.GetArguments(arguments, arguments.Capacity);
+            link.GetWorkingDirectory(workingDirectory, workingDirectory.Capacity);
+            link.GetIconLocation(iconPath, iconPath.Capacity, out iconIndex);
+            return new [] { target.ToString(), arguments.ToString(), workingDirectory.ToString(),
+                            iconPath.ToString() + "," + iconIndex.ToString() };
+        } finally { Marshal.FinalReleaseComObject(link); }
+    }
+}
+'@
+"#;
     const DESKTOP_SCRIPT: &str = r#"
 $ErrorActionPreference = 'Stop'
 $OutputEncoding = New-Object System.Text.UTF8Encoding $false
@@ -61,29 +129,25 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
 $ErrorActionPreference = 'Stop'
 $OutputEncoding = New-Object System.Text.UTF8Encoding $false
 [Console]::OutputEncoding = $OutputEncoding
-$shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($env:SCO_SHORTCUT_LINK)
 if ([string]::IsNullOrWhiteSpace($env:SCO_SHORTCUT_TARGET)) { throw 'Shortcut target environment is empty' }
 if (-not (Test-Path -LiteralPath $env:SCO_SHORTCUT_TARGET -PathType Leaf)) { throw 'Shortcut target does not exist in helper environment' }
-try { $shortcut.TargetPath = $env:SCO_SHORTCUT_TARGET }
-catch { throw ('Cannot set shortcut target; length=' + $env:SCO_SHORTCUT_TARGET.Length + '; target=' + $env:SCO_SHORTCUT_TARGET + '; ' + $_.Exception.Message) }
-$shortcut.Arguments = $env:SCO_SHORTCUT_ARGUMENTS
-$shortcut.WorkingDirectory = $env:SCO_SHORTCUT_WORKING_DIRECTORY
-$shortcut.IconLocation = $env:SCO_SHORTCUT_ICON
-$shortcut.Save()
+$iconPath, $iconIndex = $env:SCO_SHORTCUT_ICON -split ',(?=[^,]*$)', 2
+[UnicodeShellLink]::Write($env:SCO_SHORTCUT_TARGET, $env:SCO_SHORTCUT_ARGUMENTS,
+  $env:SCO_SHORTCUT_WORKING_DIRECTORY, $iconPath, [int]$iconIndex, $env:SCO_SHORTCUT_LINK)
 "#;
     const READ_SCRIPT: &str = r#"
 $ErrorActionPreference = 'Stop'
 $OutputEncoding = New-Object System.Text.UTF8Encoding $false
 [Console]::OutputEncoding = $OutputEncoding
-$shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($env:SCO_SHORTCUT_LINK)
-if ([string]::IsNullOrWhiteSpace([string]$shortcut.TargetPath)) {
+$fields = [UnicodeShellLink]::Read($env:SCO_SHORTCUT_LINK)
+if ([string]::IsNullOrWhiteSpace($fields[0])) {
   throw 'Shortcut TargetPath is empty'
 }
 [ordered]@{
-  target_path = [string]$shortcut.TargetPath
-  arguments = [string]$shortcut.Arguments
-  working_directory = [string]$shortcut.WorkingDirectory
-  icon_location = [string]$shortcut.IconLocation
+  target_path = $fields[0]
+  arguments = $fields[1]
+  working_directory = $fields[2]
+  icon_location = $fields[3]
 } | ConvertTo-Json -Compress
 "#;
     const INSTALL_SCRIPT: &str = r#"
@@ -341,14 +405,14 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
                 target.display()
             ));
         }
-        let normalized = normalized_path(target);
+        let normalized = resolved_normalized_path(target);
         if normalized.contains("\\target\\debug\\")
             || normalized.contains("\\target\\release\\")
         {
             return Err("Create desktop shortcut is not available for a build-output executable".into());
         }
         if let Some(temp) = std::env::var_os("TEMP") {
-            let temp = normalized_path(Path::new(&temp));
+            let temp = resolved_normalized_path(Path::new(&temp));
             if !temp.is_empty() && (normalized == temp || normalized.starts_with(&(temp + "\\"))) {
                 return Err("Create desktop shortcut is not available for a temporary executable".into());
             }
@@ -367,7 +431,8 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             ),
             ("SCO_SHORTCUT_ICON", OsString::from(&fields.icon_location)),
         ];
-        run_powershell(WRITE_SCRIPT, &environment)?;
+        let script = format!("{INTEROP_SCRIPT}\n{WRITE_SCRIPT}");
+        run_powershell(&script, &environment)?;
         if !link.is_file() {
             return Err("Windows shortcut writer did not create a .lnk file".into());
         }
@@ -376,7 +441,8 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
 
     fn read_fields(link: &Path) -> Result<ShortcutFields, String> {
         let environment = [("SCO_SHORTCUT_LINK", link.as_os_str().to_os_string())];
-        let output = run_powershell(READ_SCRIPT, &environment)?;
+        let script = format!("{INTEROP_SCRIPT}\n{READ_SCRIPT}");
+        let output = run_powershell(&script, &environment)?;
         serde_json::from_str(output.trim_start_matches('\u{feff}').trim())
             .map_err(|error| format!("invalid shortcut readback: {error}"))
     }
@@ -590,6 +656,12 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             .to_lowercase()
     }
 
+    fn resolved_normalized_path(path: &Path) -> String {
+        path.canonicalize()
+            .map(|path| normalized_path(&path))
+            .unwrap_or_else(|_| normalized_path(path))
+    }
+
     fn strip_verbatim_prefix(path: PathBuf) -> PathBuf {
         let text = path.to_string_lossy();
         if let Some(rest) = text.strip_prefix(r"\\?\UNC\") {
@@ -783,7 +855,7 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
         #[test]
         fn creates_reads_and_keeps_an_unchanged_shortcut() {
             let fixture = Fixture::new("create");
-            let target = fixture.target("SC2 Coop 中文.exe");
+            let target = fixture.target("SC2 Coop 中文 🧪.exe");
             let link = fixture.root.join("SC2 Coop Info.lnk");
             assert_eq!(
                 create_or_update_at(&target, &link),

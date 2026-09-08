@@ -1,3 +1,5 @@
+#requires -Version 7.0
+# The harness runs in pwsh; the production-script child is Windows PowerShell 5.
 param()
 
 $ErrorActionPreference = "Stop"
@@ -14,9 +16,17 @@ $source = Get-Content -LiteralPath (Join-Path $PSScriptRoot '../src-tauri/src/de
 function Invoke-Embedded([string]$Name, [hashtable]$Values) {
     $match = [regex]::Match($source, ('(?s)const ' + $Name + ': &str = r#"(.*?)"#;'))
     if (-not $match.Success) { throw "Embedded script missing: $Name" }
+    $script = $match.Groups[1].Value
+    if ($Name -eq 'WRITE_SCRIPT' -or $Name -eq 'READ_SCRIPT') {
+        $interop = [regex]::Match($source, '(?s)const INTEROP_SCRIPT: &str = r#"(.*?)"#;')
+        if (-not $interop.Success) { throw 'Embedded script missing: INTEROP_SCRIPT' }
+        $script = $interop.Groups[1].Value + [Environment]::NewLine + $script
+    }
     $info = New-Object Diagnostics.ProcessStartInfo
     $info.FileName = Join-Path $env:SystemRoot 'System32/WindowsPowerShell/v1.0/powershell.exe'
-    $info.Arguments = '-NoLogo -NoProfile -NonInteractive -EncodedCommand ' + [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($match.Groups[1].Value))
+    foreach ($argument in @('-NoLogo','-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-Command',$script)) {
+        $info.ArgumentList.Add($argument)
+    }
     $info.UseShellExecute = $false
     $info.CreateNoWindow = $true
     $info.RedirectStandardOutput = $true
@@ -72,7 +82,7 @@ function Assert-Fields($Fields, [string]$Target) {
 [IO.Directory]::CreateDirectory($root) | Out-Null
 try {
     $oldTarget = Join-Path $root "old & '中文'.exe"
-    $newTarget = Join-Path $root "new 中文.exe"
+    $newTarget = Join-Path $root "new 中文 🧪.exe"
     [IO.File]::WriteAllBytes($oldTarget, [byte[]](1, 2, 3))
     [IO.File]::WriteAllBytes($newTarget, [byte[]](4, 5, 6))
 
