@@ -96,6 +96,13 @@ jobs:
           npm run build 2>&1 | Tee-Object -FilePath ../validation-evidence/frontend-build-before-rust.txt
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
+      - name: Windows COM production script regression
+        working-directory: source
+        shell: pwsh
+        run: |
+          & ./tauri-overlay/tests/desktop-shortcut-windows.ps1 2>&1 | Tee-Object -FilePath validation-evidence/shortcut-com.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
       - name: Full Rust workspace tests
         working-directory: source
         shell: pwsh
