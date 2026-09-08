@@ -62,7 +62,10 @@ $ErrorActionPreference = 'Stop'
 $OutputEncoding = New-Object System.Text.UTF8Encoding $false
 [Console]::OutputEncoding = $OutputEncoding
 $shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($env:SCO_SHORTCUT_LINK)
-$shortcut.TargetPath = $env:SCO_SHORTCUT_TARGET
+if ([string]::IsNullOrWhiteSpace($env:SCO_SHORTCUT_TARGET)) { throw 'Shortcut target environment is empty' }
+if (-not (Test-Path -LiteralPath $env:SCO_SHORTCUT_TARGET -PathType Leaf)) { throw 'Shortcut target does not exist in helper environment' }
+try { $shortcut.TargetPath = $env:SCO_SHORTCUT_TARGET }
+catch { throw ('Cannot set shortcut target; length=' + $env:SCO_SHORTCUT_TARGET.Length + '; target=' + $env:SCO_SHORTCUT_TARGET + '; ' + $_.Exception.Message) }
 $shortcut.Arguments = $env:SCO_SHORTCUT_ARGUMENTS
 $shortcut.WorkingDirectory = $env:SCO_SHORTCUT_WORKING_DIRECTORY
 $shortcut.IconLocation = $env:SCO_SHORTCUT_ICON
@@ -219,6 +222,12 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
         if !target.is_file() {
             return Err(format!("shortcut target does not exist: {}", target.display()));
         }
+        // Give all callers the same resolved Shell-compatible path used by the
+        // public current_exe entry point, including explicit fixture paths.
+        let target = target
+            .canonicalize()
+            .map(strip_verbatim_prefix)
+            .map_err(|error| format!("cannot resolve shortcut target path: {error}"))?;
         let link_parent = link
             .parent()
             .ok_or_else(|| "shortcut path has no parent directory".to_string())?;
@@ -230,7 +239,7 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
         }
 
         let _lock = UpdateLock::acquire()?;
-        let expected = ShortcutFields::for_target(target)?;
+        let expected = ShortcutFields::for_target(&target)?;
         let previous = if link.is_file() {
             let fields = read_fields(link).map_err(|error| {
                 format!("cannot inspect existing shortcut; it was left unchanged: {error}")
