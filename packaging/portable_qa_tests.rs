@@ -42,7 +42,9 @@ fn acl_denied_profile_write_fails_without_any_fallback_or_private_data_mutation(
     assert!(identity.status.success());
     let identity = String::from_utf8(identity.stdout).unwrap();
     let sid = identity.split('"').find(|field| field.starts_with("S-1-")).expect("Current user SID").to_string();
-    let deny = std::process::Command::new("icacls").arg(&profile).arg("/deny").arg(format!("*{}:(OI)(CI)(W)", sid)).output().unwrap();
+    // Deny only mutation rights. Generic W also denies READ_CONTROL/SYNCHRONIZE,
+    // which the directory inspections need before reaching the real write probe.
+    let deny = std::process::Command::new("icacls").arg(&profile).arg("/deny").arg(format!("*{}:(OI)(CI)(WD,AD,WEA,WA)", sid)).output().unwrap();
     let guard = DeniedWrite { path: profile.clone(), sid };
     assert!(deny.status.success(), "{}", String::from_utf8_lossy(&deny.stderr));
     assert!(fs::write(profile.join("must-not-write"), "probe").is_err(), "The ACL fixture must really deny writes");
