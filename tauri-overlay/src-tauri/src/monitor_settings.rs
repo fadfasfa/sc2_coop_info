@@ -234,6 +234,74 @@ impl MonitorSettingsOps {
 }
 
 impl MonitorSettingsOps {
+    /// xcap reports macOS window bounds in points. Tauri's monitor bounds are
+    /// physical pixels, including the origin, so select in points and return
+    /// the original physical descriptor for placement and the recent cache.
+    pub fn monitor_for_logical_window_rect(
+        monitors: &[MonitorDescriptor],
+        scale_factors: &[f64],
+        rect: (i32, i32, u32, u32),
+    ) -> Option<MonitorDescriptor> {
+        if monitors.len() != scale_factors.len()
+            || scale_factors
+                .iter()
+                .any(|scale| !scale.is_finite() || *scale <= 0.0)
+        {
+            return None;
+        }
+        let logical_monitors = monitors
+            .iter()
+            .zip(scale_factors)
+            .map(|(monitor, scale)| {
+                MonitorDescriptor::new(
+                    monitor.name.clone(),
+                    (f64::from(monitor.position_x) / scale).round() as i32,
+                    (f64::from(monitor.position_y) / scale).round() as i32,
+                    (f64::from(monitor.width) / scale).round() as u32,
+                    (f64::from(monitor.height) / scale).round() as u32,
+                )
+            })
+            .collect::<Vec<_>>();
+        let selected = Self::monitor_for_window_rect(&logical_monitors, rect)?;
+        let index = logical_monitors
+            .iter()
+            .position(|monitor| monitor == &selected)?;
+        monitors.get(index).cloned()
+    }
+
+    pub fn monitor_for_sc2_window_rect<R: Runtime>(
+        window: &tauri::WebviewWindow<R>,
+        monitors: &[MonitorDescriptor],
+        rect: (i32, i32, u32, u32),
+    ) -> Option<MonitorDescriptor> {
+        #[cfg(target_os = "macos")]
+        {
+            let runtime_monitors = window.available_monitors().ok()?;
+            // Match geometry, not enumeration order or friendly display names.
+            // If topology changed between snapshots, use recent/manual fallback.
+            let scales = monitors
+                .iter()
+                .map(|monitor| {
+                    runtime_monitors
+                        .iter()
+                        .find(|runtime| {
+                            runtime.position().x == monitor.position_x
+                                && runtime.position().y == monitor.position_y
+                                && runtime.size().width == monitor.width
+                                && runtime.size().height == monitor.height
+                        })
+                        .map(|runtime| runtime.scale_factor())
+                })
+                .collect::<Option<Vec<_>>>()?;
+            Self::monitor_for_logical_window_rect(monitors, &scales, rect)
+        }
+        #[cfg(not(target_os = "macos"))]
+        {
+            let _ = window;
+            Self::monitor_for_window_rect(monitors, rect)
+        }
+    }
+
     /// Return the monitor containing the window's center, falling back to the
     /// monitor with the largest intersection for windows spanning displays or
     /// whose center lies exactly on a display boundary.
@@ -267,12 +335,10 @@ impl MonitorSettingsOps {
             .filter_map(|monitor| {
                 let left = window_left.max(i64::from(monitor.position_x));
                 let top = window_top.max(i64::from(monitor.position_y));
-                let right = window_right.min(
-                    i64::from(monitor.position_x) + i64::from(monitor.width),
-                );
-                let bottom = window_bottom.min(
-                    i64::from(monitor.position_y) + i64::from(monitor.height),
-                );
+                let right =
+                    window_right.min(i64::from(monitor.position_x) + i64::from(monitor.width));
+                let bottom =
+                    window_bottom.min(i64::from(monitor.position_y) + i64::from(monitor.height));
                 let area = (right - left).max(0) * (bottom - top).max(0);
                 (area > 0).then_some((area, monitor))
             })

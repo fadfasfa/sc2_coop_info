@@ -11,18 +11,24 @@ impl OverlayInfoOps {
             .ok()
             .flatten()
             .map(|rect| (rect.x(), rect.y(), rect.width(), rect.height()));
-        if let Some(current) = current_window_rect.and_then(|rect|
-            monitor_settings::MonitorSettingsOps::monitor_for_window_rect(&monitors, rect))
-        {
-            state.set_latest_sc2_monitor(current);
+        let current_monitor = current_window_rect.and_then(|rect| {
+            monitor_settings::MonitorSettingsOps::monitor_for_sc2_window_rect(
+                window, &monitors, rect,
+            )
+        });
+        if let Some(current) = current_monitor.as_ref() {
+            state.set_latest_sc2_monitor(current.clone());
         }
-        monitor_settings::MonitorSettingsOps::target_monitor(
-            &monitors,
-            current_window_rect,
-            state.latest_sc2_monitor().as_ref(),
-            settings_value.overlay_placement().monitor(),
-        )
-        .ok_or_else(|| "No monitors detected".to_string())
+        current_monitor
+            .or_else(|| {
+                monitor_settings::MonitorSettingsOps::target_monitor(
+                    &monitors,
+                    None,
+                    state.latest_sc2_monitor().as_ref(),
+                    settings_value.overlay_placement().monitor(),
+                )
+            })
+            .ok_or_else(|| "No monitors detected".to_string())
     }
 }
 
@@ -316,7 +322,8 @@ impl OverlayInfoOps {
         );
 
         if window.outer_position().ok() != Some(final_position) {
-            window.set_position(final_position)
+            window
+                .set_position(final_position)
                 .map_err(|error| format!("Failed to set overlay position: {error}"))?;
         }
         Ok(())

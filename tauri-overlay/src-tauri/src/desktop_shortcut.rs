@@ -160,17 +160,6 @@ if ($env:SCO_SHORTCUT_BACKUP) {
   [IO.File]::Move($env:SCO_SHORTCUT_TEMP, $env:SCO_SHORTCUT_LINK)
 }
 "#;
-    const RESTORE_SCRIPT: &str = r#"
-$ErrorActionPreference = 'Stop'
-$OutputEncoding = New-Object System.Text.UTF8Encoding $false
-[Console]::OutputEncoding = $OutputEncoding
-[IO.File]::Replace(
-  $env:SCO_SHORTCUT_RESTORE,
-  $env:SCO_SHORTCUT_LINK,
-  [NullString]::Value,
-  $true
-)
-"#;
 
     #[derive(Debug, Clone, Deserialize, PartialEq, Eq)]
     struct ShortcutFields {
@@ -234,14 +223,9 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
 
     impl UpdateLock {
         fn acquire() -> Result<Self, String> {
-            let handle = unsafe {
-                CreateMutexW(
-                    None,
-                    true,
-                    w!("Local\\SC2CoopInfoDesktopShortcutUpdate"),
-                )
-            }
-            .map_err(|error| format!("cannot create shortcut update mutex: {error}"))?;
+            let handle =
+                unsafe { CreateMutexW(None, true, w!("Local\\SC2CoopInfoDesktopShortcutUpdate")) }
+                    .map_err(|error| format!("cannot create shortcut update mutex: {error}"))?;
             if unsafe { GetLastError() } == ERROR_ALREADY_EXISTS {
                 let _ = unsafe { CloseHandle(handle) };
                 return Err("another shortcut update is active".into());
@@ -282,9 +266,22 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
     }
 
     fn create_or_update_at(target: &Path, link: &Path) -> Result<ShortcutUpdate, String> {
+        create_or_update_at_with_before_install(target, link, || {})
+    }
+
+    // The callback allows deterministic competing-writer tests through the real
+    // orchestration. Production always supplies a no-op; no environment test hook.
+    fn create_or_update_at_with_before_install(
+        target: &Path,
+        link: &Path,
+        before_install: impl FnOnce(),
+    ) -> Result<ShortcutUpdate, String> {
         ensure_helper_state_known()?;
         if !target.is_file() {
-            return Err(format!("shortcut target does not exist: {}", target.display()));
+            return Err(format!(
+                "shortcut target does not exist: {}",
+                target.display()
+            ));
         }
         // Give all callers the same resolved Shell-compatible path used by the
         // public current_exe entry point, including explicit fixture paths.
@@ -341,7 +338,13 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             return Err("shortcut verification failed before installation".into());
         }
 
-        let backup = link.is_file().then(|| available_backup_path(link)).transpose()?;
+        before_install();
+        // A file appearing after the initial inspection is not ours to replace.
+        // Keep the originally selected operation: Move must fail without clobbering it.
+        let backup = previous
+            .is_some()
+            .then(|| available_backup_path(link))
+            .transpose()?;
         install_shortcut(
             &mut temp,
             link,
@@ -406,15 +409,17 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             ));
         }
         let normalized = resolved_normalized_path(target);
-        if normalized.contains("\\target\\debug\\")
-            || normalized.contains("\\target\\release\\")
-        {
-            return Err("Create desktop shortcut is not available for a build-output executable".into());
+        if normalized.contains("\\target\\debug\\") || normalized.contains("\\target\\release\\") {
+            return Err(
+                "Create desktop shortcut is not available for a build-output executable".into(),
+            );
         }
         if let Some(temp) = std::env::var_os("TEMP") {
             let temp = resolved_normalized_path(Path::new(&temp));
             if !temp.is_empty() && (normalized == temp || normalized.starts_with(&(temp + "\\"))) {
-                return Err("Create desktop shortcut is not available for a temporary executable".into());
+                return Err(
+                    "Create desktop shortcut is not available for a temporary executable".into(),
+                );
             }
         }
         Ok(())
@@ -472,6 +477,7 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             }
             Err(failure) => {
                 let result = reconcile_failed_install(
+                    &temp.path,
                     link,
                     backup,
                     expected,
@@ -487,12 +493,27 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
     }
 
     fn reconcile_failed_install(
+        staged: &Path,
         link: &Path,
         backup: Option<&Path>,
         expected: &ShortcutFields,
         previous: Option<&ShortcutFields>,
         helper_error: &str,
     ) -> Result<(), String> {
+        // An unconsumed staged path is not proof that Replace left the destination
+        // unchanged: ERROR_UNABLE_TO_MOVE_REPLACEMENT_2 can leave the old file in
+        // backup and the destination absent. Recover that state with no-clobber
+        // Move, but never mistake an identical competing destination for success.
+        if staged.exists() {
+            return Err(match rollback_failed_install(link, backup) {
+                Ok(outcome) => {
+                    format!("{helper_error}; staged shortcut was not consumed; {outcome}")
+                }
+                Err(rollback) => format!(
+                    "{helper_error}; staged shortcut was not consumed; rollback failed: {rollback}"
+                ),
+            });
+        }
         match read_fields(link) {
             Ok(fields) if fields.matches(expected) => Ok(()),
             Ok(fields)
@@ -529,7 +550,7 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
     fn rollback_failed_install(link: &Path, backup: Option<&Path>) -> Result<String, String> {
         ensure_helper_state_known()?;
         match backup {
-            Some(backup) if backup.is_file() && link.is_file() => {
+            Some(backup) if backup.is_file() && !link.exists() => {
                 let mut restore = TempShortcut::new(unique_temp_link(link));
                 fs::copy(backup, &restore.path).map_err(|error| {
                     format!(
@@ -538,14 +559,13 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
                         backup.display()
                     )
                 })?;
+                // Do not use rename/Replace: an external writer may recreate
+                // the destination after the absence check. File.Move is no-clobber.
                 let environment = [
-                    (
-                        "SCO_SHORTCUT_RESTORE",
-                        restore.path.as_os_str().to_os_string(),
-                    ),
+                    ("SCO_SHORTCUT_TEMP", restore.path.as_os_str().to_os_string()),
                     ("SCO_SHORTCUT_LINK", link.as_os_str().to_os_string()),
                 ];
-                if let Err(error) = run_powershell(RESTORE_SCRIPT, &environment) {
+                if let Err(error) = run_powershell(INSTALL_SCRIPT, &environment) {
                     if HELPER_STATE_UNCERTAIN.load(Ordering::Acquire) {
                         restore.preserve();
                     }
@@ -556,30 +576,14 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
                     backup.display()
                 ))
             }
-            Some(backup) if backup.is_file() && !link.exists() => {
-                let restore = TempShortcut::new(unique_temp_link(link));
-                fs::copy(backup, &restore.path).map_err(|error| {
-                    format!(
-                        "cannot stage {} for restore: {error}; backup remains at {}",
-                        backup.display(),
-                        backup.display()
-                    )
-                })?;
-                fs::rename(&restore.path, link).map_err(|error| {
-                    format!(
-                        "cannot restore missing shortcut: {error}; backup remains at {}",
-                        backup.display()
-                    )
-                })?;
-                Ok(format!(
-                    "previous shortcut restored; backup preserved at {}",
-                    backup.display()
-                ))
-            }
-            None if link.is_file() => {
-                fs::remove_file(link)
-                    .map(|()| "new shortcut removed".to_string())
-                    .map_err(|error| format!("cannot remove new shortcut: {error}"))
+            // Readback (even identical fields) cannot establish file ownership.
+            // Never delete or overwrite an existing destination during recovery.
+            Some(backup) if link.exists() => Err(format!(
+                "destination ownership is unconfirmed; destination was left unchanged; backup preserved at {}",
+                backup.display()
+            )),
+            None if link.exists() => {
+                Err("destination ownership is unconfirmed; destination was left unchanged".into())
             }
             Some(backup) => Err(format!(
                 "cannot restore because the installed shortcut or backup is missing; expected backup at {}",
@@ -727,7 +731,6 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             "SCO_SHORTCUT_ICON",
             "SCO_SHORTCUT_TEMP",
             "SCO_SHORTCUT_BACKUP",
-            "SCO_SHORTCUT_RESTORE",
         ] {
             command.env_remove(name);
         }
@@ -861,9 +864,11 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
                 create_or_update_at(&target, &link),
                 Ok(ShortcutUpdate::Created(link.clone()))
             );
-            assert!(read_fields(&link)
-                .unwrap()
-                .matches(&ShortcutFields::for_target(&target).unwrap()));
+            assert!(
+                read_fields(&link)
+                    .unwrap()
+                    .matches(&ShortcutFields::for_target(&target).unwrap())
+            );
             assert_eq!(
                 create_or_update_at(&target, &link),
                 Ok(ShortcutUpdate::Unchanged(link))
@@ -887,12 +892,16 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             };
             assert_eq!(fs::read(&prior_backup).unwrap(), b"older backup");
             assert_ne!(backup, prior_backup);
-            assert!(read_fields(&backup)
-                .unwrap()
-                .matches(&ShortcutFields::for_target(&old_target).unwrap()));
-            assert!(read_fields(&link)
-                .unwrap()
-                .matches(&ShortcutFields::for_target(&new_target).unwrap()));
+            assert!(
+                read_fields(&backup)
+                    .unwrap()
+                    .matches(&ShortcutFields::for_target(&old_target).unwrap())
+            );
+            assert!(
+                read_fields(&link)
+                    .unwrap()
+                    .matches(&ShortcutFields::for_target(&new_target).unwrap())
+            );
         }
 
         #[test]
@@ -913,10 +922,139 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
             let link = fixture.root.join("SC2 Coop Info.lnk");
             fs::write(&link, b"not a shell link").unwrap();
             let before = fs::read(&link).unwrap();
-            assert!(create_or_update_at(&target, &link)
-                .unwrap_err()
-                .contains("left unchanged"));
+            assert!(
+                create_or_update_at(&target, &link)
+                    .unwrap_err()
+                    .contains("left unchanged")
+            );
             assert_eq!(fs::read(link).unwrap(), before);
+        }
+
+        #[test]
+        fn competing_creation_is_not_replaced_deleted_or_reported_as_success() {
+            let fixture = Fixture::new("competing-creation");
+            let target = fixture.target("new 中文 🧪.exe");
+            let other_target = fixture.target("external.exe");
+            // Corrupt, unrelated, and identical four-field destinations must all
+            // survive. Identical fields alone are not proof that our Move won.
+            for (name, external_target) in [
+                ("corrupt", None),
+                ("unrelated", Some(&other_target)),
+                ("identical", Some(&target)),
+            ] {
+                let link = fixture.root.join(format!("{name}.lnk"));
+                let mut external_bytes = Vec::new();
+                let result = create_or_update_at_with_before_install(&target, &link, || {
+                    assert!(!link.exists());
+                    if let Some(external_target) = external_target {
+                        write_shortcut(
+                            &ShortcutFields::for_target(external_target).unwrap(),
+                            &link,
+                        )
+                        .unwrap();
+                    } else {
+                        fs::write(&link, b"external file, not a shell link").unwrap();
+                    }
+                    external_bytes = fs::read(&link).unwrap();
+                });
+                assert!(
+                    result
+                        .unwrap_err()
+                        .contains("destination was left unchanged")
+                );
+                assert_eq!(fs::read(&link).unwrap(), external_bytes);
+                assert!(!link.with_file_name(format!("{name}.previous.lnk")).exists());
+            }
+        }
+
+        #[test]
+        fn failed_install_recovery_preserves_destinations_of_unknown_ownership() {
+            let fixture = Fixture::new("recovery-ownership");
+            let target = fixture.target("new.exe");
+            let expected = ShortcutFields::for_target(&target).unwrap();
+            let link = fixture.root.join("external.lnk");
+            let backup = fixture.root.join("backup.lnk");
+            fs::write(&link, b"external destination").unwrap();
+            fs::write(&backup, b"recoverable original").unwrap();
+            for backup_path in [None, Some(backup.as_path())] {
+                let error = reconcile_failed_install(
+                    &fixture.root.join("consumed.temporary.lnk"),
+                    &link,
+                    backup_path,
+                    &expected,
+                    None,
+                    "injected helper failure",
+                )
+                .unwrap_err();
+                assert!(error.contains("destination ownership is unconfirmed"));
+                assert_eq!(fs::read(&link).unwrap(), b"external destination");
+                assert_eq!(fs::read(&backup).unwrap(), b"recoverable original");
+            }
+        }
+
+        #[test]
+        fn failed_install_restores_an_absent_destination_without_consuming_backup() {
+            let fixture = Fixture::new("recovery-absent");
+            let target = fixture.target("old.exe");
+            let link = fixture.root.join("missing.lnk");
+            let backup = fixture.root.join("backup.lnk");
+            write_shortcut(&ShortcutFields::for_target(&target).unwrap(), &backup).unwrap();
+            let before = fs::read(&backup).unwrap();
+            assert!(
+                rollback_failed_install(&link, Some(&backup))
+                    .unwrap()
+                    .contains("previous shortcut restored")
+            );
+            assert_eq!(fs::read(&link).unwrap(), before);
+            assert_eq!(fs::read(&backup).unwrap(), before);
+        }
+
+        #[test]
+        fn partial_replace_failure_restores_missing_destination_with_staging_present() {
+            let fixture = Fixture::new("partial-replace");
+            let old_target = fixture.target("old.exe");
+            let new_target = fixture.target("new.exe");
+            let previous = ShortcutFields::for_target(&old_target).unwrap();
+            let expected = ShortcutFields::for_target(&new_target).unwrap();
+            let link = fixture.root.join("missing.lnk");
+            let backup = fixture.root.join("backup.lnk");
+            let staged = fixture.root.join("staged.temporary.lnk");
+            write_shortcut(&previous, &backup).unwrap();
+            write_shortcut(&expected, &staged).unwrap();
+            let backup_bytes = fs::read(&backup).unwrap();
+            let staged_bytes = fs::read(&staged).unwrap();
+
+            let error = reconcile_failed_install(
+                &staged,
+                &link,
+                Some(&backup),
+                &expected,
+                Some(&previous),
+                "ERROR_UNABLE_TO_MOVE_REPLACEMENT_2",
+            )
+            .unwrap_err();
+            assert!(error.contains("previous shortcut restored"));
+            assert!(!error.contains("unchanged"));
+            assert_eq!(fs::read(&link).unwrap(), backup_bytes);
+            assert_eq!(fs::read(&backup).unwrap(), backup_bytes);
+            assert_eq!(fs::read(&staged).unwrap(), staged_bytes);
+
+            // The same partial-failure evidence must not authorize overwriting
+            // a destination that another writer has since recreated.
+            fs::write(&link, b"external recreated destination").unwrap();
+            let error = reconcile_failed_install(
+                &staged,
+                &link,
+                Some(&backup),
+                &expected,
+                Some(&previous),
+                "ERROR_UNABLE_TO_MOVE_REPLACEMENT_2",
+            )
+            .unwrap_err();
+            assert!(error.contains("destination ownership is unconfirmed"));
+            assert_eq!(fs::read(&link).unwrap(), b"external recreated destination");
+            assert_eq!(fs::read(&backup).unwrap(), backup_bytes);
+            assert_eq!(fs::read(&staged).unwrap(), staged_bytes);
         }
 
         #[test]
@@ -935,16 +1073,20 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
         fn temp_and_debug_targets_are_rejected_by_public_policy() {
             let fixture = Fixture::new("policy");
             let temp_target = fixture.target("temporary.exe");
-            assert!(validate_target(&temp_target)
-                .unwrap_err()
-                .contains("temporary executable"));
+            assert!(
+                validate_target(&temp_target)
+                    .unwrap_err()
+                    .contains("temporary executable")
+            );
             let debug_root = fixture.root.join("target").join("debug");
             fs::create_dir_all(&debug_root).unwrap();
             let debug_target = debug_root.join("development.exe");
             fs::write(&debug_target, b"debug executable").unwrap();
-            assert!(validate_target(&debug_target)
-                .unwrap_err()
-                .contains("build-output executable"));
+            assert!(
+                validate_target(&debug_target)
+                    .unwrap_err()
+                    .contains("build-output executable")
+            );
         }
     }
 }

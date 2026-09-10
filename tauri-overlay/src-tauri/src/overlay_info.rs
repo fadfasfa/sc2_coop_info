@@ -510,7 +510,8 @@ impl OverlayInfoOps {
         };
         if let Some(rect) = sc2_rect {
             let monitors = monitor_settings::MonitorSettingsOps::monitor_descriptors(&window);
-            if let Some(monitor) = monitor_settings::MonitorSettingsOps::monitor_for_window_rect(
+            if let Some(monitor) = monitor_settings::MonitorSettingsOps::monitor_for_sc2_window_rect(
+                &window,
                 &monitors,
                 (rect.x(), rect.y(), rect.width(), rect.height()),
             ) {

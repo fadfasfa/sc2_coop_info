@@ -1,6 +1,88 @@
 use sco_tauri_overlay::{MonitorDescriptor, MonitorSettingsOps};
 
 #[test]
+fn retina_selection_uses_points_but_returns_physical_geometry() {
+    let monitors = vec![
+        MonitorDescriptor::new("Primary", 0, 0, 3840, 2160),
+        MonitorDescriptor::new("Right", 3840, 0, 3840, 2160),
+    ];
+    let rect = (2020, 100, 800, 600);
+    // The old comparison mistakes the right-screen point coordinates for
+    // primary-screen pixels. The corrected selection retains physical output.
+    assert_eq!(
+        MonitorSettingsOps::monitor_for_window_rect(&monitors, rect),
+        Some(monitors[0].clone())
+    );
+    let selected =
+        MonitorSettingsOps::monitor_for_logical_window_rect(&monitors, &[2.0, 2.0], rect);
+    assert_eq!(selected, Some(monitors[1].clone()));
+    assert_eq!(
+        MonitorSettingsOps::target_monitor(&monitors, None, selected.as_ref(), 1),
+        selected
+    );
+}
+
+#[test]
+fn logical_selection_handles_mixed_dpi_negative_portrait_and_reordered_displays() {
+    let primary = MonitorDescriptor::new("Primary", 0, 0, 3840, 2160);
+    let right = MonitorDescriptor::new("Right 1x", 1920, 0, 1920, 1080);
+    let portrait = MonitorDescriptor::new("Left 2x", -2160, -600, 2160, 3840);
+    let monitors = vec![right.clone(), portrait.clone(), primary];
+    assert_eq!(
+        MonitorSettingsOps::monitor_for_logical_window_rect(
+            &monitors,
+            &[1.0, 2.0, 2.0],
+            (2020, 100, 800, 600)
+        ),
+        Some(right),
+    );
+    assert_eq!(
+        MonitorSettingsOps::monitor_for_logical_window_rect(
+            &monitors,
+            &[1.0, 2.0, 2.0],
+            (-900, -200, 600, 900)
+        ),
+        Some(portrait),
+    );
+}
+
+#[test]
+fn logical_selection_handles_spanning_windows_and_missing_or_invalid_scales() {
+    let monitors = vec![
+        MonitorDescriptor::new("Left", -3840, 0, 3840, 2160),
+        MonitorDescriptor::new("Primary", 0, 0, 3840, 2160),
+    ];
+    assert_eq!(
+        MonitorSettingsOps::monitor_for_logical_window_rect(
+            &monitors,
+            &[2.0, 2.0],
+            (-500, 100, 1200, 600)
+        ),
+        Some(monitors[1].clone()),
+    );
+    for scales in [
+        vec![2.0],
+        vec![2.0, 0.0],
+        vec![f64::NAN, 2.0],
+        vec![2.0, f64::INFINITY],
+    ] {
+        assert_eq!(
+            MonitorSettingsOps::monitor_for_logical_window_rect(
+                &monitors,
+                &scales,
+                (100, 100, 800, 600)
+            ),
+            None
+        );
+    }
+    let recent = monitors[1].clone();
+    assert_eq!(
+        MonitorSettingsOps::target_monitor(&monitors[..1], None, Some(&recent), 1),
+        Some(monitors[0].clone())
+    );
+}
+
+#[test]
 fn normalize_monitor_descriptors_sorts_by_geometry_and_fills_empty_names() {
     let monitors = vec![
         MonitorDescriptor::new("", 1920, 0, 2560, 1440),
@@ -89,18 +171,12 @@ fn monitor_for_window_rect_prefers_center_then_largest_intersection() {
         MonitorDescriptor::new("Portrait", 1920, -900, 1080, 1920),
     ];
 
-    let centered = MonitorSettingsOps::monitor_for_window_rect(
-        &monitors,
-        (100, 100, 800, 600),
-    )
-    .expect("center monitor should exist");
+    let centered = MonitorSettingsOps::monitor_for_window_rect(&monitors, (100, 100, 800, 600))
+        .expect("center monitor should exist");
     assert_eq!(centered.name(), "Primary");
 
-    let spanning = MonitorSettingsOps::monitor_for_window_rect(
-        &monitors,
-        (-400, 100, 1000, 600),
-    )
-    .expect("intersecting monitor should exist");
+    let spanning = MonitorSettingsOps::monitor_for_window_rect(&monitors, (-400, 100, 1000, 600))
+        .expect("intersecting monitor should exist");
     assert_eq!(spanning.name(), "Primary");
 }
 
@@ -112,13 +188,9 @@ fn target_monitor_prefers_current_then_recent_then_manual_without_index_reliance
     ];
     let recent = MonitorDescriptor::new("Left", -1920, 0, 1920, 1080);
 
-    let current = MonitorSettingsOps::target_monitor(
-        &monitors,
-        Some((100, 100, 800, 600)),
-        Some(&recent),
-        1,
-    )
-    .expect("current monitor should win");
+    let current =
+        MonitorSettingsOps::target_monitor(&monitors, Some((100, 100, 800, 600)), Some(&recent), 1)
+            .expect("current monitor should win");
     assert_eq!(current.name(), "Primary");
 
     let recent_target = MonitorSettingsOps::target_monitor(&monitors, None, Some(&recent), 2)
@@ -126,13 +198,9 @@ fn target_monitor_prefers_current_then_recent_then_manual_without_index_reliance
     assert_eq!(recent_target.name(), "Left");
 
     let changed_recent = MonitorDescriptor::new("Left", -1920, 0, 1600, 900);
-    let manual_target = MonitorSettingsOps::target_monitor(
-        &monitors,
-        None,
-        Some(&changed_recent),
-        2,
-    )
-    .expect("manual monitor should be available");
+    let manual_target =
+        MonitorSettingsOps::target_monitor(&monitors, None, Some(&changed_recent), 2)
+            .expect("manual monitor should be available");
     assert_eq!(manual_target.name(), "Primary");
 }
 
@@ -143,17 +211,11 @@ fn monitor_for_window_rect_supports_negative_and_portrait_coordinates() {
         MonitorDescriptor::new("Portrait", 0, -1200, 1080, 1200),
     ];
 
-    let left = MonitorSettingsOps::monitor_for_window_rect(
-        &monitors,
-        (-900, 400, 400, 500),
-    )
-    .expect("negative-coordinate monitor should exist");
+    let left = MonitorSettingsOps::monitor_for_window_rect(&monitors, (-900, 400, 400, 500))
+        .expect("negative-coordinate monitor should exist");
     assert_eq!(left.name(), "Left");
 
-    let portrait = MonitorSettingsOps::monitor_for_window_rect(
-        &monitors,
-        (100, -1000, 400, 400),
-    )
-    .expect("portrait monitor should exist");
+    let portrait = MonitorSettingsOps::monitor_for_window_rect(&monitors, (100, -1000, 400, 400))
+        .expect("portrait monitor should exist");
     assert_eq!(portrait.name(), "Portrait");
 }

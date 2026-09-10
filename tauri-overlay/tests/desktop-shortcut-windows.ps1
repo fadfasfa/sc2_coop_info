@@ -145,15 +145,67 @@ try {
         throw "Shortcut changed after backup creation failed"
     }
 
+    # A competing creator wins a no-clobber Move. Test corrupt, unrelated and
+    # identical-field destinations; none is evidence that this operation won.
+    foreach ($variant in @('corrupt', 'unrelated', 'identical')) {
+        $raceLink = Join-Path $root ("race-$variant.lnk")
+        $raceTemp = Join-Path $root ("race-$variant.temporary.lnk")
+        New-Shortcut $raceTemp $newTarget
+        if ($variant -eq 'corrupt') {
+            [IO.File]::WriteAllBytes($raceLink, [byte[]](9, 8, 7))
+        } elseif ($variant -eq 'unrelated') {
+            New-Shortcut $raceLink $oldTarget
+        } else {
+            New-Shortcut $raceLink $newTarget
+        }
+        $externalHash = (Get-FileHash -LiteralPath $raceLink -Algorithm SHA256).Hash
+        $stagedHash = (Get-FileHash -LiteralPath $raceTemp -Algorithm SHA256).Hash
+        $moveFailed = $false
+        try { Install-Shortcut $raceTemp $raceLink '' } catch { $moveFailed = $true }
+        if (-not $moveFailed) { throw "Competing $variant destination was unexpectedly replaced" }
+        if ((Get-FileHash -LiteralPath $raceLink -Algorithm SHA256).Hash -ne $externalHash) {
+            throw "Competing $variant destination changed"
+        }
+        if ((Get-FileHash -LiteralPath $raceTemp -Algorithm SHA256).Hash -ne $stagedHash) {
+            throw "Failed Move consumed or changed the staged shortcut"
+        }
+    }
+
+    # Recovery uses the same no-clobber Move into an absent destination, never
+    # Replace over a destination whose current ownership cannot be established.
     # Restore from a copy; the operation backup must remain recoverable.
     $restoreLink = Join-Path $root 'restore.temporary.lnk'
+    $recoveredLink = Join-Path $root 'recovered.lnk'
     [IO.File]::Copy($operationBackup, $restoreLink, $false)
-    Invoke-Embedded 'RESTORE_SCRIPT' @{
-        SCO_SHORTCUT_RESTORE = $restoreLink
-        SCO_SHORTCUT_LINK = $link
-    } | Out-Null
-    Assert-Fields (Read-Shortcut $link) $oldTarget
+    $restoreFailed = $false
+    try { Install-Shortcut $restoreLink $link '' } catch { $restoreFailed = $true }
+    if (-not $restoreFailed) { throw 'Recovery overwrote an occupied destination' }
+    if ((Get-FileHash -LiteralPath $link -Algorithm SHA256).Hash -ne $installedHash) {
+        throw 'Recovery changed a destination of unknown ownership'
+    }
+    Install-Shortcut $restoreLink $recoveredLink ''
+    Assert-Fields (Read-Shortcut $recoveredLink) $oldTarget
     Assert-Fields (Read-Shortcut $operationBackup) $oldTarget
+
+    # Deterministically construct the documented partial Replace failure state:
+    # staged replacement remains, destination is absent, old file is in backup.
+    # The Rust test drives production reconciliation; here verify its embedded
+    # recovery primitive preserves both evidence files while restoring the old link.
+    $partialStaged = Join-Path $root 'partial.temporary.lnk'
+    $partialBackup = Join-Path $root 'partial.previous.lnk'
+    $partialDestination = Join-Path $root 'partial.lnk'
+    $partialRestore = Join-Path $root 'partial.restore.temporary.lnk'
+    New-Shortcut $partialStaged $newTarget
+    [IO.File]::Copy($operationBackup, $partialBackup, $false)
+    $partialStagedHash = (Get-FileHash -LiteralPath $partialStaged -Algorithm SHA256).Hash
+    $partialBackupHash = (Get-FileHash -LiteralPath $partialBackup -Algorithm SHA256).Hash
+    [IO.File]::Copy($partialBackup, $partialRestore, $false)
+    Install-Shortcut $partialRestore $partialDestination ''
+    Assert-Fields (Read-Shortcut $partialDestination) $oldTarget
+    if ((Get-FileHash -LiteralPath $partialStaged -Algorithm SHA256).Hash -ne $partialStagedHash -or
+        (Get-FileHash -LiteralPath $partialBackup -Algorithm SHA256).Hash -ne $partialBackupHash) {
+        throw 'Partial replacement recovery changed the staging or backup evidence'
+    }
     $knownDesktop = (Invoke-Embedded 'DESKTOP_SCRIPT' @{}).Trim()
     if (-not [IO.Directory]::Exists($knownDesktop)) { throw 'Known Desktop is unavailable' }
 
@@ -177,6 +229,10 @@ try {
         locked_link_preserved = $true
         backup_failure_preserved = $true
         rollback_backup_preserved = $true
+        competing_destinations_preserved = $true
+        failed_move_staging_preserved = $true
+        recovery_is_no_clobber = $true
+        partial_replace_recovery_preserves_evidence = $true
         corrupt_existing_link_rejected_without_write = $true
     } | ConvertTo-Json -Compress
 } finally {
